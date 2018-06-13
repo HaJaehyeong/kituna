@@ -46,7 +46,7 @@ Route::post('management/registrationVD', 'managementController@registrationVD');
 Route::get('management/getVD/{vd_id}', 'managementController@getVD');
 Route::post('management/updateVD', 'managementController@updateVD'); /* update DB */
 Route::post('management/deleteVD', 'managementController@deleteVD');
-
+Route::get('management/createJobOrder/{sp_id}', 'managementController@createJobOrder');
 Route::get('management/getVdStock/{vd_id}', 'managementController@getVdStock');
 Route::get('management/coinStock/{vd_id}', 'managementController@coinStock');
 Route::get('management/getProductInfo', 'managementController@getProductInfo');

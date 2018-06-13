@@ -97,9 +97,13 @@ class analysisController extends Controller
 
         return $saveAll;
     }
+
     public function ListOfDrinkSales($place, $date, $sort, $offset) {
         $saveAll = array();
         $strDate = '';                  // mysql 날짜 형식을 저장할 문자열 변수
+
+        $rank = array();
+
 
         // 넘어오는 값에 따라 mysql 날짜 형식을 바꿔준다.
         switch($date){
@@ -150,6 +154,7 @@ class analysisController extends Controller
                 ->groupBy('sd.vd_id')
                 ->orderBy('count', $sort)
                 ->offset($offset)->limit(5)->get();
+
             } else {
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
@@ -218,10 +223,26 @@ class analysisController extends Controller
                 ->limit(1)->get();
             }
 
+            $all = DB::table('sell_data as sd')
+                ->select('sd.vd_id', DB::raw('count(*) as count'))
+                ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
+                ->where(DB::raw('date_format(sell_date, "%Y-%m")'), '=', 
+                        DB::raw('date_format(now(), "%Y-%m")'))
+                ->groupBy('sd.vd_id')
+                ->orderBy('count', $sort)->get();
+
+            for ($i = 0 ; $i < count($all) ; $i++) {
+                $rank[$i] =  (object)array(
+                    'vd_id' => $all[$i]->vd_id,
+                    'num'   => $i
+                );
+            }
+
             // 값 저장하기
             $saveAll[0] = $getListOfDrinkSales;
             $saveAll[1] = $getBestSalesDifference;
-            
+            $saveAll[2] = $rank;
+
         } else {
             /** 해당 날짜에 맞게 자판기 판매 순위를 보여준다.
              * select sd.vd_id, vd_name,count(*) as count, sum(sd.coin_1000*1000+sd.coin_500*500      * +sd.coin_100*100) as getSales
@@ -316,13 +337,31 @@ class analysisController extends Controller
                 ->limit(1)->get();
             }
 
+            $all = DB::table('sell_data as sd')
+                ->select('sd.vd_id', DB::raw('count(*) as count'))
+                ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
+                ->where(DB::raw('date_format(sell_date, "%Y-%m")'), '=', 
+                        DB::raw('date_format(now(), "%Y-%m")'))
+                ->where('vd.vd_place', 'like', $place.'%')
+                ->groupBy('sd.vd_id')
+                ->orderBy('count', $sort)->get();
+    
+            for ($i = 0 ; $i < count($all) ; $i++) {
+                $rank[$i] =  (object)array(
+                    'vd_id' => $all[$i]->vd_id,
+                    'num'   => $i
+                );
+            }
+
             // 값 저장하기
             $saveAll[0] = $getListOfDrinkSales;
             $saveAll[1] = $getBestSalesDifference;
+            $saveAll[2] = $rank;
         }
 
         return $saveAll;
     }
+
     public function vendingmachineAnalysis($vd_id) {
         // 저장할 배열
         $saveAll = array();
