@@ -167,14 +167,14 @@ class analysisController extends Controller
                 ->offset($offset)->limit(5)->get();
             }
             if ($sort == 'desc') {
-                for ($i = 0 ; $i < 5 ; $i++) {
+                for ($i = 0 ; $i < count($getListOfDrinkSales) ; $i++) {
                     $getListOfDrinkSales[$i]->num = $i+1;
                 }
             } else if ($sort == 'asc') {
                 $getVDCount = DB::table('vendingmachine')
                 ->select(DB::raw('count(*) as count'))->get();
 
-                for ($i = 0 ; $i < 5 ; $i++) {
+                for ($i = 0 ; $i < count($getListOfDrinkSales) ; $i++) {
                     $getListOfDrinkSales[$i]->num = $getVDCount[0]->count-$i;
                 }
             }
@@ -278,14 +278,14 @@ class analysisController extends Controller
                 ->offset($offset)->limit(5)->get(); 
             }
             if ($sort == 'desc') {
-                for ($i = 0 ; $i < 5 ; $i++) {
+                for ($i = 0 ; $i < count($getListOfDrinkSales) ; $i++) {
                     $getListOfDrinkSales[$i]->num = $i+1;
                 }
             } else if ($sort == 'asc') {
                 $getVDCount = DB::table('vendingmachine')
                 ->select(DB::raw('count(*) as count'))->get();
 
-                for ($i = 0 ; $i < 5 ; $i++) {
+                for ($i = 0 ; $i < count($getListOfDrinkSales) ; $i++) {
                     $getListOfDrinkSales[$i]->num = $getVDCount[0]->count-$i;
                 }
             }

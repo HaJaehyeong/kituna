@@ -354,4 +354,12 @@ class realtimeController extends Controller
         ]);
     }
 
+    public function sell(){
+        for ($i = 0 ; $i < 200 ; $i++) {
+            $vd_id = rand(1, 112);
+            $line = rand(1, 8);
+            
+            realtimeController::sendDataFromVdVersionTwo($vd_id, $line); 
+        }
+    }
 }

@@ -1,32 +1,43 @@
 ﻿<template>
   <div id="analysisLineChartBackgroundDiv">
+
+    <!-- 빠르게 이동가능한 speed-dial로서, 오른쪽 하단에 버튼을 생성. -->
     <v-speed-dial v-model="fab" :bottom="bottom" :right="right" :direction="direction" :open-on-hover="true" :transition="transition">
       <v-btn slot="activator" v-model="fab" dark fab hover>
         <v-icon>import_export</v-icon>
         <v-icon>close</v-icon>
       </v-btn>
 
+      <!-- ID가 scrollLine인 태그를 찾아 바로 그 태그로 이동한다. -->
       <a href="#" v-scroll-to="'#scrollLine'">
         <v-btn fab dark small> <v-icon>show_chart</v-icon> </v-btn>
       </a>
+      <!-- ID가 scrollBar인 태그를 찾아 바로 그 태그로 이동한다. -->
       <a href="#" v-scroll-to="'#scrollBar'">
         <v-btn fab dark small> <v-icon>bar_chart</v-icon> </v-btn>
       </a>
+      <!-- ID가 div_AnalysisHeader인 DIV태그를 찾아 바로 그 태그로 이동한다. -->
       <a href="#" v-scroll-to="'#div_AnalysisHeader'">
         <v-btn fab dark small> <v-icon>mode_comment</v-icon> </v-btn>
       </a>
     </v-speed-dial>
 
+    <!-- 자식 DIV 두개를 7:3비율로 나누어, Analysis글씨와, 실시간 판매량DIV로 구성한다. -->
     <div class="analysisRealDataDiv">
-      <div><h1 style="font-weight: bold; margin-top: 3%;">Analysis</h1> </div>
+      <div>
+        <h1 style="font-weight: bold; margin-top: 3%;">Analysis</h1>
+      </div>
+      <!-- 실시간 판매량 데이터를 나타내는 DIv로 자식 DIV를 1:9로 나누어 제목과, 데이터창을 구분한다. -->
       <div id="anaylsisRealDataSecondDiv">
         <div>
           <h4 style="text-align:right; font-weight: bold; margin-top: 1%; margin-right: 20px; color:#24A6BD;">실시간 판매량</h4>
         </div>
+        <!-- 3:7 비율로 데이터 안의 현재판매량이란 글자와, 데이터를 나타내는 DIV들의 비율을 나눈다. -->
         <div id="anaylsisRealDataSecondContentDiv">
           <div>
             <h6 style="color:#24A6BD; font-weight: bold; text-align:left; margin-left: 50px;">현재 판매량(개)</h6>
           </div>
+          <!-- 3:3:3으로 DIV를 나누어 데이터를 적는다. -->
           <div class="collums333DivideDiv">
             <div>
               월 판매량 <h3 style="color:black;">{{nowMonthProduct}}</h3>     
@@ -41,6 +52,7 @@
         </div>
       </div>
     </div>
+    <!-- 좌측 장소 버튼들과 메인 DIV를 구분하기 위해 1:9로 나누어 DIV구성. -->
     <div id="placeDivisionDiv">
       <div id="placeButtonDiv">
         <v-btn large round class="placeButton" id="allBtn" @click="placeChange('all')" style="backgroundColor:#FCE6E0;"><img src="/images/all.png"></v-btn>
@@ -49,7 +61,9 @@
         <v-btn large round class="placeButton" id="hospitalBtn" @click="placeChange('hospital')"><img src="/images/hospital.png"></v-btn>
         <v-btn large round class="placeButton" id="parkBtn" @click="placeChange('park')"><img src="/images/park.png"></v-btn>
       </div>
+      <!-- 메인 DIV로, 5:5 비율로 나누어 데이터를 구분하여 나오게 하였다. -->
       <div id="saleSoltVdDiv">
+        <!-- 데이터 제목과 데이터를 구분하기 위해 1:9로 DIV를 분할. -->
         <div class="titleContentDivideDiv">
           <div class="collums333DivideDiv">
             <div>
@@ -70,13 +84,16 @@
               <thead style="font-weight: bold;">
                 <tr><td>순위</td><td>자판기 이름</td><td>판매량</td><td>매출액</td></tr>
               </thead>
+              <!-- rankVdDataArray배열을 for문을 돌며, 값을 테이블에 한줄 씩 넣는다. -->
               <tbody v-for="vdData in rankVdDataArray" :key="vdData.vd_id">
+                <!-- 처음 로딩 시 가장 위의 tr은 클릭 되어 있어 배경색을 다르게 해주며, TR을 클릭시, 클릭 된 자판기 정보를 우측 분석에서 볼 수 있게 한다. -->
                 <tr v-if="vdData.num <= 1" style="backgroundColor:#FCE6E0;" :id="vdData.vd_name"  @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer)">
                   <td>{{vdData.num}}</td>
                   <td>{{vdData.vd_name}}</td>
                   <td>{{vdData.count}}</td>
                   <td>{{vdData.getSales}}</td>
                 </tr>
+                <!-- 첫번째 TR 외에는 전부 배경색을 없앤다. -->
                 <tr v-else :id="vdData.vd_name" @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer)">
                   <td>{{vdData.num}}</td>
                   <td>{{vdData.vd_name}}</td>
@@ -85,6 +102,7 @@
                 </tr>
               </tbody>
             </table>
+            <!-- 관심 자판기의 데이터 테이블로, 한 자판기만을 보게 된다. -->
             <table class="table table-striped table-bordered table-hover" style="height: 100%; text-align: center;"> 
               <thead style="font-weight: bold;">
                 <tr><td>★</td><td>자판기 이름</td><td>담당 보충기사</td><td>매출액 차이</td></tr>
@@ -98,23 +116,24 @@
                 </tr>
               </tbody>
             </table>
-
           </div>
-          
         </div>
-
+        <!-- 데이터 제목과 데이터를 구분하기 위해 1:9로 DIV를 분할. -->
         <div class="titleContentDivideDiv">
           <div>
+            <!-- 현재 선택된 자판기 이름이 analysisVdName에 저장되어 있다. -->
             <h3 style="font-weight: bold; color:#24A6BD; margin-top: 1%;">{{analysisVdName}} 자판기</h3>
           </div>
           <div id="graphDrinkRankDivideDiv">
             <div class="analysisRealDataDiv">
-              <div style="width: 100%;">
+              <div>
                 <h4 style="font-weight: bold; color:#24A6BD; margin-top: 1%;">자판기 내 음료별 판매량</h4>
+                <!-- radar차트를 이용해, 데이터 비교가 가능하게 해두었다. -->
                 <radar-chart :chart-data="radarChart" :options="radarOption" class="chartData"  :width="400" :height="300"></radar-chart>  
               </div>
-              <div style="width: 100%;"> 
+              <div> 
                 <h4 style="font-weight: bold; color:#24A6BD; margin-top: 1%;">그 외 음료순위</h4>
+                <!-- 클릭 된 자판기 내에 없는 음료들의 순위를 데이터 테이블을 이용해 순위순으로 나타내었다. -->
                 <table class="table table-striped table-bordered table-hover" style="width: 50%; text-align: center;">
                   <thead style="font-weight: bold;">
                     <tr><td>순위</td><td>음료</td><td>판매량</td></tr>
@@ -147,6 +166,7 @@
                 <h2>작업 지시창</h2>
               </v-card-title>
               <v-card-text>
+                <!-- 작업 지시를 하는 자판기 이름과 해당 자판기 보충기사를 보여준다.  -->
                 <v-card-text>
                   ● 현재 자판기 : {{analysisVdName}}
                   <v-spacer></v-spacer>
@@ -176,13 +196,16 @@
             <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">            
               <v-card>
                 <v-toolbar dark color="cyan">
+                  <!-- 음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다. -->
                   <v-btn icon dark @click.native="dialog = false" @click="lineChangeDrinkReset()">
                     <v-icon>close</v-icon>
                   </v-btn>
                   <v-toolbar-title>{{analysisVdName}} 자판기 라인 변경</v-toolbar-title>
                   <v-spacer></v-spacer>   
                   <v-toolbar-items>
+                    <!-- 음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다. -->
                     <v-btn dark flat @click.native="dialog = false" @click="lineChangeDrinkReset()">변경 취소</v-btn>
+                    <!-- 음료 라인 변경 지시 시, setLineChangeNote메서드를 호출해, 작업지시서에 추가되도록 한다.. -->
                     <v-btn dark flat @click.native="dialog = false, snackbar = true" @click="setLineChangeNote(analysisVdId, vdDrinkId, changeDrinkId)">변경 지시</v-btn>
                   </v-toolbar-items>
                 </v-toolbar>
@@ -255,7 +278,7 @@
             <bar-chart :chart-data="barChart" :options="barOptions" class="chartData" :width="600" :height="500"></bar-chart>
           </div>
         </div>
-        <div>
+        <div class="titleContentDivideDiv">
           <h3 style="font-weight: bold; color:#24A6BD; margin-top: 3%;">음료 정보</h3>
           <table class="table table-striped table-bordered table-hover" style="width: 80%; text-align: center;">
             <thead style="font-weight: bold;">
@@ -410,21 +433,21 @@
         </div>
         <div class="collums55DivideDiv">
           <div>
-            <h4 style="font-weight: bold; color:#24A6BD;">학교 전체</h4>
+            <h4 style="font-weight: bold; color:#24A6BD;">학교 음료별 판매 비율</h4>
             <pie-chart :chart-data="pieChart" :options="pieOptions" class="chartData" :width="300" :height="300"></pie-chart>
           </div>
           <div>
-            <h4 style="font-weight: bold; color:#24A6BD;">공원 전체</h4>
+            <h4 style="font-weight: bold; color:#24A6BD;">공원 음료별 판매 비율</h4>
             <pie-chart2 :chart-data="pieChart2" :options="pieOptions2" class="chartData" :width="300" :height="300"></pie-chart2>
           </div>
         </div>
         <div class="collums55DivideDiv">
           <div>
-            <h4 style="font-weight: bold; color:#24A6BD;">회사 전체 </h4>
+            <h4 style="font-weight: bold; color:#24A6BD;">회사 음료별 판매 비율</h4>
             <pie-chart3 :chart-data="pieChart3" :options="pieOptions3" class="chartData" :width="300" :height="300"></pie-chart3>
           </div>
           <div>
-            <h4 style="font-weight: bold; color:#24A6BD;">병원 전체</h4>
+            <h4 style="font-weight: bold; color:#24A6BD;">병원 음료별 판매 비율</h4>
             <pie-chart4 :chart-data="pieChart4" :options="pieOptions4" class="chartData" :width="300" :height="300"></pie-chart4>
           </div>
         </div>
@@ -820,7 +843,7 @@
 
       /* <----- 라인 변경 DB로 전송 -----> */ 
       setLineChangeNote(vd_id,existingDrink,changeDrink){
-         let url = "/analysis/setLineChangeVerTwo/" + vd_id + "/" + existingDrink + "/" + changeDrink;
+         let url = "/analysis/setLineChangeNote/" + vd_id + "/" + existingDrink + "/" + changeDrink;
          this.axios.get(url).then((response) => {
          });
       },
@@ -845,9 +868,9 @@
         let regexp = /\B(?=(\d{3})+(?!\d))/g;  // 정규식을 통해 3자리마다 ,를 찍어준다.
         //만약 place버튼 클릭시, 해당 클릭에 맞는 값으로 변경
         this.axios.get(url).then((response) => {
-          this.nowMonthProduct  = response.data[0][0].count.toString().replace(regexp, ',');
-          this.nowDayProduct    = response.data[1][0].count.toString().replace(regexp, ',');
-          this.nowDaySales      = response.data[1][0].getSales.toString().replace(regexp, ',');
+          this.nowMonthProduct  = response.data[0][0].count.toString().replace(regexp, ',');    //이번달 팔린 판매량을 대입.
+          this.nowDayProduct    = response.data[1][0].count.toString().replace(regexp, ',');    // 오늘 팔린 판매량을 대입.
+          this.nowDaySales      = response.data[1][0].getSales.toString().replace(regexp, ','); // 오늘 매출액을 대입.
         });
       },
       /* <----- 화면 최상단 실시간 데이터 넣는 메서드 -----> */ 
@@ -879,11 +902,6 @@
           let pushDate = '';
           let nowDate = '';
           let beforDate = '';
-
-          //만약 실시간페이지에서 한 자판기에 대한 값을 가져 올 경우, 해당 자판기의 값을 본다.
-          if(this.realtimeVdId)
-            vd_id = this.realtimeVdId;
-          
           
           if(this.yearChip == true){
             pushDate = 'year';
@@ -898,8 +916,6 @@
             nowDate = '이번주';
             beforDate = '저번주';
           }
-
-   
 
           this.theOtherAnalysis(vd_id);  
           let url = "/analysis/differenceVdAnalysis/" + vd_id + '/' + pushDate;
@@ -962,9 +978,24 @@
           });
       },
       /* <----- 한 자판기에 대한 분석 통계 가져오는 메서드 -----> */ 
-
+      realtimeVdSearch(num){
+        this.realtimeVdId = 0;
+        num = num + 1;
+        let url = "/analysis/ListOfDrinkSales/" + this.choosePlace + "/" + this.rankVdDate + "/" + this.rankVdSort + "/" + num;
+        this.axios.get(url).then((response) => {
+          
+          this.rankVdDataArray = response.data[0];                   // 처음 최상단에 올라오는 자판기 데이터
+          this.analysisVdId = response.data[0][0].vd_id;             
+          this.analysisVdName = response.data[0][0].vd_name;
+          this.analysisVdSp = response.data[0][0].vd_supplementer;
+          this.vendingAnalysis(this.analysisVdId);
+        });
+      },
       /* <----- 자판기 매출순 테이블에 값 가져오는 메서드 -----> */ 
       rankVdData(){
+        //만약 실시간페이지에서 한 자판기에 대한 값을 가져 올 경우, 해당 자판기의 값을 본다.
+
+      
         let url = "/analysis/ListOfDrinkSales/" + this.choosePlace + "/" + this.rankVdDate + "/" + this.rankVdSort + "/0";
         let regexp = /\B(?=(\d{3})+(?!\d))/g;  // 정규식을 통해 3자리마다 ,를 찍어준다.
         this.axios.get(url).then((response) => {
@@ -974,14 +1005,24 @@
           };
           response.data[1][0].value = response.data[1][0].value.toString().replace(regexp, ',');
           
+          if(this.realtimeVdId !== 0){
+            console.log(this.realtimeVdId + "있다");
+            for(let i = 0 ; i < response.data[2].length ; i++){
+              if(response.data[2][i].vd_id == this.realtimeVdId){
+                this.realtimeVdSearch(response.data[2][i].num);
+              }
+            }
+          }else{
+            console.log(this.realtimeVdId + "없다");
+            this.rankVdDataArray = response.data[0];                   // 처음 최상단에 올라오는 자판기 데이터
+            this.analysisVdId = response.data[0][0].vd_id;             
+            this.analysisVdName = response.data[0][0].vd_name;
+            this.analysisVdSp = response.data[0][0].vd_supplementer;
+            this.vendingAnalysis(this.analysisVdId);
 
-          this.rankVdDataArray = response.data[0];                   // 처음 최상단에 올라오는 자판기 데이터
+          }
+          console.log(this.analysisVdId + "ze");
           this.interestVdDataArray = response.data[1];               // 관심 자판기 데이터
-          this.analysisVdId = response.data[0][0].vd_id;             
-          this.analysisVdName = response.data[0][0].vd_name;
-          this.analysisVdSp = response.data[0][0].vd_supplementer;
-
-          this.vendingAnalysis(this.analysisVdId);
         });       
       },
       /* <----- 자판기 매출순 테이블에 값 가져오는 메서드 -----> */ 

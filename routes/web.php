@@ -7,6 +7,7 @@ Route::get('/realtime', function ()   {    return view('welcome'); });
 Route::get('/analysis', function ()   {    return view('welcome'); });
 Route::get('/management', function () {    return view('welcome'); });
 Route::get('/product', function () {    return view('welcome'); });
+Route::get('sell', 'realtimeController@sell');
 
 
 // <----------- analysis ----------->
