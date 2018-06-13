@@ -1,0 +1,1147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bdf565f0-5230-412a-b26f-5ab97eadf963" name="Default" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file leaf-file-name="databases_info.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/databases_info.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="114">
+              <caret line="3" column="44" lean-forward="false" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="conn.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/conn.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="148">
+              <caret line="190" column="23" lean-forward="true" selection-start-line="190" selection-start-column="23" selection-end-line="190" selection-end-column="23" />
+              <folding>
+                <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+                <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+                <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+                <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+                <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+                <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+                <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+                <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+                <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+                <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+                <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+                <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+                <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+                <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+                <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+                <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+                <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resigster.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/resigster.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="76">
+              <caret line="2" column="85" lean-forward="false" selection-start-line="2" selection-start-column="85" selection-end-line="2" selection-end-column="85" />
+              <folding>
+                <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+                <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+                <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+                <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+                <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+                <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+                <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+                <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="push_notification.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/push_notification.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="38">
+              <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+              <folding>
+                <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+                <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+                <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>note</find>
+      <find>br</find>
+      <find>credate</find>
+      <find>create</find>
+      <find>inse</find>
+      <find>print</find>
+      <find>regi</find>
+      <find>login_id</find>
+      <find>job_order</find>
+      <find>array_push</find>
+      <find>result_all</find>
+      <find>vd_soldout</find>
+      <find>strcmp</find>
+      <find>get_marker</find>
+      <find>get_order_sheet</find>
+      <find>echo</find>
+      <find>mysql_ew</find>
+      <find>mysql_err</find>
+      <find>$note_all</find>
+      <find>no_marker</find>
+      <find>echo $qu</find>
+      <find>get_markers</find>
+      <find>calendar_get_Day</find>
+      <find>json</find>
+      <find>공지</find>
+      <find>POST</find>
+      <find>$_POST</find>
+      <find>공지사항</find>
+      <find>13.</find>
+      <find>push_notification</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/conn2.php" />
+        <option value="$PROJECT_DIR$/test.php" />
+        <option value="$PROJECT_DIR$/conn.php" />
+        <option value="$PROJECT_DIR$/test.html" />
+        <option value="$PROJECT_DIR$/push_notification.php" />
+        <option value="$PROJECT_DIR$/resigster.php" />
+        <option value="$PROJECT_DIR$/databases_info.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-54" />
+    <option name="y" value="7" />
+    <option name="width" value="1938" />
+    <option name="height" value="1048" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="android_db_conn_source" type="b2602c69:ProjectViewProjectNode" />
+              <item name="android_db_conn_source" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JinSungKyu" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdf565f0-5230-412a-b26f-5ab97eadf963" name="Default" comment="" />
+      <created>1521614654371</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1521614654371</updated>
+      <workItem from="1521614655725" duration="263000" />
+      <workItem from="1521631575045" duration="1438000" />
+      <workItem from="1521634582636" duration="2644000" />
+      <workItem from="1521785669320" duration="2228000" />
+      <workItem from="1521804543279" duration="4537000" />
+      <workItem from="1521876036750" duration="596000" />
+      <workItem from="1521952619080" duration="595000" />
+      <workItem from="1521964019209" duration="547000" />
+      <workItem from="1522021602265" duration="694000" />
+      <workItem from="1522023166279" duration="4095000" />
+      <workItem from="1522108835202" duration="598000" />
+      <workItem from="1522150873846" duration="784000" />
+      <workItem from="1522239020753" duration="1468000" />
+      <workItem from="1522245753399" duration="220000" />
+      <workItem from="1522631518894" duration="612000" />
+      <workItem from="1522675406291" duration="43000" />
+      <workItem from="1522712916267" duration="596000" />
+      <workItem from="1522721346791" duration="1263000" />
+      <workItem from="1522749839525" duration="598000" />
+      <workItem from="1522805475727" duration="1935000" />
+      <workItem from="1522815336931" duration="7020000" />
+      <workItem from="1522836102664" duration="798000" />
+      <workItem from="1522885880429" duration="11600000" />
+      <workItem from="1522904575823" duration="829000" />
+      <workItem from="1522922564627" duration="2711000" />
+      <workItem from="1522935246845" duration="963000" />
+      <workItem from="1522972154962" duration="3266000" />
+      <workItem from="1523008794578" duration="597000" />
+      <workItem from="1523083422097" duration="597000" />
+      <workItem from="1523095520459" duration="602000" />
+      <workItem from="1523164256682" duration="14505000" />
+      <workItem from="1523231823770" duration="945000" />
+      <workItem from="1523271457439" duration="5098000" />
+      <workItem from="1523295877263" duration="2882000" />
+      <workItem from="1523318293835" duration="5469000" />
+      <workItem from="1523339258660" duration="969000" />
+      <workItem from="1523359404163" duration="5748000" />
+      <workItem from="1523402788165" duration="3255000" />
+      <workItem from="1523410516057" duration="2701000" />
+      <workItem from="1523490608096" duration="80000" />
+      <workItem from="1523491223968" duration="1406000" />
+      <workItem from="1523617090199" duration="1593000" />
+      <workItem from="1523698004581" duration="2645000" />
+      <workItem from="1523769676183" duration="7437000" />
+      <workItem from="1524191678467" duration="7889000" />
+      <workItem from="1524219323310" duration="4173000" />
+      <workItem from="1524273324630" duration="4904000" />
+      <workItem from="1524440749330" duration="10946000" />
+      <workItem from="1524485686757" duration="4722000" />
+      <workItem from="1524535000609" duration="158000" />
+      <workItem from="1524535349442" duration="2954000" />
+      <workItem from="1524632866553" duration="1301000" />
+      <workItem from="1524793499035" duration="798000" />
+      <workItem from="1524796917860" duration="439000" />
+      <workItem from="1524801717502" duration="863000" />
+      <workItem from="1525049314044" duration="1773000" />
+      <workItem from="1525051220006" duration="878000" />
+      <workItem from="1525052429621" duration="63000" />
+      <workItem from="1525052639128" duration="55000" />
+      <workItem from="1525052814473" duration="782000" />
+      <workItem from="1525508599809" duration="3958000" />
+      <workItem from="1525737278433" duration="12404000" />
+      <workItem from="1525757667129" duration="1385000" />
+      <workItem from="1525823949204" duration="579000" />
+      <workItem from="1525840993365" duration="5994000" />
+      <workItem from="1525847151685" duration="2093000" />
+      <workItem from="1525853271440" duration="595000" />
+      <workItem from="1525859947734" duration="6027000" />
+      <workItem from="1525867968550" duration="2655000" />
+      <workItem from="1525916856480" duration="446000" />
+      <workItem from="1525930833118" duration="804000" />
+      <workItem from="1525948971534" duration="105000" />
+      <workItem from="1525949228267" duration="132000" />
+      <workItem from="1525949387568" duration="4000" />
+      <workItem from="1525949444709" duration="3000" />
+      <workItem from="1525949476603" duration="5000" />
+      <workItem from="1525950317592" duration="621000" />
+      <workItem from="1526005601389" duration="716000" />
+      <workItem from="1526264215538" duration="2683000" />
+      <workItem from="1526348450931" duration="23000" />
+      <workItem from="1526468543282" duration="632000" />
+      <workItem from="1526799952582" duration="622000" />
+      <workItem from="1528369239570" duration="2724000" />
+      <workItem from="1528420349439" duration="2050000" />
+      <workItem from="1528423810111" duration="867000" />
+      <workItem from="1528768575576" duration="2456000" />
+      <workItem from="1528793176022" duration="111000" />
+      <workItem from="1528880065865" duration="55000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="202917000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.10989583" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13680">
+          <caret line="360" column="5" lean-forward="true" selection-start-line="360" selection-start-column="5" selection-end-line="360" selection-end-column="5" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20672">
+          <caret line="544" column="54" lean-forward="true" selection-start-line="544" selection-start-column="54" selection-end-line="544" selection-end-column="54" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2850">
+          <caret line="75" column="16" lean-forward="true" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="6" column="2" lean-forward="false" selection-start-line="6" selection-start-column="2" selection-end-line="6" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2850">
+          <caret line="75" column="16" lean-forward="true" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="16" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27968">
+          <caret line="736" column="41" lean-forward="true" selection-start-line="736" selection-start-column="41" selection-end-line="736" selection-end-column="41" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8512">
+          <caret line="224" column="22" lean-forward="false" selection-start-line="224" selection-start-column="22" selection-end-line="224" selection-end-column="22" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2166">
+          <caret line="57" column="41" lean-forward="true" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="false" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8512">
+          <caret line="224" column="22" lean-forward="false" selection-start-line="224" selection-start-column="22" selection-end-line="224" selection-end-column="22" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="false" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6992">
+          <caret line="184" column="65" lean-forward="true" selection-start-line="184" selection-start-column="65" selection-end-line="184" selection-end-column="65" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="false" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20558">
+          <caret line="541" column="32" lean-forward="false" selection-start-line="541" selection-start-column="27" selection-end-line="541" selection-end-column="32" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="true" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25992">
+          <caret line="684" column="30" lean-forward="false" selection-start-line="684" selection-start-column="28" selection-end-line="684" selection-end-column="30" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="true" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17100">
+          <caret line="450" column="39" lean-forward="false" selection-start-line="450" selection-start-column="39" selection-end-line="450" selection-end-column="39" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="true" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13414">
+          <caret line="353" column="34" lean-forward="false" selection-start-line="353" selection-start-column="34" selection-end-line="353" selection-end-column="34" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="true" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22990">
+          <caret line="605" column="0" lean-forward="true" selection-start-line="605" selection-start-column="0" selection-end-line="605" selection-end-column="0" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="4" column="20" lean-forward="false" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="12" column="43" lean-forward="false" selection-start-line="12" selection-start-column="43" selection-end-line="12" selection-end-column="43" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2698">
+          <caret line="71" column="1" lean-forward="true" selection-start-line="71" selection-start-column="1" selection-end-line="71" selection-end-column="1" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18582">
+          <caret line="489" column="74" lean-forward="false" selection-start-line="489" selection-start-column="74" selection-end-line="489" selection-end-column="74" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.php" />
+    <entry file="file://$PROJECT_DIR$/conn.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="190" column="23" lean-forward="true" selection-start-line="190" selection-start-column="23" selection-end-line="190" selection-end-column="23" />
+          <folding>
+            <marker date="1526266473652" expanded="true" signature="2800:2814" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="4868:4882" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="5843:5953" ph="INSERT INTO ${SUPPLE_TABLE}... " />
+            <marker date="1526266473652" expanded="true" signature="6700:6714" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="8471:8485" ph="SELECT * FRO... ${SUPPLE_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="10461:10917" ph="SELECT * FRO... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="13277:13322" ph="SELECT * FRO... ${COINT_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="14763:14864" ph="SELECT note ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15718" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="15559:15785" ph="SELECT vd_id... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="20256:20705" ph="SELECT vd_id... ${VENDING_TABLE}" />
+            <marker date="1526266473652" expanded="true" signature="21678:22057" ph="SELECT DISTI... ${PRODUCT_INFO}" />
+            <marker date="1526266473652" expanded="true" signature="23234:23772" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="29722:30260" ph="SELECT sp.sp... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="38473:38672" ph="SELECT drink... ${JOB_COLUMN}" />
+            <marker date="1526266473652" expanded="true" signature="39798:40121" ph="SELECT pi.dr... ${CAR_STOCK}" />
+            <marker date="1526266473652" expanded="true" signature="43178:43377" ph="SELECT jo.or... job_order" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/databases_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="3" column="44" lean-forward="false" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/push_notification.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="17" lean-forward="false" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+          <folding>
+            <marker date="1528424610396" expanded="true" signature="1710:1761" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1710:1788" ph="SELECT * FRO... ${TOKEN_INFO}" />
+            <marker date="1528424610396" expanded="true" signature="1843:1857" ph="SELECT * FRO... ${TOKEN_INFO}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resigster.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="2" column="85" lean-forward="false" selection-start-line="2" selection-start-column="85" selection-end-line="2" selection-end-column="85" />
+          <folding>
+            <marker date="1528793287325" expanded="true" signature="398:409" ph="INSERT INTO .... " />
+            <marker date="1528793287325" expanded="true" signature="398:476" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:489" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:509" ph="INSERT INTO ${FCM_TOKEN}... " />
+            <marker date="1528793287325" expanded="true" signature="398:552" ph="INSERT INTO ${TOKEN_INFO}... " />
+            <marker date="1528793287325" expanded="true" signature="398:567" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:569" ph="INSERT INTO fcm_token... " />
+            <marker date="1528793287325" expanded="true" signature="398:580" ph="INSERT INTO ..... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

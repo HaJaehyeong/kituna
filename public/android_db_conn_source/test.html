@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+<script>
+    $(function(){ $("#listButton").click(function(){
+        $.ajax({
+            type: 'post' ,
+            url: './push_notification.php' ,
+            dataType : 'html' ,
+            data: {message:"hibro"} ,
+            success: function(data) { $("#listDiv").html(data); } });	})	})
+
+</script>
+<form>
+    <input type="button" id="listButton" value="리스트출력" /> <br/>
+    <div id="listDiv"></div>
+
+</form>
+</body>
+</html>

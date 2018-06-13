@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Laravel Vue CRUD Application</title>
+    <link href="http://ec2-13-125-220-71.ap-northeast-2.compute.amazonaws.com/css/app.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="app">
+    <h1>뷰 라우터 예제</h1>
+    <p>
+        <router-link to="/main"> Main 컴포넌트로 이동</router-link>
+        <router-link to="/login"> Login 컴포넌트로 이동</router-link>
+    </p>
+    <router-view></router-view>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.2/dist/vue.js"></script>
+    <script src="https://unpkg.com/vue-router@3.0.1/dist/vue-router.js"></script>
+    <script>
+    var Main = { template: '<div>main</div>' };
+    var Login = { template: '<div>login</div>' };
+
+    var routes = [
+        { path: '/main', component: Main },
+        { path: '/login', component: Login }
+    ];
+
+    var router = new VueRouter ({
+        routes
+    });
+
+
+    var app = new Vue({
+        router
+    }).$mount('#app');
+</script>
+</body></html>

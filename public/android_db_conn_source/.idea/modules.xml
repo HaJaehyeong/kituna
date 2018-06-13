@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../JinSungKyu/.idea/JinSungKyu.iml" filepath="$PROJECT_DIR$/../JinSungKyu/.idea/JinSungKyu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/android_db_conn_source.iml" filepath="$PROJECT_DIR$/.idea/android_db_conn_source.iml" />
+    </modules>
+  </component>
+</project>
