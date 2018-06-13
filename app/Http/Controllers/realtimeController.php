@@ -189,8 +189,6 @@ class realtimeController extends Controller
           \Log::info($note);
           
 
-
-
         // 작업지시를 내리는 것..
 
         // 작업지시를 내리면 현재 생성안된 작업지시서를 찾아서 가져온다.
@@ -270,61 +268,90 @@ class realtimeController extends Controller
     }
 
 
-    public function sendedDataNum($lineNum) {
-        
-        // 내가 뽑는 음료의 수량 -1하는 변수
-        $tempNum = 0;
+    public function sendDataFromVdVersionTwo($vd_id, $line) {
+        /*
+         * select sp.sp_id
+         * from vendingmachine as vd
+         * join supplementer as sp on sp.sp_login_id = vd.vd_supplementer
+         * where vd.vd_id = $vd_id
+         */
+        $getSpId = DB::table('vendingmachine as vd')->select('sp.sp_id')
+        ->join('supplementer as sp', 'sp.sp_login_id', '=', 'vd.vd_supplementer')
+        ->where('vd.vd_id', $vd_id)->get();
 
-        $getStock = DB::table('vd_stock')
-        ->where('vd_id', 1)->where('line', $lineNum)->get();
+        // 재고 -1
+        $update = DB::table('vd_stock')
+        ->where('vd_id', $vd_id)
+        ->where('line', $line)
+        ->decrement('stock', 1);
 
-        $tempNum = $getStock[0]->stock - 1; 
+        // 넣을 작업지시서 찾기
+        $findJobOrder = DB::table('job_order')->where('sp_id', $getSpId[0]->sp_id)
+        ->where('jo_check', 0)->get();
 
-        // 버튼에 해당하는 라인의 수량 줄어든다. (update문)
-        $result = DB::table('vd_stock')
-            ->where('vd_id', 1)->where('line', $lineNum)
-            ->update(['stock' => $tempNum]);
+        // 해당 라인의 재고를 가져온다.
+        $getData = DB::table('vd_stock')
+        ->select('stock')
+        ->where('vd_id', $vd_id)
+        ->where('line', $line)->get();
 
-        // 동전을 빼기 위해 vendingmachine 테이블을 가져온다.
-        $getVDinfo = DB::table('vendingmachine')
-            ->where('vd_id', 1)->get();
+        // 재고가 0이면
+        if ($getData[0]->stock == 0) {
+            // 매진 자판기로 만듬
+            $updateVd = DB::table('vendingmachine')
+            ->where('vd_id', $vd_id)
+            ->update(['vd_soldout' => 2]);
+        }
 
-        $getStockCheck = DB::table('vd_stock')
-        ->where('vd_id', 1)->get();
+        // 해당 자판기의 매진임박여부를 확인 하기위해..
+        $getVd = DB::table('vendingmachine')
+        ->select('vd_soldout')
+        ->where('vd_id', $vd_id)->get();
 
-        // $checkSoldout이 1이면 매진임박자판기 / 2이면 정상자판기
-        $checkSoldout;
-        foreach ($getStockCheck as $temp) {
-            // 1개라도 갯수가 8개 이하라면 vd_soldout은 1로
-            if( ($temp-> stock) < 9 ){
-                $checkSoldout = 1;
-                break;
-            }else{
-                $checkSoldout = 2;
+        if ($getData[0]->stock < 9 && $getVd[0]->vd_soldout != 3 && $getVd[0]->vd_soldout != 1     && $getVd[0]->vd_soldout != 2){
+            // 매진임박 자판기로 만듬
+            $updateVd = DB::table('vendingmachine')
+            ->where('vd_id', $vd_id)
+            ->update(['vd_soldout' => 1]);
+
+            $getJoColumnInfo = DB::table('vd_stock as vs')
+            ->select('jo.jo_id', 'vs.vd_id', 'vd.vd_name', 'vd.vd_supplementer', 'pi.drink_name', 'pi.drink_img_path', DB::raw('vs.max_stock - vs.stock as sp_val'), 'vs.line')
+            ->join('vendingmachine as vd', 'vd.vd_id', '=', 'vs.vd_id')
+            ->join('product_info as pi', 'pi.drink_id', '=', 'vs.drink_id')
+            ->join('supplementer as sm', 'sm.sp_login_id', '=', 'vd.vd_supplementer')
+            ->join('job_order as jo', 'jo.sp_id', '=', 'sm.sp_id')
+            ->where('vd.vd_id', $vd_id)->where('jo.jo_id', $findJobOrder[0]->jo_id)->get();
+
+            for ($i = 0 ; $i < count($getJoColumnInfo) ; $i++) {
+                DB::table('jo_column')->insert([
+                    'jc_id'       => NULL,
+                    'jo_id'       => $getJoColumnInfo[$i]->jo_id,
+                    'vd_id'       => $getJoColumnInfo[$i]->vd_id,
+                    'vd_name'     => $getJoColumnInfo[$i]->vd_name,
+                    'sp_login_id' => $getJoColumnInfo[$i]->vd_supplementer,
+                    'drink_name'  => $getJoColumnInfo[$i]->drink_name,
+                    'drink_path'  => $getJoColumnInfo[$i]->drink_img_path,
+                    'sp_val'      => $getJoColumnInfo[$i]->sp_val,
+                    'drink_line'  => $getJoColumnInfo[$i]->line,
+                    'note'        => NULL,
+                    'sp_check'    => 0
+                ]);
             }
+        } else {
+            // update 하기~~
+            $update = DB::table('jo_column')->where('drink_line', $line)->where('vd_id', $vd_id)->where('jo_id', $findJobOrder[0]->jo_id)->increment('sp_val', 1);
         }
 
-        if($checkSoldout == 1){
-            // 잔돈 500원 두개 추가, 100원 한개 빠진다. (update문)
-            $result = DB::table('vendingmachine')
-                    ->where('vd_id', 1)
-                    ->update([
-                            'coin_500' => $getVDinfo[0]->coin_500 + 2,
-                            'coin_100' => $getVDinfo[0]->coin_100 - 1,
-                            'vd_soldout' => 1]
-                            );                
-        }else if($checkSoldout == 2){
-            $result = DB::table('vendingmachine')
-                    ->where('vd_id', 1)
-                    ->update([
-                            'coin_500' => $getVDinfo[0]->coin_500 + 2,
-                            'coin_100' => $getVDinfo[0]->coin_100 - 1,
-                            'vd_soldout' => 0]
-                            );         
-        }
+        $getDrinkId = DB::table('vd_stock')->select('drink_id')
+            ->where('vd_id', $vd_id)->where('line', $line)->get();
 
-        if($result) return 'good';
-        else return 'fail';
+        DB::table('sell_data')->insert([
+            'vd_id'     => $vd_id,
+            'line'      => $line,
+            'drink_id'  => $getDrinkId[0]->drink_id,
+            'coin_500'  => 1,
+            'coin_100'  => 3
+        ]);
     }
 
 }
