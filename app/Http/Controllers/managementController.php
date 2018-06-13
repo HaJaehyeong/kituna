@@ -659,4 +659,42 @@ class managementController extends Controller
     }
     //----------------------- 보충기사 삭제 -------------------------------
 
+    // 작업지시서 생성버튼
+    public function createJobOrder($sp_id) {
+        
+        $boolean = "true";
+
+        // 버튼을 누르면 jo_check를 1로 만든다 여기서 1은 작업지시서 생성된거
+        DB::table('job_order')
+        ->where('jo_check', 0)->where('sp_id', $sp_id)->update([
+            'jo_check'      => 1
+        ]);
+        
+        // 내일 날짜
+        $tomorrow = date("Y-m-d", mktime(0,0,0,date("m") , date("d")+1, date("Y"))); 
+
+        // 음 내일날짜로 하나가 만들어져 있으면 고민해본다. 
+        // 날짜가 아니고 보충하지 않은 작업지시서를 가지고 있으면으로 변경
+        $getTomorrowJobOrder = DB::table('job_order')->select('order_date')
+        //->where(DB::raw('date_format(order_date, "%Y-%m-%d")'), $tomorrow)
+        ->where('jo_check', 0)
+        ->where('sp_id', $sp_id)->get();
+
+        // 보충하지 않은 작업지시서를 가지고 있으면 작업지시서 생성을 안함
+        if (isset($getTomorrowJobOrder[0])) {
+            $boolean = "false";
+        } else {
+            // 존재하지 않으면 내일 보충할 다음날 작업지시서를 생성한다
+            DB::table('job_order')->insert([
+                'sp_id'      => $sp_id,
+                'order_date' => $tomorrow." 00:00:00",
+                'jo_check'   => 0
+            ]);
+        }
+
+        // 이후부터는 계속 다음작업지시서에 추가가 된다.
+        // 그리고 그 작업지시서가 생성되면 트루, 있으면 풜스 반환!
+        return $boolean;
+    } 
+
 }
