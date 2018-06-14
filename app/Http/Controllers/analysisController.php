@@ -104,7 +104,6 @@ class analysisController extends Controller
 
         $rank = array();
 
-
         // 넘어오는 값에 따라 mysql 날짜 형식을 바꿔준다.
         switch($date){
             case 'year':

@@ -578,7 +578,6 @@
   </div>
 </template>
 
-
 <script>
 import { EventBus } from '../../app.js';
 import draggable from 'vuedraggable';
@@ -625,7 +624,7 @@ export default {
           { text: '위치', value: 'Location' },
           { text: '관리자',sortable: true, value: 'Manager' }
         ],
-       options: [  { value: null, text: '8개' }],
+      options: [  { value: null, text: '8개' }],
       vendingName:"",
       items:[],
       select: [  /* 모달창 선택지 */
@@ -727,7 +726,7 @@ export default {
   mounted(){
     var link = document.location.href;
     var queryID=this.$route.query.id;
-    if(link=="management?id="+queryID){
+    if(link=="http://localhost:8000/management?id="+queryID){
       this.specific();
     };
     // 보충 기사 정보를 화면에 바로 보이게 하기 위해 mouted에서 메서드 바로 호출

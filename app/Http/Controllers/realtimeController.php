@@ -59,11 +59,12 @@ class realtimeController extends Controller
                       DB::raw('count(\'product_info.drink_name\') as count'))
             ->join('product_info', 'sell_data.drink_id', '=', 'product_info.drink_id')
             ->groupBy('sell_data.sell_date')->groupBy('product_info.drink_name')
-            ->having('sell_date', '>',  DB::raw('DATE_SUB(\''.date('Y-m-d').'\', INTERVAL 2 DAY)'))
+            ->having('sell_date', '>',  DB::raw('DATE_SUB(\''.date('Y-m-d').'\', INTERVAL 1 DAY)'))
             ->get();
             
         return $getSellData;
     }
+
     public function getVdStock($vd_id) {
         $getVdStock = DB::table(DB::raw('vd_stock vs'))
         ->select(DB::raw('vs.vd_id, vs.line, vs.stock, vs.max_stock, pi.drink_name, pi.drink_img_path, sm.expiration_date, pi.sell_price'))
@@ -73,12 +74,14 @@ class realtimeController extends Controller
         
         return $getVdStock;
     }
+
     public function vdListSP($spName) {
         $getVdList = DB::table('vendingmachine')
         ->where('vd_supplementer', $spName)->get();
 
         return $getVdList;
     }
+
     public function coinStock($vd_id){
         $getCoinStock = DB::table('vendingmachine')
         ->select(DB::raw('coin_1000 as won1000, coin_500 as won500, coin_100 as won100, 1000*coin_1000+500*coin_500+100*coin_100 as sum'))
@@ -107,7 +110,7 @@ class realtimeController extends Controller
         ->select('vd.vd_name', 'pi.drink_name', 'sd.sell_date', DB::raw('sd.sell_date, sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100 as sell_price'))
         ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
         ->join('product_info as pi', 'pi.drink_id', '=', 'sd.drink_id')
-        ->where(DB::raw('date_format(sd.sell_date, "%Y-%m-%d")'), DB::raw('date_sub(date_format(now(), "%Y-%m-%d"), interval 1 day)'))
+        ->where(DB::raw('date_format(sd.sell_date, "%Y-%m-%d")'), DB::raw('date_sub(date_format(now(), "%Y-%m-%d"), interval 0 day)'))
         ->orderBy('sd.sell_date', 'desc')->get();
             
         return $getSellData;

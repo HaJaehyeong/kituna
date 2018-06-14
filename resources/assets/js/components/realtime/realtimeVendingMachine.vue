@@ -1,14 +1,15 @@
 <template>
-    <div>
+    <div id="allDivision">
       <!--*******************  자판기 아이콘 클릭 전 ************************-->
       <div id="background" v-if="itemList==0">
-        <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br /><br /><br /><br />
          <img src="images/logo.png"  width="300px">
          <h4>Click on the vending machine icon in Google Maps</h4>
+         <br /><br /><br /><br /><br /><br />
       </div>  
       <!--*******************  자판기 아이콘 클릭 후 ************************-->
     <div id="background" v-if="itemList!=0" > 
-      <br /> <br /><br /><br />
+      <br /> 
      <v-card>
       <br /><br />
       <div v-for="(item, index) in itemList_v" :key="index">   

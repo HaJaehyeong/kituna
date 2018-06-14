@@ -659,6 +659,23 @@ class managementController extends Controller
     }
     //----------------------- 보충기사 삭제 -------------------------------
 
+    public function checkJobOrder($sp_id, $date) {
+        // 오늘 작업지시서가 생성 되어 있으면 내일 작업지시서가 있으니까
+        // 내일 작업지시서가 있는지 확인한다.
+        // select * from job_order where date_format(order_date, "%Y-%m-%d") = date_sub(date_format(now(), "%Y-%m-%d"), interval -1 day)
+        $check = DB::table('job_order')
+        ->where(DB::raw('date_format(order_date, "%Y-%m-%d")'), 
+        DB::raw('date_sub(date_format("'.$date.'", "%Y-%m-%d"), interval -1 day)'))
+        ->where('sp_id', $sp_id)->get();
+        
+        if (isset($check[0])) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+
+
     // 작업지시서 생성버튼
     public function createJobOrder($sp_id) {
         

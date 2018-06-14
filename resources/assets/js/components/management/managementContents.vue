@@ -6,6 +6,7 @@
         <v-btn ripple @click="sideChoose(false)" v-if="slideSide == true">접기</v-btn>
         <v-btn ripple @click="sideChoose(true)" v-else>펼치기</v-btn>
         <v-tab-item v-for="choose in spInforPageList" :key="choose">
+          <!-- 작업지시서 -->
           <v-card flat v-if="choose=='작업지시서'">
             <div id="identificationDiv">
               <div>
@@ -43,6 +44,7 @@
                   <v-btn outline color="indigo" @click="dateChange(-1)" style="width: 20%; height: 35%;">◀</v-btn>
                   <v-btn dark @click.native.stop="dialog = true" style="width: 20%; height: 35%;">{{today}}</v-btn>
                   <v-btn outline color="indigo" @click="dateChange(1)" style="width: 20%; height: 35%;">▶</v-btn>
+                  
                   <!-- 달력 띄우는 모달창 -->
                   <v-dialog v-model="dialog" max-width="400">
                     <v-card>
@@ -55,20 +57,23 @@
                     </v-card>
                   </v-dialog>
                   <!-- 달력 띄우는 모달창 -->
+
                 </div>
                 <div>
                   <h3>작업지시서</h3>
+                  <br v-if="jobOrderCheck == false">
+                  <h3 v-if="jobOrderCheck == false">생성(x)</h3>
                 </div>
                 <div>
                   <h3 align="right">보충기사: {{spName}}</h3>
                   <v-btn @click="printWindow">인쇄</v-btn>
-                  <v-btn v-if="saveToday == today" @click="createJobOrderBtn">작업지시서 생성</v-btn>
-                  <v-btn @click="test">PUSH</v-btn>
+                  <v-btn v-if="saveToday == today && jobOrderCheck == false" @click="createJobOrderBtn">작업지시서 생성</v-btn>
                 </div>
               </div>
               <div>
                 <br>
-                <table class="blueTable">
+                <!-- 전체 보충 제품 개수 -->
+                <table id="allProductTable" class="blueTable">
                   <tbody v-for="count in allProductTableRepeationCount" :key="count.index">
                     <tr>
                       <th>음료명</th>
@@ -91,8 +96,10 @@
                     </tr>
                   </tbody>
                 </table>
+                <!-- 전체 보충 제품 개수 -->
                 <br>
-                <table v-if="allVDCount > 0" class="blueTable">
+                <!-- 작업지시서 본 내용 -->
+                <table id="allProductContentsTable" v-if="allVDCount > 0" class="blueTable">
                   <thead>
                     <th>자판기이름</th>
                     <th colspan="2">라인1</th><th colspan="2">라인2</th><th colspan="2">라인3</th><th colspan="2">라인4</th>
@@ -149,6 +156,9 @@
                     </tr>
                   </tbody>
                 </table>
+                <!-- 작업지시서 본 내용 -->
+
+                <!-- 작업지시 모달창 -->
                 <v-dialog v-model="orderJobDialog" max-width="520" max-height="300">
                   <v-card>
                     <v-card-title>
@@ -177,9 +187,13 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
+                <!-- 작업지시 모달창 -->
               </div>
             </div>
           </v-card>
+          <!-- 작업지시서 -->
+
+          <!-- 담당자판기 -->
           <v-card flat v-else-if="choose=='담당자판기'">
             <div id="identificationDiv">
               <div>
@@ -242,6 +256,7 @@
               </v-card>
             </v-container>
           </v-card>
+          <!-- 담당자판기 -->
         </v-tab-item>
       </v-tabs>
     </div>
@@ -308,12 +323,12 @@
   let obj_c =[];
 
   import { EventBus } from '../../app.js';
-  import html2canvas from 'html2canvas'
+  import html2canvas from 'html2canvas'          // 캔버스 사용
   export default{  
     data(){
       return{
         vdNameSearch: '',
-        contentPage: '보충기사',                                     // default로 보충기사 페이지가 보이도록 한다.
+        contentPage: '보충기사',                 // default로 보충기사 페이지가 보이도록 한다.
         spAllVDNameStockArr: [],
         vdLineTableHeaderArr: [{
           text: '자판기명',
@@ -358,10 +373,10 @@
         active : null,
 
         spName : '',    // 작업지시서 내 보충 기사 이름
-        today  : '',     // 오늘 날짜,
+        today  : '',    // 오늘 날짜
           
         dialog     : false,   // 모달 창 띄울지 결정하는 불린 값
-        pickerDate : null, // 모달 안 달력에서 클릭 되는 날짜
+        pickerDate : null,    // 모달 안 달력에서 클릭 되는 날짜
         landscape  : false,
         reactive   : false,
 
@@ -411,10 +426,10 @@
         }],
         itemList:[],
         itemList_c:[],
-        vending_name:'', /* 모달창 자판기 이름 */
-        vending_manager:'', /* 모달창 자판기 매니저 이름 */
-        vending_id : '',/* 모달창 자판기 아이디 */
-        select: [  /* 모달창 선택지 */
+        vending_name:'',          /* 모달창 자판기 이름 */
+        vending_manager:'',       /* 모달창 자판기 매니저 이름 */
+        vending_id : '',          /* 모달창 자판기 아이디 */
+        select: [                 /* 모달창 선택지 */
           { text: '긴급! 음료 재고 부족' },
           { text: '긴급! 잔고 부족' },
           { text: '축제 기간 ( 재고잔고 확인 요망 )' },
@@ -424,26 +439,29 @@
         selectedItem:'',
         selectedItem_etc:'',
 
-        allProductCountArr: [],
-        allProductTableRepeationCount: 0,
-        allProductCountArrCut: [],
-        allVDCount: 0,
-        allPDCount: 0,
-        allCount: 0,
+        allProductCountArr              : [],       // 모든 제품 정보
+        allProductTableRepeationCount   : 0,        // 전체 보충 제품 테이블 줄 수
+        allProductCountArrCut           : [],       // 전체 보충 제품
+        allVDCount                      : 0,        // 전체 작업지시 자판기 수
+        allPDCount                      : 0,        // 전체 작업지시 제품 종류
+        allCount                        : 0,        // 전제 작업지시 제품 개수
 
-        sameVDArr: [],
-        slideSide: true,
-        orderJobDialog: false,
-        jobOrderVDName: "",
-        jobOrderVDId: "",
-        saveToday: "",
+        sameVDArr                       : [],       // 같은 자판기의 제품
+        slideSide                       : true,     // 접기펴기 상태
+        orderJobDialog                  : false,    // 작업지시 모달창 상태
+        jobOrderVDName                  : "",       // 작업지시 내리는 자판기 이름
+        jobOrderVDId                    : "",       // 작어지시 내리는 자판기 아이디
+        saveToday                       : "",       // 오늘 날짜
+        jobOrderCheck                   : false     // 작업지시서 생성 유무 확인
       }
     },
     watch: {
-      //오늘 날짜가 바뀌는 것을 실시간으로 감시한다.
+      // 오늘 날짜가 바뀌는 것을 실시간으로 감시한다.
       today: function(){
         this.joborderRenew();
       },
+
+      // 보충기사 변경 시 작동
       spName: function(){
         this.joborderRenew();
         this.chargeVdRenew();
@@ -503,6 +521,7 @@
      //<------------- 잔고 EventBus ------------->
       EventBus.$on('CoinEventBus',(response) => {
         this.data = [];
+
         if(obj_c==[]){
           for(let key in response){
              this.data[key]={won1000:response[key].won1000, won500:response[key].won500,
@@ -520,47 +539,42 @@
                        won100:this.data[key].won100, sum:this.data[key].sum});
           }
         }
+
         this.itemList_c = obj_c;
       });
     },
     methods: {
-      test: function() {
-        let sendPushAlertUrl = "android_db_conn_source/push_notification.php";
-
-        this.axios.post(sendPushAlertUrl)
-        .then((response) => {
-          console.log(response.data);
-          alert("알람이 갔습니다.");
-        })
-        .catch((error) => {
-
-        })
-      },
       createJobOrderBtn() {
-        let url = 'management/getSP';
+        let getSPUrl = 'management/getSP';    // 보충기사 정보 url
 
-        this.axios.get(url)
+        this.axios.get(getSPUrl)
         .then((response) => {
           for (var i = 0; i < response.data.length; i++) {
             if (response.data[i].sp_login_id == this.spName) {
-              let createJobOrderUrl = "management/createJobOrder/" + response.data[i].sp_id;;
+              // 해당되는 보충기사 찾기
+
+              let createJobOrderUrl = "management/createJobOrder/" + response.data[i].sp_id;
+              // 작업지시서 생성 url
               
               this.axios.get(createJobOrderUrl)
               .then((response) => {
-                if (response.data == "true") {
-                  alert("오늘의 작업지시서가 생성되었습니다.");
-                  this.joborderRenew();
+                console.log(typeof response.data);
 
-                  let sendPushAlertUrl = "android_db_conn_source/push_notification.php";
+                if (response.data == true) {
+                  alert("오늘의 작업지시서가 생성되었습니다.");
+                  this.joborderRenew();   // 새로고침
+
+                  let sendPushAlertUrl = "android_db_conn_source/push_notification.php";  // 푸시 알람 url
 
                   this.axios.post(sendPushAlertUrl)
                   .then((response) => {
-                    alert("알람을 전송했습니다.");
+                    console.log(response.data);
+                    alert("앱으로 푸시알람이 갔습니다.");
                   })
                   .catch((error) => {
-
+                    console.log(error.response);
+                    alert("푸시알람 보내기가 실패하였습니다.");
                   })
-
                 }
                 else {
                   alert("오늘의 작업지시서 이미 생성되어있습니다.");
@@ -568,6 +582,7 @@
               })
               .catch((error) => {
                 console.log(error.response);
+                alert("작업지시서 생성에 실패하였습니다.");
               })
 
               break;
@@ -576,6 +591,7 @@
         })
         .catch((error) => {
           console.log(error.response);
+          alert("보충기사 정보찾기에 실패하였습니다.");
         })
       },
       // 작업지시서 생성
@@ -583,14 +599,16 @@
 
 	    printWindow(){
         html2canvas(document.getElementById("spOrderListCutDiv")).then(function (canvas) {
-          const html = document.querySelector('html');
+          // 해당 div 이미지화
 
-          html.appendChild(canvas);
+          const html = document.querySelector('html');  // 새 element 생성
+
+          html.appendChild(canvas);                     // 이미지 넣기
           document.body.style.display = 'none';
-          window.print();
+          window.print();                               // 인쇄
           document.body.style.display = 'block';
 
-          html.removeChild(html.lastChild);
+          html.removeChild(html.lastChild);             // 이미지 제거
         });
 	    },
       // 인쇄
@@ -665,9 +683,9 @@
           //보충기사의 그날 작업 지시서를 http통신을 통해 DB에서 가져온다.
           this.axios.get("/management/jobOrder/" + this.spName + "/" + this.today)
           .then((response) => {
-            this.allProductCountArr = [];
-            this.sameVDArr = [];
-            this.allCount = 0;
+            this.allProductCountArr = [];       // 모든 제품 정보 초기화
+            this.sameVDArr = [];                // 같은 자판기의 제품 정보 초기화
+            this.allCount = 0;                  // 총 작업지시 제품 수 초기화
 
             for(var i = 0; i < response.data.length; i++) {
               var productObj = {
@@ -678,8 +696,9 @@
               productObj.productName = response.data[i].drink_name;
               productObj.productCount = response.data[i].sp_val;
               this.allCount += productObj.productCount;
+              // 작업지시 제품 수 정리
 
-              var is_nameSame = false;
+              var is_nameSame = false;    // 같은 이름 제품 유무
 
               for (var j = 0; j < this.allProductCountArr.length; j++) {
                 if (this.allProductCountArr[j].productName == productObj.productName) {
@@ -692,8 +711,9 @@
               if (is_nameSame == false) {
                 this.allProductCountArr.push(productObj);
               }
+              // 같은 이름 제품 정보 정리
 
-              var is_vdSame = false;
+              var is_vdSame = false;      // 같은 자판기 유무
 
               for (var j = 0; j < this.sameVDArr.length; j++) {
                 if (this.sameVDArr[j].vd_id == response.data[i].vd_id) {
@@ -719,10 +739,12 @@
                   this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val}]});
                 }
               }
+              // 같은 이름 자판기 정보 정리
             }
+            // 해당 보충기사의 모든 작업지시 사항 정리
 
-            this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 8);
-            this.allProductCountArrCut = [];
+            this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 8);   // 모든 작업지시 테이블 줄 수 
+            this.allProductCountArrCut = [];                                                      // 모든 작업지시 제품 정보
             var cut = 0;
 
             for (var i = 0; i < this.allProductTableRepeationCount; i++) {
@@ -738,12 +760,59 @@
                 }
               }
             }
+            // 줄 수에 맞게 제품 정보 입력
 
-            this.allVDCount = this.sameVDArr.length;
-            this.allPDCount = this.allProductCountArr.length;
-          });  
+            this.allVDCount = this.sameVDArr.length;            // 모든 작업지시 자판기 수
+            this.allPDCount = this.allProductCountArr.length;   // 모든 작업지시 종류
+
+            let getSPUrl = 'management/getSP';    // 보충기사 정보 url
+
+            this.axios.get(getSPUrl)
+            .then((response) => {
+              for (var i = 0; i < response.data.length; i++) {
+                if (response.data[i].sp_login_id == this.spName) {
+                  // 해당되는 보충기사 찾기
+
+                  let jobOrderCheckUrl = 'management/checkJobOrder/' + response.data[i].sp_id + "/" + this.today;    // 작업지시서 생성 유무확인 url
+
+                  this.axios.get(jobOrderCheckUrl)
+                  .then((response) => {
+                    if (response.data == true) {
+
+                      this.jobOrderCheck = true;
+
+                      document.getElementById("allProductTable").className = "blueTable";
+                      document.getElementById("allProductContentsTable").className = "blueTable";
+                    }
+                    else {
+                      this.jobOrderCheck = false;
+
+                      document.getElementById("allProductTable").className = "blueTableChange";
+                      document.getElementById("allProductContentsTable").className = "blueTableChange";
+                    }
+                  })
+                  .catch((error) => {
+                    console.log(error.response);
+                    alert("작업지시서 생성유무 확인에 실패하였습니다.");
+                  })
+
+                  break;
+                }
+              }
+            })
+            .catch((error) => {
+              console.log(error.response);
+              alert("보충기사 정보찾기에 실패하였습니다.");
+            })
+          })
+          .catch((error) => {
+            console.log(error.response);
+            alert("작업지시 정보를 가져오는 것을 실패하였습니다.");
+          })  
         }
       },
+
+
       chargeVdRenew(){
         // 보충기사의 ID로 해당 보충기사의 담당자판기의 현황을 볼 수 있다.
         this.axios.get("management/getVdInfo/" + this.spName)
@@ -755,6 +824,7 @@
             line1: "", line2: "", line3: "", line4: "",
             line5: "", line6: "", line7: "", line8: ""
           }
+          // 자판기 라인 객체
 
           for (var i = 0; i < response.data.length; i++) {
             inputObj.vd_name = response.data[i].vd_name;
@@ -767,6 +837,7 @@
             else if (response.data[i].line == 6) { inputObj.line6 = response.data[i].drink_name + "  /  " + response.data[i].stock; }
             else if (response.data[i].line == 7) { inputObj.line7 = response.data[i].drink_name + "  /  " + response.data[i].stock; }
             else { inputObj.line8 = response.data[i].drink_name + "  /  " + response.data[i].stock; }
+            // 라인에 따라 제품 정보 입력
 
             if (inputObj.line1 != "" && inputObj.line2 != "" && inputObj.line3 != "" && inputObj.line4 != "" && inputObj.line5 != "" && inputObj.line6 != "" && inputObj.line7 != "" && inputObj.line8 != "") {
               this.spAllVDNameStockArr.push(inputObj);
@@ -778,11 +849,15 @@
               }
             }
           }
+          // 자판기 라인에 따라 제품 정리
         })
         .catch((error) => {
-
+          console.log(error.response);
+          alert("담당자판기 정보를 가져오는 것에 실패하였습니다.");
         })
       },
+
+
       // 오늘 날짜를 구하는 함수
       todayFunction(){
         let date = new Date();
@@ -935,9 +1010,43 @@ table.blueTable thead, table.blueTable th {
   color: #FFFFFF;
   text-align: center;
   border-left: 2px solid #D0E4F5;
-   width: 1000px;
+  width: 1000px;
 }
 table.blueTable thead th:first-child {
+  border-left: none;
+}
+
+
+table.blueTableChange {
+  border: 1px solid #1C6EA4;
+  background-color: rgb(255, 255, 255);
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.blueTableChange td {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+  width: 100px;
+}
+table.blueTableChange tbody td {
+  font-size: 13px;
+  width: 100px;
+}
+table.blueTableChange thead, table.blueTableChange th {
+  background: #1C6EA4;
+  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+  border-bottom: 2px solid #444444;
+  font-size: 15px;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  border-left: 2px solid #D0E4F5;
+  width: 1000px;
+}
+table.blueTableChange thead th:first-child {
   border-left: none;
 }
 </style>

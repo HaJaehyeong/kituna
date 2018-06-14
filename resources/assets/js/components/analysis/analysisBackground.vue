@@ -5,7 +5,7 @@
             <router-view name="MainHeader"></router-view>
         </div>
         <div id="div_AnalysisLineChartView">
-            <router-view name="AnalysisLineChart"></router-view>      
+            <router-view name="AnalysisLineChart" :realtimeVdId="realtimeVdId"></router-view>      
         </div>
     </div>
 
@@ -13,7 +13,24 @@
  
 <script>
     export default {
-
+        data(){
+            return{ 
+                realtimeVdId : 0,
+            }
+        },
+        mounted () {
+            this.realtimeValue();
+        },
+        methods: {
+            realtimeValue(){
+                if(this.$route.query.id){
+                    this.realtimeVdId = this.$route.query.id;
+                    console.log(this.realtimeVdId);
+                }else{
+                    console.log("값 없어");
+                }
+            }
+        }
     }
 </script>
 
