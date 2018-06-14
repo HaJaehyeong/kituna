@@ -497,7 +497,7 @@ export default {
         formData.append('ven_id',this.vending_id);
         formData.append('ven_note',selectedItem);
        
-         this.axios.post("realtime/addJobOrderVerTwo", formData).then((Response)=>{
+         this.axios.post("management/addJobOrderVerTwo", formData).then((Response)=>{
             console.log(Response.data);
         }).catch(ex=>{
           console.log(ex);
