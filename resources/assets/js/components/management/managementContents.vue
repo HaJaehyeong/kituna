@@ -151,7 +151,7 @@
                       <td v-if="vending.lineAndProduct[7].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[7].sp_val}}</td>
                       <td v-else>{{vending.lineAndProduct[7].sp_val}}</td>
                       
-                      <td v-if="saveToday == today" @click="createNote(vending.vd_name, vending.vd_id)">{{vending.orderNote}}</td>
+                      <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)">{{vending.orderNote}}</td>
                       <td v-else>{{vending.orderNote}}</td>
                     </tr>
                   </tbody>
