@@ -583,8 +583,8 @@ class productController extends Controller
 
         $email->Host = "smtp.gmail.com";
         $email->SMTPAuth = true;
-        $email->Port = 465;
-        $email->SMTPSecure = "ssl";
+        $email->Port = 587;
+        $email->SMTPSecure = "tls";
         $email->Username = $myMailAdress[0]->mail;              // 로그인 메일 주소
         $email->Password = "tpwkclsrn79!";                      // 로그인 비밀번호
         $email->Body = "HaJaeCompany orderSheet";               // 메일 내용
