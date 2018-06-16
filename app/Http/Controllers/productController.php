@@ -44,65 +44,55 @@ class productController extends Controller
 
     //------------------------ 제품 등록 -------------------------------
     public function imgStore(Request $request) { 
-        if ($request->file('image')) {
-            // 파일이 들어 있는지 확인
+        if(!file_exists(public_path('\images\drink'))){
+            File::makeDirectory(public_path('\images\drink'));
+        }
+        // 제품 이미지 파일 저장 폴더가 없으면 생성
 
-            if(!is_dir('\productImg')) {
-                Storage::makeDirectory('\productImg');
-            }
-            // 해당 폴더가 없으면 생성
+        $file       = $request->file('image');  // 제품 이미지 파일 
+        $fileName   = $request->get('name');    // 제품 이미지 파일 이름
+        
+        if(file_exists(public_path('\images\drink\\'.$fileName.'.png'))){
+            // 같은 이름의 제품 이미지 파일이 있는지 확인
+
+            echo $fileName;
+        }
+        else {
+            $file->storeAs('\images\drink', $fileName.'.png');  // 제품 이미지 파일 저장
             
-            $file = $request->file('image');                                // 파일 
-            $fileName = $request->get('name');                              // 파일 이름
+            //----------------------- DB 저장 ---------------------------
+            $drink_name      = $request->get("drink_name");         // 제품 이름
+            $cp_name         = $request->get("cp_name");            // 회사 이름
+            $drink_price     = $request->get("drink_price");        // 제품 가격
+            $max_stock       = $request->get("max_stock");          // 최대 재고
+            $expiration_date = $request->get("expiration_date");    // 유통 기한
+            $stock           = $request->get("stock");              // 현재 재고
 
-            $file->storeAs('\productImg', $fileName.'.png');                       // Storage경로로 파일 저장
+            echo $drink_name." ".$cp_name." ".$drink_price." ".$max_stock." ".$expiration_date;
 
-            if(!file_exists(public_path('\images\drink'))){
-                File::makeDirectory(public_path('\images\drink'));
-            }
-            // 해당 폴더가 없으면 생성
+            $getCpId = DB::table('company_info')->select('cp_id')->where('cp_name', $cp_name)->get();
 
-            if(file_exists(public_path('\images\drink\\'.$fileName.'.png'))){
-                // 같은 이름의 파일이 있는지 확인
-                echo $fileName;
-            }
-            else {
-                $file->move(public_path('\images\drink'), $fileName.'.png');     // Storage에서 Public으로 파일 이동
+            DB::table('product_info')->insert([
+                'drink_id'      => null,
+                'drink_name'    => $drink_name,
+                'cp_id'         => $getCpId[0]->cp_id,
+                'drink_img_path'=> "/images/drink/".$drink_name.".png",
+                'drink_price'   => $drink_price,
+                "sell_price"    => 800,
+                'max_stock'     => $max_stock
+            ]);
 
-                //----------------------- DB 저장 ---------------------------
-                $drink_name = $request->get("drink_name");
-                $cp_name = $request->get("cp_name");
-                $drink_price = $request->get("drink_price");
-                $max_stock = $request->get("max_stock");
-                $expiration_date = $request->get("expiration_date");
-                $stock = $request->get("stock");
+            $getDrinkId = DB::table('product_info')->select('drink_id')
+                    ->where('drink_name', $drink_name)->get();
 
-                echo $drink_name." ".$cp_name." ".$drink_price." ".$max_stock." ".$expiration_date;
-
-                $getCpId = DB::table('company_info')->select('cp_id')->where('cp_name', $cp_name)->get();
-
-                DB::table('product_info')->insert([
-                    'drink_id'      => null,
-                    'drink_name'    => $drink_name,
-                    'cp_id'         => $getCpId[0]->cp_id,
-                    'drink_img_path'=> "/images/drink/".$drink_name.".png",
-                    'drink_price'   => $drink_price,
-                    "sell_price"    => 800,
-                    'max_stock'     => $max_stock
-                ]);
-
-                $getDrinkId = DB::table('product_info')->select('drink_id')
-                        ->where('drink_name', $drink_name)->get();
-
-                DB::table('stock_management')->insert([
-                    'drink_id'          => $getDrinkId[0]->drink_id,
-                    'stock_id'          => null,
-                    'buy_date'          => DB::raw('CURRENT_TIMESTAMP'),
-                    'expiration_date'   => $expiration_date." 00:00:00",
-                    'stock'             => $stock
-                ]);
-                //----------------------- DB 저장 ---------------------------
-            }
+            DB::table('stock_management')->insert([
+                'drink_id'          => $getDrinkId[0]->drink_id,
+                'stock_id'          => null,
+                'buy_date'          => DB::raw('CURRENT_TIMESTAMP'),
+                'expiration_date'   => $expiration_date." 00:00:00",
+                'stock'             => $stock
+            ]);
+            //----------------------- DB 저장 ---------------------------
         }
     }
     //------------------------ 제품 등록 -------------------------------
@@ -111,35 +101,33 @@ class productController extends Controller
     
     //------------------------ 제품 수정 -------------------------------
     public function updateProduct(Request $request) {
-        $fileName = $request->get('name');                              // 파일 이름
-
-        if ($request->get("fileUse") == "true") {
-            if(!is_dir('\productImg')) {
-                Storage::makeDirectory('\productImg');
-            }
-            // 해당 폴더가 없으면 생성
-
-            $file = $request->file('image');                                // 파일
-            $file->storeAs('\productImg', $fileName.'.png');                       // Storage경로로 파일 저장
-
-            if(!file_exists(public_path('\images\drink'))){
-                File::makeDirectory(public_path('\images\drink'));
-            }
-            // 해당 폴더가 없으면 생성
-        }
-
-        $original_name = $request->get("original_name");
+        $fileName        = $request->get('name');               // 바뀐 제품 이미지 파일 이름
+        $original_name   = $request->get("original_name");      // 원래 제품 이미지 파일 이름
         
         if($original_name == $fileName) {
-            //----------------------- DB 저장 ---------------------------
-            $stock_id = $request->get("stock_id");
-            $original_name = $request->get("original_name");
-            $drink_name = $request->get("drink_name");
-            $cp_name = $request->get("cp_name");
-            $drink_price = $request->get("drink_price");
-            $stock = $request->get("stock");
-            $max_stock = $request->get("max_stock");
-            $expiration_date = $request->get("expiration_date");
+            // 제품 이미지 파일 이름 변화가 없을 시
+
+            if ($request->get("fileUse") == "true") {
+                // 제품 이미지 파일변화 유무확인
+    
+                if(!file_exists(public_path('\images\drink'))){
+                    File::makeDirectory(public_path('\images\drink'));
+                }
+                // 제품 이미지 파일 저장 폴더가 없으면 생성
+    
+                $file = $request->file('image');                    // 제품 이미지 파일
+                $file->storeAs('\images\drink', $fileName.'.png');  // 제품 이미지 파일 저장
+            }
+
+            //----------------------- DB 업데이트 ---------------------------
+            $stock_id        = $request->get("stock_id");           // 재고 아이디
+            $original_name   = $request->get("original_name");      // 원래 파일 이름
+            $drink_name      = $request->get("drink_name");         // 제품 이름
+            $cp_name         = $request->get("cp_name");            // 회사 이름
+            $drink_price     = $request->get("drink_price");        // 제품 가격
+            $stock           = $request->get("stock");              // 현재 재고
+            $max_stock       = $request->get("max_stock");          // 최대 재고
+            $expiration_date = $request->get("expiration_date");    // 유통 기한
 
             $getCpId = DB::table('company_info')->select('cp_id')->where('cp_name', $cp_name)->get();
     
@@ -160,29 +148,41 @@ class productController extends Controller
                 'expiration_date'   => $expiration_date." 00:00:00",
                 'stock'             => $stock
             ]);
-            //----------------------- DB 저장 ---------------------------
+            //----------------------- DB 업데이트 ---------------------------
         }
         else {
+            // 제품 이미지 파일 이름 변화 있을 시
+
             if(file_exists(public_path('\images\drink\\'.$fileName.'.png'))){
-                // 같은 이름의 파일이 있는지 확인
+                // 같은 이름의 제품 이미지 파일이 있는지 확인
 
                 echo $fileName;   
             }
             else {
                 if ($request->get("fileUse") == "true") {
-                    File::delete(public_path('\images\drink\\'.$original_name.'.png'));                // 파일 삭제
-                    $file->move(public_path('\images\drink'), $fileName.'.png');     // Storage에서 Public으로 파일 이동
+                    // 제품 이미지 파일 변화 유무확인
+
+                    File::delete(public_path('\images\drink\\'.$original_name.'.png'));
+                    // 원래 제품 이미지 파일 삭제
+                    
+                    if(!file_exists(public_path('\images\drink'))){
+                        File::makeDirectory(public_path('\images\drink'));
+                    }
+                    // 제품 이미지 파일 저장 폴더가 없으면 생성
+        
+                    $file = $request->file('image');                    // 제품 이미지 파일
+                    $file->storeAs('\images\drink', $fileName.'.png');  // 제품 이미지 파일 저장
                 }
 
-                //----------------------- DB 저장 ---------------------------
-                $stock_id = $request->get("stock_id");
-                $original_name = $request->get("original_name");
-                $drink_name = $request->get("drink_name");
-                $cp_name = $request->get("cp_name");
-                $drink_price = $request->get("drink_price");
-                $stock = $request->get("stock");
-                $max_stock = $request->get("max_stock");
-                $expiration_date = $request->get("expiration_date");
+                //----------------------- DB 업데이트 ---------------------------
+                $stock_id        = $request->get("stock_id");           // 재고 아이디
+                $original_name   = $request->get("original_name");      // 원래 파일 이름
+                $drink_name      = $request->get("drink_name");         // 제품 이름
+                $cp_name         = $request->get("cp_name");            // 회사 이름
+                $drink_price     = $request->get("drink_price");        // 제품 가격
+                $stock           = $request->get("stock");              // 현재 재고
+                $max_stock       = $request->get("max_stock");          // 최대 재고
+                $expiration_date = $request->get("expiration_date");    // 유통 기한
 
                 $getCpId = DB::table('company_info')->select('cp_id')->where('cp_name', $cp_name)->get();
         
@@ -203,7 +203,7 @@ class productController extends Controller
                     'expiration_date'   => $expiration_date." 00:00:00",
                     'stock'             => $stock
                 ]);
-                //----------------------- DB 저장 ---------------------------
+                //----------------------- DB 업데이트 ---------------------------
             }
         }
     }
@@ -213,13 +213,14 @@ class productController extends Controller
 
     //------------------------ 제품 삭제 -------------------------------
     public function deleteProduct(Request $request) {
-        $stock_id = $request->get('stock_id');
-        $drink_name = $request->get('drink_name');
-        $fileName = $drink_name.'.png';
+        $stock_id    = $request->get('stock_id');       // 재고 아이디
+        $drink_name  = $request->get('drink_name');     // 제품 이름
+        $fileName    = $drink_name.'.png';              // 제품 이미지 파일
 
         if(file_exists(public_path('\images\drink\\'.$fileName))){
-            // 같은 이름의 파일이 있는지 확인
+            // 같은 이름의 제품 이미지 파일이 있는지 확인
             
+            //----------------------- DB 데이터 삭제 ---------------------------
             // 제품삭제 -> stock_id 받아 재고가 전부 0이면 제품을 삭제
             // 주문내역도 없어야함
             $get_data = DB::table('stock_management')->where('stock_id', $stock_id)->first();
@@ -241,14 +242,16 @@ class productController extends Controller
             }
 
             if($stock_check == "good"){
-                // 해당 제품을 삭제한다.
+                // 제품을 삭제한다.
                 DB::table('stock_management')->where('drink_id', $get_drink_id)->delete();
                 DB::table('product_info')->where('drink_id', $get_drink_id)->delete();
 
-                File::delete(public_path('\images\drink\\'.$fileName));                // 파일 삭제
+                File::delete(public_path('\images\drink\\'.$fileName));
+                // 제품 이미지 파일 삭제
             }
 
             return $stock_check;
+            //----------------------- DB 데이터 삭제 ---------------------------
         }
     }
     //------------------------ 제품 삭제 -------------------------------
@@ -326,8 +329,8 @@ class productController extends Controller
     // return값[1] = 제품정보
     public function getOrderInfo(Request $request) {
 
-        $cp_id = $request->get("cp_id");
-        $os_id = $request->get("os_id");
+        $cp_id = $request->get("cp_id");    // 회사 아이디
+        $os_id = $request->get("os_id");    // 주문 아이디
 
         $getOrderInfo = array();
         $getOrderInfo[0] = DB::table('company_info')->where('cp_id', $cp_id)->get();
@@ -466,12 +469,13 @@ class productController extends Controller
     //------------------------ 회사정보 등록 -------------------------------
     public function registerCompanyInfo(Request $request) {
 
-        $cp_name = $request->get("cp_name");
-        $cp_leader = $request->get("cp_leader");
-        $cp_phone = $request->get("cp_phone");
-        $cp_mail = $request->get("cp_mail");
-        $cp_fax = $request->get("cp_fax");
-        
+        $cp_name     = $request->get("cp_name");        // 회사 이름
+        $cp_leader   = $request->get("cp_leader");      // 회사 담당자
+        $cp_phone    = $request->get("cp_phone");       // 회사 전화번호
+        $cp_mail     = $request->get("cp_mail");        // 회사 이메일
+        $cp_fax      = $request->get("cp_fax");         // 팩스 번호
+
+        //------------------------ DB 저장 -------------------------------
         $result = DB::table('company_info')->insert([
             'cp_id'         => NULL,
             'cp_name'       => $cp_name,
@@ -481,6 +485,7 @@ class productController extends Controller
             'cp_fax'        => $cp_fax,
             'cp_os_path'    => "documentFile/".$cp_name.".pdf"
         ]);
+        //------------------------ DB 저장 -------------------------------
 
         if ($result) {
             return 'good';
@@ -494,14 +499,14 @@ class productController extends Controller
 
     //------------------------ 회사정보 수정 -------------------------------
     public function updateCompanyInfo(Request $request) {
-        $cp_id = $request->get("cp_id");
-        $cp_name = $request->get("cp_name");
-        $cp_leader = $request->get("cp_leader");
-        $cp_phone = $request->get("cp_phone");
-        $cp_mail = $request->get("cp_mail");
-        $cp_fax = $request->get("cp_fax");
+        $cp_id       = $request->get("cp_id");          // 회사 아이디
+        $cp_name     = $request->get("cp_name");        // 회사 이름
+        $cp_leader   = $request->get("cp_leader");      // 회사 담당자 이름
+        $cp_phone    = $request->get("cp_phone");       // 회사 전화번호
+        $cp_mail     = $request->get("cp_mail");        // 회사 이메일
+        $cp_fax      = $request->get("cp_fax");         // 팩스 번호
 
-        
+        //------------------------ DB 업데이트 -------------------------------
         $result = DB::table('company_info')->where('cp_id', $cp_id)->update([
             'cp_name'       => $cp_name,
             'cp_leader'     => $cp_leader,
@@ -509,6 +514,7 @@ class productController extends Controller
             'cp_mail'       => $cp_mail,
             'cp_fax'        => $cp_fax
         ]);
+        //------------------------ DB 업데이트 -------------------------------
 
         if ($result) {
             return 'good';
@@ -544,11 +550,11 @@ class productController extends Controller
     //------------------------ 회사 삭제 -------------------------------
 
 
-    
+
     //------------------------ pdf 메일 보내기 -------------------------------
     public function sendPDF(Request $request) {
-        $fileData = $request->file('pdfFile');
-        $cp_id = $request->get('cp_id');
+        $fileData = $request->file('pdfFile');  // 주문서 파일
+        $cp_id    = $request->get('cp_id');     // 회사 아이디
 
         $getLast_Os_path = DB::table('order_sheet')->select('os_path')
         ->orderBy('os_id', 'desc')
@@ -563,35 +569,29 @@ class productController extends Controller
 
         $fileName = $getLast_Os_path[0]->os_path;
         $fileName = explode("/", $fileName)[1];
-
-        if(!is_dir('\productOrderSheet')) {
-            Storage::makeDirectory('\productOrderSheet');
-        }
-        // 해당 폴더가 없으면 생성
-
-        $fileData->storeAs('\productOrderSheet', $fileName);                       // Storage경로로 파일 저장
+        // 주문서 파일 이름
 
         if(!file_exists(public_path('\documentFile'))){
             File::makeDirectory(public_path('\documentFile'));
         }
-        // 해당 폴더가 없으면 생성
+        // 주문서 파일 저장 폴더가 없으면 생성
 
-        $fileData->move(public_path('\documentFile'), $fileName);     // Storage에서 Public으로 파일 이동
+        $fileData->storeAs('\documentFile', $fileName);         // 주문서 파일 저장
 
-        $email = new PHPMailer(true);
+        $email = new PHPMailer(true);                           // 메일 객체 생성
         $email->IsSMTP();
 
         $email->Host = "smtp.gmail.com";
         $email->SMTPAuth = true;
         $email->Port = 465;
         $email->SMTPSecure = "ssl";
-        $email->Username = $myMailAdress[0]->mail;
-        $email->Password = "tpwkclsrn79!";
-        $email->Body = "HaJaeCompany orderSheet";
-        $email->SetFrom($myMailAdress[0]->mail);
-        $email->AddAddress($get_send_mailAdress[0]->cp_mail);
-        $email->Subject = "HaJaeCompany orderSheet";
-        $email->AddAttachment("documentFile/".$fileName);
+        $email->Username = $myMailAdress[0]->mail;              // 로그인 메일 주소
+        $email->Password = "tpwkclsrn79!";                      // 로그인 비밀번호
+        $email->Body = "HaJaeCompany orderSheet";               // 메일 내용
+        $email->SetFrom($myMailAdress[0]->mail);                // 보내는 메일 주소
+        $email->AddAddress($get_send_mailAdress[0]->cp_mail);   // 받는 메일 주소
+        $email->Subject = "HaJaeCompany orderSheet";            // 메일 제목
+        $email->AddAttachment("documentFile/".$fileName);       // 첨부 파일
 
         if ($email->Send()) {
             return "good";
@@ -599,8 +599,6 @@ class productController extends Controller
         else {
             return "fail";
         }
-
-        
     }
     //------------------------ pdf 메일 보내기 -------------------------------
 
