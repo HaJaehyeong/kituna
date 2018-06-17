@@ -581,7 +581,7 @@ class productController extends Controller
         $email = new PHPMailer(true);                           // 메일 객체 생성
         $email->IsSMTP();
 
-        $email->Host = "smtp.gmail.com";
+        $email->Host = "smtp.naver.com";
         $email->SMTPAuth = true;
         $email->Port = 587;
         $email->SMTPSecure = "tls";

@@ -581,6 +581,9 @@ class analysisController extends Controller
             }
         });
 
+        for ($i = 0 ; $i < count($array) ; $i++) {
+            $array[$i]->num = $i+1;
+        }
 
         $saveAll[0] = $getListOfDrinkSales;
         $saveAll[1] = $array;
