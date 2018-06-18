@@ -20,6 +20,7 @@
     export default {
        
     }
+    
 </script>
 
 <style>
@@ -41,8 +42,11 @@
     grid-template-columns: repeat(8, 1fr);
     grid-auto-rows: minmax(100px, auto);
     grid-template-areas: 
-      "rh rh  rh rh rh rh rh rh "
-      "lc lc  gm gm gm gm vm vm ";
+      "rh rh rh rh rh rh rh rh "
+      "lc lc lc gm gm gm gm gm "
+      "lc lc lc gm gm gm gm gm "
+      "lc lc lc vm vm vm vm vm "
+      "lc lc lc vm vm vm vm vm ";
    }
     
 </style>

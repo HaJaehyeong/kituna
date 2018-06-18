@@ -1,64 +1,69 @@
 <template>
-  <div>  
-    <h2><b-badge variant="light">Index</b-badge></h2>
+  <div id="allDivision" >  
+    <div style="text-align:left;font-family:'Dosis';" >
+    <h2><strong>　　Real time Management </strong></h2>
+    </div>
+    <br />
     <div class="tab_container">
-    <!-- ****************** Local list ****************** --> 
-    <v-tabs v-model="active" icons-and-text centered dark  color="cyan darken-1">
-      <v-tab  v-for="choose in spOrVdCard" :key="choose" ripple > {{ choose }} 조회</v-tab>
-      <v-tab-item v-for="choose in spOrVdCard" :key="choose">
-        <v-card flat v-if="choose=='지역별'">
-          <b-tabs pills card vertical>
-           <b-tab title="전국" data-toggle="tab" href="#" @click="SouthKorea(127.826836,36.684272)"></b-tab>
-            <b-tab :title="item_1.text" data-toggle="tab" href="#"  @click="NationWideEmit(item_1.latitude,item_1.longitude)" v-for="(item_1, key, index) in itemList" :key="index">
-            <div class ="box" v-for="item_2 in item_1.children" :key="item_2.no">
-              <v-card tile>
-               <br />
-                <v-layout row wrap><v-flex xs1></v-flex>
-                  <v-card hover>
-                     <v-chip label @click="localEmit(item_2.longitude,item_2.latitude) " flat  outline color="cyan darken-4" >{{item_2.name}}</v-chip>  
-                  </v-card>
-                  <v-flex xs1></v-flex>
-                  <v-card  tile hover>
-                   <div v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==1)">
-                      <v-layout row wrap><v-card tile color="red lighten-4">　 매진임박 :  {{item_3.count}}대 　</v-card>
-                       </v-layout>
-                   </div>
-                   <div v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==3)">
-                      <v-layout row wrap>
-                         <v-layout row wrap><v-flex xs1></v-flex><v-card v-if="item_3.count!=0" tile color="grey lighten-5">　 작업지시 : {{item_3.count}}대　</v-card>
-                         </v-layout>
-                      </v-layout>
-                   </div>
-                   <div v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==0)">
-                      <v-layout row wrap>
-                         <v-layout row wrap><v-flex xs1></v-flex><v-card v-if="item_3.count!=0" tile color="grey lighten-5">　 총 자판기 : {{item_3.count}}대　</v-card>
-                         </v-layout>
-                      </v-layout>
-                   </div>
-                   
-                 </v-card>
-                </v-layout>
-               <br />
-             </v-card>
+        <input id="select1" name="sex" type="radio" checked>
+        <button id="btn1"><label for="select1" class="men">지역별 조회</label></button>
+        <input id="select2" name="sex" type="radio">
+        <button id="btn2"><label for="select2" class="women">보충기사별 조회</label></button>
+
+        <!-- ****************** Local list ****************** --> 
+        <div class="page1" id="page_1">
+          <br />
+          <button id="localBtn" href="#" @click="SouthKorea(127.826836,36.684272)">전국</button>
+          <br /><br />
+          <div v-for="(item_1, key, index) in itemList" :key="index">
+            <div v-if="item_1.text=='서울특별시'">
+             <button id="localBtn" href="#" v-b-toggle.seoul  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
+            </div>
+            <div v-if="item_1.text=='대구광역시'">
+             <button id="localBtn" href="#" v-b-toggle.daegu  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
+            </div>
+            <div v-if="item_1.text!='대구광역시'&&item_1.text!='서울특별시'">
+             <button id="localBtn" href="#" v-b-toggle.index  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
+            </div>
+         
+          <br />
+          <div v-if="item_1.text=='서울특별시'">
+              <b-collapse id="seoul">
+                  <b-card style="max-width: 27em;">
+                   <button class="subLocalBtnFrame" type="button"  id="subLocalBtnFrame1"  @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">
+                      <tr id="subLocalButton">　　 {{item_2.name}}</tr>
+                      <tr >
+                        <td id="subLocalButton_1" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==1)">{{item_3.count}}</td><td id="subLocalButton_2" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==0)">/{{item_3.count}}</td>
+                      </tr>
+                      </button> 
+                  </b-card>
+                </b-collapse>
            </div>
-         </b-tab>
-        </b-tabs>
-      </v-card>
-          <!-- ******************  supplemener list ****************** -->
-          <v-card flat v-else-if="choose=='보충기사별'">
-            <div v-for="(item,index) in itemList2" :key="item.index" v-if="index>=0">
-              <div class="text-xs-center">
+           <div v-if="item_1.text=='대구광역시'">
+              <b-collapse id="daegu">
+                  <b-card style="max-width: 27em;">
+                    <button class="subLocalBtnFrame" type="button"  id="subLocalBtnFrame1"  @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">
+                      <tr id="subLocalButton">　　 {{item_2.name}}</tr>
+                      <tr >
+                        <td id="subLocalButton_1" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==1)">{{item_3.count}}</td><td id="subLocalButton_2" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==0)">/{{item_3.count}}</td>
+                      </tr>
+                      </button>
+                  </b-card>
+                </b-collapse>
+           </div>
+          </div>
+       </div>
+        <!-- ******************  supplemener list ****************** -->
+        <div class="page2">
+           <div id="supporter_frame" v-for="(item,index) in itemList2" :key="item.index" v-if="index>=0">
+              <div>
                 <div  @click="supplementerEmit(item.supplementer)">
                   <v-avatar>
                     <img v-bind:src="item.imgSrc">
                   </v-avatar>
-                  {{item.supplementer}}
+                  　{{item.supplementer}}  <button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">작업지시서</p></button>
                 </div>
-                <v-btn @click="orderList(item.supplementer)">작업지시서</v-btn>
-              </div>
-            </div>     
-          </v-card>
-          <v-dialog v-model="orderJobModal" fullscreen>
+           <v-dialog v-model="orderJobModal" fullscreen>
             <v-card flat>
               <div id="spOrderListCutDiv">
                 <div id="spOrderListHeader">                        
@@ -67,7 +72,7 @@
                     <v-btn dark @click.native.stop="dialog = true" style="width: 20%; height: 20%;">{{today}}</v-btn>
                     <v-btn outline color="indigo" @click="dateChange(1)" style="width: 20%; height: 20%;">▶</v-btn>
                     <!-- 달력 띄우는 모달창 -->
-                    <v-dialog v-model="dialog" max-width="400">
+                     <v-dialog v-model="dialog" max-width="400">
                       <v-card>
                         <v-date-picker color="green lighten-1" v-model="pickerDate" :landscape="landscape" :reactive="reactive"></v-date-picker>
                         <v-card-actions>
@@ -76,9 +81,9 @@
                           <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" @click="chooseDateChange()">확인</v-btn>
                         </v-card-actions>
                       </v-card>
-                    </v-dialog>
+                    </v-dialog> 
                     <!-- 달력 띄우는 모달창 -->
-                  </div>
+                   </div>
                   <div>
                     <h3>작업지시서</h3>
                   </div>
@@ -200,14 +205,15 @@
                         <v-btn color="green darken-1" flat="flat" @click.native="orderJobDialog = sendNote(selectedItem,selectedItem_etc)">submit</v-btn>
                       </v-card-actions>
                     </v-card>
-                  </v-dialog>
-                </div>
+                   </v-dialog>
+                   </div>
+                  </div>
+                </v-card>
+               </v-dialog>
               </div>
-            </v-card>
-          </v-dialog>
-        </v-tab-item>
-      </v-tabs>
-    </div>
+            </div> 
+        </div>
+    </div> 
     
   </div>
 </template>
@@ -568,7 +574,10 @@ export default {
     localEmit :function(arg1,arg2){
       
       EventBus.$emit('LocalEvent',arg1,arg2);
-  
+
+      let clickVd = document.getElementById(subLocalBtnFrame);
+      clickVd.style.backgroundColor = '#FCE6E0';
+
     },
     //<--------------------- South --------------------------->  
     SouthKorea:function(arg1,arg2){
@@ -660,13 +669,16 @@ export default {
 </script>
 
 <style>
-/* left div */
-#leftList{
-          width:100%;
-          height: 100%;
-          float: left;
-}
 
+/* 전체 구역 마진 설정 */
+#allDivision{
+margin-top:10px;
+margin-right:1px;
+margin-bottom:10px; 
+margin-left:280px;
+font-family:"Gothic A1";
+}
+/* 하이퍼링크 설정 */
  #a:link { color: rgb(198, 198, 198); text-decoration: none;}
  #a:visited { color: rgb(65, 39, 39); text-decoration: none;}
  #a:hover { color: rgb(154, 169, 156); text-decoration: underline;}
@@ -691,148 +703,324 @@ export default {
 
 body {
    font-family: sans-serif;
-   background: #f6f9fa;
+   background: #ffffff;
 }
 
 h1 {
-   color: #ccc;
+   color: rgb(255, 255, 255);
    text-align: center;
 }
+/* 지역별 조회 배경 설정 */
+#page_1{
+    width:  400px;
+    height: 880px;
+    margin-top: 5px;
+    background-image: url("/images/realtime/left_frame.png");
+  /*   background-repeat: no-repeat;*/
+    background-position: center; 
+    background-size: 370px 840px;
+    
+}
 
-a {
-  color: rgb(60, 52, 52);
-  text-decoration: none;
+/* 지역별 조회 버튼 css 설정 */
+input#select1,input#select2{
+  display:none;
+}
+
+.page1,.page2{
+  display:none;
+}
+input#select1:checked ~ .page1{
+  display:block;
+}
+input#select2:checked ~ .page2{
+  display:block;
+}
+
+/* 이름 설정 */
+label{
+    display:inline-block;
+    width: 200px;
+    height: 70px;
+    background:rgb(255, 255, 255);
+    font-size: 20px;
+    text-align:center;
+    line-height:30px;
+    font-family:"Nanum Gothic";
+    color:#0064c8;
+}
+/* ------------------------- 버튼1- 지역별 조회 설정 ----------------------*/
+#btn1 {
+    position: relative;
+    border: 3px solid #ebf0f5;
+    border-radius:10px;
+    font-size: 20px;
+    color: #FFFFFF;
+    padding-top:5px;
+    padding-right: 25px;
+    width: 200px;
+    height: 55px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer; 
+    font-family:"Nanum Gothic";
+}
+#btn1:hover {
+  border: 3px solid #0064c8;
+  color:#0064c8;
+}
+#btn1:after {
+    content: "";
+    background: #0064c8;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+   
+}
+
+#btn1:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+#btn1:focus {
   outline: none;
-}
-
-/*Fun begins*/
-.tab_container {
-   width: 90%;
-   margin: 0 auto;
-   padding-top: 0px;
-   position: relative;
-}
-
-input, section {
-  clear: both;
-  padding-top: 10px;
-  display: none;
-}
-
-label {
-  font-weight: 700;
-  font-size: 18px;
-  display: block;
-  float: left;
-  width: 50%;
-  height: 7.5ex;
-  padding: 1.5em;
-  color: #301b1b;
-  cursor: pointer;
-  text-decoration: none;
-  text-align: center;
-  background: #f0f0f0;
-}
-
-#tab1:checked ~ #content1,
-#tab2:checked ~ #content2 {
-  display: block;
-  padding: 20px;
-  background: #fff;
-  color: rgb(27, 15, 15);
-  border-bottom: 2px solid #f0f0f0;
-}
-
-.tab_container .tab-content p,
-.tab_container .tab-content h3 {
-  -webkit-animation: fadeInScale 0.7s ease-in-out;
-  -moz-animation: fadeInScale 0.7s ease-in-out;
-  animation: fadeInScale 0.7s ease-in-out;
-}
-.tab_container .tab-content h3  {
-  text-align: center;
-}
-
-.tab_container [id^="tab"]:checked + label {
-  background: #fff;
-  box-shadow: inset 0 3px rgb(238, 0, 12);
-}
-
-.tab_container [id^="tab"]:checked + label .fa {
-  color: rgb(184, 38, 38);
-}
-
-label .fa {
-  font-size: 1.3em;
-  margin: 0 0.4em 0 0;
-}
-
-/*Media query*/
-@media only screen and (max-width: 930px) {
-  label span {
-    font-size: 14px;
-  }
-  label .fa {
-    font-size: 14px;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  label span {
-    display: none;
-  }
-
-  label .fa {
-    font-size: 16px;
-  }
-
-  .tab_container {
-    width: 98%;
-  }
-}
-
-/*Content Animation*/
-@keyframes fadeInScale {
-  0% {
-     transform: scale(0.9);
-     opacity: 0;
-  }
-  
-  100% {
-     transform: scale(1);
-     opacity: 1;
-  }
-}
-table.blueTable {
-  border: 1px solid #1C6EA4;
-  background-color: #EEEEEE;
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
-table.blueTable td {
-  border: 1px solid #AAAAAA;
-  padding: 3px 2px;
-  width: 100px;
-}
-table.blueTable tbody td {
-  font-size: 13px;
-  width: 100px;
-}
-table.blueTable thead, table.blueTable th {
-  background: #1C6EA4;
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  border-bottom: 2px solid #444444;
-  font-size: 15px;
+  border: 3px solid #0064c8;
+  color:#0064c8;
   font-weight: bold;
-  color: #FFFFFF;
+}
+
+/* ------------------ 버튼2- 보충기사별 조회 설정 -----------------*/
+#btn2{
+    position: relative;
+    border: 3px solid #ebf0f5;
+    border-radius:10px;
+    font-size: 20px;
+    color: #FFFFFF;
+    padding-top:5px;
+    padding-right: 25px;
+    width: 200px;
+    height: 55px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer; 
+    font-family:"Nanum Gothic";
+}
+#btn2:hover {
+  border: 3px solid #0064c8;
+  color:#0064c8;
+}
+#btn2:after {
+    content: "";
+    background: #0064c8;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s;
+}
+
+#btn2:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+#btn2:focus {
+  outline: none;
+  border: 3px solid #0064c8;
+  color: #0064c8;
+  font-weight: bold;
+}
+
+/* 각 지역 버튼 설정 */
+#localBtn{
+  color: #ffffff;
+  font-size: 20px;
   text-align: center;
-  border-left: 2px solid #D0E4F5;
-   width: 1000px;
+  font-family:"Nanum Gothic";
+  font-weight: bold;
+  
 }
-table.blueTable thead th:first-child {
-  border-left: none;
+/* 각 지역별 버튼*/
+.subLocalBtnFrame{  
+
+    padding-left : -19px;
+    padding-right : 10px;
+    padding-bottom : 15px;
+    position: relative;
+    height: 70px;
+    width: 150px;
+    
+    border: 3px solid #04376a;
+    border-radius:10px;
+    margin: 10px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    font-size: 22px;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+
 }
+
+/* .subLocalBtnFrame:focus {
+  outline: none;
+  border: 3px solid #0064c8;
+  color: #0064c8;
+  font-weight: bold;
+}
+
+.subLocalBtnFrame:after {
+			content: "";
+			background-color: #0064c8;
+			display: block;
+			position: absolute;
+			top: 70px;
+			left: 0;
+			padding-top: 200%;
+			padding-left: 300%;
+			margin-left: 0;
+			margin-top: -120%;
+			opacity: 0;
+			transition: all 0.8s;
+ }
+
+ .subLocalBtnFrame:active::after {
+			padding: 0px;
+			margin: 0px;
+			opacity: 1;
+			transition: all 0s
+      
+ } */
+
+ .subLocalBtnFrame:hover { box-shadow: 0 0px 10px 0 rgba(102, 102, 102, 0.2), 0 6px 10px 0 rgba(0,0,0,0.19); }
+
+ .subLocalBtnFrame:active  {
+	transition: all 1s;
+  border: 3px solid #0064c8;
+  color: #0064c8;
+  font-weight: bold;
+}
+/* 각 지역별 내부 폰트 */
+#subLocalButton{
+  color: #0064c8;
+  font-size: 21px;
+  text-align: center;
+  font-family:"Nanum Gothic";
+  font-weight: bold;
+}
+
+/* 각지역별 내부 폰트 - 첫번째 숫자  */
+#subLocalButton_1{
+  color: #306ca8;
+  font-size: 26px;
+  text-align: center;
+  font-family:"Fugaz One";
+}
+/* 각지역별 내부 폰트 - 두번째 숫자  */
+#subLocalButton_2{
+  color: #79a9da;
+  font-size: 17px;
+  text-align: center;
+  font-family:"Fugaz One";
+}
+
+/* 보충기사별  테두리 */
+ #supporter_frame{
+ 
+    background-image:url(/images/realtime/vertical_frame.png);
+    background-repeat:no-repeat;
+    background-size:320px 90px; 
+    height:90px;
+    margin-left: 20%;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    padding-top :4%;
+    padding-right :11%;
+    
+    font-size: 20px;
+    font-family:"Nanum Gothic";
+    color:#ffffff;
+    font-weight: bold;
+ 
+}
+  /* 작업지시서 버튼 */
+  .work_order_button{
+    position: relative;
+    width: 130px;
+    height: 40px;
+    
+    padding-top: 3%;
+
+    border-radius:10px;
+    background-color: #ffffff;
+    margin: 10px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    overflow: hidden;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+  }
+
+
+  .work_order_button:focus {
+  outline: none;
+  border: 3px solid #0064c8;
+  
+	background-color: #f6faff;
+  color: #0064c8;
+  font-weight: bold;
+}
+
+.work_order_button:after {
+			content: "";
+			background-color: #f6faff;
+			display: block;
+			position: absolute;
+			top: 70px;
+			left: 0;
+			padding-top: 200%;
+			padding-left: 300%;
+			margin-left: 0;
+			margin-top: -120%;
+			opacity: 0;
+			transition: all 0.8s;
+ }
+
+ .work_order_button:active::after {
+			padding: 0px;
+			margin: 0px;
+			opacity: 1;
+			transition: all 0s
+      
+ }
+ .work_order_button:hover { 
+   text-shadow: 0 10px 10px 10px rgba(102, 102, 102, 0.2), 0 16px 10px 0 rgba(0,0,0,0.19); 
+   box-shadow: 0 10px 10px 10px rgba(102, 102, 102, 0.2), 0 16px 10px 0 rgba(0,0,0,0.19); }
+
+ #work_order_font{
+    text-decoration: bold;
+    font-size: 17px;
+    font-family:"Nanum Gothic";
+    color:#0064c8;
+  }
 </style>

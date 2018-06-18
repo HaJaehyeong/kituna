@@ -1,24 +1,21 @@
 <template>
-
     <div class="topMenu">
-        <div class="menu" style="margin-left:3%;">
-            <h5><a class="menuHeaderA" href="/realtime"> RealTime </a></h5>
+         <div class="menu" style="margin-left:1%; margin-bottom:1%;">
+          <a  href="/mainPage"> <img width="45%" src="/images/logo_blue.png"> </a>
         </div>
-        <div class="menu">
-            <h5><a class="menuHeaderA" href="/analysis"> Analysis </a></h5>
+        <div class="menu" id="a1">
+            <h5><a class="menuHeaderA"  href="/realtime"><strong> RealTime </strong></a></h5>
         </div>
-        <div class="menu">
-            <h5><a class="menuHeaderA" href="/management"> VendingMachine Management </a></h5>
+        <div class="menu" id="a2">
+            <h5><a class="menuHeaderA" href="/analysis"><strong> Analysis </strong></a></h5>
         </div>
-        <div class="menu">
-            <h5><a class="menuHeaderA" href="/product"> Product Management</a></h5>
+        <div class="menu" id="a3">
+            <h5><a class="menuHeaderA" href="/management"><strong> VendingMachine </strong><br/><strong>Management </strong></a></h5>
         </div>
-        <div>
-            <h5><img src="/images/mainPageImage/menu.png" style="margin-left:3%;"></h5>
+        <div class="menu" id="a4">
+            <h5><a class="menuHeaderA" href="/product"><strong> Product</strong><br/><strong>Management</strong></a></h5>
         </div>
     </div>
-    
-    
 </template>
 
 <script>
@@ -35,29 +32,42 @@
 <style>
 
 div.topMenu {
+  font-family: "Dosis";  
+  font-size: 20px;
   list-style-type: none;
   overflow: hidden;
-  background-color: #24A6BD;
+  background-color: #0064c8;
   position: -webkit-sticky; /* Safari */
   position: sticky;
   z-index: 3;
 }
 div.menu {
-  width: 20%;
-  margin-left: 1.5%;
+  width: 16%;
+  margin-left: 2%;
+  margin-top: 0.2%;
+  margin-bottom: 0.2%;
   float: left;
   display: block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
-}
+ /* padding: 4px 4px;
+ */}
+ #a1 {
+   margin-top:25px;
+ }
+ #a2 {
+   margin-top:25px;
+ }
+  #a3 {
+   margin-top:10px;
+ }
+ #a4 {
+   margin-top:10px;
+ }
 
 
- .menuHeaderA:link { color: red; text-decoration: none;}
+ .menuHeaderA:link { color: rgb(255, 255, 255); text-decoration: none;}
  .menuHeaderA:visited { color: rgb(255, 255, 255); text-decoration: none;}
- .menuHeaderA:hover { color: rgb(190, 230, 192); text-decoration: underline;}
- 
- .tabs.mytabs .nav-tabs .nav-link.active {
-  background-color: #aabbcc !important;
-}
+ .menuHeaderA:hover { color: rgb(189, 211, 240); text-decoration: none;}
+
 </style>

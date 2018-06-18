@@ -11,6 +11,14 @@
         <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+        <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Black+Ops+One" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Gothic+A1:500" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Sunflower:500" rel="stylesheet"> <!-- realtime 재고잔고 설명 폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Dosis:700" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Fugaz+One" rel="stylesheet"> <!-- 숫자 폰트 -->
+        <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
     </head>
     <body>
         <div data-app>

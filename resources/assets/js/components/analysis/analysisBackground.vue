@@ -4,7 +4,7 @@
         <div id="div_AnalysisHeader">
             <router-view name="MainHeader"></router-view>
         </div>
-        <div id="div_AnalysisLineChartView">
+        <div id="div_AnalysisLineChartView" v-bind:style="{ 'background-image': 'url(images/analysis/background.png)' }">
             <router-view name="AnalysisLineChart" :realtimeVdId="realtimeVdId"></router-view>      
         </div>
     </div>
@@ -27,7 +27,6 @@
                     this.realtimeVdId = this.$route.query.id;
                     console.log(this.realtimeVdId);
                 }else{
-                    console.log("값 없어");
                 }
             }
         }

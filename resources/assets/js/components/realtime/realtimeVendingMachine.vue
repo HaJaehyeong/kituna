@@ -1,124 +1,162 @@
 <template>
     <div id="allDivision">
-      <!--*******************  자판기 아이콘 클릭 전 ************************-->
-      <div id="background" v-if="itemList==0">
+      <!--/////////////////////////  자판기 아이콘 클릭 전 /////////////////////////-->
+      <div id="background1" v-if="itemList==0">
         <br /><br /><br /><br /><br /><br /><br />
          <img src="images/logo.png"  width="300px">
          <h4>Click on the vending machine icon in Google Maps</h4>
          <br /><br /><br /><br /><br /><br />
       </div>  
-      <!--*******************  자판기 아이콘 클릭 후 ************************-->
-    <div id="background" v-if="itemList!=0" > 
-      <br /> 
-     <v-card>
-      <br /><br />
-      <div v-for="(item, index) in itemList_v" :key="index">   
-      <h1><b-badge variant="dark">{{item.name}}</b-badge></h1>
-      <br /><br />
-      </div>  
-        <!-- 음료재고 -->
-      <h2><b-badge variant="light">음료 재고</b-badge>
-      <v-btn outline fab color="grey darken-1" @click="refresh()">
-      <v-icon dark>autorenew</v-icon>
-      </v-btn></h2>
-       <table width="330"  align="center">
-        <tr style=" height:80px; width:100px; text-align:center;vertical-align:middle ">
-        <td id="no1" v-for="(item, index) in itemList" :key="index" v-if="(index<4)">
-        <img v-bind:src="item.drink_img_path" style=" height:70px; width:30px;  "></td>
-        </tr>
-        <tr style=" height:10px; text-align:center; vertical-align:middle">
-        <td id="no2" v-for="(item, index) in itemList" :key="index" v-if="(index<4)">
-        <h3><b-badge v-if="(item.stock<9)" variant="danger" class="blink" >{{item.stock}}/35</b-badge>
-        <b-badge v-if="((item.stock>=9)&&(item.stock<=34))" variant="secondary" >{{item.stock}}/35</b-badge>
-        <b-badge v-if="(item.stock==35)" variant="success" class="blink2" >{{item.stock}}/35</b-badge>
-        </h3></td>
-        </tr> 
-        <tr style="height:80px; width:100px; text-align:center;vertical-align:middle">
-        <td id="no3" v-for="(item, index) in itemList" :key="index" v-if="(index>=4)&&(index<8)">
-        <img v-bind:src="item.drink_img_path" style=" height:70px; width:30px;  "></td>
-        </tr>
-        <tr style="height:10px; text-align:center; vertical-align:middle">
-        <td id="no4" v-for="(item, index) in itemList" :key="index" v-if="((index>=4)&&(index<8))">
-        <h3><b-badge v-if="(item.stock<9)" variant="danger" class="blink" >{{item.stock}}/35</b-badge>
-        <b-badge v-if="((item.stock>=9)&&(item.stock<=34))" variant="secondary">{{item.stock}}/35</b-badge>
-        <b-badge v-if="(item.stock==35)" variant="success" class="blink2" >{{item.stock}}/35</b-badge>
-        </h3></td>
-        </tr> 
-      </table> 
-      <br />
-       <!-- 동전 잔고 -->
-      <div>
-        <h2><b-badge variant="light">동전 잔고</b-badge></h2>
-        </div>  
-        <br />
-        <div v-for="(item, index) in itemList_c" :key="index">
-        <v-layout>
-        <v-flex xs1></v-flex>  
-        <v-card><v-card-text> 1000원   {{item.won1000}}개 </v-card-text></v-card>
-        <v-card><v-card-text> 500원   {{item.won500}}개 </v-card-text></v-card>
-        <v-card><v-card-text> 100원  {{item.won100}}개 </v-card-text></v-card>
-        <v-card><v-card-text> 총  합 {{item.sum}}원 </v-card-text></v-card>
-        </v-layout>   
+      <!--/////////////////////////  자판기 아이콘 클릭 후 /////////////////////////-->
+    <div id="background2" v-if="itemList!=0" >
+      <div v-if="trueOrFalse==false" class="hover15 column" id ="background2_title" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
+      <strong id="vendingMachineNameFont">{{item.name}}    </strong>    <div class="hover13 figure">
+         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh()"></figure>
       </div>
-     <br /><br />
-     <!-- 더보기 버튼  -->
-     <v-menu
-      :close-on-content-click="false"
-      :nudge-width="150"
-      v-model="menu"
-      offset-x
-    >
-    <v-btn slot="activator" color="cyan darken-1" dark>
-      <v-icon dark>dehaze</v-icon>　더보기　
-    </v-btn>
-    <v-card>
-      <v-list>
-        <v-list-tile avatar>
-            <div v-for="(item, index) in itemList_v" :key="index">
-          <v-list-tile-content>
-            <br /><br /><br />
-            <v-card-title > ● 보충기사 : {{item.supplementer}} </v-card-title>
-            <v-card-title > ● 지역 : {{item.name}}</v-card-title>
-          </v-list-tile-content>
-          </div>
-          <v-spacer></v-spacer>
-          <v-list-tile-action>
-            <v-btn
-              :class="fav ? 'red--text' : ''"
-              icon
-              @click="fav = !fav"
-            >
-              <v-icon>favorite</v-icon>
-            </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
-    </v-list>
-  <br />
-    <v-list>
+      </div> 
+      <div v-if="trueOrFalse==true" class="hover15 column" id ="background2_title2" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
+      <strong id="vendingMachineNameFont">{{item.name}}    </strong>    <div class="hover13 figure">
+         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh()"></figure>
+      </div>
+      </div> 
+      <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 전 ~~~~~~~~~~~ -->
+        <!-- *********************** 음료재고 div ********************** -->
+      <div v-if="trueOrFalse==false" id="bottom_left">
+       <table id="drinkStockTable">
+         <tr >
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==0)" >
+             <br />
+             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+             </tr>
+           </td>
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==1)">
+             <br />
+             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+             </tr>
+           </td>
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==2)">
+             <br />
+             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+              </tr>
+           </td>
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==3)">
+             <br />
+             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+             </tr>
+           </td>
+         </tr> 
+         <tr >
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==4)" >
+             <br />
+             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+             </tr>
+           </td>
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==5)">
+             <br />
+             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+             </tr>
+           </td>
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==6)">
+             <br />
+             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+              </tr>
+           </td>
+           <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==7)">
+             <br />
+             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr>
+               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
+               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
+               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+             </tr>
+           </td>
+         </tr>
+       </table>
+      <br />
+      </div>
+       <!-- *********************** 동전 잔고 div *********************** -->
+      <div v-if="trueOrFalse==false" id="bottom_center">
+       <div v-for="(item, index) in itemList_c" :key="index">
+        <table>
+          <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
+          <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
+          <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.won1000}}개</td></tr>
+        </table>
+        <p id="CoinStockFont" style="text-align:left">　잔고 현황</p>
+        <table id="trBgColor">
+         <tr id="CoinStockFont" ><td style="padding-left:150px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right">총 합 </td></tr>
+         <tr id="sumFont"><td style="padding-left:150px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}￦</td></tr>
+        </table>
+       </div>
+      </div>
+      <!-- *********************** 더보기 버튼  ************************ -->
+      <div v-if="trueOrFalse==false" id="bottom_right" class="hover13 figure">
+         <figure><img id="add_button" src="/images/realtime/more_button.png" @click="moreButton(true)" ></figure>
+      </div>
+
+      <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 후 ~~~~~~~~~~~ -->
+      <!-- *********************** 더보기 기능 div ********************** -->
+      <div v-if="trueOrFalse==true" id="bottom_left2">
+        <div id="add_table" v-for="(item, index) in itemList_v" :key="index">
+          <br />
+         <p id="top_info_settting" >Supporter Name</p>
+         <p id="bottom_info_settting">{{item.supplementer}}</p>
+         <br /><p id="top_info_settting">Area</p>
+         <p id="bottom_info_settting">{{item.name}}</p>
          <br />
-     <div id="mainImageButtonDiv">
-         <div class="partInfo"  @click.stop="dialog = true" @click="sale_history()">
-                <img src="/images/document2.png" class="icon">
-                <h6>판매 내역</h6>
-            </div>
-            <div class="partInfo" @click.stop="dialog2 = true" style="margin-left:3%;">
-                <img src="/images/document.png" class="icon">
-                <h6>작업지시 작성</h6>
-            </div>
-         <router-link :to="route_analysis" id="analyst" >
-            <div class="partInfo" >
-                <img src="/images/mainPageImage/analysis.png" class="icon">
-                <h6>분석 보기</h6>
-            </div>
-        </router-link>
-        <router-link :to="route_management" id="management">
-            <div class="partInfo">
-                <img src="/images/mainPageImage/vending-machine.png"  class="icon">
-                <h6>자판기 관리</h6>
-            </div>
-        </router-link>         
-        <!-- ***************판매내역 모달창********************* -->
-             <v-layout row justify-center>
+          <tr><img id="img_info_settting" src="/images/realtime/heart.png"></tr>
+         
+        </div>
+        <div id="add_list_button">
+        <div class="hover13 figure">
+         <tr>
+         <td> <!-- 판매목록 -->
+           <figure><img id="add_button"   @click.stop="dialog = true" @click="sale_history()" src="/images/realtime/sell_button.png" ></figure>
+          </td>
+         <td> <!-- 작업지시 작성 -->
+           <figure><img id="add_button" @click.stop="dialog2 = true"  src="/images/realtime/order_button.png" ></figure>
+          </td>
+         <td> <!-- 분석 보기 -->
+           <router-link :to="route_analysis" id="analyst" >
+           <figure><img id="add_button" src="/images/realtime/analysis_button.png" ></figure>
+           </router-link>
+         </td>
+         <td> <!-- 자판기 관리 -->
+           <router-link :to="route_management" id="management">
+           <figure><img id="add_button" src="/images/realtime/vending_button.png" ></figure>
+           </router-link>
+         </td>
+         </tr>
+        </div>  <!-- ***************판매내역 모달창********************* -->
+         <v-layout row justify-center>
             <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
              <v-card  color="light-blue darken-1">
                 <v-toolbar >
@@ -137,9 +175,9 @@
                     <v-card-title >  ● 보충기사 : {{item.supplementer}}</v-card-title>
                    </div>
                 </v-card>
-                <v-card>
+                <v-card> -->
                   <!-- data table pagenation -->
-                   <v-data-table
+                 <v-data-table
                       :headers="headers"
                       :items="items"
                       :loading="true"
@@ -189,17 +227,14 @@
               </v-card>
             </v-dialog>
         </v-layout>
-       </div>
-      </v-list>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn flat @click="menu = false">Cancel</v-btn>
-      </v-card-actions>
-      </v-card>
-    </v-menu>
-     </v-card>
-</div>
-    </div>
+        </div>
+      </div>
+      <!-- *********************** back 버튼  ********************** -->
+      <div v-if="trueOrFalse==true" id="bottom_right2" class="hover13 figure">
+           <figure><img id="add_button" src="/images/realtime/back.png" @click="moreButton(false)" ></figure>
+      </div>
+  </div>
+</div> 
 </template>
 
 <script>
@@ -250,8 +285,8 @@ export default {
       selectedItem_etc:'',
       goToId:'',
       route_analysis:'', /* 해당 분석 페이지 */
-      route_management:'' 
-     
+      route_management:'' ,
+      trueOrFalse:false/* 더보기 버튼 클릭 유무 */
     }
   },
   created: function() {
@@ -290,7 +325,7 @@ export default {
                 array[key] = {
                  line : response[key].line,
                  stock  : response[key].stock,
-                 drink_img_path : response[key].drink_img_path
+                 drink_img_path : response[key].drink_back_path
                 }
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
@@ -303,7 +338,7 @@ export default {
                 array[key] = {
                  line : response[key].line,
                  stock  : response[key].stock,
-                 drink_img_path : response[key].drink_img_path
+                 drink_img_path : response[key].drink_back_path
                 }
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
@@ -373,7 +408,7 @@ export default {
                 array[key] = {
                  line : response[key].line,
                  stock  : response[key].stock,
-                 drink_img_path : response[key].drink_img_path
+                 drink_img_path : response[key].drink_back_path
                 }
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
@@ -386,7 +421,7 @@ export default {
                 array[key] = {
                  line : response[key].line,
                  stock  : response[key].stock,
-                 drink_img_path : response[key].drink_img_path
+                 drink_img_path : response[key].drink_back_path
                 }
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
@@ -487,7 +522,7 @@ export default {
         this.items = obj_sell;                   
       })
     },
-      /* <---------------------모달창 내용 db전송 --------------------> */
+    /* <---------------------모달창 내용 db전송 --------------------> */
     submit(selectedItem,selectedItem_etc){
         // console.log(selectedItem_etc);
          console.log(this.vending_id);
@@ -497,7 +532,7 @@ export default {
         formData.append('ven_id',this.vending_id);
         formData.append('ven_note',selectedItem);
        
-         this.axios.post("management/addJobOrderVerTwo", formData).then((Response)=>{
+         this.axios.post("realtime/addJobOrderVerTwo", formData).then((Response)=>{
             console.log(Response.data);
         }).catch(ex=>{
           console.log(ex);
@@ -516,77 +551,241 @@ export default {
        } 
         this.dialog = false
     },
+    /* <---------------------더보기 버튼 클릭 유무--------------------> */
+    moreButton(arg1){
+     this.trueOrFalse=arg1;
+    }
   }
 }
 </script>
 
 <style>
-  #background {
-      background-repeat: no-repeat;
-      margin: 23px 0px 0px 0px;     
-      width: 100%;
-      height: 350;
-       }
-  #no1{
-    background-color: #F2F2F2;
+   /* 자판기 아이콘 누르기 전 */
+  #background1{
+    width:100%;   
+    position: relative;
+    right: 240px; 
   }
-  #no2{
-    background-color: #6E6E6E;
+  /*  자판기 아이콘 누른 후  */
+  #background2 {  
+    width:100%;   
+    position: relative;
+    right: 280px;
   }
-  #no3{
-    background-color: #F2F2F2;
+  /* 현재 클릭된 자판기 이름 -1*/
+  #background2_title{
+    position: relative;
+    left: -200px;
   }
-  #no4{
-    background-color: #6E6E6E;
+   /* 현재 클릭된 자판기 이름 -2*/
+  #background2_title2{
+    position: relative;
+    left: -200px;
+    top: -26px;
   }
 
+  /* 음료 리스트 */
+  #bottom_left{
+    margin-left:10px;
+    float: left; width: 45%; padding:3px
+  }
+  /* 잔고 리스트 */
+  #bottom_center{
+    float: left;
+    width: 35%; 
+    margin-top:13px;
+    margin-right:15px;
+    }
+  /* 더보기 버튼 */
+  #bottom_right{
+    margin-top:13px;
+    float: left;
+  }
+  /* 더보기 리스트 */
+  #bottom_left2{
+    margin-top:-10px;
+    margin-left:10px;
+    float: left; width: 65%;  
+    background-image:url(/images/realtime/vertical_frame.png);
+    background-repeat:no-repeat;
+    background-size:780px 300px; 
+    width: 780px;
+    height: 300px; 
+  }
+  /* 백 버튼 */
+  #bottom_right2{
+    margin-top:-10px;
+    float: left; 
+    margin-left:25px;
+  }
+.hover13 figure:hover img {
+	opacity: 1;
+	-webkit-animation: flash 1.5s;
+	animation: flash 2.5s;
+}
+  @-webkit-keyframes flash {
+    0% {
+      opacity: .4;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes flash {
+    0% {
+      opacity: .4;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 
-.icon {
-  width :  30%;
-  height:30% ;
-  margin-top: 10%;
-  margin-bottom: 10%;
-}
+  /* 잔고 테이블 */
+  #coin_stock_table1{
+    font-family:"Fugaz One";
+    color: rgb(48, 109, 170);
+    font-size: 2.0em
+  }
+  #coin_stock_table2{
+   font-family:"Fugaz One";
+    color: black;
+    font-size: 2.0em
+  }
+  #sumFont{
+    font-family:"Fugaz One";
+    color: rgb(48, 109, 170);
+    font-size: 2.5em
+  }
+  /* 테이블 배경 색 */
+  #trBgColor{
+  background-color:  rgb(229, 239, 248);
+  }
 
-.partInfo:hover .icon{
-    opacity: 0.3
-}
-.partInfo {
-  width: 15%;
-  height: 90px;
-  margin-left: 4%;
-  margin-top: 3%;
-  margin-bottom: 3%;
-  margin-right: 1%;
-  background-color: rgba(20, 124, 136, 0.72);
-  display: inline-block;
-  overflow-x:hidden;
-  overflow-y:hidden;
-  color: rgb(255, 255, 255);
-  border-radius: 20px;
-  text-align: center;
-}
+  /* 자판기 이름 설정 */
+  #vendingMachineNameFont{
+    font-family:"Nanum Gothic";
+    color: black;
+    font-size: 2.2em
+  }
+  /* 음료 재고 테이블 */
+  #drinkStockTable{
+    margin-left: 5px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+  }
+  /* 테이블 배경사진 */
+  #tdBackground{
+   background-image:url(/images/realtime/frame.png);
+   background-repeat:no-repeat;
+   background-size:100px 160px; 
+   width: 120px;
+   height: 160px;
+  }
+  /* 재고 높은 숫자 */
+  #numberTop{
+    font-family:"Fugaz One";
+    color: rgb(228, 142, 61);
+    font-size: 2.0em
+  }
+  /* 재고 중간 숫자 */
+  #numberCenter{
+    font-family:"Fugaz One";
+    color: rgb(48, 109, 170);
+    font-size: 2.0em
+  }
+  /* 재고 낮은 숫자 */
+  #numberBottom{
+    font-family:"Fugaz One";
+    color: rgb(52, 196, 83);
+    font-size: 2.0em
+  }
+  /* 잔고현황 타이틀 설정 */
+  #CoinStockFont{
+    font-family:"Nanum Gothic";
+    color: black;
+    font-size: 1.7em
+  }
+  .icon {
+    width :30%;
+    height:30% ;
+    margin-top: 10%;
+    margin-bottom: 10%;
+  }
 
-/* 매진임박일 경우 숫자 깜빡거림 설정 */
-.blink{
-  color:rgb(255, 255, 255);
-  font-size:20px;
-  animation:blink_animation .6s 7;
-}
-@keyframes blink_animation {
-    50%   {color:rgb(255, 255, 255);}      
-    100% {color:rgb(255, 0, 0)}
-}
+  .partInfo:hover .icon{
+      opacity: 0.3
+  }
+  .partInfo {
+    width: 15%;
+    height: 90px;
+    margin-left: 4%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin-right: 1%;
+    background-color: rgba(20, 124, 136, 0.72);
+    display: inline-block;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    color: rgb(218, 216, 230);
+    border-radius: 20px;
+    text-align: center;
+  }
 
-/* 완충일 경우 숫자 깜빡거림 설정 */
-.blink2{
-  color:rgb(255, 255, 255);
-  font-size:20px;
-  animation:blink_animation2 .6s 2;
-}
-@keyframes blink_animation2 {
-    50%   {color:rgb(255, 255, 255);}      
-    100% {color:rgb(38, 202, 38)}
-}
+  /* 매진임박일 경우 숫자 깜빡거림 설정 */
+  .blink{
+    color:rgb(255, 255, 255);
+    font-size:20px;
+    animation:blink_animation .6s 7;
+  }
+  @keyframes blink_animation {
+      50%   {color:rgb(255, 255, 255);}      
+      100% {color: rgb(228, 142, 61);}
+  }
+
+  /* 완충일 경우 숫자 깜빡거림 설정 */
+  .blink2{
+    color:rgb(255, 255, 255);
+    font-size:20px;
+    animation:blink_animation2 .6s 2;
+  }
+  @keyframes blink_animation2 {
+      50%   {color:rgb(255, 255, 255);}      
+      100% {color: rgb(52, 196, 83)}
+  }
+
+   /* 더보기 기능 왼쪽 설명 부분 */
+  #add_table{
+  float: left; width: 30%;  
+  margin-left: -20px;
+  }
+  /* 더보기 기능 오른쪽 버튼들 */
+  #add_list_button{
+  float :left;
+  width: 60%; 
+  margin-top: 5%;
+  margin-right: 12%;
+  }
+  /* 더보기 기능 왼쪽 설명  설정 */
+  #top_info_settting{
+    font-family:"Nanum Gothic";
+    color: rgb(255, 255, 255);
+    font-size:16px;
+    text-align: left;
+    font-weight: bold;
+    margin-left: 20%;
+  }
+  #bottom_info_settting{
+    font-family:"Nanum Gothic";
+    color: rgb(255, 255, 255);
+    font-size:20px;
+    text-align: left;
+    font-weight: bold;
+    margin-left: 20%;
+  }
+  #img_info_settting{
+    margin-left: -330%;
+    margin-top: -37%;
+  
+  }
 
 </style>

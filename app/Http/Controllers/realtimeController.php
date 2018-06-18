@@ -67,7 +67,7 @@ class realtimeController extends Controller
 
     public function getVdStock($vd_id) {
         $getVdStock = DB::table(DB::raw('vd_stock vs'))
-        ->select(DB::raw('vs.vd_id, vs.line, vs.stock, vs.max_stock, pi.drink_name, pi.drink_img_path, sm.expiration_date, pi.sell_price'))
+        ->select(DB::raw('vs.vd_id, vs.line, vs.stock, vs.max_stock, pi.drink_name, pi.drink_back_path, sm.expiration_date, pi.sell_price'))
         ->join(DB::raw('stock_management sm'), 'vs.drink_id', '=', 'sm.drink_id')
         ->join(DB::raw('product_info pi'), 'sm.drink_id', '=', 'pi.drink_id')
         ->where('vs.vd_id', $vd_id)->get();

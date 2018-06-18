@@ -1,15 +1,12 @@
 <template>
 <div> 
   <div id="mapImage">
-    <br />
-    <br />
-    <br />
     <v-layout>    
-    <v-flex xs6>   
+    <v-flex xs8>   
     </v-flex>
-     <v-flex xs12 sm6 class="py-2">    
+     <v-flex xs6 sm6 class="py-2">    
         <!-- 상단바 버튼  -->
-        <v-btn-toggle v-model="icon">
+        <v-btn-toggle v-model="icon" id="buttonFont">
               <v-btn flat value="left" @click="googleButton(0)" >
                 <v-icon>brightness_1</v-icon><span>　전 체</span>
               </v-btn>
@@ -25,12 +22,11 @@
          </v-btn-toggle>
       </v-flex>
    </v-layout>
-   <!-- 구글 맵  -->
-    <br />                
+   <!-- 구글 맵  -->              
     <gmap-map
       :center="center"
       :zoom="zoom"
-      style="width:90%;  height: 570px;"
+      style="width:100%;  height: 450px;"
     >  
     <!-- cluster 적용  -->
     <gmap-cluster :grid-size="gridSize" v-if="clustering" >
@@ -635,10 +631,59 @@ export default {
 };
 </script>
 <style>
+/* <----------------전체 레이아웃 ----------------> */
 #mapImage{
-        width: 100%;
-        height: 50%;      
-        float: left;
+  
+margin-top:35px;
+margin-right:280px;
+margin-bottom:0px; 
+
 }
+/* <------------- 상단바 버튼 css ------------> */
+#buttonFont{
+  background:#f7fbff;
+  color:#03101f;
+  border:none;
+  position:relative;
+  height:33px;
+  width: 100%;
+  font-size:0.9em;
+  padding:0 2em;
+  cursor:pointer;
+  transition:800ms ease all;
+  outline:none;
+  font-family:"Nanum Gothic";
+  font-weight: bold;
+}
+#buttonFont:hover{
+  background:rgb(255, 255, 255);
+  color:#04213d;
+  
+  font-weight: bold;
+}
+#buttonFont:before,#buttonFont:after{
+  content:'';
+  position:absolute;
+  top:0;
+  right:0;
+  height:2px;
+  width:0;
+  background: #0064c8;
+  transition:400ms ease all;
+  
+  font-weight: bold;
+}
+#buttonFont:after{
+  right:inherit;
+  top:inherit;
+  left:0;
+  bottom:0;
+}
+#buttonFont:hover:before,#buttonFont:hover:after{
+  width:100%;
+  transition:800ms ease all;
+}
+
+
 
 </style>
