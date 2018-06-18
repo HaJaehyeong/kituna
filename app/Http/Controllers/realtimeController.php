@@ -365,4 +365,24 @@ class realtimeController extends Controller
             realtimeController::sendDataFromVdVersionTwo($vd_id, $line); 
         }
     }
+
+    // nfc대면 보충 완료
+    public function supplementOK($vd_id) {
+        // // //vd stock update 쿼리 생성 및 실행
+        $result = DB::table('vd_stock')
+            ->where('vd_id', $vd_id)
+            ->update(['stock' => 35]);
+    
+        //vendingmachine update 쿼리 생성 및 실행
+        $result = DB::table('vendingmachine')
+            ->where('vd_id', $vd_id)->update(['vd_soldout' => 0]);
+    
+        //Jo_column Update 쿼리 생성 및 실행
+        $result = DB::table('jo_column')
+            ->where('vd_id', $vd_id)->update(['sp_check' => 1]);
+    
+        if($result) return 'good';
+        else return 'fail';
+    }
+    
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="topMenu">
-         <div class="menu" style="margin-left:1%; margin-bottom:1%;">
-          <a  href="/mainPage"> <img width="45%" src="/images/logo_blue.png"> </a>
+        <div class="menu" style="margin-left:1%; margin-top:1%;">
+            <a  href="/mainPage"> <img width="45%" src="/images/logo_blue.png"> </a>
         </div>
         <div class="menu" id="a1">
             <h5><a class="menuHeaderA"  href="/realtime"><strong> RealTime </strong></a></h5>

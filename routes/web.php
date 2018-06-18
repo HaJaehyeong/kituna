@@ -35,6 +35,8 @@ Route::get('realtime/getNumOfVd', 'realtimeController@getNumOfVd'); /* 지역별
 Route::get('realtime/clickAButton/{vd_soldout}', 'realtimeController@clickAButton'); /* 구글 마커 버튼 */
 Route::get('realtime/sendedDataNum/{line_num}', 'realtimeController@sendedDataNum');
 Route::get('realtime/sendDataFromVdVersionTwo/{vd_id}/{line}', 'realtimeController@sendDataFromVdVersionTwo');
+// nfc대면 보충 완료
+Route::get('realtime/supplementOK/{vd_id}', 'realtimeController@supplementOK');
 
 
 // <----------- management ----------->
