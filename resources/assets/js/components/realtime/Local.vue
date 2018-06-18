@@ -54,14 +54,15 @@
           </div>
        </div>
         <!-- ******************  supplemener list ****************** -->
-        <div class="page2">
-           <div id="supporter_frame" v-for="(item,index) in itemList2" :key="item.index" v-if="index>=0">
-              <div>
-                <div  @click="supplementerEmit(item.supplementer)">
-                  <v-avatar>
+        <div class="page2" id="page_2">
+           <br /><br /><br />
+           <div  v-for="(item,index) in itemList2" :key="item.index" v-if="index>=0">
+            <br />
+              <div id="supporter_frame" >
+                <div id="supprter_frame_2" @click="supplementerEmit(item.supplementer)">
+                  <v-avatar   :tile="tile">
                     <img v-bind:src="item.imgSrc">
-                  </v-avatar>
-                  　{{item.supplementer}}  <button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">작업지시서</p></button>
+                  </v-avatar>{{item.supplementer}}　<button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">작업지시서</p></button>
                 </div>
            <v-dialog v-model="orderJobModal" fullscreen>
             <v-card flat>
@@ -722,6 +723,17 @@ h1 {
     
 }
 
+/* 지역별 조회 배경 설정 */
+#page_2{
+    width:  400px;
+    height: 880px;
+    background-image: url("/images/realtime/left_frame.png");
+  /*  background-repeat: no-repeat;*/
+    background-position: center; 
+    background-size: 370px 840px;
+    
+}
+
 /* 지역별 조회 버튼 css 설정 */
 input#select1,input#select2{
   display:none;
@@ -925,7 +937,7 @@ label{
   font-size: 21px;
   text-align: center;
   font-family:"Nanum Gothic";
-  font-weight: bold;
+  font-weight: bold; 
 }
 
 /* 각지역별 내부 폰트 - 첫번째 숫자  */
@@ -945,40 +957,46 @@ label{
 
 /* 보충기사별  테두리 */
  #supporter_frame{
- 
-    background-image:url(/images/realtime/vertical_frame.png);
+  
+    background-color: #ffffff;
     background-repeat:no-repeat;
-    background-size:320px 90px; 
+    box-shadow: 0 10px 10px 10px rgba(102, 102, 102, 0.2), 0 16px 10px 0 rgba(0,0,0,0.19); 
+
+    border-radius:10px;
     height:90px;
-    margin-left: 20%;
-    margin-top: 5%;
+    width: 320px;
+    margin-left: 2%;
     margin-bottom: 2%;
-    padding-top :4%;
+    padding-top :14%;
     padding-right :11%;
-    
+
     font-size: 20px;
     font-family:"Nanum Gothic";
-    color:#ffffff;
+    color:#0064c8;
     font-weight: bold;
  
 }
+ #supprter_frame_2{
+  margin-top: -10%;
+
+ }
   /* 작업지시서 버튼 */
   .work_order_button{
     position: relative;
     width: 130px;
     height: 40px;
-    
     padding-top: 3%;
-
     border-radius:10px;
     background-color: #ffffff;
-    margin: 10px;
+    
     border: none;
     text-align: center;
     cursor: pointer;
     overflow: hidden;
     -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
+    box-shadow: 0 10px 10px 10px rgba(102, 102, 102, 0.2), 0 16px 10px 0 rgba(0,0,0,0.19); 
+
   }
 
 
