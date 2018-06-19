@@ -30,36 +30,36 @@
              <br />
              <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>　
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==1)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
              </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==2)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
               </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==3)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>
          </tr> 
@@ -68,36 +68,36 @@
              <br />
              <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==5)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
              </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==6)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p> 
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
               </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==7)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
              <tr>
-               <p v-if="(item.stock<9)" id="numberTop" class="blink" >{{item.stock}}/35</p>
-               <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
-               <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
+               <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>
          </tr>
@@ -511,10 +511,10 @@ export default {
         /* 재고 숫자가 바뀔 경우 효과음 냄 */
        // if((this.itemList!=0)&&(this.itemList_before != this.itemList)){
       
-          if(sound) {  /* 효과음 부분 */
-            var audio = new Audio(sound);
-            audio.play();
-           }
+          // if(sound) {  /* 효과음 부분 */
+          //   var audio = new Audio(sound);
+          //   audio.play();
+          //  }
        //  }
 
        // this.itemList_before = this.itemList;
