@@ -36,6 +36,8 @@ class managementController extends Controller
     }
     //<------------------- 보충기사 담당자판기 ----------------------->
 
+
+    //<------------------- 작업지시서 정보 ----------------------->
     public function getJobOrder($spName, $order_date) {
 
         $getJobOrder = DB::table(DB::raw('jo_column jc'))
@@ -47,7 +49,9 @@ class managementController extends Controller
 
         return $getJobOrder;
     }
-    
+    //<------------------- 작업지시서 생성 ----------------------->
+
+
     //coin Stock
     public function coinStock($vd_id){
         $getCoinStock = DB::table('coin_stock as cs')
@@ -408,7 +412,7 @@ class managementController extends Controller
         return $result;
     }
 
-
+    //<-------------------- 작업지시 ------------------------>
     public function addJobOrderVerTwo(Request $inputNote) {
         
         $vd_id= $inputNote->get('ven_id'); 
@@ -491,6 +495,7 @@ class managementController extends Controller
 
         return "good";
     }
+    //<-------------------- 작업지시 ------------------------>
 
     public function getJoInfo($jo_id) {
         
@@ -543,52 +548,48 @@ class managementController extends Controller
 
     //----------------------- 보충기사 등록 -------------------------------
     public function addSP(Request $request) {
-        
-        // 방금 등록한 자판기의 id가져오기
-        $getLastVdId = DB::table('supplementer')->select('sp_id')
-         ->orderBy('sp_id', 'desc')->limit(1)->get();
 
-        $fileName = $getLastVdId[0]->sp_id;
-
-        if(!is_dir('\spImg')) {
-            Storage::makeDirectory('\spImg');
-        }
-        // 해당 폴더가 없으면 생성
-        
-        $imageFile = $request->file("imageFile");                                // 파일 
-        $imageFile->storeAs('\spImg', $fileName.'.png');                       // Storage경로로 파일 저장
+        $fileName = $request->get("sp_login_id");
 
         if(!file_exists(public_path('\images\supplementer'))){
             File::makeDirectory(public_path('\images\supplementer'));
         }
         // 해당 폴더가 없으면 생성
-
-        $imageFile->move(public_path('\images\supplementer'), $fileName.'.png');     // Storage에서 Public으로 파일 이동
         
-        $sp_login_id = $request->get("sp_login_id");
-        $sp_password = $request->get("sp_password");
-        $sp_name = $request->get("sp_name");
-        $sp_mail = $request->get("sp_mail");
-        $sp_phone = $request->get("sp_phone");
-        $sp_address = $request->get("sp_address");
-        $sp_img_path = $request->get("sp_img_path");
-        $sp_img_path = "/images/supplementer/".$fileName.".png";
+        if(file_exists(public_path('\images\supplementer\\'.$fileName.'.png'))){
+            // 같은 이름의 제품 이미지 파일이 있는지 확인
 
-        $result = DB::table('supplementer')->insert([
-            'sp_id'             => NULL,
-            'sp_login_id'       => $sp_login_id,
-            'sp_password'       => $sp_password,
-            'sp_name'           => $sp_name,
-            'sp_mail'           => $sp_mail,
-            'sp_phone'          => $sp_phone,
-            'sp_address'        => $sp_address,
-            'sp_img_path'       => $sp_img_path
-        ]);
-         
-        if($result){
-            return "good";
-        }else{
             return "fail";
+        }
+        else {
+            $imageFile = $request->file("imageFile");                                    // 파일 
+            $imageFile->storeAs('\images\supplementer', $fileName.'.png');               // 파일 저장
+            
+            $sp_login_id = $request->get("sp_login_id");
+            $sp_password = $request->get("sp_password");
+            $sp_name = $request->get("sp_name");
+            $sp_mail = $request->get("sp_mail");
+            $sp_phone = $request->get("sp_phone");
+            $sp_address = $request->get("sp_address");
+            $sp_img_path = $request->get("sp_img_path");
+            $sp_img_path = "/images/supplementer/".$fileName.".png";
+
+            $result = DB::table('supplementer')->insert([
+                'sp_id'             => NULL,
+                'sp_login_id'       => $sp_login_id,
+                'sp_password'       => $sp_password,
+                'sp_name'           => $sp_name,
+                'sp_mail'           => $sp_mail,
+                'sp_phone'          => $sp_phone,
+                'sp_address'        => $sp_address,
+                'sp_img_path'       => $sp_img_path
+            ]);
+            
+            if($result){
+                return "good";
+            }else{
+                return "fail";
+            }
         }
     }
     //----------------------- 보충기사 등록 -------------------------------
@@ -596,42 +597,89 @@ class managementController extends Controller
 
     //----------------------- 보충기사 수정 -------------------------------
     public function updateSP(Request $request) {
-        $is_file = $request->get('is_file');                              // 파일 이름
-        $fileNmae = $request->get('sp_id');
+        $is_file = $request->get('is_file');
+        $originalFileName = $request->get('original_sp_login_id');              // 원래 파일 이름                
+        $fileName = $request->get('sp_login_id');                               // 바뀔 파일 이름
 
         if ($is_file == "ok") {
-            $spImage = $request->file('imageFile');                                // 파일
-            $spImage->storeAs('\spImg', $fileName.'.png');                       // Storage경로로 파일 저장
+            File::delete(public_path('\images\supplementer\\'.$originalFileName.'.png'));  // 파일 삭제
 
-            File::delete(public_path('\images\supplementer\\'.$original_name.'.png'));                // 파일 삭제
-            $spImage->move(public_path('\images\supplementer'), $fileName.'.png');     // Storage에서 Public으로 파일 이동
+            if(file_exists(public_path('\images\supplementer\\'.$fileName.'.png'))){
+                // 같은 이름의 제품 이미지 파일이 있는지 확인
+    
+                return "fail";
+            }
+            else {
+                $spImage = $request->file('imageFile');                                        // 파일
+                $spImage->storeAs('\images\supplementer', $fileName.'.png');                   // 파일 저장
+            
+                $sp_id = (int)$request->get('sp_id');
+                $sp_login_id = (string)$request->get('sp_login_id');
+                $sp_password = (string)$request->get('sp_password');
+                $sp_name = (string)$request->get('sp_name');
+                $sp_mail = (string)$request->get('sp_mail');
+                $sp_phone = (string)$request->get('sp_phone');
+                $sp_address = (string)$request->get('sp_address');
+                $sp_img_path = '/images/supplementer/'.$fileName.'.png';
+
+                $getSpInfo = DB::table('supplementer')->where('sp_id', $sp_id)->get();
+
+                if ($getSpInfo[0]->sp_login_id == $sp_login_id && 
+                $getSpInfo[0]->sp_password == $sp_password && 
+                $getSpInfo[0]->sp_name == $sp_name && 
+                $getSpInfo[0]->sp_mail == $sp_mail && 
+                $getSpInfo[0]->sp_phone == $sp_phone && 
+                $getSpInfo[0]->sp_address == $sp_address) {
+                    return "good";
+                }
+                else {
+                    $result = DB::table('supplementer')
+                    ->where('sp_id', $sp_id)->update([
+                        'sp_id'             => $sp_id,
+                        'sp_login_id'       => $sp_login_id,
+                        'sp_password'       => $sp_password,
+                        'sp_name'           => $sp_name,
+                        'sp_mail'           => $sp_mail,
+                        'sp_phone'          => $sp_phone,
+                        'sp_address'        => $sp_address,
+                        'sp_img_path'       => $sp_img_path
+                    ]);
+
+                    if($result){
+                        return "good";
+                    }else{
+                        return "fail";
+                    }
+                }
+            }
         }
+        else {
+            $sp_id = $request->get('sp_id');
+            $sp_login_id = $request->get('sp_login_id');
+            $sp_password = $request->get('sp_password');
+            $sp_name = $request->get('sp_name');
+            $sp_mail = $request->get('sp_mail');
+            $sp_phone = $request->get('sp_phone');
+            $sp_address = $request->get('sp_address');
+            $sp_img_path = '/images/supplementer/'.$fileNmae.'.png';
 
-        $sp_id = $request->get('sp_id');
-        $sp_login_id = $request->get('sp_login_id');
-        $sp_password = $request->get('sp_password');
-        $sp_name = $request->get('sp_name');
-        $sp_mail = $request->get('sp_mail');
-        $sp_phone = $request->get('sp_phone');
-        $sp_address = $request->get('sp_address');
-        $sp_img_path = '/images/supplementer/'.$fileNmae.'.png';
+            $result = DB::table('supplementer')
+            ->where('sp_id', $sp_id)->update([
+                'sp_id'             => $sp_id,
+                'sp_login_id'       => $sp_login_id,
+                'sp_password'       => $sp_password,
+                'sp_name'           => $sp_name,
+                'sp_mail'           => $sp_mail,
+                'sp_phone'          => $sp_phone,
+                'sp_address'        => $sp_address,
+                'sp_img_path'       => $sp_img_path
+            ]);
 
-        $result = DB::table('supplementer')
-        ->where('sp_id', $sp_id)->update([
-            'sp_id'             => $sp_id,
-            'sp_login_id'       => $sp_login_id,
-            'sp_password'       => $sp_password,
-            'sp_name'           => $sp_name,
-            'sp_mail'           => $sp_mail,
-            'sp_phone'          => $sp_phone,
-            'sp_address'        => $sp_address,
-            'sp_img_path'       => $sp_img_path
-        ]);
-
-        if($result){
-            return "good";
-        }else{
-            return "fail";
+            if($result){
+                return "good";
+            }else{
+                return "fail";
+            }
         }
     }
     //----------------------- 보충기사 수정 -------------------------------
@@ -640,10 +688,11 @@ class managementController extends Controller
 
     //----------------------- 보충기사 삭제 -------------------------------
     public function deleteSP($sp_id) {
-        
         // 해당 보충기사의 sp_login_id를 가져온다.
         $getSpLoginId = DB::table('supplementer')->select('sp_login_id')
         ->where('sp_id', $sp_id)->get();
+
+        $fileName = $getSpLoginId[0]->sp_login_id;
 
         // 해당 보충기사의 이름으로 등록된 자판기가 있는지 확인한다.
          $getVDInfo = DB::table('vendingmachine')
@@ -652,31 +701,19 @@ class managementController extends Controller
         // 등록된 자판기가 없으면 해당 보충기사를 삭제한다.
         if(!isset($getVDInfo[0])){
             $result = DB::table('supplementer')->where('sp_id', $sp_id)->delete();
-            if($result) return "good";
+            
+            if($result) {
+                File::delete(public_path('\images\supplementer\\'.$fileName.'.png'));          // 파일 삭제
+                return "good";
+            }
         }else{
             return "fail";
         }
     }
     //----------------------- 보충기사 삭제 -------------------------------
 
-    public function checkJobOrder($sp_id, $date) {
-        // 오늘 작업지시서가 생성 되어 있으면 내일 작업지시서가 있으니까
-        // 내일 작업지시서가 있는지 확인한다.
-        // select * from job_order where date_format(order_date, "%Y-%m-%d") = date_sub(date_format(now(), "%Y-%m-%d"), interval -1 day)
-        $check = DB::table('job_order')
-        ->where(DB::raw('date_format(order_date, "%Y-%m-%d")'), 
-        DB::raw('date_sub(date_format("'.$date.'", "%Y-%m-%d"), interval -1 day)'))
-        ->where('sp_id', $sp_id)->get();
-        
-        if (isset($check[0])) {
-            return "true";
-        } else {
-            return "false";
-        }
-    }
-
-
-    // 작업지시서 생성버튼
+    
+    //----------------------- 작업지시서 생성 -------------------------------
     public function createJobOrder($sp_id) {
         
         $boolean = "true";
@@ -712,6 +749,25 @@ class managementController extends Controller
         // 이후부터는 계속 다음작업지시서에 추가가 된다.
         // 그리고 그 작업지시서가 생성되면 트루, 있으면 풜스 반환!
         return $boolean;
-    } 
+    }   
+    //----------------------- 작업지시서 생성 -------------------------------
 
+
+    //----------------------- 작업지시서 생성 유무 확인-------------------------------
+    public function checkJobOrder($sp_id, $date) {
+        // 오늘 작업지시서가 생성 되어 있으면 내일 작업지시서가 있으니까
+        // 내일 작업지시서가 있는지 확인한다.
+        // select * from job_order where date_format(order_date, "%Y-%m-%d") = date_sub(date_format(now(), "%Y-%m-%d"), interval -1 day)
+        $check = DB::table('job_order')
+        ->where(DB::raw('date_format(order_date, "%Y-%m-%d")'), 
+        DB::raw('date_sub(date_format("'.$date.'", "%Y-%m-%d"), interval -1 day)'))
+        ->where('sp_id', $sp_id)->get();
+        
+        if (isset($check[0])) {
+            return "true";
+        } else {
+            return "false";
+        }
+    }
+    //----------------------- 작업지시서 생성 유무 확인-------------------------------
 }

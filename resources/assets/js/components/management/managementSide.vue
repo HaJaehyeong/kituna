@@ -1,581 +1,74 @@
 <template>
   <div>
-    <v-tabs v-model="active" color="gray" dark slider-color="yellow" v-if="TrueOrFalse==false">
-      <v-tab v-for="choose in spOrVdCard" :key="choose" ripple @click="contentPageChange(choose)"> {{ choose }} 조회</v-tab>
-      <v-tab-item v-for="choose in spOrVdCard" :key="choose">
-        <v-card flat v-if="choose=='보충기사'">
-          <div>
-            <v-btn dark @click="insertSupple = true, spIn = true">보충기사 등록</v-btn>
-            <v-btn dark @click="spUpRe(true, false)">보충기사 수정</v-btn>
-            <v-btn dark @click="spUpRe(false, true)">보충기사 삭제</v-btn>
-            <v-dialog v-model="insertSupple" persistent max-width="500px">
-              <v-card>
-                <v-card-title>
-                  <span v-if="spIn == true" class="headline">보충기사 등록</span>
-                  <span v-else class="headline">보충기사 수정</span>
-                </v-card-title>
-                <v-card-text>
-                  <img id="blah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
-                  <input type="file" accept=".png" id="inputFile" @change="readURL('inputFile')">
-                </v-card-text>
-                <v-card-text v-if="spIn == true">
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs12>
-                        <v-text-field label="Input your name" required id="spInputName"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your Id" required id="spInputId"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your password" required id="spInputPasswd"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your mail" required id="spInputMail"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your phone" required id="spInputPhone"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your address" required id="spInputAddress"></v-text-field>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-text>
-                <v-card-text v-else>
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs12>
-                        <v-text-field label="Input your name" required id="spInputNameChange" :value="spInputNameChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your Id" required id="spInputIdChange" :value="spInputIdChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your password" required id="spInputPasswdChange" :value="spInputPasswdChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your mail" required id="spInputMailChange" :value="spInputMailChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your phone" required id="spInputPhoneChange" :value="spInputPhoneChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your address" required id="spInputAddressChange" :value="spInputAddressChange"></v-text-field>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions v-if="spIn == true">
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" flat @click="spInFunc">등록</v-btn>
-                  <v-btn color="blue darken-1" flat @click.native="insertSupple = false, spIn = false">취소</v-btn>
-                </v-card-actions>
-                <v-card-actions v-else>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" flat @click="spUpFunc">수정</v-btn>
-                  <v-btn color="blue darken-1" flat @click.native="insertSupple = false, spUp = false">취소</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <div class="fixed-table-container">
-              <div class="header-bg"></div>
-              <div class="table-wrapper">
-                <table>
-                  <thead> 
-                    <th width="8%"> <!-- %넓이 값을 지정을 위해 div를 포함시키기. -->
-                      <div class="th-text">번호</div>
-                    </th>
-                    <th width="25%">
-                      <div class="th-text">사진</div>
-                    </th>
-                    <th width="17%">
-                      <div class="th-text">이름</div>
-                    </th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="sp in spArray" :key="sp.No" @click="spInfor(sp.Id, sp.sp_id)" :id="sp.sp_id">
-                      <td>{{sp.No}}</td>
-                      <td><img :src="sp.Pic" id="spImage"></td>
-                      <td>{{sp.Name}}</td>
-                    </tr>
-                  </tbody>
-                </table>      
-              </div>
+    <h3>Vending Machine Management</h3>
+    <div>
+      <v-btn id="spBtn" round outline color="indigo" @click="contentPageChange('보충기사')">보충기사 조회</v-btn>
+      <v-btn id="vdBtn" round outline color="grey lighten-1" @click="contentPageChange('자판기')">자판기 조회</v-btn>
+    </div>
+    <div v-if="pageName == '보충기사'">
+      <div class="spListDivBackground">
+        <div v-for="sp in spArray" :key="sp.No">
+          <div class="spListDiv" @click="spInfor(sp.Id, sp.sp_id, sp.Name)" :id="sp.sp_id">
+            <div>
+              <img :src="sp.Pic" id="spImage" class="imgRodius">
+            </div>
+            <div style="margin: 15px;">
+              <h4 :name="sp.Name" style="color: skyblue">{{sp.Name}}</h4>
+              <h5 :name="sp.Name" style="color: skyblue">Supplement</h5>
             </div>
           </div>
-        </v-card>
-        <v-card flat v-else-if="choose=='자판기'">
-          <v-card>
-            <!-- ********************** 자판기 등록창********************** -->
-            <v-layout row justify-center>
-              <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
-                <v-btn slot="activator" @click="DrinkList">자판기 등록</v-btn>
-                <v-card  color="light-blue darken-1">
-                  <v-toolbar >
-                    <v-btn icon @click.native="dialog = false" >
-                      <v-icon>close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                      <v-btn color="white" flat @click.native="close">Cancel</v-btn>
-                      <v-btn color="white" flat @click.native="save">Save</v-btn>
-                    </v-toolbar-items>
-                  </v-toolbar>
-                  <br>
-                <v-card>
-                <v-card-title>
-                  <span class="headline">자판기 기본정보</span>
-                </v-card-title>
-                <v-card-text>
-                  <!-- ********************** 자판기 기본 등록 및 수정 내부 창 ********************** -->
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs2 order-md1 order-xs3>
-                        <v-text-field color="light-blue darken-4"  name="input-3-4" label="자판기 이름"  class="input-group--focused"  :rules="[() => editedItem.Ven_Name.length > 0 || 'Vendingmachine name is required']"  required v-model="editedItem.Ven_Name"></v-text-field>
-                      </v-flex>
-                      <v-flex xs2 order-md1 order-xs4>
-                        <v-text-field color="light-blue darken-4 " name="input-3-4" label="위치"  class="input-group--focused"  :rules="[() => editedItem.Location.length > 0 || 'ex)Buk-gu, Daegu, Republic of Korea']"  required   v-model="editedItem.Location"></v-text-field>
-                      </v-flex> 
-                      <v-flex xs2 order-md1 order-xs3>
-                        <v-select
-                          :items="select"
-                          label="관리자명"
-                          item-value="text"
-                          v-model ="editedItem.Manager">
-                        </v-select>
-                      </v-flex>                
-                      <v-flex xs3 order-md1  order-xs6>
-                        <label>
-                          <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-                          <button @click="addMarker">Add</button>
-                        </label>
-                      </v-flex>
-                      <v-flex xs2 order-md1  order-xs5 >
-                        <gmap-map :center="center" :zoom="zoom" style="width:350px;  height: 250px;">
-                          <gmap-marker
-                            :key="index"
-                            v-for="(m, index) in markers"
-                            :position="m.position"
-                            :markers="m.markers"
-                            @click="center=m.position"
-                            :draggable="m.draggable">
-                          </gmap-marker>
-                        </gmap-map>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions></v-card-actions>
-                </v-card>
-                <!-- ********************** 자판기 음료 등록 및 수정 ********************** -->
-                <v-card>
-                  <v-card-title><span class="headline">{{ formSubTitle }}</span></v-card-title>
-                  <v-container fluid grid-list-md>
-                    <v-layout row wrap>
-                      <v-flex xs1>
-                        <v-subheader>음료라인 수</v-subheader>
-                      </v-flex>
-                      <v-flex xs1>
-                        <b-form-select v-model="selected" :options="options" class="mb-1"  />
-                      </v-flex>
-                    </v-layout>
-                    <v-layout row wrap v-if="editedIndex!=-1">
-                      <v-flex xs1>
-                        <!-- Edit일 경우 뜨는 현재 음료 리스트  -->
-                        <v-subheader>현재 음료 리스트</v-subheader>
-                      </v-flex>
-                      <v-layout  xs2 md2 lg2 v-for="(drinkItem, index) in editedItem_drink" :key="index">
-                        <v-flex  v-for="(item2, index)  in drinkItem" :key="index">
-                          <v-card-title>{{index}}</v-card-title>
-                          <v-card-media   height="70px">   
-                            <v-card><img xs3 md3 lg3 :src="item2" style=" height:70px; width:30px;"></v-card>
-                            <v-spacer></v-spacer>
-                          </v-card-media>  
-                        </v-flex> 
-                      </v-layout>
-                    </v-layout>
-                    <br />
-                    <v-layout row wrap>
-                      <v-flex xs1>
-                        <v-subheader>음료 설정</v-subheader>
-                      </v-flex>
-                      <!-- Set Drink List Card -->
-                      <v-flex xs5 md5 lg5>
-                        <v-layout row wrap>
-                          <v-flex xs3 md3 lg3 v-for="(value, index) in InputDrinkItem" :key="index">
-                            <v-card width="150px" height="200px">
-                              <draggable :id="index" v-model="itemList_All" :options="{group:'itemList_All'}" @start="drag=true" 
-                                @end="drag=false" @add="newLine">
-                                <v-card-title class="headline"> 
-                                  {{ capLetter(index) }}
-                                </v-card-title>
-                                <v-card v-for="(item2, index)  in value" :key="index">
-                                  <v-card-media  height="70px">  
-                                    <v-spacer></v-spacer>  
-                                    <img :src="item2" style=" height:70px; width:30px;" >
-                                    <v-spacer></v-spacer>
-                                  </v-card-media>
-                                </v-card> 
-                              </draggable>
-                            </v-card>
-                          </v-flex>
-                        </v-layout>
-                      </v-flex>
-                      <v-flex xs1></v-flex>
-                        <!-- All Drink list Card -->
-                        <v-flex xs5>  총 음료 리스트 (원하는 음료를 드래그해주세요)
-                          <v-layout row wrap>
-                            <v-flex xs2 md2 lg2 v-for="(drinkItem, index) in itemList_All" :key="index">
-                              <draggable :id="index" v-model="itemList_All" :options="{group: { name:'itemList_All', pull:'clone', put:'false'}}" @start="drag=true" 
-                                @end="drag=false" :move="chooseItem">
-                                <v-card class="ma-2 pa-1">
-                                  <v-card-media  height="70px">
-                                    <v-spacer></v-spacer>
-                                    <img :src="drinkItem.path" style=" height:70px; width:30px;">
-                                    <v-spacer></v-spacer>
-                                  </v-card-media>
-                                </v-card>
-                              </draggable>
-                            </v-flex>
-                          </v-layout>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-card>   
-                </v-card>
-              </v-dialog>
-            </v-layout>
-          </v-card>
-          <!-- vending machine List -->
-          <v-card-title>
-            <v-text-field
-              append-icon="search"
-              label="Please enter search keywords"
-              single-line
-              hide-details
-              v-model="search">
-            </v-text-field>
-          </v-card-title>
-          <v-data-table :headers="headers" :items="items" :search="search">
-            <template slot="items" slot-scope="props">
-              <tr :id="props.item.No" @mouseover="mouseover(props.item.No)" @mouseout="mouseout(props.item.No)" @click="trClick(props.item.No)">
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.No }}</td>
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.Ven_Name }}</td>
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Location }}</td>
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Manager }}</td>
-                <td class="justify-center layout px-0">
-                  <v-btn icon class="mx-0" @click="editItem(props.item)">
-                    <v-icon color="teal">edit</v-icon>
-                  </v-btn>
-                  <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                    <v-icon color="pink">delete</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-            </template>
-            <template slot="no-data">
-              <v-btn color="primary" @click="vendingList">Reset</v-btn>
-            </template>
-            <v-alert slot="no-results" :value="true" color="error" icon="warning">
-              Your search for "{{ search }}" found no results.
-            </v-alert>
-          </v-data-table>
-        </v-card>
-      </v-tab-item>
-    </v-tabs>
-    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^66. -->
+        </div>
+        <div class="spInsertBtn" v-b-modal.spInsertModal>
+          <h1 style="color: skyblue">+</h1>
+          <h5 style="color: skyblue">새로운 보충기사 등록하기</h5>
+        </div>
+        <div class="spUpdateAndspRemoveBtn">
+          <v-btn v-if="clickedSpTrId == ''" round @click="spUploadFunc(true)">보충기사 수정</v-btn>
+          <v-btn v-else round v-b-modal.spUploadModal @click="spUploadFunc(true)">보충기사 수정</v-btn>
+          <v-btn round class="error" @click="spRemoveFunc">보충기사 삭제</v-btn>
+        </div>
+      </div>
+      <b-modal id="spInsertModal" hide-footer ref="spInsertRef" title="보충기사 등록">
+        <div>
+          <img id="insertBlah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
+          <input type="file" accept=".png" id="insertFile" @change="readURL('insertFile')">
+          <b-form-input type="text" placeholder="Enter your name" id="spInputName"></b-form-input>
+          <b-form-input type="text" placeholder="Enter your id" id="spInputId"></b-form-input>
+          <b-form-input type="text" placeholder="Enter your password" id="spInputPasswd"></b-form-input>
+          <b-form-input type="text" placeholder="Enter your mail adress" id="spInputMail"></b-form-input>
+          <b-form-input type="text" placeholder="Enter your phoneNumber" id="spInputPhone"></b-form-input>
+          <b-form-input type="text" placeholder="Enter your address" id="spInputAddress"></b-form-input>
+        </div>
+        <br>
+        <div>
+          <b-btn @click="spInsertFunc">등록</b-btn>
+          <b-btn @click="$refs.spInsertRef.hide()">취소</b-btn>
+        </div>
+      </b-modal>
 
-    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^66. -->
-
-    <!-- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^66. -->
- <v-tabs v-model="active" color="gray" dark slider-color="yellow" v-if="TrueOrFalse==true">
-      <v-tab v-for="choose in spOrVdCard" :key="choose" ripple @click="contentPageChange(choose)"> {{ choose }} 조회</v-tab>
-      <v-tab-item v-for="choose in spOrVdCard" :key="choose">
-        <v-card flat v-if="choose=='자판기'">
-          <div>
-            <v-btn dark @click="insertSupple = true, spIn = true">보충기사 등록</v-btn>
-            <v-btn dark @click="spUpRe(true, false)">보충기사 수정</v-btn>
-            <v-btn dark @click="spUpRe(false, true)">보충기사 삭제</v-btn>
-            <v-dialog v-model="insertSupple" persistent max-width="500px">
-              <v-card>
-                <v-card-title>
-                  <span v-if="spIn == true" class="headline">보충기사 등록</span>
-                  <span v-else class="headline">보충기사 수정</span>
-                </v-card-title>
-                <v-card-text>
-                  <img id="blah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
-                  <input type="file" accept=".png" id="inputFile" @change="readURL('inputFile')">
-                </v-card-text>
-                <v-card-text v-if="spIn == true">
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs12>
-                        <v-text-field label="Input your name" required id="spInputName"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your Id" required id="spInputId"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your password" required id="spInputPasswd"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your mail" required id="spInputMail"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your phone" required id="spInputPhone"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your address" required id="spInputAddress"></v-text-field>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-text>
-                <v-card-text v-else>
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs12>
-                        <v-text-field label="Input your name" required id="spInputNameChange" :value="spInputNameChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your Id" required id="spInputIdChange" :value="spInputIdChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your password" required id="spInputPasswdChange" :value="spInputPasswdChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your mail" required id="spInputMailChange" :value="spInputMailChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your phone" required id="spInputPhoneChange" :value="spInputPhoneChange"></v-text-field>
-                      </v-flex>
-                      <v-flex xs12>
-                        <v-text-field label="Input your address" required id="spInputAddressChange" :value="spInputAddressChange"></v-text-field>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions v-if="spIn == true">
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" flat @click="spInFunc">등록</v-btn>
-                  <v-btn color="blue darken-1" flat @click.native="insertSupple = false, spIn = false">취소</v-btn>
-                </v-card-actions>
-                <v-card-actions v-else>
-                  <v-spacer></v-spacer>
-                  <v-btn color="blue darken-1" flat @click="spUpFunc">수정</v-btn>
-                  <v-btn color="blue darken-1" flat @click.native="insertSupple = false, spUp = false">취소</v-btn>
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-            <div class="fixed-table-container">
-              <div class="header-bg"></div>
-              <div class="table-wrapper">
-                <table>
-                  <thead> 
-                    <th width="8%"> <!-- %넓이 값을 지정을 위해 div를 포함시키기. -->
-                      <div class="th-text">번호</div>
-                    </th>
-                    <th width="25%">
-                      <div class="th-text">사진</div>
-                    </th>
-                    <th width="17%">
-                      <div class="th-text">이름</div>
-                    </th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="sp in spArray" :key="sp.No" @click="spInfor(sp.Id, sp.sp_id)" :id="sp.sp_id">
-                      <td>{{sp.No}}</td>
-                      <td><img :src="sp.Pic" id="spImage"></td>
-                      <td>{{sp.Name}}</td>
-                    </tr>
-                  </tbody>
-                </table>      
-              </div>
-            </div>
-          </div>
-        </v-card>
-        <v-card flat v-else-if="choose=='보충기사'">
-          <v-card>
-            <!-- ********************** 자판기 등록창********************** -->
-            <v-layout row justify-center>
-              <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
-                <v-btn slot="activator" @click="DrinkList">자판기 등록</v-btn>
-                <v-card  color="light-blue darken-1">
-                  <v-toolbar >
-                    <v-btn icon @click.native="dialog = false" >
-                      <v-icon>close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-toolbar-items>
-                      <v-btn color="white" flat @click.native="close">Cancel</v-btn>
-                      <v-btn color="white" flat @click.native="save">Save</v-btn>
-                    </v-toolbar-items>
-                  </v-toolbar>
-                  <br>
-                <v-card>
-                <v-card-title>
-                  <span class="headline">자판기 기본정보</span>
-                </v-card-title>
-                <v-card-text>
-                  <!-- ********************** 자판기 기본 등록 및 수정 내부 창 ********************** -->
-                  <v-container grid-list-md>
-                    <v-layout wrap>
-                      <v-flex xs2 order-md1 order-xs3>
-                        <v-text-field color="light-blue darken-4"  name="input-3-4" label="자판기 이름"  class="input-group--focused"  :rules="[() => editedItem.Ven_Name.length > 0 || 'Vendingmachine name is required']"  required v-model="editedItem.Ven_Name"></v-text-field>
-                      </v-flex>
-                      <v-flex xs2 order-md1 order-xs4>
-                        <v-text-field color="light-blue darken-4 " name="input-3-4" label="위치"  class="input-group--focused"  :rules="[() => editedItem.Location.length > 0 || 'ex)Buk-gu, Daegu, Republic of Korea']"  required   v-model="editedItem.Location"></v-text-field>
-                      </v-flex> 
-                      <v-flex xs2 order-md1 order-xs3>
-                        <v-select
-                          :items="select"
-                          label="관리자명"
-                          item-value="text"
-                          v-model ="editedItem.Manager">
-                        </v-select>
-                      </v-flex>
-                      <v-flex xs3 order-md1  order-xs6>
-                        <label>
-                          <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
-                          <button @click="addMarker">Add</button>
-                        </label>
-                      </v-flex>
-                      <v-flex xs2 order-md1  order-xs5 >
-                        <gmap-map :center="center" :zoom="zoom" style="width:350px;  height: 250px;">
-                          <gmap-marker
-                            :key="index"
-                            v-for="(m, index) in markers"
-                            :position="m.position"
-                            :markers="m.markers"
-                            @click="center=m.position"
-                            :draggable="m.draggable">
-                          </gmap-marker>
-                        </gmap-map>
-                      </v-flex>
-                    </v-layout>
-                  </v-container>
-                </v-card-text>
-                <v-card-actions></v-card-actions>
-                </v-card>
-                <!-- ********************** 자판기 음료 등록 및 수정 ********************** -->
-                <v-card>
-                  <v-card-title><span class="headline">{{ formSubTitle }}</span></v-card-title>
-                  <v-container fluid grid-list-md>
-                    <v-layout row wrap>
-                      <v-flex xs1>
-                        <v-subheader>음료라인 수</v-subheader>
-                      </v-flex>
-                      <v-flex xs1>
-                        <b-form-select v-model="selected" :options="options" class="mb-1"  />
-                      </v-flex>
-                    </v-layout>
-                    <v-layout row wrap v-if="editedIndex!=-1">
-                      <v-flex xs1>
-                        <!-- Edit일 경우 뜨는 현재 음료 리스트  -->
-                        <v-subheader>현재 음료 리스트</v-subheader>
-                      </v-flex>
-                      <v-layout  xs2 md2 lg2 v-for="(drinkItem, index) in editedItem_drink" :key="index">
-                        <v-flex  v-for="(item2, index)  in drinkItem" :key="index">
-                          <v-card-title>{{index}}</v-card-title>
-                          <v-card-media   height="70px">   
-                            <v-card><img xs3 md3 lg3 :src="item2" style=" height:70px; width:30px;"></v-card>
-                            <v-spacer></v-spacer>
-                          </v-card-media>  
-                        </v-flex> 
-                      </v-layout>
-                    </v-layout>
-                    <br />
-                    <v-layout row wrap>
-                      <v-flex xs1>
-                        <v-subheader>음료 설정</v-subheader>
-                      </v-flex>
-                      <!-- Set Drink List Card -->
-                      <v-flex xs5 md5 lg5>
-                        <v-layout row wrap>
-                          <v-flex xs3 md3 lg3 v-for="(value, index) in InputDrinkItem" :key="index">
-                            <v-card width="150px" height="200px">
-                              <draggable :id="index" v-model="itemList_All" :options="{group:'itemList_All'}" @start="drag=true" 
-                                @end="drag=false" @add="newLine">
-                                <v-card-title class="headline"> 
-                                  {{ capLetter(index) }}
-                                </v-card-title>
-                                <v-card v-for="(item2, index)  in value" :key="index">
-                                  <v-card-media  height="70px">  
-                                    <v-spacer></v-spacer>  
-                                    <img :src="item2" style=" height:70px; width:30px;" >
-                                    <v-spacer></v-spacer>
-                                  </v-card-media>
-                                </v-card> 
-                              </draggable>
-                            </v-card>
-                          </v-flex>
-                        </v-layout>
-                      </v-flex>
-                      <v-flex xs1></v-flex>
-                        <!-- All Drink list Card -->
-                        <v-flex xs5>  총 음료 리스트 (원하는 음료를 드래그해주세요)
-                          <v-layout row wrap>
-                            <v-flex xs2 md2 lg2 v-for="(drinkItem, index) in itemList_All" :key="index">
-                              <draggable :id="index" v-model="itemList_All" :options="{group: { name:'itemList_All', pull:'clone', put:'false'}}" @start="drag=true" 
-                                @end="drag=false" :move="chooseItem">
-                                <v-card class="ma-2 pa-1">
-                                  <v-card-media  height="70px">
-                                    <v-spacer></v-spacer>
-                                    <img :src="drinkItem.path" style=" height:70px; width:30px;">
-                                    <v-spacer></v-spacer>
-                                  </v-card-media>
-                                </v-card>
-                              </draggable>
-                            </v-flex>
-                          </v-layout>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
-                  </v-card>   
-                </v-card>
-              </v-dialog>
-            </v-layout>
-          </v-card>
-          <!-- vending machine List -->
-          <v-card-title>
-            <v-text-field
-              append-icon="search"
-              label="Please enter search keywords"
-              single-line
-              hide-details
-              v-model="search">
-            </v-text-field>
-          </v-card-title>
-          <v-data-table :headers="headers" :items="items" :search="search">
-            <template slot="items" slot-scope="props">
-              <tr :id="props.item.No" @mouseover="mouseover(props.item.No)" @mouseout="mouseout(props.item.No)" @click="trClick(props.item.No)">
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.No }}</td>
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.Ven_Name }}</td>
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Location }}</td>
-                <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Manager }}</td>
-                <td class="justify-center layout px-0">
-                  <v-btn icon class="mx-0" @click="editItem(props.item)">
-                    <v-icon color="teal">edit</v-icon>
-                  </v-btn>
-                  <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                    <v-icon color="pink">delete</v-icon>
-                  </v-btn>
-                </td>
-              </tr>
-            </template>
-            <template slot="no-data">
-              <v-btn color="primary" @click="vendingList">Reset</v-btn>
-            </template>
-            <v-alert slot="no-results" :value="true" color="error" icon="warning">
-              Your search for "{{ search }}" found no results.
-            </v-alert>
-          </v-data-table>
-        </v-card>
-      </v-tab-item>
-    </v-tabs>
+      <b-modal id="spUploadModal" hide-footer ref="spUploadRef" title="보충기사 수정">
+        <div>
+          <img id="uploadBlah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
+          <input type="file" accept=".png" id="uploadFile" @change="readURL('uploadFile')">
+          <b-form-input type="text" :value="spInputNameChange" id="spInputNameChange"></b-form-input>
+          <b-form-input type="text" :value="spInputIdChange" id="spInputIdChange"></b-form-input>
+          <b-form-input type="text" :value="spInputPasswdChange" id="spInputPasswdChange"></b-form-input>
+          <b-form-input type="text" :value="spInputMailChange" id="spInputMailChange"></b-form-input>
+          <b-form-input type="text" :value="spInputPhoneChange" id="spInputPhoneChange"></b-form-input>
+          <b-form-input type="text" :value="spInputAddressChange" id="spInputAddressChange"></b-form-input>
+        </div>
+        <br>
+        <div>
+          <b-btn @click="spUploadFunc(false)">수정</b-btn>
+          <b-btn @click="$refs.spUploadRef.hide()">취소</b-btn>
+        </div>
+      </b-modal>
+    </div>
   </div>
+  
+ 
+  
+  
 </template>
 
 <script>
@@ -624,7 +117,7 @@ export default {
           { text: '위치', value: 'Location' },
           { text: '관리자',sortable: true, value: 'Manager' }
         ],
-      options: [  { value: null, text: '8개' }],
+       options: [  { value: null, text: '8개' }],
       vendingName:"",
       items:[],
       select: [  /* 모달창 선택지 */
@@ -705,19 +198,18 @@ export default {
         Line7 : null,
         Line8 : null,
       },
-      TrueOrFalse :false,
-      insertSupple: false,
-      clickedSpTrId: "",
-      spIn: false,
-      spUp: false,
-      spRe: false,
-      spInputNameChange: "",
-      spInputIdChange: "",
-      spInputPasswdChange: "",
-      spInputMailChange: "",
-      spInputPhoneChange: "",
-      spInputAddressChange: "",
-      originPhoneNum: ""
+      TrueOrFalse             : false,      // 실시간 페이지에서 넘어왔는지 유무 확인
+      clickedSpTrId           : "",         // 클릭한 보충기사 태그 아이디          
+      spInputNameChange       : "",         // 보충기사 수정 모달창 이름 값
+      spInputIdChange         : "",         // 보충기사 수정 모달창 아이디 값
+      spInputPasswdChange     : "",         // 보충기사 수정 모달창 비밀번호 값
+      spInputMailChange       : "",         // 보충기사 수정 모달창 이메일 값
+      spInputPhoneChange      : "",         // 보충기사 수정 모달창 휴대전화번호 값
+      spInputAddressChange    : "",         // 보충기사 수정 모달창 주소 값
+      originPhoneNum          : "",         // 수정 전 휴대전화번호 값
+      pageName                : "보충기사",  // 현재 페이지 이름
+      clickedTrName           : "",         // 클릭한 DIV안에 있는 태그의 이름
+      original_sp_login_id    : "",         // 수정 전 보충기사 아이디
     }
   },
   components: {
@@ -749,27 +241,35 @@ export default {
       }
     },
   methods: {
-    readURL(input) {
-      var fileTag = document.getElementById(input);
+    readURL(inputAndUpload) {
+      var fileTag = document.getElementById(inputAndUpload);
 
       if (fileTag.files && fileTag.files[0]) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#blah').attr('src', e.target.result);
+            if (inputAndUpload == 'insertFile') {
+              document.getElementById('insertBlah').setAttribute('src', e.target.result);
+            }
+            else {
+              document.getElementById('uploadBlah').setAttribute('src', e.target.result);
+            }
         };
 
         reader.readAsDataURL(fileTag.files[0]);
       }
     },
-    spInFunc() {
+    // 모달창에 보충기사 이미지 미리보기
+
+    spInsertFunc() {
         var saveSpName = document.getElementById("spInputName").value;
         var saveSpId = document.getElementById("spInputId").value;
         var saveSpPasswd = document.getElementById("spInputPasswd").value;
         var saveSpMail = document.getElementById("spInputMail").value;
         var saveSpPhone = document.getElementById("spInputPhone").value;
         var saveSpAddress = document.getElementById("spInputAddress").value;
-        var saveImage = document.getElementById("inputFile").value;
+        var saveImage = document.getElementById("insertFile").value;
+        // 현재 모달창에 입력된 값
 
         if (saveSpName == "") {
           alert("이름을 입력해주십시오.");
@@ -793,7 +293,9 @@ export default {
           alert("이미지를 넣어주세요");
         }
         else {
-          const fileInput = document.getElementById("inputFile");
+          // 값 유무 확인
+
+          const fileInput = document.getElementById("insertFile");
           const formData = new FormData();
           formData.append('sp_login_id', saveSpId);
           formData.append('sp_password', saveSpPasswd);
@@ -803,153 +305,179 @@ export default {
           formData.append('sp_address', saveSpAddress);
           formData.append('sp_address', saveSpAddress);
           formData.append('imageFile', fileInput.files[0]);
+          // 전송할 데이터
 
           this.axios.post("management/addSP", formData)
           .then((response) => {
             if(response.data == "good") {
               alert("등록되었습니다.");
-              this.insertSupple = false;
-              this.spIn = false;
-              location.reload();
+              this.$refs.spInsertRef.hide();
+              this.spList();
+              // 새로고침
             }
             else {
-              alert("등록에 실패하였습니다.");
+              alert("등록에 실패하였습니다.11");
             }
           })
           .then((error) => {
             console.log(error);
+            alert("등록에 실패하였습니다.22");
           })
         }
     },
-    spUpFunc() {
-      this.spInputNameChange = document.getElementById('spInputNameChange').value;
-      this.spInputIdChange = document.getElementById('spInputIdChange').value;
-      this.spInputPasswdChange = document.getElementById('spInputPasswdChange').value;
-      this.spInputMailChange = document.getElementById('spInputMailChange').value;
-      this.spInputPhoneChange = document.getElementById('spInputPhoneChange').value;
-      this.spInputAddressChange = document.getElementById('spInputAddressChange').value;
+    // 보충기사 등록하기
 
-
-      if (this.spInputNameChange == "") {
-        alert("이름을 입력해주십시오.");
-      }
-      else if (this.spInputIdChange == "") {
-        alert("아이디를 입력해주십시오.");
-      }
-      else if (this.spInputPasswdChange == "") {
-        alert("비밀번호를 입력해주십시오.");
-      }
-      else if (this.spInputMailChange == "") {
-        alert("메일을 입력해주십시오.");
-      }
-      else if (this.spInputPhoneChange == "") {
-        alert("휴대전화번호를 입력해주십시오.");
-      }
-      else if (this.spInputAddressChange == "") {
-        alert("주소를 입력해주십시오.");
-      }
-      else {
-        const formData = new FormData();
-        formData.append('sp_id', this.clickedSpTrId);
-        formData.append('sp_login_id', this.spInputIdChange);
-        formData.append('sp_password', this.spInputPasswdChange);
-        formData.append('sp_name', this.spInputNameChange);
-        formData.append('sp_mail', this.spInputMailChange);
-        formData.append('sp_phone', this.spInputPhoneChange);
-        formData.append('sp_address', this.spInputAddressChange);
-
-        if (document.getElementById("inputFile").value != "") {
-          const fileInput = document.getElementById("inputFile");
-          formData.append('imageFile', fileInput.files[0]);
-          formData.append('is_file', "ok");
-        }
-        else {
-          formData.append('is_file', "no");
-        }
-
-        this.axios.post("management/updateSP", formData)
-        .then((response) => {
-          if(response.data == "good") {
-            alert("수정되었습니다.");
-            this.insertSupple = false;
-            this.spUp = false;
-            location.reload();
-          }
-          else {
-            alert("수정에 실패하였습니다.");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        })
-      }
-    },
-    spUpRe(up, re) {
-      this.spUp = up;
-      this.spRe = re;
-
-      if (this.spUp == true) {
+    spUploadFunc(openAndUpload) {
+      if (openAndUpload == true) {
         if (this.clickedSpTrId == "") {
+          // 보충기사를 선택하지 않았을 경우
+
           alert("수정할 보충기사를 선택하십시오.");
-          this.spUp = false;
         }
         else{
-          this.insertSupple = true;
+          let getSPUrl = 'management/getSP';    // 보충기사 정보 url
 
-          let url = 'management/getSP';
-          this.axios.get(url)
+          this.axios.get(getSPUrl)
           .then((response) => {
+            console.log(response.data);
+            console.log(this.clickedSpTrId);
+            console.log(this.clickedSpTrId[this.clickedSpTrId.length-1]);
+
             for (var i = 0; i < response.data.length; i++) {
-              if (this.clickedSpTrId == response.data[i].sp_id) {
+              if (this.clickedSpTrId == response.data[i].sp_name + response.data[i].sp_id) {
+                // 해당 보충기사 찾기
                 
-                var showImage = document.getElementById("blah");
+                var showImage = document.getElementById("uploadBlah");
 
                 this.spInputNameChange = response.data[i].sp_name;
                 this.spInputIdChange = response.data[i].sp_login_id;
+                this.original_sp_login_id = response.data[i].sp_login_id;
                 this.spInputPasswdChange = response.data[i].sp_password;
                 this.spInputMailChange = response.data[i].sp_mail;
                 this.spInputPhoneChange = response.data[i].sp_phone;
                 this.originPhoneNum = response.data[i].sp_phone;
                 this.spInputAddressChange = response.data[i].sp_address;
                 showImage.src = response.data[i].sp_img_path;
+                // 수정 모달창에 보충기사 정보 입력
 
                 break;
               }
             }
           })
           .catch((error) => {
-
+            console.log(error.response);
+            alert("보충기사 정보찾기에 실패하였습니다.");
           })
         }
       }
       else {
-        if (this.clickedSpTrId == "") {
-          alert("삭제할 보충기사를 선택하십시오.");
-          this.spRe = false;
+        this.spInputNameChange = document.getElementById('spInputNameChange').value;
+        this.spInputIdChange = document.getElementById('spInputIdChange').value;
+        this.spInputPasswdChange = document.getElementById('spInputPasswdChange').value;
+        this.spInputMailChange = document.getElementById('spInputMailChange').value;
+        this.spInputPhoneChange = document.getElementById('spInputPhoneChange').value;
+        this.spInputAddressChange = document.getElementById('spInputAddressChange').value;
+        // 현재 모달창에 입력된 값
+
+        if (this.spInputNameChange == "") {
+          alert("이름을 입력해주십시오.");
         }
-        else{
-          var removeCheck = confirm("해당 보충기사를 정말로 삭제하시겠습니까?");
+        else if (this.spInputIdChange == "") {
+          alert("아이디를 입력해주십시오.");
+        }
+        else if (this.spInputPasswdChange == "") {
+          alert("비밀번호를 입력해주십시오.");
+        }
+        else if (this.spInputMailChange == "") {
+          alert("메일을 입력해주십시오.");
+        }
+        else if (this.spInputPhoneChange == "") {
+          alert("휴대전화번호를 입력해주십시오.");
+        }
+        else if (this.spInputAddressChange == "") {
+          alert("주소를 입력해주십시오.");
+        }
+        else {
+          // 값 유무 확인
 
-          if (removeCheck == true) {
-            let spRemoveUrl = 'management/deleteSP/' + this.clickedSpTrId;
-            this.axios.get(spRemoveUrl)
-            .then((response) => {
-              if (response.data == "good") {
-                alert("삭제되었습니다.");
-                this.spRe = false;
-                location.reload();
-              }
-              else {
-                alert("담당하고 있는 자판기가 아직 있습니다.");
-              }
-            })
-            .catch((error) => {
+          const formData = new FormData();
+          formData.append('sp_id', this.clickedSpTrId[this.clickedSpTrId.length-1]);
+          formData.append('original_sp_login_id', this.original_sp_login_id);
+          formData.append('sp_login_id', this.spInputIdChange);
+          formData.append('sp_password', this.spInputPasswdChange);
+          formData.append('sp_name', this.spInputNameChange);
+          formData.append('sp_mail', this.spInputMailChange);
+          formData.append('sp_phone', this.spInputPhoneChange);
+          formData.append('sp_address', this.spInputAddressChange);
+          // 전송할 데이터
 
-            })
+          if (document.getElementById("uploadFile").value != "") {
+            const fileInput = document.getElementById("uploadFile");
+            formData.append('imageFile', fileInput.files[0]);
+            formData.append('is_file', "ok");
           }
+          else {
+            formData.append('is_file', "no");
+          }
+          // 이미지 파일 변경 유무 확인
+
+          this.axios.post("management/updateSP", formData)
+          .then((response) => {
+            console.log(response.data);
+
+            if(response.data == "good") {
+              alert("수정되었습니다.");
+              this.$refs.spUploadRef.hide()
+              this.spList();
+            }
+            else {
+              alert("수정에 실패하였습니다.11");
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+            alert("수정에 실패하였습니다.22");
+          })
         }
       }
     },
+    // 보충기사 정보 수정하기
+
+    spRemoveFunc() {
+      if (this.clickedSpTrId == "") {
+        // 보충기사를 선택하지 않았을 경우
+
+        alert("삭제할 보충기사를 선택하십시오.");
+      }
+      else{
+        var removeCheck = confirm("해당 보충기사를 정말로 삭제하시겠습니까?");
+        // 삭제할 것인지 다시 확인
+
+        if (removeCheck == true) {
+          // 삭제 진행 시
+
+          let spRemoveUrl = 'management/deleteSP/' + this.clickedSpTrId[this.clickedSpTrId.length-1];    // 보충기사 삭제 url
+
+          this.axios.get(spRemoveUrl)
+          .then((response) => {
+            if (response.data == "good") {
+              alert("삭제되었습니다.");
+              this.clickedSpTrId = "";
+              this.spList();
+              // 새로고침
+            }
+            else {
+              alert("담당하고 있는 자판기가 아직 있습니다.");
+            }
+          })
+          .catch((error) => {
+            console.log(error.response);
+            alert("보충기사 삭제에 실패하였습니다.");
+          })
+        }
+      }
+    },
+    // 보충기사 수정 모달창에 정보입력 및 보충기사 삭제
 
     //서버 DB에서 보충기사 정보를 가지고 온다.
     spList(){
@@ -961,10 +489,12 @@ export default {
           obj_c.push({
             name:array_c[key].name})
         }
-        });
+      });
 
       let url = 'management/getSP';
       this.axios.get(url).then((response) =>{
+        this.spArray = [];
+
         //보충 기사 3명의 정보를 배열에 담는다.
         for(let i = 0 ; i < response.data.length; i++){
 
@@ -973,7 +503,7 @@ export default {
             Pic: response.data[i]['sp_img_path'],
             Name: response.data[i]['sp_name'],
             Id: response.data[i]['sp_login_id'],
-            sp_id: response.data[i]['sp_id']
+            sp_id: response.data[i]['sp_name'] + response.data[i]['sp_id']
           };
 
           this.spArray.push(spObj);
@@ -1032,24 +562,48 @@ export default {
       })
     },
 
-    spInfor(spId, realSp_id){
+    spInfor(spId, realSp_id, spName){
       if (this.clickedSpTrId == "") {
         var clickSpTr = document.getElementById(realSp_id);
-        clickSpTr.style.backgroundColor = "skyblue";
+        clickSpTr.style.backgroundColor = "rgb(0, 183, 238)";
         this.clickedSpTrId = realSp_id;
+        this.clickedTrName = spName;
+
+        for (var i = 0; i < document.getElementsByName(spName).length; i++) {
+          document.getElementsByName(spName)[i].style.color = "white";
+        }
+        
       }
       else {
+        for (var i = 0; i < document.getElementsByName(this.clickedTrName).length; i++) {
+          document.getElementsByName(this.clickedTrName)[i].style.color = "skyblue";
+        }
+
         document.getElementById(this.clickedSpTrId).style.backgroundColor = "white";
         var clickSpTr = document.getElementById(realSp_id);
-        clickSpTr.style.backgroundColor = "skyblue";
+        clickSpTr.style.backgroundColor = "rgb(0, 183, 238)";
         this.clickedSpTrId = realSp_id;
+        this.clickedTrName = spName;
+
+        for (var i = 0; i < document.getElementsByName(spName).length; i++) {
+          document.getElementsByName(spName)[i].style.color = "white";
+        }
       }
       
-
       EventBus.$emit('jobOrder', spId); 
     },
 
+
     contentPageChange(page){
+      if (page == "보충기사") {
+        document.getElementById('spBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round indigo--text");
+        document.getElementById('vdBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round grey--text text--lighten-1");
+      }
+      else {
+        document.getElementById('spBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round grey--text text--lighten-1");
+        document.getElementById('vdBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round indigo--text");
+      }
+
       EventBus.$emit('contentPageChange', page); 
       this.vendingList();
     },
@@ -1234,7 +788,7 @@ export default {
         };
       });
     },
-    /* <---------------- 수정 버튼 클릭 시 음료 리스트 -----------------> */
+
     DrinkList:function(){
 
         this.axios.get("management/getProductInfo").then((response) =>{
@@ -1302,40 +856,71 @@ export default {
       this.itemList_All.splice(0,);
       this.DrinkList();
    },
-   //<------------------ specific page (realtime->management) ----------------->
+   //<---------------------- specific page ---------------------->
     specific(){
       var id = this.$route.query.id;
       
       this.spOrVdCard = { 0 : '보충기사', 1 : '자판기'}, 
       this.TrueOrFalse = true;
-      console.log(this.TrueOrFalse );
+      console.log(this.TrueOrFalse);
       this.contentPageChange("자판기");
-
-      /*  해당 자판기 음료 재고  */
-      this.axios.get("realtime/getVdStock/"+id)
-        .then(function (response) {
-          
-             response=response.data;
-             EventBus.$emit('StockEventBus',response); 
-        }) 
-
-      /*  해당 자판기 동전 잔고  */  
-      this.axios.get("realtime/coinStock/"+id)
-        .then(function (response) {
-             response=response.data;
-             EventBus.$emit('CoinEventBus',response); 
-             
-        })    
+       
+ 
    }
   }
 }
 </script>
 
 <style>
- #spImage{
+.spListDivBackground {
+  background-color: rgb(48, 109, 170);
+  width: 330px;
+  height: 700px;
+  border-radius: 15px;
+  padding-top: 10px;
+}
+
+.spListDiv {
+  display : grid;
+  grid-template-columns : 0.3fr 0.7fr;
+  background-color: white;
+  width: 300px;
+  height: 100px;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 10px;
+}
+
+.imgRodius {
+  border-radius: 15px;
+  width: 70px;
+  height: 85px;
+}
+
+.spInsertBtn {
+  background-color: white;
+  width: 300px;
+  height: 100px;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.spUpdateAndspRemoveBtn {
+  position: absolute;
+  bottom: 45px;
+}
+
+
+
+
+
+
+
+
+ /* #spImage{
    width: 50px;
    height: 65px;
- }
+ } */
 
  .scroll-area {
   position: relative;

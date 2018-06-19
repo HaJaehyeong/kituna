@@ -81,3 +81,6 @@ Route::post('product/updateCompanyInfo', 'productController@updateCompanyInfo');
 Route::get('product/deleteCompanyInfo/{cp_id}', 'productController@deleteCompanyInfo');                 // 회사 삭제
 Route::post('product/sendPDF', 'productController@sendPDF');                                            // 회사정보 수정
 Route::get('product/getMyCompanyInfo', 'productController@getMyCompanyInfo');                           // 내 회사 정보
+
+
+Route::get('testtt', 'realtimeController@test');

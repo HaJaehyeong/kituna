@@ -11,16 +11,18 @@
     <div id="background2" v-if="itemList!=0" >
       <div v-if="trueOrFalse==false" class="hover15 column" id ="background2_title" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
       <strong id="vendingMachineNameFont">{{item.name}}    </strong>    <div class="hover13 figure">
-         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh()"></figure>
+         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')"></figure>
       </div>
+      <!--  <audio id="audio" src="/images/realtime/ping.mp3"></audio> -->
       </div> 
       <div v-if="trueOrFalse==true" class="hover15 column" id ="background2_title2" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
       <strong id="vendingMachineNameFont">{{item.name}}    </strong>    <div class="hover13 figure">
-         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh()"></figure>
+         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')"></figure>
       </div>
       </div> 
       <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 전 ~~~~~~~~~~~ -->
         <!-- *********************** 음료재고 div ********************** -->
+      <div >  
       <div v-if="trueOrFalse==false" id="bottom_left">
        <table id="drinkStockTable">
          <tr >
@@ -32,7 +34,7 @@
                <p v-if="((item.stock>=9)&&(item.stock<=34))" id="numberCenter" >{{item.stock}}/35</p>
                <p v-if="(item.stock==35)" id="numberBottom" class="blink2" >{{item.stock}}/35</p>
              </tr>
-           </td>
+           </td>　
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==1)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
@@ -100,6 +102,7 @@
            </td>
          </tr>
        </table>
+      
       <br />
       </div>
        <!-- *********************** 동전 잔고 div *********************** -->
@@ -111,11 +114,12 @@
           <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.won1000}}개</td></tr>
         </table>
         <p id="CoinStockFont" style="text-align:left">　잔고 현황</p>
-        <table id="trBgColor">
+        <table id="trBgColor" style="margin-top:-15px">
          <tr id="CoinStockFont" ><td style="padding-left:150px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right">총 합 </td></tr>
          <tr id="sumFont"><td style="padding-left:150px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}￦</td></tr>
         </table>
        </div>
+      </div>
       </div>
       <!-- *********************** 더보기 버튼  ************************ -->
       <div v-if="trueOrFalse==false" id="bottom_right" class="hover13 figure">
@@ -240,8 +244,10 @@
 <script>
 let array = [];
 let obj =[];
+let obj2 =[];
 let obj_c =[];
-let temp;
+let temp; /* 현재 vendingmachine id */
+
 let obj_v=[];
 
 //import 'vuetify/dist/vuetify.min.css'
@@ -286,8 +292,19 @@ export default {
       goToId:'',
       route_analysis:'', /* 해당 분석 페이지 */
       route_management:'' ,
-      trueOrFalse:false/* 더보기 버튼 클릭 유무 */
+      trueOrFalse:false/* 더보기 버튼 클릭 유무 */,
+      itemList_before :'' ,/* 변화 전 item*/
+      vendingId_before :'' /* 변화 전 vending id*/
     }
+  },
+  watch: {
+
+    /* 자동 refresh --- 물건 재고 및 잔고 */
+    itemList: function(){
+  
+        this.refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3');
+    } 
+
   },
   created: function() {
 
@@ -299,12 +316,14 @@ export default {
     this.vendingSupplementer=arg3;
     this.vendingAddress=arg4;
     this.vending_id=this.vendingId;
+    this.vendingId_before=this.vendingId;
+
    if(obj_v==[]){
-     obj_v.push({id: this.vendingId,name:this.vendingName,supplementer:this.vendingSupplementer,address: this.vendingAddress});
-    this.itemList_v=obj_v;
+        obj_v.push({id: this.vendingId,name:this.vendingName,supplementer:this.vendingSupplementer,address: this.vendingAddress});
+        this.itemList_v=obj_v;
     
     }else{
-       obj_v.splice(0,2);
+        obj_v.splice(0,2);
         obj_v.push({name:this.vendingName,supplementer:this.vendingSupplementer,address: this.vendingAddress});
         this.itemList_v=obj_v;
    
@@ -319,7 +338,8 @@ export default {
     this.axios.get("/realtime/getVdStock/"+this.vendingId)
        .then((response) =>{
            let key;
-            response = response.data; 
+           response = response.data; 
+           
            if(obj==[]){
              for(key in response){
                 array[key] = {
@@ -330,10 +350,14 @@ export default {
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
                          drink_img_path:array[key].drink_img_path});
+                 obj2.push({line:array[key].line,
+                         stock:array[key].stock,
+                         drink_img_path:array[key].drink_img_path});
               }
            }
            else{
-             obj.splice(0,8);
+             obj.splice(0,);
+             obj2.splice(0,);
               for(key in response){
                 array[key] = {
                  line : response[key].line,
@@ -343,6 +367,10 @@ export default {
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
                          drink_img_path:array[key].drink_img_path});
+                         
+                obj2.push({line:array[key].line,
+                         stock:array[key].stock,
+                         drink_img_path:array[key].drink_img_path});       
               } 
            }   
          })
@@ -369,10 +397,10 @@ export default {
                          won500:array[key].won500,
                          won100:array[key].won100,
                          sum:array[key].sum});
-              }
+              } 
            }
            else{
-             obj_c.splice(0,8);
+             obj_c.splice(0,);
               for(key in response){
                 array[key] = {
                  won1000 : response[key].won1000,
@@ -391,13 +419,17 @@ export default {
          console.log(error);
        });
 
-        this.itemList = obj;
-        this.itemList_c=obj_c;
+        this.itemList = obj;         /*   재고 전체 받아오는 변수   */
+        this.itemList_c=obj_c;       /*   잔고 전체 받아오는 변수   */
+        this.itemList_before=obj2;   /*   재고만 받아오는 변수      */
+
    });
+
   },
   methods: {
+      
     //<----------------- refresh methods --------------------->
-       refresh(){
+       refresh(sound){
          //<-----------------refresh 물건 재고 axios ----------------------->
         this.axios.get("/realtime/getVdStock/"+temp)
        .then((response) =>{
@@ -406,20 +438,21 @@ export default {
            if(obj==[]){
              for(key in response){
                 array[key] = {
-                 line : response[key].line,
-                 stock  : response[key].stock,
+                 line  : response[key].line,
+                 stock : response[key].stock,
                  drink_img_path : response[key].drink_back_path
                 }
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
-                         drink_img_path:array[key].drink_img_path});
+                         drink_img_path :array[key].drink_img_path});
               }
            }
            else{
-             obj.splice(0,8);
+             obj.splice(0,);
+             obj2.splice(0,);
               for(key in response){
                 array[key] = {
-                 line : response[key].line,
+                 line   : response[key].line,
                  stock  : response[key].stock,
                  drink_img_path : response[key].drink_back_path
                 }
@@ -433,7 +466,7 @@ export default {
          console.log(error);
        });
           //<----------------- refresh 동전 잔고 axios ----------------------->
-    this.axios.get("/realtime/coinStock/"+this.vendingId)
+       this.axios.get("/realtime/coinStock/"+this.vendingId)
        .then((response) =>{
            let key;
             response = response.data; 
@@ -453,7 +486,7 @@ export default {
               }
            }
            else{
-             obj_c.splice(0,8);
+             obj_c.splice(0,);
               for(key in response){
                 array[key] = {
                  won1000 : response[key].won1000,
@@ -470,15 +503,26 @@ export default {
          })
        .catch(function (error) {
          console.log(error);
-       });
+       }); 
+
+        this.itemList = obj;  /* 재고 전체 리스트 */
+        this.itemList_c=obj_c; /* 잔고 전체 리스트  */
         
-        this.itemList = obj; 
-        this.itemList_c=obj_c;
-        
-       EventBus.$emit('selectId',this.vendingId); 
-       
-       } ,
+        /* 재고 숫자가 바뀔 경우 효과음 냄 */
+       // if((this.itemList!=0)&&(this.itemList_before != this.itemList)){
       
+          if(sound) {  /* 효과음 부분 */
+            var audio = new Audio(sound);
+            audio.play();
+           }
+       //  }
+
+       // this.itemList_before = this.itemList;
+
+        EventBus.$emit('selectId',this.vendingId);    /* google-map으로 새로고침갱신 값 전달 */
+      
+       } ,
+    
           //<----------------- sale history axios ----------------------->
        sale_history :function(){
       this.axios.get("realtime/getSellDataList").then((response) =>{
@@ -571,57 +615,61 @@ export default {
     width:100%;   
     position: relative;
     right: 280px;
+    margin-top:-55px;
   }
   /* 현재 클릭된 자판기 이름 -1*/
   #background2_title{
     position: relative;
     left: -200px;
+    margin-top:60px;
   }
    /* 현재 클릭된 자판기 이름 -2*/
   #background2_title2{
     position: relative;
     left: -200px;
-    top: -26px;
+    top: -10px;
+    margin-top:70px;
   }
 
   /* 음료 리스트 */
   #bottom_left{
+    margin-top:-25px;
     margin-left:10px;
-    float: left; width: 45%; padding:3px
+    float: left; width: 50%; padding:3px
   }
   /* 잔고 리스트 */
   #bottom_center{
     float: left;
     width: 35%; 
-    margin-top:13px;
-    margin-right:15px;
+    margin-top:-5px;
+    margin-right:10px;
     }
   /* 더보기 버튼 */
   #bottom_right{
-    margin-top:13px;
+    margin-top:-5px;
     float: left;
   }
   /* 더보기 리스트 */
   #bottom_left2{
-    margin-top:-10px;
-    margin-left:10px;
-    float: left; width: 65%;  
+    margin-top:-15px;
+    margin-left:20px;
+    float: left; width: 63%;  
     background-image:url(/images/realtime/vertical_frame.png);
     background-repeat:no-repeat;
-    background-size:780px 300px; 
-    width: 780px;
+    background-size:800px 300px; 
+    width: 800px;
     height: 300px; 
   }
   /* 백 버튼 */
   #bottom_right2{
-    margin-top:-10px;
+   margin-top:-15px;
     float: left; 
     margin-left:25px;
   }
 .hover13 figure:hover img {
-	opacity: 1;
-	-webkit-animation: flash 1.5s;
-	animation: flash 2.5s;
+  opacity: 1;
+  -webkit-animation: flash 1.5s;
+  animation: flash 2.5s;
 }
   @-webkit-keyframes flash {
     0% {
@@ -671,7 +719,8 @@ export default {
   #drinkStockTable{
     margin-left: 5px;
     margin-right: 15px;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
+
   }
   /* 테이블 배경사진 */
   #tdBackground{
@@ -680,6 +729,7 @@ export default {
    background-size:100px 160px; 
    width: 120px;
    height: 160px;
+   margin-right: 30px;
   }
   /* 재고 높은 숫자 */
   #numberTop{
@@ -753,7 +803,7 @@ export default {
       100% {color: rgb(52, 196, 83)}
   }
 
-   /* 더보기 기능 왼쪽 설명 부분 */
+  /* 더보기 기능 왼쪽 설명 부분 */
   #add_table{
   float: left; width: 30%;  
   margin-left: -20px;
@@ -765,7 +815,7 @@ export default {
   margin-top: 5%;
   margin-right: 12%;
   }
-  /* 더보기 기능 왼쪽 설명  설정 */
+  /* 더보기 기능 왼쪽 설명 설정 */
   #top_info_settting{
     font-family:"Nanum Gothic";
     color: rgb(255, 255, 255);
@@ -789,3 +839,6 @@ export default {
   }
 
 </style>
+
+
+

@@ -103,7 +103,7 @@
                   <thead>
                     <th>자판기이름</th>
                     <th colspan="2">라인1</th><th colspan="2">라인2</th><th colspan="2">라인3</th><th colspan="2">라인4</th>
-                    <th colspan="2">라인5</th><th colspan="2">라인6</th><th colspan="2">라인7</th><th colspan="2">라인8</th>
+                    <!-- <th colspan="2">라인5</th><th colspan="2">라인6</th><th colspan="2">라인7</th><th colspan="2">라인8</th> -->
                     <th>비고</th>
                   </thead>
                   <tbody>
@@ -111,27 +111,27 @@
                       <td v-if="vending.orderNote == ''">{{vending.vd_name}}</td>
                       <td v-else style="background-color: aqua;">{{vending.vd_name}}</td>
 
-                      <td v-if="vending.lineAndProduct[0].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[0].productName}}</td>
+                      <td v-if="vending.lineAndProduct[0].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[0].productName}}</td>
                       <td v-else>{{vending.lineAndProduct[0].productName}}</td>
-                      <td v-if="vending.lineAndProduct[0].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[0].sp_val}}</td>
+                      <td v-if="vending.lineAndProduct[0].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[0].sp_val}}</td>
                       <td v-else>{{vending.lineAndProduct[0].sp_val}}</td>
 
-                      <td v-if="vending.lineAndProduct[1].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[1].productName}}</td>
+                      <td v-if="vending.lineAndProduct[1].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[1].productName}}</td>
                       <td v-else>{{vending.lineAndProduct[1].productName}}</td>
-                      <td v-if="vending.lineAndProduct[1].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[1].sp_val}}</td>
+                      <td v-if="vending.lineAndProduct[1].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[1].sp_val}}</td>
                       <td v-else>{{vending.lineAndProduct[1].sp_val}}</td>
 
-                      <td v-if="vending.lineAndProduct[2].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[2].productName}}</td>
+                      <td v-if="vending.lineAndProduct[2].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[2].productName}}</td>
                       <td v-else>{{vending.lineAndProduct[2].productName}}</td>
-                      <td v-if="vending.lineAndProduct[2].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[2].sp_val}}</td>
+                      <td v-if="vending.lineAndProduct[2].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[2].sp_val}}</td>
                       <td v-else>{{vending.lineAndProduct[2].sp_val}}</td>
 
-                      <td v-if="vending.lineAndProduct[3].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[3].productName}}</td>
+                      <td v-if="vending.lineAndProduct[3].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[3].productName}}</td>
                       <td v-else>{{vending.lineAndProduct[3].productName}}</td>
-                      <td v-if="vending.lineAndProduct[3].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[3].sp_val}}</td>
+                      <td v-if="vending.lineAndProduct[3].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[3].sp_val}}</td>
                       <td v-else>{{vending.lineAndProduct[3].sp_val}}</td>
 
-                      <td v-if="vending.lineAndProduct[4].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[4].productName}}</td>
+                      <!-- <td v-if="vending.lineAndProduct[4].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[4].productName}}</td>
                       <td v-else>{{vending.lineAndProduct[4].productName}}</td>
                       <td v-if="vending.lineAndProduct[4].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[4].sp_val}}</td>
                       <td v-else>{{vending.lineAndProduct[4].sp_val}}</td>
@@ -149,7 +149,7 @@
                       <td v-if="vending.lineAndProduct[7].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[7].productName}}</td>
                       <td v-else>{{vending.lineAndProduct[7].productName}}</td>
                       <td v-if="vending.lineAndProduct[7].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[7].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[7].sp_val}}</td>
+                      <td v-else>{{vending.lineAndProduct[7].sp_val}}</td> -->
                       
                       <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)">{{vending.orderNote}}</td>
                       <td v-else>{{vending.orderNote}}</td>
@@ -996,7 +996,7 @@ table.blueTable td {
   width: 100px;
 }
 table.blueTable tbody td {
-  font-size: 13px;
+  font-size: 18px;
   width: 100px;
 }
 table.blueTable thead, table.blueTable th {
@@ -1005,7 +1005,7 @@ table.blueTable thead, table.blueTable th {
   background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
   background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
   border-bottom: 2px solid #444444;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
   color: #FFFFFF;
   text-align: center;
@@ -1030,7 +1030,7 @@ table.blueTableChange td {
   width: 100px;
 }
 table.blueTableChange tbody td {
-  font-size: 13px;
+  font-size: 18px;
   width: 100px;
 }
 table.blueTableChange thead, table.blueTableChange th {
@@ -1039,7 +1039,7 @@ table.blueTableChange thead, table.blueTableChange th {
   background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
   background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
   border-bottom: 2px solid #444444;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
   color: #FFFFFF;
   text-align: center;

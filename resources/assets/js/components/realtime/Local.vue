@@ -3,16 +3,16 @@
     <div style="text-align:left;font-family:'Dosis';" >
     <h2><strong>　　Real time Management </strong></h2>
     </div>
-    <br />
-    <div class="tab_container">
+    <div id="tab_container">
         <input id="select1" name="sex" type="radio" checked>
-        <button id="btn1"><label for="select1" class="men">지역별 조회</label></button>
+        <button id="btn1"><label for="select1" class="men">지역별</label></button>
         <input id="select2" name="sex" type="radio">
-        <button id="btn2"><label for="select2" class="women">보충기사별 조회</label></button>
+        <button id="btn2"><label for="select2" class="women">보충기사별</label></button>
 
         <!-- ****************** Local list ****************** --> 
         <div class="page1" id="page_1">
           <br />
+    
           <button id="localBtn" href="#" @click="SouthKorea(127.826836,36.684272)">전국</button>
           <br /><br />
           <div v-for="(item_1, key, index) in itemList" :key="index">
@@ -25,29 +25,26 @@
             <div v-if="item_1.text!='대구광역시'&&item_1.text!='서울특별시'">
              <button id="localBtn" href="#" v-b-toggle.index  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
             </div>
-         
           <br />
           <div v-if="item_1.text=='서울특별시'">
               <b-collapse id="seoul">
                   <b-card style="max-width: 27em;">
-                   <button class="subLocalBtnFrame" type="button"  id="subLocalBtnFrame1"  @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">
-                      <tr id="subLocalButton">　　 {{item_2.name}}</tr>
+                    <v-btn outline color="indigo"  class="subLocalBtnFrame"   @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">  <tr id="subLocalButton">{{item_2.name}}　 </tr>
+                      <Br />
                       <tr >
                         <td id="subLocalButton_1" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==1)">{{item_3.count}}</td><td id="subLocalButton_2" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==0)">/{{item_3.count}}</td>
-                      </tr>
-                      </button> 
+                      </tr></v-btn>
                   </b-card>
                 </b-collapse>
            </div>
            <div v-if="item_1.text=='대구광역시'">
               <b-collapse id="daegu">
                   <b-card style="max-width: 27em;">
-                    <button class="subLocalBtnFrame" type="button"  id="subLocalBtnFrame1"  @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">
-                      <tr id="subLocalButton">　　 {{item_2.name}}</tr>
+                      <v-btn outline color="indigo"  class="subLocalBtnFrame"   @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">  <tr id="subLocalButton">{{item_2.name}}　 </tr>
+                      <Br />
                       <tr >
                         <td id="subLocalButton_1" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==1)">{{item_3.count}}</td><td id="subLocalButton_2" v-for="item_3 in itemsCount" :key="item_3.no" v-if="(item_2.englishN==item_3.address)&&(item_3.vd_soldout==0)">/{{item_3.count}}</td>
-                      </tr>
-                      </button>
+                      </tr></v-btn>
                   </b-card>
                 </b-collapse>
            </div>
@@ -60,9 +57,9 @@
             <br />
               <div id="supporter_frame" >
                 <div id="supprter_frame_2" @click="supplementerEmit(item.supplementer)">
-                  <v-avatar   :tile="tile">
+                  <v-avatar >
                     <img v-bind:src="item.imgSrc">
-                  </v-avatar>{{item.supplementer}}　<button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">작업지시서</p></button>
+                  </v-avatar> {{item.supplementer}}　<button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">작업지시서</p></button>
                 </div>
            <v-dialog v-model="orderJobModal" fullscreen>
             <v-card flat>
@@ -576,9 +573,7 @@ export default {
       
       EventBus.$emit('LocalEvent',arg1,arg2);
 
-      let clickVd = document.getElementById(subLocalBtnFrame);
-      clickVd.style.backgroundColor = '#FCE6E0';
-
+   
     },
     //<--------------------- South --------------------------->  
     SouthKorea:function(arg1,arg2){
@@ -714,23 +709,24 @@ h1 {
 /* 지역별 조회 배경 설정 */
 #page_1{
     width:  400px;
-    height: 880px;
-    margin-top: 5px;
+    height: 700px;
+    margin-top: 12px;
     background-image: url("/images/realtime/left_frame.png");
   /*   background-repeat: no-repeat;*/
     background-position: center; 
-    background-size: 370px 840px;
+    background-size: 370px 700px;
     
 }
 
 /* 지역별 조회 배경 설정 */
 #page_2{
     width:  400px;
-    height: 880px;
+    height: 700px;
+    margin-top: 15px;
     background-image: url("/images/realtime/left_frame.png");
   /*  background-repeat: no-repeat;*/
     background-position: center; 
-    background-size: 370px 840px;
+    background-size: 370px 700px;
     
 }
 
@@ -764,13 +760,13 @@ label{
 /* ------------------------- 버튼1- 지역별 조회 설정 ----------------------*/
 #btn1 {
     position: relative;
-    border: 3px solid #ebf0f5;
+    border: 3px solid  #0064c8;
     border-radius:10px;
-    font-size: 20px;
+    font-size: 21px;
     color: #FFFFFF;
     padding-top:5px;
-    padding-right: 25px;
-    width: 200px;
+    padding-right:38%;
+    width: 177px;
     height: 55px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -779,10 +775,13 @@ label{
     overflow: hidden;
     cursor: pointer; 
     font-family:"Nanum Gothic";
+    margin-top: 5%;
+    margin-right: 1%;
 }
 #btn1:hover {
   border: 3px solid #0064c8;
-  color:#0064c8;
+  color:#0064c8; 
+  font-weight: bold;
 }
 #btn1:after {
     content: "";
@@ -814,13 +813,13 @@ label{
 /* ------------------ 버튼2- 보충기사별 조회 설정 -----------------*/
 #btn2{
     position: relative;
-    border: 3px solid #ebf0f5;
+    border: 3px solid  #0064c8;
     border-radius:10px;
-    font-size: 20px;
+    font-size: 21px;
     color: #FFFFFF;
     padding-top:5px;
-    padding-right: 25px;
-    width: 200px;
+    padding-right:38%;
+    width: 177px;
     height: 55px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -829,10 +828,12 @@ label{
     overflow: hidden;
     cursor: pointer; 
     font-family:"Nanum Gothic";
+    
 }
 #btn2:hover {
   border: 3px solid #0064c8;
   color:#0064c8;
+  font-weight: bold;
 }
 #btn2:after {
     content: "";
@@ -893,7 +894,7 @@ label{
 
 }
 
-/* .subLocalBtnFrame:focus {
+.subLocalBtnFrame:focus {
   outline: none;
   border: 3px solid #0064c8;
   color: #0064c8;
@@ -921,7 +922,7 @@ label{
 			opacity: 1;
 			transition: all 0s
       
- } */
+ }
 
  .subLocalBtnFrame:hover { box-shadow: 0 0px 10px 0 rgba(102, 102, 102, 0.2), 0 6px 10px 0 rgba(0,0,0,0.19); }
 

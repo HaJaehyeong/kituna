@@ -26,7 +26,7 @@
     <gmap-map
       :center="center"
       :zoom="zoom"
-      style="width:100%;  height: 450px;"
+      style="width:100%;  height: 400px;"
     >  
     <!-- cluster 적용  -->
     <gmap-cluster :grid-size="gridSize" v-if="clustering" >
@@ -156,7 +156,11 @@ export default {
       selectTrue: false,
       }
   },
-
+  watch : {
+    vendingId : function () {
+      this.changeVending();
+    }
+  },
   created: function() {
      //<--------------- 전국 EventBus -------------->
     EventBus.$on('SouthKorea',(arg1,arg2) => {
@@ -634,7 +638,7 @@ export default {
 /* <----------------전체 레이아웃 ----------------> */
 #mapImage{
   
-margin-top:35px;
+margin-top:15px;
 margin-right:280px;
 margin-bottom:0px; 
 
@@ -683,7 +687,6 @@ margin-bottom:0px;
   width:100%;
   transition:800ms ease all;
 }
-
 
 
 </style>

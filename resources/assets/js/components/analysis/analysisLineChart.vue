@@ -54,7 +54,9 @@
     <!-- 좌측 장소 버튼들과 메인 DIV를 구분하기 위해 1:9로 나누어 DIV구성. -->
     <div id="placeDivisionDiv">
       <div class="collums55DivideDiv">
+        <!-- DIV안에 빈공간을 많이 만들어 화면 좌측에 장소 버튼들이 메인DIV에 붙도록 한다. -->
         <div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
         <div>
           <br>
@@ -70,7 +72,7 @@
           <div>
             <div class="collums55DivideDiv">
               <div>
-                매출순 자판기
+                <span class="mainContents">매출순 자판기</span>
                 <img :src="rankVdSortImgSrc" @click="rankVdSortChange()">
               </div>
               <div>
@@ -81,24 +83,24 @@
             </div>
             <div id="tableArrowDiv">
               <div>
-                <table class="table table-hover">
-                  <thead style="font-weight: bold;">
-                    <tr><td>순위</td><td>자판기 이름</td><td>판매량</td><td>매출액</td></tr>
+                <table class="table table-hover" style="color: #0064C8;">
+                  <thead style="font-weight: bold; font-family: Nanum+Gothic; border-bottom: 2px solid #0064C8;">
+                    <tr><td>순위</td><td>자판기명</td><td>판매량</td><td>매출액</td></tr>
                   </thead>
                   <!-- rankVdDataArray배열을 for문을 돌며, 값을 테이블에 한줄 씩 넣는다. -->
                   <tbody v-for="vdData in rankVdDataArray" :key="vdData.vd_id">
                     <!-- 처음 로딩 시 가장 위의 tr은 클릭 되어 있어 배경색을 다르게 해주며, TR을 클릭시, 클릭 된 자판기 정보를 우측 분석에서 볼 수 있게 한다. -->
                     <tr v-if="(vdData.num%2) !== 0" style="background-color:#E5EFF9;" :id="vdData.vd_name"  @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
-                      <th scope="row">{{vdData.num}}</th>
-                      <td>{{vdData.vd_name}}</td>
-                      <td>{{vdData.count}}</td>
-                      <td>{{vdData.getSales}}</td>
+                      <th> {{vdData.num}}</th>
+                      <td  style="font-weight: bold; font-size: 15px;">{{vdData.vd_name}}</td>
+                      <th>{{vdData.count}}</th>
+                      <th>{{vdData.getSales}}</th>
                     </tr>
                     <tr v-else @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
-                      <th scope="row">{{vdData.num}}</th>
-                      <td>{{vdData.vd_name}}</td>
-                      <td>{{vdData.count}}</td>
-                      <td>{{vdData.getSales}}</td>
+                      <th> {{vdData.num}}</th>
+                      <td  style="font-weight: bold; font-size: 15px;">{{vdData.vd_name}}</td>
+                      <th>{{vdData.count}}</th>
+                      <th>{{vdData.getSales}}</th>
                     </tr>  
                   </tbody>
                 </table>
@@ -106,20 +108,20 @@
                 <div id="interestVdTableDiv">
                   <table class="table"> 
                     <thead style="font-weight: bold;">
-                      <tr><td>자판기 이름</td><td>담당 보충기사</td><td>매출액 차이</td></tr>
+                      <tr><td>자판기명</td><td>담당 보충기사</td><td>매출액 차이</td></tr>
                     </thead>
                     <tbody>
                       <tr v-for="vdData in interestVdDataArray" :id="vdData.vd_name" :key="vdData.vd_id" @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer)">
-                        <td>★ {{vdData.vd_name}}</td>
-                        <td>{{vdData.vd_supplementer}}</td>
-                        <td>{{vdData.value}}</td>
+                        <th>★ {{vdData.vd_name}}</th>
+                        <th>{{vdData.vd_supplementer}}</th>
+                        <th>{{vdData.value}}</th>
                       </tr>
                     </tbody>
                 </table>
                 </div>
               </div>
               <div>
-                <table class="table borderless" align="left"> 
+                <table class="table borderless"> 
                     <thead >
                       <tr>
                         <td></td>
@@ -147,7 +149,7 @@
             </div>
           </div>
           <!-- 데이터 제목과 데이터를 구분하기 위해 1:9로 DIV를 분할. -->
-          <div>
+          <div style="height:550px;">
             <div>
               <!-- 현재 선택된 자판기 이름이 analysisVdName에 저장되어 있다. -->
               <h2 id="clickVdName">{{analysisVdName}} 자판기</h2>
@@ -157,52 +159,36 @@
                 <div>
                   <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">자판기 내 음료별 판매량</h4>
                   <!-- radar차트를 이용해, 데이터 비교가 가능하게 해두었다. -->
-                  <radar-chart :chart-data="radarChart" :options="radarOption" class="chartData"  :width="400" :height="400"></radar-chart>  
+                  <radar-chart :chart-data="radarChart" :options="radarOption" class="chartData" id="chartData" :width="350" :height="350"></radar-chart>  
                 </div>
                 <div> 
                   <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">그 외 음료순위 및 판매량</h4>
                   <!-- 클릭 된 자판기 내에 없는 음료들의 순위를 데이터 테이블을 이용해 순위순으로 나타내었다. -->
-                  <table class="table table-hover">
+                  <table class="table table-hover" style="color: #0064C8;">
                     <tbody v-for="drinkList in theRestDrinkRankArray" :key="drinkList.num">
                       <tr v-if="(drinkList.num%2) !== 0" style="background-color:#E5EFF9;">
-                        <td>{{drinkList.num}}</td>
+                        <th style="color: #0064C8;">{{drinkList.num}}</th>
                         <td><img :src="'images/drink/' + drinkList.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                        <td>{{drinkList.count}}</td>
+                        <td style="font-weight: bold; font-size: 20px;">{{drinkList.count}}</td>
                       </tr>
                       <tr v-else>
-                        <td>{{drinkList.num}}</td>
+                        <th style="color: #0064C8;">{{drinkList.num}}</th>
                         <td><img :src="'images/drink/' + drinkList.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                        <td>{{drinkList.count}}</td>
+                        <td style="font-weight: bold; font-size: 20px;">{{drinkList.count}}</td>
                       </tr>
                     </tbody>
                   </table>
-
                   <div>
-
-                    <table class="table borderless">
-                      <tr>
-                        <td>평균 보충 주기 : </td>
-                        <td>{{avgSupplementCycle}}</td>
-                        <td>일</td>
-                      </tr>
-                      <tr>
-                        <td>컴플레인 :</td>
-                        <td>{{complain}}</td>
-                        <td>회</td>
-                      </tr>
-                      <tr>
-                        <td>판매장소 :</td>
-                        <td>{{sellPlace}}</td>
-                        <td></td>
-                      </tr>
-                    </table>
+                    <span style="float: left; font-size: 20px; color:#0064C8;">평균보충주기 : </span><span style="float: right; font-size: 20px; color:#0064C8;">일</span><span style="float: right; font-size: 20px; font-weight: bold;">{{avgSupplementCycle}}</span><br><br>
+                    <span style="float: left; font-size: 20px; color:#0064C8;">컴플레인 : </span><span style="float: right; font-size: 20px; color:#0064C8;">회</span><span style="float: right; font-size: 20px; font-weight: bold;">{{complain}}</span><br><br>
+                    <span style="float: left; font-size: 20px; color:#0064C8;">판매장소 : </span><span style="float: right; font-size: 20px; font-weight: bold;">{{sellPlace}}</span><br>
                     <div class="collums55DivideDiv">
-                      <v-btn @click.native.stop="jobOrderDialog = true">
-                        <img src="images/analysis/jobOrderImg.png">
+                      <v-btn @click.native.stop="jobOrderDialog = true" style="height: 156px;">
+                        <img src="images/analysis/jobOrderImg.png" style="height: 156px;">
                       </v-btn>
                    
-                      <v-btn @click="dialogOpen()">
-                        <img src="images/analysis/lineChangeImg.png">
+                      <v-btn @click="dialogOpen()" style="height: 156px;"> 
+                        <img src="images/analysis/lineChangeImg.png" style="height: 156px;">
                       </v-btn>
                     </div>
 
@@ -325,8 +311,8 @@
           
           <div class="titleContentDivideDiv">
             <div id="scrollBar" class="collums55DivideDiv">
-              <div style="text-align: left;">
-                <h3 style="font-weight: bold; color:#0064C8; margin-top: 3%;">음료별 판매순위</h3>
+              <div>
+                <span class="mainContents">음료별 판매순위</span>
               </div>
               <div>
                 <v-chip label :selected="drinkYearChip" outline color="secondary" @click="drinkRankDateChange('year')">년간</v-chip>
@@ -339,28 +325,28 @@
             </div>
           </div>
           <div class="titleContentDivideDiv">
-            <div style="text-align: left;">
-              <h3 style="font-weight: bold; color:#0064C8; margin-top: 3%;" aling-text= left>음료 정보</h3>
+            <div>
+              <span class="mainContents">음료 정보</span>
             </div>
             <div class="collums73DivideDiv">
-              <table class="table table-hover" id="test">
+              <table class="table table-hover">
                 <thead style="font-weight: bold;">
                   <tr><td>음료</td><td>평균 소진량(개)</td><td>예상 소진일(일)</td><td>잔량(개)</td><td>주문</td></tr>
                 </thead>
                 <tbody v-for="array in drinkExhaustAnalysisArray" :key="array.drink_name">
                   <tr v-if="(array.num%2) !== 0" style="background-color:#E5EFF9;">
                       <td><img :src="'images/drink/' + array.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                      <td>{{array.avgSales}}</td>
-                      <td>{{array.prediction}}</td>
-                      <td>{{array.sum}}</td>
+                      <th>{{array.avgSales}}</th>
+                      <th>{{array.prediction}}</th>
+                      <th>{{array.sum}}</th>
                       <td v-if="array.prediction < 4"><img src="images/analysis/check.png" @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck" ></td>
                       <td v-else><img src="images/analysis/uncheck.png"  @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
                   </tr>
                   <tr v-else>
                       <td><img :src="'images/drink/' + array.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                      <td>{{array.avgSales}}</td>
-                      <td>{{array.prediction}}</td>
-                      <td>{{array.sum}}</td>
+                      <th>{{array.avgSales}}</th>
+                      <th>{{array.prediction}}</th>
+                      <th>{{array.sum}}</th>
                       <td v-if="array.prediction < 4"><img src="images/analysis/check.png" @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
                       <td v-else><img src="images/analysis/uncheck.png"  @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
                   </tr>
@@ -1598,6 +1584,7 @@
   display     : grid;
   grid-template-rows: 0.05fr 0.95fr;
   margin-right: 5%;
+
 }
 #analysisLineChartBackgroundDiv .speed-dial {
   position: fixed;
@@ -1606,7 +1593,7 @@
 /* ----- 상단 실시간 데이터 부분 DIV ----- */
 .collums73DivideDiv{
   display     : grid;
-  grid-template-columns: 0.65fr 0.35fr;
+  grid-template-columns: 0.6fr 0.4fr;
   width: 100%;
   height: 100%;
 }
@@ -1622,6 +1609,7 @@
   grid-template-columns: 0.3fr 0.7fr;
   width: 100%;
   height: 100%;
+  margin-top: 1%;
 }
 #anaylsisRealDataSecondContentDiv{
   border-radius: 20px 20px 20px 20px; 
@@ -1632,31 +1620,39 @@
   display     : grid;
   grid-template-columns: 0.33fr 0.33fr 0.33fr;
   font-weight: bold ;
+  width: 100%;
+  height: 100%;
 }
 
 .collums25DivideDiv{
   display     : grid;
   grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
+  width: 100%;
+  height: 100%;
 }
 .collums55DivideDiv{
   display     : grid;
   grid-template-columns: 0.5fr 0.5fr;
   font-weight: bold ;
   color: #0064C8;
+  width: 100%;
 }
 #analysisVdDiv{
   display     : grid;
   grid-template-columns: 0.5fr 0.5fr;
   background-color:  #ffffff;
   border-radius: 10px 10px 10px 10px; 
-  margin-bottom: 3%;
+  margin-bottom: 2%;
   padding: 1%;
-  
+  height: 550px;
+  box-shadow: 1px 1px 5px;
 }
 
 #tableArrowDiv{
   display     : grid;
-  grid-template-columns: 0.98fr 0.02fr;
+  grid-template-columns: 0.99fr 0.01fr;
+  width: 100%;
+  height: 100%;
 }
 /* ----- 상단 실시간 데이터 부분 DIV ----- */
 
@@ -1674,6 +1670,8 @@
 
 .titleContentDivideDiv{
   display     : grid;
+  width: 100%;
+  height: 100%;
   grid-template-rows: 0.1fr 0.9fr;
   background-color:  #ffffff;
   padding: 1%;
@@ -1681,6 +1679,7 @@
   margin-right: 1%;
   margin-bottom: 1%;
   border-radius: 10px 10px 10px 10px; 
+  box-shadow: 1px 1px 5px;
 }
 #interestVdTableDiv{
   background-color:  #0064C8;
@@ -1690,6 +1689,8 @@
 #graphDrinkRankDivideDiv{
   display     : grid;
   grid-template-rows: 0.7fr 0.3fr;
+  width: 100%;
+  height: 100%;
 }
 
 #clickVdName{
@@ -1717,6 +1718,22 @@ a:link { text-decoration: none; color: #000000;}
 .borderless td, .borderless th {
     border: none;
     text-align: left;
+    font-size: 13pt;
+    color: #0064C8;
 }
 
+.mainContents{
+  font-family: "Nanum+Gothic";
+  font-size: 15pt;
+  text-align: left;
+}
+.table{
+  font-size: 15pt;
+}
+#chartData{
+  float: left;
+}
 </style>
+
+
+
