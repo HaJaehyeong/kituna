@@ -360,7 +360,7 @@ class realtimeController extends Controller
     public function sell(){
         for ($i = 0 ; $i < 1 ; $i++) {
             $vd_id = rand(1, 1);
-            $line = rand(1, 8);
+            $line = rand(1, 1);
             
             realtimeController::sendDataFromVdVersionTwo($vd_id, $line); 
         }
