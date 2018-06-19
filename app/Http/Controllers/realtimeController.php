@@ -311,14 +311,14 @@ class realtimeController extends Controller
         ->select('vd_soldout')
         ->where('vd_id', $vd_id)->get();
 
-        if ($getData[0]->stock < 9 && $getVd[0]->vd_soldout != 3 && $getVd[0]->vd_soldout != 1     && $getVd[0]->vd_soldout != 2){
+        if ($getData[0]->stock < 4 && $getVd[0]->vd_soldout != 1 && $getVd[0]->vd_soldout != 2     && $getVd[0]->vd_soldout != 3){
             // 매진임박 자판기로 만듬
             $updateVd = DB::table('vendingmachine')
             ->where('vd_id', $vd_id)
             ->update(['vd_soldout' => 1]);
 
             $getJoColumnInfo = DB::table('vd_stock as vs')
-            ->select('jo.jo_id', 'vs.vd_id', 'vd.vd_name', 'vd.vd_supplementer', 'pi.drink_name', 'pi.drink_img_path', DB::raw('vs.max_stock - vs.stock as sp_val'), 'vs.line')
+            ->select('jo.jo_id', 'vs.vd_id', 'vd.vd_name', 'vd.vd_supplementer', 'pi.drink_name', 'pi.drink_img_path', DB::raw('10 - vs.stock as sp_val'), 'vs.line')
             ->join('vendingmachine as vd', 'vd.vd_id', '=', 'vs.vd_id')
             ->join('product_info as pi', 'pi.drink_id', '=', 'vs.drink_id')
             ->join('supplementer as sm', 'sm.sp_login_id', '=', 'vd.vd_supplementer')
@@ -358,8 +358,8 @@ class realtimeController extends Controller
     }
 
     public function sell(){
-        for ($i = 0 ; $i < 200 ; $i++) {
-            $vd_id = rand(1, 112);
+        for ($i = 0 ; $i < 1 ; $i++) {
+            $vd_id = rand(1, 1);
             $line = rand(1, 8);
             
             realtimeController::sendDataFromVdVersionTwo($vd_id, $line); 
@@ -384,5 +384,5 @@ class realtimeController extends Controller
         if($result) return 'good';
         else return 'fail';
     }
-    
+
 }
