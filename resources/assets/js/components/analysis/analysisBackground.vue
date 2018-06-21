@@ -36,7 +36,7 @@
 <style>
     #analysisBackground{
         display     : grid;
-        grid-template-rows: 0.05fr 0.95fr;
+        grid-template-rows: 0.04fr 0.96fr;
         /* background-image: url("/images/mainPageImage/backgroundVending.jpg"); */
     }
   

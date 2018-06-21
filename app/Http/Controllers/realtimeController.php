@@ -368,6 +368,7 @@ class realtimeController extends Controller
 
     // nfc대면 보충 완료
     public function supplementOK($vd_id) {
+        
         // // //vd stock update 쿼리 생성 및 실행
         $result = DB::table('vd_stock')
             ->where('vd_id', $vd_id)
@@ -383,42 +384,6 @@ class realtimeController extends Controller
     
         if($result) return 'good';
         else return 'fail';
-    }
-
-
-    public function test() {
-
-        $sp_id = 4;
-        $sp_login_id = "hello";
-        $sp_password = "is me";
-        $sp_name = "hello";
-        $sp_mail = "asdf@hellllo.com";
-        $sp_phone = "0000108888";
-        $sp_address = "daegu good";
-        $sp_img_path = "/images/supplementer/4.png";
-
-        $getSpInfo = DB::table('supplementer')->where('sp_id', $sp_id)->get();
-
-        if ($getSpInfo[0]->sp_login_id == $sp_login_id && 
-        $getSpInfo[0]->sp_password == $sp_passwordsp_login_id && 
-        $getSpInfo[0]->sp_name == $sp_name && 
-        $getSpInfo[0]->sp_mail == $sp_mail && 
-        $getSpInfo[0]->sp_phone == $sp_phone && 
-        $getSpInfo[0]->sp_address == $sp_address) {
-            return "true";
-        }
-
-        $result = DB::table('supplementer')
-                ->where('sp_id', $sp_id)->update([
-                    'sp_id'             => $sp_id,
-                    'sp_login_id'       => $sp_login_id,
-                    'sp_password'       => $sp_password,
-                    'sp_name'           => $sp_name,
-                    'sp_mail'           => $sp_mail,
-                    'sp_phone'          => $sp_phone,
-                    'sp_address'        => $sp_address,
-                    'sp_img_path'       => $sp_img_path
-        ]);
     }
 
 }

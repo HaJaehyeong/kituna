@@ -1,20 +1,30 @@
 <template>
   <div>
-    <h3>Vending Machine Management</h3>
+    <br>
+    <h3>Management</h3>
     <div>
-      <v-btn id="spBtn" round outline color="indigo" @click="contentPageChange('보충기사')">보충기사 조회</v-btn>
-      <v-btn id="vdBtn" round outline color="grey lighten-1" @click="contentPageChange('자판기')">자판기 조회</v-btn>
+      <v-btn id="spBtn" class="spBtnStyle" outline color="indigo" @click="contentPageChange('보충기사')"><h6>보충기사 조회</h6></v-btn>
+      <v-btn id="vdBtn" class="spBtnStyle" outline color="grey lighten-1" @click="contentPageChange('자판기')"><h6>자판기 조회</h6></v-btn>
     </div>
     <div v-if="pageName == '보충기사'">
       <div class="spListDivBackground">
         <div v-for="sp in spArray" :key="sp.No">
-          <div class="spListDiv" @click="spInfor(sp.Id, sp.sp_id, sp.Name)" :id="sp.sp_id">
+          <div v-if="sp.No == 1" class="spListDiv" @click="spInfor(sp.Id, sp.sp_id, sp.Name, false)" :id="sp.sp_id" style="background-color: rgb(0, 183, 238);">
+            <div>
+              <img :src="sp.Pic" id="spImage" class="imgRodius">
+            </div>
+            <div style="margin: 15px;">
+              <h4 :name="sp.Name" style="color: white">{{sp.Name}}</h4>
+              <h6 :name="sp.Name" style="color: white">Supplement</h6>
+            </div>
+          </div>
+          <div v-else class="spListDiv" @click="spInfor(sp.Id, sp.sp_id, sp.Name, false)" :id="sp.sp_id">
             <div>
               <img :src="sp.Pic" id="spImage" class="imgRodius">
             </div>
             <div style="margin: 15px;">
               <h4 :name="sp.Name" style="color: skyblue">{{sp.Name}}</h4>
-              <h5 :name="sp.Name" style="color: skyblue">Supplement</h5>
+              <h6 :name="sp.Name" style="color: skyblue">Supplement</h6>
             </div>
           </div>
         </div>
@@ -23,9 +33,9 @@
           <h5 style="color: skyblue">새로운 보충기사 등록하기</h5>
         </div>
         <div class="spUpdateAndspRemoveBtn">
-          <v-btn v-if="clickedSpTrId == ''" round @click="spUploadFunc(true)">보충기사 수정</v-btn>
-          <v-btn v-else round v-b-modal.spUploadModal @click="spUploadFunc(true)">보충기사 수정</v-btn>
-          <v-btn round class="error" @click="spRemoveFunc">보충기사 삭제</v-btn>
+          <v-btn v-if="clickedSpTrId == ''" class="spBtnStyle" @click="spUploadFunc(true)"><h6 style="color: #1565C0;">보충기사 수정</h6></v-btn>
+          <v-btn v-else class="spBtnStyle" v-b-modal.spUploadModal @click="spUploadFunc(true)"><h6 style="color: #1565C0;">보충기사 수정</h6></v-btn>
+          <v-btn color="error" class="spBtnStyle" @click="spRemoveFunc"><h6>보충기사 삭제</h6></v-btn>
         </div>
       </div>
       <b-modal id="spInsertModal" hide-footer ref="spInsertRef" title="보충기사 등록">
@@ -65,10 +75,6 @@
       </b-modal>
     </div>
   </div>
-  
- 
-  
-  
 </template>
 
 <script>
@@ -225,6 +231,8 @@ export default {
     this.spList();
     this.geolocate();
     this.DrinkList();
+
+    this.spInfor("hajae", "Ha Jaehyeong1", "Ha Jaehyeong", true);
   }, 
   //<------------------ search filtering ----------------------->
   computed : {
@@ -562,17 +570,22 @@ export default {
       })
     },
 
-    spInfor(spId, realSp_id, spName){
+    spInfor(spId, realSp_id, spName, firstInput){
       if (this.clickedSpTrId == "") {
-        var clickSpTr = document.getElementById(realSp_id);
-        clickSpTr.style.backgroundColor = "rgb(0, 183, 238)";
-        this.clickedSpTrId = realSp_id;
-        this.clickedTrName = spName;
-
-        for (var i = 0; i < document.getElementsByName(spName).length; i++) {
-          document.getElementsByName(spName)[i].style.color = "white";
+        if (firstInput == true) {
+          this.clickedSpTrId = realSp_id;
+          this.clickedTrName = spName;
         }
-        
+        else {
+          var clickSpTr = document.getElementById(realSp_id);
+          clickSpTr.style.backgroundColor = "rgb(0, 183, 238)";
+          this.clickedSpTrId = realSp_id;
+          this.clickedTrName = spName;
+
+          for (var i = 0; i < document.getElementsByName(spName).length; i++) {
+            document.getElementsByName(spName)[i].style.color = "white";
+          }
+        }
       }
       else {
         for (var i = 0; i < document.getElementsByName(this.clickedTrName).length; i++) {
@@ -596,12 +609,12 @@ export default {
 
     contentPageChange(page){
       if (page == "보충기사") {
-        document.getElementById('spBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round indigo--text");
-        document.getElementById('vdBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round grey--text text--lighten-1");
+        document.getElementById('spBtn').setAttribute('class', "spBtnStyle btn btn--outline btn--depressed indigo--text");
+        document.getElementById('vdBtn').setAttribute('class', "spBtnStyle btn btn--outline btn--depressed grey--text text--lighten-1");
       }
       else {
-        document.getElementById('spBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round grey--text text--lighten-1");
-        document.getElementById('vdBtn').setAttribute('class', "btn btn--outline btn--depressed btn--round indigo--text");
+        document.getElementById('spBtn').setAttribute('class', "spBtnStyle btn btn--outline btn--depressed grey--text text--lighten-1");
+        document.getElementById('vdBtn').setAttribute('class', "spBtnStyle btn btn--outline btn--depressed indigo--text");
       }
 
       EventBus.$emit('contentPageChange', page); 
@@ -873,9 +886,10 @@ export default {
 
 <style>
 .spListDivBackground {
-  background-color: rgb(48, 109, 170);
-  width: 330px;
-  height: 700px;
+  position: relative;
+  background-color: #0064c8;
+  width: 280px;
+  height: 600px;
   border-radius: 15px;
   padding-top: 10px;
 }
@@ -884,92 +898,35 @@ export default {
   display : grid;
   grid-template-columns : 0.3fr 0.7fr;
   background-color: white;
-  width: 300px;
-  height: 100px;
+  width: 260px;
+  height: 80px;
   border-radius: 15px;
-  padding: 10px;
+  padding: 9px;
   margin: 10px;
 }
 
 .imgRodius {
   border-radius: 15px;
-  width: 70px;
-  height: 85px;
+  width: 60px;
+  height: 60px;
 }
 
 .spInsertBtn {
   background-color: white;
-  width: 300px;
-  height: 100px;
+  width: 260px;
+  height: 80px;
   border-radius: 15px;
-  padding: 10px;
+  padding: 5px;
 }
 
 .spUpdateAndspRemoveBtn {
   position: absolute;
-  bottom: 45px;
+  left: 10px;
+  bottom: 10px;
 }
 
-
-
-
-
-
-
-
- /* #spImage{
-   width: 50px;
-   height: 65px;
- } */
-
- .scroll-area {
-  position: relative;
-  margin: auto;
-  width: 300px;
-  height: 500px;
-}.fixed-table-container {
-        width: 400px;
-        height: 600px;
-        border: 1px solid #000;
-        position: relative;
-        padding-top: 30px; /* header-bg height값 */
-    }
-    .header-bg {
-        background: skyblue;
-        height: 30px; /* header-bg height값 */
-        position: absolute;
-        top: 0;
-        right: 0;
-        left: 0;
-        border-bottom: 1px solid #000;
-    }
-    .table-wrapper {
-        overflow-x: hidden;
-        overflow-y: auto;
-        height: 100%;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    td {
-        border-bottom: 1px solid #ccc;
-        padding: 5px;
-    }
-    td + td {
-        border-left: 1px solid #ccc;
-    }
-    th {
-        padding: 0px; /* reset */
-    }
-    .th-text {
-        position: absolute;
-        top: 0;
-        width: inherit;
-        line-height: 30px; /* header-bg height값 */
-        border-left: 1px solid #000;
-    }
-    th:first-child .th-text {
-        border-left: none;
-    }
+.spBtnStyle {
+  width: 115px;
+  border-radius: 8px;
+}
 </style>

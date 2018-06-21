@@ -10,10 +10,10 @@
             <h5><a class="menuHeaderA" href="/analysis"><strong> Analysis </strong></a></h5>
         </div>
         <div class="menu" id="a3">
-            <h5><a class="menuHeaderA" href="/management"><strong> VendingMachine </strong><br/><strong>Management </strong></a></h5>
+            <h5><a class="menuHeaderA" href="/management"><strong>Management </strong></a></h5>
         </div>
         <div class="menu" id="a4">
-            <h5><a class="menuHeaderA" href="/product"><strong> Product</strong><br/><strong>Management</strong></a></h5>
+            <h5><a class="menuHeaderA" href="/product"><strong> Product</strong></a></h5>
         </div>
     </div>
 </template>
@@ -40,6 +40,7 @@ div.topMenu {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   z-index: 3;
+  padding-bottom: 12px;
 }
 div.menu {
   width: 16%;
@@ -59,10 +60,10 @@ div.menu {
    margin-top:25px;
  }
   #a3 {
-   margin-top:10px;
+   margin-top:25px;
  }
  #a4 {
-   margin-top:10px;
+   margin-top:25px;
  }
 
 

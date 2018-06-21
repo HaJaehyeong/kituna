@@ -932,4 +932,11 @@ class analysisController extends Controller
 
         return $saveAll;
     }
+
+    // 자판기 수 가져오기
+    public function getVdCount() {
+        $vdCount = DB::table('vendingmachine')->get();
+
+        return count($vdCount);
+    }
 }

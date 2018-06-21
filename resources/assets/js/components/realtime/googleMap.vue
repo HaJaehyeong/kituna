@@ -26,7 +26,7 @@
     <gmap-map
       :center="center"
       :zoom="zoom"
-      style="width:100%;  height: 400px;"
+      style="width:100%;  height: 300px;"
     >  
     <!-- cluster 적용  -->
     <gmap-cluster :grid-size="gridSize" v-if="clustering" >
@@ -130,11 +130,11 @@ export default {
       longitude :0,
       latitude :0,
       center: {
-        lat: 36.323836,
-        lng: 127.398077 
+        lat: 37.731179,
+        lng: 139.760476 
       },
        draggable:false,
-       zoom:parseFloat(6.8),
+       zoom:parseFloat(3),
        infoContent: '',
        infoWinOpen: false,
        infoOptions: {
@@ -163,7 +163,7 @@ export default {
   },
   created: function() {
      //<--------------- 전국 EventBus -------------->
-    EventBus.$on('SouthKorea',(arg1,arg2) => {
+    EventBus.$on('tokyo',(arg1,arg2) => {
 
                 arg1 = parseFloat(arg1);
                 arg2 = parseFloat(arg2);
@@ -175,7 +175,7 @@ export default {
                   lat : this.latitude,
                   lng : this.longitude
                 };
-                this.zoom =parseInt(7.5);
+                this.zoom =parseInt(11);
    
    });
     //<-------------- 지역 EventBus --------------->
@@ -191,7 +191,7 @@ export default {
                   lat : this.latitude,
                   lng : this.longitude
                 };
-                this.zoom =parseInt(15.5);
+                this.zoom =parseInt(16);
    
    });
 
@@ -209,7 +209,7 @@ export default {
                   lng : this.longitude
                 };
   
-                this.zoom = parseInt(11.5);     
+                this.zoom = parseInt(14);     
     });
 
     //<--------------- 전국 EventBus ---------------->
@@ -230,7 +230,7 @@ export default {
                   lng : this.longitude
                 };
 
-                this.zoom = parseInt(7);
+                this.zoom = parseInt(5);
                 this.marker = [];   
                 this.data = [];
                 this.stock = [];
@@ -279,53 +279,13 @@ export default {
         })
 
         });
-        
-        //<---------- 선택한 자판기 아이디 ------------->
-        EventBus.$on('selectId',(arg1) => {
-        vendingId= arg1;
-        this.changeVending(vendingId);
-        });
-       
+  
     },
    
   mounted() {  
   },
 
   methods: {
-
-   //<----------------- 새로고침 후 자판기 색 변화 --------------------> 
-    changeVending(selectVendingId){
-     this.axios.get("/realtime/list/all/all")
-       .then((response) =>{
-           let key;
-           response = response.data; 
-             for(key in response){
-                if((response[key].vd_id==selectVendingId)){
-                if(response[key].vd_soldout==0){
-                //  console.log("z",this.markers[key].icon);
-                  this.markers[key].icon ="/images/realtime/vending_black_yel.png"  
-                }
-                else if(response[key].vd_soldout==1){
-                  
-                //  console.log("f",this.markers[key].icon);
-                 this.markers[key].icon ="/images/realtime/vending_red_yel.png"  
-                }     
-                 else if(response[key].vd_soldout==2){
-                  
-                //  console.log("f",this.markers[key].icon);
-                 this.markers[key].icon ="/images/realtime/vending_sold_out.png"  
-                }   
-                 else if(response[key].vd_soldout==3){
-                  
-                //  console.log("f",this.markers[key].icon);
-                 this.markers[key].icon ="/images/realtime/vending_instruction.png"  
-                }   
-              }
-            }
-
-         
-        })
-    },
     /*  현재 구글맵 위치  */
     setPlace(place) {
       this.currentPlace = place;
@@ -638,8 +598,8 @@ export default {
 /* <----------------전체 레이아웃 ----------------> */
 #mapImage{
   
-margin-top:15px;
-margin-right:280px;
+margin-top:-13px;
+margin-right:160px;
 margin-bottom:0px; 
 
 }
@@ -651,7 +611,7 @@ margin-bottom:0px;
   position:relative;
   height:33px;
   width: 100%;
-  font-size:0.9em;
+  font-size:0.3em;
   padding:0 2em;
   cursor:pointer;
   transition:800ms ease all;
@@ -687,6 +647,5 @@ margin-bottom:0px;
   width:100%;
   transition:800ms ease all;
 }
-
 
 </style>

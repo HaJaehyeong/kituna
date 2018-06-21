@@ -5,29 +5,29 @@
     </div>
     <div id="tab_container">
         <input id="select1" name="sex" type="radio" checked>
-        <button id="btn1"><label for="select1" class="men">지역별</label></button>
+        <button id="btn1"><label for="select1" class="local" @click="tokyo(139.700442,35.706269)">지역별</label></button>
         <input id="select2" name="sex" type="radio">
-        <button id="btn2"><label for="select2" class="women">보충기사별</label></button>
+        <button id="btn2"><label for="select2" class="supporter">보충기사별</label></button>
 
         <!-- ****************** Local list ****************** --> 
         <div class="page1" id="page_1">
           <br />
-    
-          <button id="localBtn" href="#" @click="SouthKorea(127.826836,36.684272)">전국</button>
+             
+          <button id="localBtn" href="#" @click="tokyo(139.700442,35.706269)">東京</button>
           <br /><br />
           <div v-for="(item_1, key, index) in itemList" :key="index">
-            <div v-if="item_1.text=='서울특별시'">
-             <button id="localBtn" href="#" v-b-toggle.seoul  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
+            <div v-if="item_1.text=='千代田区(chiyoda)'">
+             <button id="localBtn" href="#" v-b-toggle.chiyoda  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
             </div>
-            <div v-if="item_1.text=='대구광역시'">
-             <button id="localBtn" href="#" v-b-toggle.daegu  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
+            <div v-if="item_1.text=='新宿区(shinjuku)'">
+             <button id="localBtn" href="#" v-b-toggle.shinjuku  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
             </div>
-            <div v-if="item_1.text!='대구광역시'&&item_1.text!='서울특별시'">
+            <div v-if="item_1.text!='新宿区(shinjuku)'&&item_1.text!='千代田区(chiyoda)'">
              <button id="localBtn" href="#" v-b-toggle.index  @click="NationWideEmit(item_1.latitude,item_1.longitude)" >{{item_1.text}}</button>
             </div>
           <br />
-          <div v-if="item_1.text=='서울특별시'">
-              <b-collapse id="seoul">
+          <div v-if="item_1.text=='千代田区(chiyoda)'">
+              <b-collapse id="chiyoda">
                   <b-card style="max-width: 27em;">
                     <v-btn outline color="indigo"  class="subLocalBtnFrame"   @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">  <tr id="subLocalButton">{{item_2.name}}　 </tr>
                       <Br />
@@ -37,8 +37,8 @@
                   </b-card>
                 </b-collapse>
            </div>
-           <div v-if="item_1.text=='대구광역시'">
-              <b-collapse id="daegu">
+           <div v-if="item_1.text=='新宿区(shinjuku)'">
+              <b-collapse id="shinjuku">
                   <b-card style="max-width: 27em;">
                       <v-btn outline color="indigo"  class="subLocalBtnFrame"   @click="localEmit(item_2.longitude,item_2.latitude) " v-for="item_2 in item_1.children" :key="item_2.no">  <tr id="subLocalButton">{{item_2.name}}　 </tr>
                       <Br />
@@ -558,7 +558,7 @@ export default {
     NationEmit(response){
       var response = response;
       var count =0;
-      EventBus.$emit('NationEvent',36.684272,127.826836,response,count); 
+      EventBus.$emit('NationEvent',37.983772,140.000876,response,count); 
     },
  
     
@@ -576,8 +576,8 @@ export default {
    
     },
     //<--------------------- South --------------------------->  
-    SouthKorea:function(arg1,arg2){
-      EventBus.$emit('SouthKorea',arg1,arg2);
+    tokyo:function(arg1,arg2){
+      EventBus.$emit('tokyo',arg1,arg2);
     }, 
   
     //<----------------- SupplimenterList -------------------->
@@ -611,7 +611,7 @@ export default {
        });
          
       this.itemList2 = obj;
-      this.SouthKorea();
+      this.tokyo();
     },
 
     //<--------------------- supplementer Emit  ------------------------>
@@ -668,10 +668,10 @@ export default {
 
 /* 전체 구역 마진 설정 */
 #allDivision{
-margin-top:10px;
+margin-top:-20px;
 margin-right:1px;
 margin-bottom:10px; 
-margin-left:280px;
+margin-left:80px;
 font-family:"Gothic A1";
 }
 /* 하이퍼링크 설정 */
@@ -709,24 +709,26 @@ h1 {
 /* 지역별 조회 배경 설정 */
 #page_1{
     width:  400px;
-    height: 700px;
-    margin-top: 12px;
+    height: 550px;
     background-image: url("/images/realtime/left_frame.png");
   /*   background-repeat: no-repeat;*/
     background-position: center; 
-    background-size: 370px 700px;
+    background-size: 370px 500px;
+    font-size: 14px;
+    margin-top:-10px;
+    padding-top:6px;
     
 }
 
 /* 지역별 조회 배경 설정 */
 #page_2{
     width:  400px;
-    height: 700px;
-    margin-top: 15px;
+    height: 550px;
     background-image: url("/images/realtime/left_frame.png");
   /*  background-repeat: no-repeat;*/
     background-position: center; 
-    background-size: 370px 700px;
+    background-size: 370px 500px;
+    margin-top:-10px;
     
 }
 
@@ -757,6 +759,10 @@ label{
     font-family:"Nanum Gothic";
     color:#0064c8;
 }
+/* 탭 부분 폰트 설정 - 일본어  */
+#tab_container{
+   font-family:"Rounded Mplus 1c";
+}
 /* ------------------------- 버튼1- 지역별 조회 설정 ----------------------*/
 #btn1 {
     position: relative;
@@ -766,8 +772,8 @@ label{
     color: #FFFFFF;
     padding-top:5px;
     padding-right:38%;
-    width: 177px;
-    height: 55px;
+    width: 130px;
+    height: 50px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -775,7 +781,7 @@ label{
     overflow: hidden;
     cursor: pointer; 
     font-family:"Nanum Gothic";
-    margin-top: 5%;
+    margin-top: 2%;
     margin-right: 1%;
 }
 #btn1:hover {
@@ -819,8 +825,8 @@ label{
     color: #FFFFFF;
     padding-top:5px;
     padding-right:38%;
-    width: 177px;
-    height: 55px;
+    width: 160px;
+    height: 50px;
     text-align: center;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -877,8 +883,9 @@ label{
     padding-right : 10px;
     padding-bottom : 15px;
     position: relative;
-    height: 70px;
     width: 150px;
+    height: 50px;
+   
     
     border: 3px solid #04376a;
     border-radius:10px;

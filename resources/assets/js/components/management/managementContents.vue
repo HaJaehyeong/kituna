@@ -1,164 +1,132 @@
 <template>
-  <div>
+  <div class="rowStyle">
+    <div>
+        <br><br><br>
+    </div>
     <div v-if="contentPage == '보충기사'">
-      <v-tabs v-model="active" color="gray" dark slider-color="yellow">
-        <v-tab v-for="choose in spInforPageList" :key="choose" ripple >{{ choose }}</v-tab>
-        <v-btn ripple @click="sideChoose(false)" v-if="slideSide == true">접기</v-btn>
-        <v-btn ripple @click="sideChoose(true)" v-else>펼치기</v-btn>
-        <v-tab-item v-for="choose in spInforPageList" :key="choose">
-          <!-- 작업지시서 -->
-          <v-card flat v-if="choose=='작업지시서'">
-            <div id="identificationDiv">
-              <div>
-                <img :src="identifyImg" id="showImage">
-              </div>
-              <div>
-                <table>
-                  <tr>
-                    <td style="width: 20%;">사원번호</td>
-                    <td>{{identifyNo}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">이름</td>
-                    <td>{{identifyName}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">전화번호</td>
-                    <td>{{identifyPhoneNum}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">이메일</td>
-                    <td>{{identifyEmail}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">주소</td>
-                    <td>{{identifyAddress}}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <br>
-            <div id="spOrderListCutDiv">
-              <div id="spOrderListHeader">                        
-                <div>
-                  <v-btn outline color="indigo" @click="dateChange(-1)" style="width: 20%; height: 35%;">◀</v-btn>
-                  <v-btn dark @click.native.stop="dialog = true" style="width: 20%; height: 35%;">{{today}}</v-btn>
-                  <v-btn outline color="indigo" @click="dateChange(1)" style="width: 20%; height: 35%;">▶</v-btn>
-                  
-                  <!-- 달력 띄우는 모달창 -->
-                  <v-dialog v-model="dialog" max-width="400">
-                    <v-card>
-                      <v-date-picker color="green lighten-1" v-model="pickerDate" :landscape="landscape" :reactive="reactive"></v-date-picker>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" >취소</v-btn>
-                        <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" @click="chooseDateChange()">확인</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog>
-                  <!-- 달력 띄우는 모달창 -->
+      <div class="contentsUpperStyle">
+        <div style="margin-right: 10px;">
+          <img :src="identifyImg" id="showImage" style="width: 100%; ">
+        </div>
+        <div style="margin-left: 10px;">
+          <table class="spInfoTableStyle">
+            <tr class="even">
+              <th class="blueFontStyle"><font size="3">사원번호</font></th>
+              <td><font size="3">{{identifyNo}}</font></td>
+              <th class="blueFontStyle"><font size="3">전화번호</font></th>
+              <td><font size="3">{{identifyPhoneNum}}</font></td>
+            </tr>
+            <tr>
+              <th class="blueFontStyle"><font size="3">이름</font></th>
+              <td><font size="3">{{identifyName}}</font></td>
+              <th class="blueFontStyle"><font size="3">이메일</font></th>
+              <td><font size="3">{{identifyEmail}}</font></td>
+            </tr>
+            <tr class="even">
+              <th class="blueFontStyle"><font size="3">주소</font></th>
+              <td colspan="3"><font size="3">{{identifyAddress}}</font></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div>
+        <v-tabs v-model="active" color="grey lighten-5" slider-color="indigo">
+          <v-tab v-for="choose in spInforPageList" :key="choose">{{ choose }}</v-tab>
+          <v-tab-item v-for="choose in spInforPageList" :key="choose">
+            <div v-if="choose=='작업지시서'">
+              <div class="contentsRowStyle" id="spOrderListCutDiv">
+                <div class="productStyle">
+                  <div>
+                    <table class="jobOrderTableStyle">
+                      <tbody>
+                        <tr v-for="count in allProductTableRepeationCount" :key="count.index" style="width: 100%; height: 50%;">
+                          <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
+                            <div v-if="product.productCount != 0 && product.productCount != -1" class="productDivStyle">
+                              <img :src="product.productImgSrc" style="width: 65%; height: 60px; margin: 10px;">
+                              <h3 class="blueFontStyle" style="text-align: center;">{{product.productCount}}</h3>
+                            </div>
+                            <div v-else class="emptyDivStyle" style="position: relative;">
+                              <div style="position: absolute; bottom: 7px; left: 25px;">
+                                <h5 v-if="product.productCount == -1" style="color: white; text-align: center;">총 량</h5>
+                                <h3 v-if="product.productCount == -1" style="color: white; text-align: center;">{{allCount}}</h3>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div>
+                    <div style="margin-bottom: 10px;">
+                      <div>
+                        <v-btn outline small color="indigo" @click="dateChange(-1)" class="arrowImgSytle" style="border: 0px;">◀</v-btn>
+                        <v-btn outline small color="indigo" @click.native.stop="dialog = true" style="min-width: 0px; font-size: 18px; padding: 2px;">{{today}}</v-btn>
+                        <v-btn outline small color="indigo" @click="dateChange(1)" class="arrowImgSytle" style="border: 0px;">▶</v-btn>
+                      </div>
+                      <div style="display: grid; grid-template-columns: 0.5fr 0.5fr;">
+                        <v-btn v-if="saveToday == today && jobOrderCheck == false" @click="createJobOrderBtn" class="printAndOrderCreateBtnStyle" color="primary">작업지시서<br>생성</v-btn>
+                        <v-btn v-else disabled  class="printAndOrderCreateBtnStyle" color="primary">작업지시서<br>생성</v-btn>
+                        <v-btn @click="printWindow" class="printAndOrderCreateBtnStyle" color="teal accent-4"><img src="/images/management/print_btn.png" style="width: 150%; height: 100%"></v-btn>
+                      </div>
 
+                      <!-- 달력 띄우는 모달창 -->
+                      <v-dialog v-model="dialog" max-width="300">
+                        <v-card>
+                          <v-date-picker color="green lighten-1" v-model="pickerDate" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                          <v-spacer></v-spacer>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" @click="chooseDateChange()">확인</v-btn>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" >취소</v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                      <!-- 달력 띄우는 모달창 -->
+
+                    </div>
+                    <div class="divRowHalf">
+                      <div style="margin-bottom: 10px;">
+                        <h5 class="blueFontStyle">보충기사 이름</h5>
+                        <h4>{{spName}}</h4>
+                      </div>
+                      <div class="divColumnHalf">
+                        <div>
+                          <h5 class="blueFontStyle">자판기 수</h5>
+                          <p><font size="5">{{allVDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">개</font></p>
+                        </div>
+                        <div>
+                          <h5 class="blueFontStyle">제품 수</h5>
+                          <p><font size="5">{{allPDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">종</font></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div>
-                  <h3>작업지시서</h3>
-                  <br v-if="jobOrderCheck == false">
-                  <h3 v-if="jobOrderCheck == false">생성(x)</h3>
-                </div>
-                <div>
-                  <h3 align="right">보충기사: {{spName}}</h3>
-                  <v-btn @click="printWindow">인쇄</v-btn>
-                  <v-btn v-if="saveToday == today && jobOrderCheck == false" @click="createJobOrderBtn">작업지시서 생성</v-btn>
-                </div>
-              </div>
-              <div>
-                <br>
-                <!-- 전체 보충 제품 개수 -->
-                <table id="allProductTable" class="blueTable">
-                  <tbody v-for="count in allProductTableRepeationCount" :key="count.index">
-                    <tr>
-                      <th>음료명</th>
-                      <th v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
-                        {{product.productName}}
-                      </th>
-                    </tr>
-                    <tr>
-                      <th>필요량</th>
-                      <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
-                        {{product.productCount}}
-                      </td>
-                    </tr>
-                  </tbody>
-                  <tbody>
-                    <tr>
-                      <th>자판기수</th><td colspan="2">{{allVDCount}}</td>
-                      <th>제품수</th><td colspan="2">{{allPDCount}}</td>
-                      <th>총량</th><td colspan="2">{{allCount}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <!-- 전체 보충 제품 개수 -->
-                <br>
-                <!-- 작업지시서 본 내용 -->
-                <table id="allProductContentsTable" v-if="allVDCount > 0" class="blueTable">
-                  <thead>
-                    <th>자판기이름</th>
-                    <th colspan="2">라인1</th><th colspan="2">라인2</th><th colspan="2">라인3</th><th colspan="2">라인4</th>
-                    <!-- <th colspan="2">라인5</th><th colspan="2">라인6</th><th colspan="2">라인7</th><th colspan="2">라인8</th> -->
-                    <th>비고</th>
-                  </thead>
-                  <tbody>
-                    <tr v-for="vending in sameVDArr" :key="vending.index">
-                      <td v-if="vending.orderNote == ''">{{vending.vd_name}}</td>
-                      <td v-else style="background-color: aqua;">{{vending.vd_name}}</td>
+                
+                  <!-- 작업지시서 본 내용 -->
+                  <table class="orderTableStyle">
+                    <thead style="text-align: center;">
+                      <th style="width: 13%;"><font size="4">자판기 명</font></th>
+                      <th v-for="n in 8" :key="n.index"><font size="4">{{n}}</font></th>
+                      <th style="width: 16%;"><font size="4">비고</font></th>
+                    </thead>
+                    <tbody>
+                      <tr v-for="vending in sameVDArr" :key="vending.index">
+                        <td><font size="4" color="#1565C0">{{vending.vd_name}}</font></td>
 
-                      <td v-if="vending.lineAndProduct[0].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[0].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[0].productName}}</td>
-                      <td v-if="vending.lineAndProduct[0].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[0].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[0].sp_val}}</td>
+                        <td v-for="productValue in vending.lineAndProduct" :key="productValue.index">
+                          <img :src="productValue.imgSrc" style="width: 25px; height: 35px; margin-left: 10px; margin-right: 10px;">
+                          <font size="4">{{productValue.sp_val}}</font>
+                        </td>                      
+                        
+                        <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)" style="width: 10%">{{vending.orderNote}}</td>
+                        <td v-else style="width: 10%">{{vending.orderNote}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
 
-                      <td v-if="vending.lineAndProduct[1].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[1].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[1].productName}}</td>
-                      <td v-if="vending.lineAndProduct[1].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[1].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[1].sp_val}}</td>
-
-                      <td v-if="vending.lineAndProduct[2].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[2].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[2].productName}}</td>
-                      <td v-if="vending.lineAndProduct[2].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[2].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[2].sp_val}}</td>
-
-                      <td v-if="vending.lineAndProduct[3].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[3].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[3].productName}}</td>
-                      <td v-if="vending.lineAndProduct[3].sp_val >= 8" style="background-color: yellow;">{{vending.lineAndProduct[3].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[3].sp_val}}</td>
-
-                      <!-- <td v-if="vending.lineAndProduct[4].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[4].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[4].productName}}</td>
-                      <td v-if="vending.lineAndProduct[4].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[4].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[4].sp_val}}</td>
-
-                      <td v-if="vending.lineAndProduct[5].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[5].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[5].productName}}</td>
-                      <td v-if="vending.lineAndProduct[5].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[5].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[5].sp_val}}</td>
-
-                      <td v-if="vending.lineAndProduct[6].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[6].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[6].productName}}</td>
-                      <td v-if="vending.lineAndProduct[6].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[6].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[6].sp_val}}</td>
-
-                      <td v-if="vending.lineAndProduct[7].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[7].productName}}</td>
-                      <td v-else>{{vending.lineAndProduct[7].productName}}</td>
-                      <td v-if="vending.lineAndProduct[7].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[7].sp_val}}</td>
-                      <td v-else>{{vending.lineAndProduct[7].sp_val}}</td> -->
-                      
-                      <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)">{{vending.orderNote}}</td>
-                      <td v-else>{{vending.orderNote}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <!-- 작업지시서 본 내용 -->
-
-                <!-- 작업지시 모달창 -->
+                  <!-- 작업지시 모달창 -->
                 <v-dialog v-model="orderJobDialog" max-width="520" max-height="300">
                   <v-card>
                     <v-card-title>
@@ -166,9 +134,9 @@
                     </v-card-title>
                     <v-card-text>
                       <v-card-text>
-                        ● 현재 자판기 : {{jobOrderVDName}}
+                        <h3>● 현재 자판기 : {{jobOrderVDName}}</h3>
                         <v-spacer></v-spacer>
-                        ● 보충 기사 : {{spName}}
+                        <h3>● 보충 기사 : {{spName}}</h3>
                       </v-card-text>
                       <v-select
                         :items="select"
@@ -188,133 +156,48 @@
                   </v-card>
                 </v-dialog>
                 <!-- 작업지시 모달창 -->
-              </div>
-            </div>
-          </v-card>
-          <!-- 작업지시서 -->
-
-          <!-- 담당자판기 -->
-          <v-card flat v-else-if="choose=='담당자판기'">
-            <div id="identificationDiv">
-              <div>
-                <img :src="identifyImg" id="showImage">
-              </div>
-              <div>
-                <table>
-                  <tr>
-                    <td style="width: 20%;">사원번호</td>
-                    <td>{{identifyNo}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">이름</td>
-                    <td>{{identifyName}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">전화번호</td>
-                    <td>{{identifyPhoneNum}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">이메일</td>
-                    <td>{{identifyEmail}}</td>
-                  </tr>
-                  <tr>
-                    <td style="width: 20%;">주소</td>
-                    <td>{{identifyAddress}}</td>
-                  </tr>
-                </table>
-              </div>
-            </div>
-            <v-container fluid fill-height>
-              <v-card>
-                <v-card-title>
-                  자판기명 검색
-                  <v-spacer></v-spacer>
-                  <v-text-field
-                    v-model="vdNameSearch"
-                    append-icon="search"
-                    label="Search"
-                    single-line
-                    hide-details
-                  ></v-text-field>
-                </v-card-title>
-                <v-data-table :search="vdNameSearch" :headers="vdLineTableHeaderArr" :items="spAllVDNameStockArr" class="elevation-1">
-                  <template slot="items" slot-scope="props">
-                    <td>{{ props.item.vd_name }}</td>
-                    <td>{{ props.item.line1 }}</td>
-                    <td>{{ props.item.line2 }}</td>
-                    <td>{{ props.item.line3 }}</td>
-                    <td>{{ props.item.line4 }}</td>
-                    <td>{{ props.item.line5 }}</td>
-                    <td>{{ props.item.line6 }}</td>
-                    <td>{{ props.item.line7 }}</td>
-                    <td>{{ props.item.line8 }}</td>
-                  </template>
-                  <v-alert slot="no-results" :value="true" color="error" icon="warning">
-                    Your search for "{{ vdNameSearch }}" found no results.
-                  </v-alert>
-                </v-data-table>
-              </v-card>
-            </v-container>
-          </v-card>
-          <!-- 담당자판기 -->
-        </v-tab-item>
-      </v-tabs>
-    </div>
-
-    <!-- 다희 누나 부분 -->
-    <div v-else-if="contentPage == '자판기'">
-      <br>
-      <br>
-      <div> <!-- 음료 재고 테이블  -->
-        <h2><b-badge variant="light">Drink Stock</b-badge></h2>
-      </div>
-      <b-table striped hover :items="itemList" :fields="fields"></b-table>   
-      <div> <!-- 잔고 테이블 --> 
-        <h2><b-badge variant="light">Coin Stock</b-badge></h2>
-      </div>     
-      <b-table striped hover :items="itemList_c" :fields="fields_c"></b-table>  
-      <div v-if="itemList!=''" id="lateral"> <!-- 작업지시 모달창 -->
-        <v-layout row justify-center>
-          <v-btn absolute dark fab top right color="blue lighten-3" @click.native.stop="dialog = true">
-            <v-icon>edit</v-icon>
-          </v-btn>
-          <v-dialog v-model="dialog" max-width="520" max-height="300">
-            <v-card>
-              <v-card-title>
-                <h2>작업 지시창</h2>
-              </v-card-title>
-              <v-card-text>
-                <v-card-text>
-                  ● 현재 자판기 : {{vending_name}}
-                  <v-spacer></v-spacer>
-                  ● 보충 기사 : {{vending_manager}}
-                </v-card-text>
-                <v-select
-                  :items="select"
-                  label="Please Select List"
-                  item-value="text"
-                  v-model ="selectedItem">
-                </v-select>
-                <div v-if="selectedItem=='기타'">
-                  <v-text-field  label="작업지시를 적어주세요" v-model="selectedItem_etc"></v-text-field>
                 </div>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">cancel</v-btn>
-                <v-btn color="green darken-1" flat="flat" @click.native="dialog = submit(selectedItem,selectedItem_etc)">submit</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-layout>
-      </div>
-      <div v-if="dialog == false">
-        <v-alert outline color="success" icon="check_circle" :value="true">
-          This is a success alert.
-        </v-alert>
+              </div>
+            </div>
+            <div v-else>
+              <v-container fluid fill-height>
+                <v-card>
+                  <v-card-title>
+                    자판기명 검색
+                    <v-spacer></v-spacer>
+                    <v-text-field
+                      v-model="vdNameSearch"
+                      append-icon="search"
+                      label="Search"
+                      single-line
+                      hide-details
+                    ></v-text-field>
+                  </v-card-title>
+                  <v-data-table :search="vdNameSearch" :headers="vdLineTableHeaderArr" :items="spAllVDNameStockArr" class="elevation-1">
+                    <template slot="items" slot-scope="props">
+                      <td>{{ props.item.vd_name }}</td>
+                      <td>{{ props.item.line1 }}</td>
+                      <td>{{ props.item.line2 }}</td>
+                      <td>{{ props.item.line3 }}</td>
+                      <td>{{ props.item.line4 }}</td>
+                      <td>{{ props.item.line5 }}</td>
+                      <td>{{ props.item.line6 }}</td>
+                      <td>{{ props.item.line7 }}</td>
+                      <td>{{ props.item.line8 }}</td>
+                    </template>
+                    <v-alert slot="no-results" :value="true" color="error" icon="warning">
+                      Your search for "{{ vdNameSearch }}" found no results.
+                    </v-alert>
+                  </v-data-table>
+                </v-card>
+              </v-container>
+            </div>
+          </v-tab-item>
+        </v-tabs>
       </div>
     </div>
-    <!-- 다희 누나 부분 --> 
+    <div v-else>
+    </div>
   </div>
 </template>
 <script type="text/javascript" src="jquery.min.js"></script>
@@ -447,7 +330,6 @@
         allCount                        : 0,        // 전제 작업지시 제품 개수
 
         sameVDArr                       : [],       // 같은 자판기의 제품
-        slideSide                       : true,     // 접기펴기 상태
         orderJobDialog                  : false,    // 작업지시 모달창 상태
         jobOrderVDName                  : "",       // 작업지시 내리는 자판기 이름
         jobOrderVDId                    : "",       // 작어지시 내리는 자판기 아이디
@@ -558,17 +440,14 @@
               
               this.axios.get(createJobOrderUrl)
               .then((response) => {
-                console.log(typeof response.data);
-
                 if (response.data == true) {
                   alert("오늘의 작업지시서가 생성되었습니다.");
-                  this.joborderRenew();   // 새로고침
+                  this.jobOrderCheck = true;  // 작업지시서 생성 확인 
 
                   let sendPushAlertUrl = "android_db_conn_source/push_notification.php";  // 푸시 알람 url
 
                   this.axios.post(sendPushAlertUrl)
                   .then((response) => {
-                    console.log(response.data);
                     alert("앱으로 푸시알람이 갔습니다.");
                   })
                   .catch((error) => {
@@ -655,13 +534,9 @@
         this.jobOrderVDName = chooseVDName;
         this.jobOrderVDId = vendingId;
       },
-      // 지시사항 모달창 오픈
+      // 작업지시 모달창 오픈
 
 
-      sideChoose(choice) {
-        this.slideSide = choice; 
-        this.$emit('clicked', this.slideSide);
-      },
       identifyRenew(){
         this.axios.get("/management/getSP").then((response) =>{
           for(let i = 0 ; i < response.data.length ; i ++){
@@ -677,12 +552,15 @@
         });
       },
       // watch를 통해 보충기사 및 날짜에 변화가 있을 경우 해당 메서드로 오게 된다.
+
+
       joborderRenew(){
         // 보충기사가 클릭 됬는지 확인하는 if문
         if(this.spName){
           //보충기사의 그날 작업 지시서를 http통신을 통해 DB에서 가져온다.
           this.axios.get("/management/jobOrder/" + this.spName + "/" + this.today)
           .then((response) => {
+
             this.allProductCountArr = [];       // 모든 제품 정보 초기화
             this.sameVDArr = [];                // 같은 자판기의 제품 정보 초기화
             this.allCount = 0;                  // 총 작업지시 제품 수 초기화
@@ -690,11 +568,13 @@
             for(var i = 0; i < response.data.length; i++) {
               var productObj = {
                 productName: "",
-                productCount: 0
+                productCount: 0,
+                productImgSrc: ""
               }
 
               productObj.productName = response.data[i].drink_name;
               productObj.productCount = response.data[i].sp_val;
+              productObj.productImgSrc = "/images/drink/" + response.data[i].drink_name + "_back.png";
               this.allCount += productObj.productCount;
               // 작업지시 제품 수 정리
 
@@ -718,7 +598,7 @@
               for (var j = 0; j < this.sameVDArr.length; j++) {
                 if (this.sameVDArr[j].vd_id == response.data[i].vd_id) {
                   var pdName = response.data[i].drink_name.replace("_", "\n");
-                  this.sameVDArr[j].lineAndProduct.push({lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val});
+                  this.sameVDArr[j].lineAndProduct.push({lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"});
                   
                   if (response.data[i].note != null) {
                     this.sameVDArr[j].orderNote += "," + response.data[i].note;
@@ -733,17 +613,49 @@
                 var pdName = response.data[i].drink_name.replace("_", "\n");
 
                 if (response.data[i].note != null) {
-                  this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: response.data[i].note, lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val}]});
+                  this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: response.data[i].note, lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
                 }
                 else {
-                  this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val}]});
+                  this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
                 }
               }
               // 같은 이름 자판기 정보 정리
             }
             // 해당 보충기사의 모든 작업지시 사항 정리
+            
+            for (var i = 0; i < this.allProductCountArr.length; i++) {
+              if (this.allProductCountArr[i].productCount == 0) {
+                this.allProductCountArr.splice(i, 1);
+              }
+            }
+            // 보충량 0인 제품 삭제
 
-            this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 8);   // 모든 작업지시 테이블 줄 수 
+            this.allPDCount = this.allProductCountArr.length;   // 모든 제품 수
+
+            var inputEmptyObj = {
+              productName: "",
+              productCount: 0,
+              productImgSrc: ""
+            }
+            // 빈 값을 가진 객체
+
+            while (this.allProductCountArr.length < 12) {
+              if (this.allProductCountArr.length == 11) {
+                 var inputLastEmptyObj = {
+                  productName: "",
+                  productCount: -1,
+                  productImgSrc: ""
+                }
+
+                this.allProductCountArr.push(inputLastEmptyObj);
+              }
+              else {
+                this.allProductCountArr.push(inputEmptyObj);
+              }
+            }
+            // 공간 맞추기
+
+            this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 6);   // 모든 작업지시 테이블 줄 수 
             this.allProductCountArrCut = [];                                                      // 모든 작업지시 제품 정보
             var cut = 0;
 
@@ -751,7 +663,7 @@
               this.allProductCountArrCut[i] = [];
 
               for (var j = cut; j < this.allProductCountArr.length; j++) {
-                if (j % 8 != 0 || j == cut) {
+                if (j % 6 != 0 || j == cut) {
                   this.allProductCountArrCut[i].push(this.allProductCountArr[j]);
                 }
                 else {
@@ -763,9 +675,8 @@
             // 줄 수에 맞게 제품 정보 입력
 
             this.allVDCount = this.sameVDArr.length;            // 모든 작업지시 자판기 수
-            this.allPDCount = this.allProductCountArr.length;   // 모든 작업지시 종류
 
-            let getSPUrl = 'management/getSP';    // 보충기사 정보 url
+            let getSPUrl = 'management/getSP';                  // 보충기사 정보 url
 
             this.axios.get(getSPUrl)
             .then((response) => {
@@ -774,21 +685,19 @@
                   // 해당되는 보충기사 찾기
 
                   let jobOrderCheckUrl = 'management/checkJobOrder/' + response.data[i].sp_id + "/" + this.today;    // 작업지시서 생성 유무확인 url
+                  // 작업지시서 생성 유무 확인 url
 
                   this.axios.get(jobOrderCheckUrl)
                   .then((response) => {
                     if (response.data == true) {
+                      // 작업지시서가 생성 되어 있을 경우
 
                       this.jobOrderCheck = true;
-
-                      document.getElementById("allProductTable").className = "blueTable";
-                      document.getElementById("allProductContentsTable").className = "blueTable";
                     }
                     else {
-                      this.jobOrderCheck = false;
+                      // 작업지시서가 생성 되어 있지 않을 경우
 
-                      document.getElementById("allProductTable").className = "blueTableChange";
-                      document.getElementById("allProductContentsTable").className = "blueTableChange";
+                      this.jobOrderCheck = false;
                     }
                   })
                   .catch((error) => {
@@ -956,97 +865,131 @@
 
 </script>
 
-<style id="styleHtml">
-#showImage {
-  width: 150px;
-  height: 180px;
+<style>
+table.spInfoTableStyle {
+  width: 100%;
+  height: 120px;
+}
+table.spInfoTableStyle .even {
+  background: #E3F2FD;
+}
+table.spInfoTableStyle th {
+  width: 15%;
+  padding-left: 20px;
+}
+table.spInfoTableStyle td {
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  border-right: 10px solid #FAFAFA;
 }
 
-#lateral .speed-dial,
-#lateral .btn--floating {
-  position: absolute;
+.rowStyle {
+  height: 100%;
+  display: grid;
+  grid-template-rows: 0.115fr 0.885fr;
 }
-#lateral .btn--floating {
-  margin: 746px 26px 56px 56px;
+
+.contentsUpperStyle {
+  display: grid;
+  grid-template-columns: 0.15fr 0.85fr;
 }
+
+.productDivStyle {
+  background-image: url("/images/management/white_background.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  width:100%;
+  height: 100%;
+  text-align: center;
+}
+.emptyDivStyle {
+  background-image: url("/images/management/blue_background.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  width:100%;
+  height: 100%;
+}
+
+.contentsRowStyle {
+  display: grid;
+  grid-template-rows: 0.4fr 0.6fr;
+  height: 460px;
+  background-color: #FAFAFA;
+}
+
+.arrowImgSytle {
+  min-width: 0px;
+  margin: 0px;
+  padding: 1px;
+}
+
+.printAndOrderCreateBtnStyle {
+  border: 0px;
+  min-width: 0px;
+  margin: 5px;
+  padding: 1px;
+  height: 90%;
+  border-radius: 15px;
+}
+
+table.jobOrderTableStyle td {
+  width: 100px;
+  height: 130px;
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.divRowHalf {
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr;
+}
+
+.divColumnHalf {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+}
+
+.productStyle {
+  display: grid;
+  grid-template-columns: 0.7fr 0.3fr;
+}
+
+.blueFontStyle{
+  color: #1565C0;
+}
+
+table.orderTableStyle {
+  width: 100%;
+}
+table.orderTableStyle th {
+  border-bottom: 3px #1565C0 solid;
+  color: #1565C0;
+}
+table.orderTableStyle td {
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+table.orderTableStyle tr:nth-child(even) {
+  background: #E3F2FD;
+}
+
+#showImage {
+  width: 150px;
+  height: 120px;
+  margin-right: 10px;
+}
+
 #spOrderListCutDiv{
   display : grid;
   grid-template-rows: 0.1fr 0.9fr;
 }
-#spOrderListHeader{
-  display : grid;
-  grid-template-columns: 0.3fr 0.3fr 0.3fr;
-}
-#identificationDiv{
-  display : grid;
-  grid-template-columns: 0.5fr 0.5fr;
-}
- 
-
-table.blueTable {
-  border: 1px solid #1C6EA4;
-  background-color: #EEEEEE;
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
-table.blueTable td {
-  border: 1px solid #AAAAAA;
-  padding: 3px 2px;
-  width: 100px;
-}
-table.blueTable tbody td {
-  font-size: 18px;
-  width: 100px;
-}
-table.blueTable thead, table.blueTable th {
-  background: #1C6EA4;
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  border-bottom: 2px solid #444444;
-  font-size: 20px;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: center;
-  border-left: 2px solid #D0E4F5;
-  width: 1000px;
-}
-table.blueTable thead th:first-child {
-  border-left: none;
-}
 
 
-table.blueTableChange {
-  border: 1px solid #1C6EA4;
-  background-color: rgb(255, 255, 255);
-  width: 100%;
-  text-align: center;
-  border-collapse: collapse;
-}
-table.blueTableChange td {
-  border: 1px solid #AAAAAA;
-  padding: 3px 2px;
-  width: 100px;
-}
-table.blueTableChange tbody td {
-  font-size: 18px;
-  width: 100px;
-}
-table.blueTableChange thead, table.blueTableChange th {
-  background: #1C6EA4;
-  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
-  border-bottom: 2px solid #444444;
-  font-size: 20px;
-  font-weight: bold;
-  color: #FFFFFF;
-  text-align: center;
-  border-left: 2px solid #D0E4F5;
-  width: 1000px;
-}
-table.blueTableChange thead th:first-child {
-  border-left: none;
-}
 </style>

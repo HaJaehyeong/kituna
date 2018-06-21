@@ -3,8 +3,8 @@
       <!--/////////////////////////  자판기 아이콘 클릭 전 /////////////////////////-->
       <div id="background1" v-if="itemList==0">
         <br /><br /><br /><br /><br /><br /><br />
-         <img src="images/logo.png"  width="300px">
-         <h4>Click on the vending machine icon in Google Maps</h4>
+         <img src="images/logo.png"  width="270px">
+         <h5 style="text-align:center;font-family:'Dosis';" >Click on the vending machine icon in Google Maps</h5>
          <br /><br /><br /><br /><br /><br />
       </div>  
       <!--/////////////////////////  자판기 아이콘 클릭 후 /////////////////////////-->
@@ -28,37 +28,41 @@
          <tr >
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==0)" >
              <br />
-             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse1==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse1>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>　
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==1)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
-               <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
+                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse2==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse2>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
+                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
              </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==2)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse3==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse3>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
               </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==3)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse4==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse4>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>
@@ -66,37 +70,41 @@
          <tr >
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==4)" >
              <br />
-             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse5==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse5>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==5)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse6==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse6>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
              </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==6)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse7==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse7>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p> 
               </tr>
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==7)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:70px; width:70px;  "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
-               <p v-if="((item.stock>=4)&&(item.stock<=9))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse8==0))" id="numberCenter" >{{item.stock}}/10</p>
+               <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse8>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
            </td>
@@ -113,10 +121,10 @@
           <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
           <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.won1000}}개</td></tr>
         </table>
-        <p id="CoinStockFont" style="text-align:left">　잔고 현황</p>
+        <p id="CoinStockFont" style="text-align:left; font-size: 1.3em; ">　잔고 현황</p>
         <table id="trBgColor" style="margin-top:-15px">
-         <tr id="CoinStockFont" ><td style="padding-left:150px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right">총 합 </td></tr>
-         <tr id="sumFont"><td style="padding-left:150px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}￦</td></tr>
+         <tr id="CoinStockFont" ><td style="padding-left:180px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right;font-size: 1.0em; ">총 합 </td></tr>
+         <tr id="sumFont"><td style="padding-left:180px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}￦</td></tr>
         </table>
        </div>
       </div>
@@ -125,7 +133,6 @@
       <div v-if="trueOrFalse==false" id="bottom_right" class="hover13 figure">
          <figure><img id="add_button" src="/images/realtime/more_button.png" @click="moreButton(true)" ></figure>
       </div>
-
       <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 후 ~~~~~~~~~~~ -->
       <!-- *********************** 더보기 기능 div ********************** -->
       <div v-if="trueOrFalse==true" id="bottom_left2">
@@ -143,19 +150,19 @@
         <div class="hover13 figure">
          <tr>
          <td> <!-- 판매목록 -->
-           <figure><img id="add_button"   @click.stop="dialog = true" @click="sale_history()" src="/images/realtime/sell_button.png" ></figure>
+           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;"  @click.stop="dialog = true" @click="sale_history()" src="/images/realtime/sell_button.png" ><p>　</p></figure>
           </td>
          <td> <!-- 작업지시 작성 -->
-           <figure><img id="add_button" @click.stop="dialog2 = true"  src="/images/realtime/order_button.png" ></figure>
+           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:4%;" @click.stop="dialog2 = true"  src="/images/realtime/order_button.png" ></figure>
           </td>
          <td> <!-- 분석 보기 -->
            <router-link :to="route_analysis" id="analyst" >
-           <figure><img id="add_button" src="/images/realtime/analysis_button.png" ></figure>
+           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:4%;" src="/images/realtime/analysis_button.png" ></figure>
            </router-link>
          </td>
          <td> <!-- 자판기 관리 -->
            <router-link :to="route_management" id="management">
-           <figure><img id="add_button" src="/images/realtime/vending_button.png" ></figure>
+           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:4%;" src="/images/realtime/vending_button.png" ></figure>
            </router-link>
          </td>
          </tr>
@@ -242,10 +249,6 @@
 </template>
 
 <script>
-let array = [];
-let obj =[];
-let obj2 =[];
-let obj_c =[];
 let temp; /* 현재 vendingmachine id */
 
 let obj_v=[];
@@ -294,50 +297,72 @@ export default {
       route_management:'' ,
       trueOrFalse:false/* 더보기 버튼 클릭 유무 */,
       itemList_before :'' ,/* 변화 전 item*/
-      vendingId_before :'' /* 변화 전 vending id*/
+      vendingId_before :'' ,/* 변화 전 vending id*/
+
+      colorTrueOrFalse1: 0,/* 라인 1번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse2: 0,/* 라인 2번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse3: 0,/* 라인 3번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse4: 0,/* 라인 4번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse5: 0,/* 라인 5번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse6: 0,/* 라인 6번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse7: 0,/* 라인 7번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse8: 0,/* 라인 8번 숫자변화시 색깔 변화  */
+
     }
   },
   watch: {
 
     /* 자동 refresh --- 물건 재고 및 잔고 */
     itemList: function(){
-  
-        this.refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3');
+
+      this.refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3');
     } 
 
   },
   created: function() {
+    
+     this.colorTrueOrFalse1=0; /* 색깔 숫자 초기화 */
+     this.colorTrueOrFalse2=0; 
+     this.colorTrueOrFalse3=0; 
+     this.colorTrueOrFalse4=0; 
+     this.colorTrueOrFalse5=0; 
+     this.colorTrueOrFalse6=0; 
+     this.colorTrueOrFalse7=0;
+     this.colorTrueOrFalse8=0;
 
-   //<-------------------- 자판기 아이디 EventBus ------------->
+    /* 해당 자판기의 재고 및 잔고 */
+     //<-------------- 자판기 아이디 EventBus  ------------->
     EventBus.$on('VendingId',(arg1,arg2,arg3,arg4) => {
-
+  
     this.vendingId=arg1;
     this.vendingName=arg2;
     this.vendingSupplementer=arg3;
     this.vendingAddress=arg4;
     this.vending_id=this.vendingId;
-    this.vendingId_before=this.vendingId;
 
    if(obj_v==[]){
         obj_v.push({id: this.vendingId,name:this.vendingName,supplementer:this.vendingSupplementer,address: this.vendingAddress});
         this.itemList_v=obj_v;
     
     }else{
+
         obj_v.splice(0,2);
         obj_v.push({name:this.vendingName,supplementer:this.vendingSupplementer,address: this.vendingAddress});
         this.itemList_v=obj_v;
    
     }
   
-   
     temp=this.vendingId;
     this.route_analysis = "/analysis?id="+temp;
     this.route_management ="/management?id="+temp;
     this.goToId = temp;
+  
     //<----------------- 물건 재고 axios ----------------------->
     this.axios.get("/realtime/getVdStock/"+this.vendingId)
        .then((response) =>{
            let key;
+           let obj =[];    
+           let array = [];
            response = response.data; 
            
            if(obj==[]){
@@ -350,14 +375,10 @@ export default {
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
                          drink_img_path:array[key].drink_img_path});
-                 obj2.push({line:array[key].line,
-                         stock:array[key].stock,
-                         drink_img_path:array[key].drink_img_path});
               }
            }
            else{
              obj.splice(0,);
-             obj2.splice(0,);
               for(key in response){
                 array[key] = {
                  line : response[key].line,
@@ -366,13 +387,12 @@ export default {
                 }
                 obj.push({line:array[key].line,
                          stock:array[key].stock,
-                         drink_img_path:array[key].drink_img_path});
-                         
-                obj2.push({line:array[key].line,
-                         stock:array[key].stock,
-                         drink_img_path:array[key].drink_img_path});       
+                         drink_img_path:array[key].drink_img_path});   
               } 
-           }   
+           } 
+        this.itemList = obj;         /*   재고 전체 받아오는 변수   */
+        this.itemList_before=obj;   /*   재고만 받아오는 변수      */  
+
          })
        .catch(function (error) {
          console.log(error);
@@ -383,6 +403,8 @@ export default {
     this.axios.get("/realtime/coinStock/"+this.vendingId)
        .then((response) =>{
            let key;
+           let obj_c=[];
+           let array = [];
             response = response.data; 
            if(obj_c==[]){
              for(key in response){
@@ -413,27 +435,28 @@ export default {
                          won100:array[key].won100,
                          sum:array[key].sum});
               } 
-           }   
+           } 
+         this.itemList_c=obj_c;       /*   잔고 전체 받아오는 변수   */  
          })
        .catch(function (error) {
          console.log(error);
        });
-
-        this.itemList = obj;         /*   재고 전체 받아오는 변수   */
-        this.itemList_c=obj_c;       /*   잔고 전체 받아오는 변수   */
-        this.itemList_before=obj2;   /*   재고만 받아오는 변수      */
-
-   });
-
-  },
-  methods: {
+     
       
-    //<----------------- refresh methods --------------------->
+   });
+  },
+
+  methods: {
+
+  //<----------------- refresh methods --------------------->
        refresh(sound){
+
          //<-----------------refresh 물건 재고 axios ----------------------->
         this.axios.get("/realtime/getVdStock/"+temp)
        .then((response) =>{
            let key;
+           let obj=[];
+           let array = [];
             response = response.data; 
            if(obj==[]){
              for(key in response){
@@ -449,7 +472,6 @@ export default {
            }
            else{
              obj.splice(0,);
-             obj2.splice(0,);
               for(key in response){
                 array[key] = {
                  line   : response[key].line,
@@ -461,14 +483,18 @@ export default {
                          drink_img_path:array[key].drink_img_path});
               } 
            }   
+             this.itemList = obj;  /* 재고 전체 리스트 */
          })
        .catch(function (error) {
          console.log(error);
        });
-          //<----------------- refresh 동전 잔고 axios ----------------------->
+      
+       //<----------------- refresh 동전 잔고 axios ----------------------->
        this.axios.get("/realtime/coinStock/"+this.vendingId)
        .then((response) =>{
            let key;
+           let obj_c=[];
+           let array = [];
             response = response.data; 
            if(obj_c==[]){
              for(key in response){
@@ -499,36 +525,67 @@ export default {
                          won100:array[key].won100,
                          sum:array[key].sum});
               } 
-           }   
+           }  
+            this.itemList_c=obj_c; /* 잔고 전체 리스트  */ 
          })
        .catch(function (error) {
          console.log(error);
        }); 
-
-        this.itemList = obj;  /* 재고 전체 리스트 */
-        this.itemList_c=obj_c; /* 잔고 전체 리스트  */
-        
-        /* 재고 숫자가 바뀔 경우 효과음 냄 */
-       // if((this.itemList!=0)&&(this.itemList_before != this.itemList)){
       
-          // if(sound) {  /* 효과음 부분 */
-          //   var audio = new Audio(sound);
-          //   audio.play();
-          //  }
-       //  }
 
-       // this.itemList_before = this.itemList;
-
-        EventBus.$emit('selectId',this.vendingId);    /* google-map으로 새로고침갱신 값 전달 */
+      /* 재고 숫자가 바뀔 경우 효과음 냄 */
+     if(this.vendingId==this.vendingId_before){
+      for (var i=0; i<8;i++){
+        if((this.itemList[i].line==this.itemList_before[i].line)){
+           if(this.itemList[i].stock!=this.itemList_before[i].stock){
       
+             if(sound) {  /* 효과음 부분 */
+                 var audio = new Audio(sound);
+                 audio.play();
+              }
+
+             /* 숫자 바뀔 경우 색 변환 */
+             if(this.itemList[i].line==1){
+                this.colorTrueOrFalse1++;
+             }
+             if(this.itemList[i].line==2){
+                this.colorTrueOrFalse2++;
+             } 
+             if(this.itemList[i].line==3){
+                this.colorTrueOrFalse3++;
+             } 
+             if(this.itemList[i].line==4){
+                this.colorTrueOrFalse4++;
+             }  
+             if(this.itemList[i].line==5){
+                this.colorTrueOrFalse5++;
+             } 
+             if(this.itemList[i].line==6){
+                this.colorTrueOrFalse6++;
+             } 
+             if(this.itemList[i].line==7){
+                this.colorTrueOrFalse7++;
+             } 
+             if(this.itemList[i].line==8){
+                this.colorTrueOrFalse8++;
+             } 
+           }
+         } 
+       }
+     }
+       
+        this.vendingId_before = this.vending_id; //현재 아이디를 비교 대상 아이디변수에 값 넣기
+        this.itemList_before = this.itemList; //현재 재고리스트를 비교 대상 재고리스트 배열에 값 넣기
+
        } ,
     
-          //<----------------- sale history axios ----------------------->
+    //<----------------- sale history axios ----------------------->
        sale_history :function(){
       this.axios.get("realtime/getSellDataList").then((response) =>{
         response = response.data;
         var obj_sell =[];
-        if(obj==[]){ 
+        let array = [];
+        if(this.itemList==[]){ 
            for(let key in response){
          array[key] = {
             name : response[key].vd_name,
@@ -606,18 +663,20 @@ export default {
 <style>
    /* 자판기 아이콘 누르기 전 */
   #background1{
-    width:100%;   
+    width:60%;   
     position: relative;
-    right: 240px; 
+    right: 100px; 
+    margin-bottom:35%;
   }
   /*  자판기 아이콘 누른 후  */
   #background2 {  
     width:100%;   
     position: relative;
-    right: 280px;
+    right: 180px;
     margin-top:-55px;
+    margin-left:30px;
   }
-  /* 현재 클릭된 자판기 이름 -1*/
+  /* 현재 클릭된 자판기 이름 -1*/ 
   #background2_title{
     position: relative;
     left: -200px;
@@ -634,37 +693,36 @@ export default {
   /* 음료 리스트 */
   #bottom_left{
     margin-top:-25px;
-    margin-left:10px;
-    float: left; width: 50%; padding:3px
+    margin-left:60px;
+    float: left; width: 42%; padding:3px
   }
   /* 잔고 리스트 */
   #bottom_center{
     float: left;
     width: 35%; 
-    margin-top:-5px;
+    margin-top: 0px;
     margin-right:10px;
     }
   /* 더보기 버튼 */
   #bottom_right{
-    margin-top:-5px;
     float: left;
   }
   /* 더보기 리스트 */
   #bottom_left2{
-    margin-top:-15px;
-    margin-left:20px;
+    margin-left:80px;
+    margin-top:-10px;
     float: left; width: 63%;  
     background-image:url(/images/realtime/vertical_frame.png);
     background-repeat:no-repeat;
-    background-size:800px 300px; 
-    width: 800px;
-    height: 300px; 
+    background-size:600px 250px; 
+    width: 600px;
+    height: 250px; 
   }
   /* 백 버튼 */
   #bottom_right2{
-   margin-top:-15px;
     float: left; 
-    margin-left:25px;
+    margin-top:-10px;
+    margin-left:35px;
   }
 .hover13 figure:hover img {
   opacity: 1;
@@ -692,17 +750,17 @@ export default {
   #coin_stock_table1{
     font-family:"Fugaz One";
     color: rgb(48, 109, 170);
-    font-size: 2.0em
+    font-size: 1.5em
   }
   #coin_stock_table2{
    font-family:"Fugaz One";
     color: black;
-    font-size: 2.0em
+    font-size: 1.5em
   }
   #sumFont{
     font-family:"Fugaz One";
     color: rgb(48, 109, 170);
-    font-size: 2.5em
+    font-size: 1.5em
   }
   /* 테이블 배경 색 */
   #trBgColor{
@@ -713,41 +771,49 @@ export default {
   #vendingMachineNameFont{
     font-family:"Nanum Gothic";
     color: black;
-    font-size: 2.2em
+    font-size: 1.7em
   }
   /* 음료 재고 테이블 */
   #drinkStockTable{
-    margin-left: 5px;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    
+    padding-left:50px;
+    margin-top: 4px;
+    margin-left: 15px;
+    margin-right: 10px;
+    margin-bottom: 5px;
 
   }
   /* 테이블 배경사진 */
   #tdBackground{
    background-image:url(/images/realtime/frame.png);
    background-repeat:no-repeat;
-   background-size:100px 160px; 
-   width: 120px;
-   height: 160px;
-   margin-right: 30px;
+   background-size:77px 120px; 
+   width: 80px;
+   height: 130px;
   }
   /* 재고 높은 숫자 */
   #numberTop{
+    margin-left:5px;
+    padding-left:5px;
     font-family:"Fugaz One";
     color: rgb(228, 142, 61);
-    font-size: 2.0em
+    font-size: 1.5em
   }
   /* 재고 중간 숫자 */
   #numberCenter{
+    margin-left:5px;
+    padding-left:5px;
     font-family:"Fugaz One";
     color: rgb(48, 109, 170);
-    font-size: 2.0em
+     font-size: 1.5em
   }
   /* 재고 낮은 숫자 */
   #numberBottom{
+    margin-left:5px;
+    padding-left:5px;
     font-family:"Fugaz One";
     color: rgb(52, 196, 83);
-    font-size: 2.0em
+     font-size: 1.5em
   }
   /* 잔고현황 타이틀 설정 */
   #CoinStockFont{
@@ -802,6 +868,17 @@ export default {
       50%   {color:rgb(255, 255, 255);}      
       100% {color: rgb(52, 196, 83)}
   }
+  
+  /* 숫자 변화 될 경우 깜빡거림 설정 */
+  .blink3{
+    color:rgb(255, 255, 255);
+    font-size:20px;
+    animation:blink_animation3 .6s 3;
+  }
+  @keyframes blink_animation3 {
+      50%  {color:rgb(255, 255, 255);}      
+      100% {color: rgb(248, 74, 149)}
+  }
 
   /* 더보기 기능 왼쪽 설명 부분 */
   #add_table{
@@ -813,7 +890,7 @@ export default {
   float :left;
   width: 60%; 
   margin-top: 5%;
-  margin-right: 12%;
+  margin-left: 3%;
   }
   /* 더보기 기능 왼쪽 설명 설정 */
   #top_info_settting{
@@ -833,12 +910,13 @@ export default {
     margin-left: 20%;
   }
   #img_info_settting{
-    margin-left: -330%;
-    margin-top: -37%;
+    width:70%;
+    margin-left: -280%;
+    margin-top: -87%;
   
   }
-
+  /* 새로고침 버튼 */
+  #add_button{
+    width: 78% ;
+  }
 </style>
-
-
-

@@ -23,8 +23,8 @@
 
     <!-- 자식 DIV 두개를 7:3비율로 나누어, Analysis글씨와, 실시간 판매량DIV로 구성한다. -->
     <div class="collums64DivideDiv">
-      <div>
-        <h1 style="font-weight: bold; margin-top: 3%;">Analysis</h1>
+      <div style="text-align:left;font-family:'Dosis'; margin-left: 10%;" >
+        <h2><strong>　　Real time Management </strong></h2>
       </div>
       <!-- 실시간 판매량 데이터를 나타내는 DIv로 자식 DIV를 1:9로 나누어 제목과, 데이터창을 구분한다. -->
       <div id="anaylsisRealDataSecondDiv">
@@ -39,13 +39,13 @@
           </div> -->
           <!-- 3:3:3으로 DIV를 나누어 데이터를 적는다. -->
           
-          <div style="color:#FFFFFF; font-weight: bold;">
-            월 판매량 <h3>{{nowMonthProduct}}</h3>     
+          <div style="color:#FFFFFF; font-weight: bold; padding-top: 20px;">
+            월 판매량 <br><h3>{{nowMonthProduct}}</h3>     
           </div>
-          <div style="color:#FFFFFF; font-weight: bold;">
+          <div style="color:#FFFFFF; font-weight: bold; padding-top: 20px;">
             일 판매량 <h3>{{nowDayProduct}}</h3>
           </div>
-          <div style="color:#FFFFFF; font-weight: bold;">
+          <div style="color:#FFFFFF; font-weight: bold; padding-top: 20px;">
             일 매출액 <h3>{{nowDaySales}}</h3>
           </div>   
         </div>
@@ -85,63 +85,78 @@
               <div>
                 <table class="table table-hover" style="color: #0064C8;">
                   <thead style="font-weight: bold; font-family: Nanum+Gothic; border-bottom: 2px solid #0064C8;">
-                    <tr><td>순위</td><td>자판기명</td><td>판매량</td><td>매출액</td></tr>
+                    <tr>
+                      <td style="padding-top: 10px;">순위</td>
+                      <td style="padding-top: 10px;">자판기명</td>
+                      <td style="padding-top: 10px;">판매량</td>
+                      <td style="padding-top: 10px;">매출액</td>
+                    </tr>
                   </thead>
                   <!-- rankVdDataArray배열을 for문을 돌며, 값을 테이블에 한줄 씩 넣는다. -->
                   <tbody v-for="vdData in rankVdDataArray" :key="vdData.vd_id">
                     <!-- 처음 로딩 시 가장 위의 tr은 클릭 되어 있어 배경색을 다르게 해주며, TR을 클릭시, 클릭 된 자판기 정보를 우측 분석에서 볼 수 있게 한다. -->
-                    <tr v-if="(vdData.num%2) !== 0" style="background-color:#E5EFF9;" :id="vdData.vd_name"  @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
-                      <th> {{vdData.num}}</th>
-                      <td  style="font-weight: bold; font-size: 15px;">{{vdData.vd_name}}</td>
-                      <th>{{vdData.count}}</th>
-                      <th>{{vdData.getSales}}</th>
+                    <tr v-if="vdData.num == 1" style="background-color:#E5EFF9; border: 3px solid #0064C8;" :id="vdData.vd_name"  @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
+                      <th style="padding-top: 10px;"> {{vdData.num}}</th>
+                      <td style="font-weight: bold; font-size: 15px; padding-top: 10px;">{{vdData.vd_name}}</td>
+                      <th style="padding-top: 10px;">{{vdData.count}}</th>
+                      <th style="padding-top: 10px;">{{vdData.getSales}}</th>
                     </tr>
+                    <tr v-else-if="(vdData.num%2) !== 0" style="background-color:#E5EFF9;" @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
+                      <th style="padding-top: 10px;"> {{vdData.num}}</th>
+                      <td  style="font-weight: bold; font-size: 15px; padding-top: 10px;">{{vdData.vd_name}}</td>
+                      <th style="padding-top: 10px;">{{vdData.count}}</th>
+                      <th style="padding-top: 10px;">{{vdData.getSales}}</th>
+                    </tr>  
                     <tr v-else @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
-                      <th> {{vdData.num}}</th>
-                      <td  style="font-weight: bold; font-size: 15px;">{{vdData.vd_name}}</td>
-                      <th>{{vdData.count}}</th>
-                      <th>{{vdData.getSales}}</th>
+                      <th style="padding-top: 10px;"> {{vdData.num}}</th>
+                      <td  style="font-weight: bold; font-size: 15px; padding-top: 10px;">{{vdData.vd_name}}</td>
+                      <th style="padding-top: 10px;">{{vdData.count}}</th>
+                      <th style="padding-top: 10px;">{{vdData.getSales}}</th>
                     </tr>  
                   </tbody>
                 </table>
                 <!-- 관심 자판기의 데이터 테이블로, 한 자판기만을 보게 된다. -->
-                <div id="interestVdTableDiv">
-                  <table class="table"> 
+                <div>
+                  <table class="table" id="interestVdTableDiv"> 
                     <thead style="font-weight: bold;">
-                      <tr><td>자판기명</td><td>담당 보충기사</td><td>매출액 차이</td></tr>
+                      <tr>
+                        <td style="padding-top: 10px;">자판기명</td>
+                        <td style="padding-top: 10px;">담당 보충기사</td>
+                        <td style="padding-top: 10px;">매출액 차이</td>
+                      </tr>
                     </thead>
                     <tbody>
                       <tr v-for="vdData in interestVdDataArray" :id="vdData.vd_name" :key="vdData.vd_id" @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer)">
-                        <th>★ {{vdData.vd_name}}</th>
-                        <th>{{vdData.vd_supplementer}}</th>
-                        <th>{{vdData.value}}</th>
+                        <th style="padding-top: 10px;">★ {{vdData.vd_name}}</th>
+                        <th style="padding-top: 10px;">{{vdData.vd_supplementer}}</th>
+                        <th style="padding-top: 10px;">{{vdData.value}}</th>
                       </tr>
                     </tbody>
                 </table>
                 </div>
               </div>
               <div>
-                <table class="table borderless"> 
-                    <thead >
-                      <tr>
+                <table class="table borderless" > 
+                    <thead>
+                      <tr style="border-bottom: none; border-top: none; pointer-events: none;">
                         <td></td>
                       </tr>
                     </thead>
-                    <tbody >
-                      <tr>
-                        <td style="padding-top: 5%;"><img :src="clickVdSrc1" id="clickVd1"></td>
+                    <tbody>
+                      <tr style="border-bottom: none; border-top: none; pointer-events: none; ">
+                        <td style="padding-top: 7%;"><img :src="clickVdSrc1" id="clickVd1"></td>
                       </tr>
-                      <tr>
-                        <td style="padding-top: 5%;"><img :src="clickVdSrc2" id="clickVd2"></td>
+                      <tr style="border-bottom: none; border-top: none; pointer-events: none;">
+                        <td style="padding-top: 10%;"><img :src="clickVdSrc2" id="clickVd2"></td>
                       </tr>
-                      <tr>
-                        <td style="padding-top: 5%;"><img :src="clickVdSrc3" id="clickVd3"></td>
+                      <tr style="border-bottom: none; border-top: none; pointer-events: none;">
+                        <td style="padding-top: 10%;"><img :src="clickVdSrc3" id="clickVd3"></td>
                       </tr>
-                      <tr>
-                        <td style="padding-top: 5%;"><img :src="clickVdSrc4" id="clickVd4"></td>
+                      <tr style="border-bottom: none; border-top: none; pointer-events: none;">
+                        <td style="padding-top: 10%;"><img :src="clickVdSrc4" id="clickVd4"></td>
                       </tr>
-                      <tr>
-                        <td style="padding-top: 5%;"><img :src="clickVdSrc5" id="clickVd5"></td>
+                      <tr style="border-bottom: none; border-top: none; pointer-events: none;">
+                        <td style="padding-top: 10%;"><img :src="clickVdSrc5" id="clickVd5"></td>
                       </tr>
                     </tbody>
                 </table>
@@ -155,7 +170,7 @@
               <h2 id="clickVdName">{{analysisVdName}} 자판기</h2>
             </div>
             <div id="graphDrinkRankDivideDiv">
-              <div class="collums73DivideDiv">
+              <div class="collums64DivideDiv">
                 <div>
                   <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">자판기 내 음료별 판매량</h4>
                   <!-- radar차트를 이용해, 데이터 비교가 가능하게 해두었다. -->
@@ -167,14 +182,14 @@
                   <table class="table table-hover" style="color: #0064C8;">
                     <tbody v-for="drinkList in theRestDrinkRankArray" :key="drinkList.num">
                       <tr v-if="(drinkList.num%2) !== 0" style="background-color:#E5EFF9;">
-                        <th style="color: #0064C8;">{{drinkList.num}}</th>
-                        <td><img :src="'images/drink/' + drinkList.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                        <td style="font-weight: bold; font-size: 20px;">{{drinkList.count}}</td>
+                        <th style="color: #0064C8; padding-top: 10px;">{{drinkList.num}}</th>
+                        <td style="padding-top: 7px;"><img :src="'images/drink/' + drinkList.drink_name + '.png'" style="width:22px; height: 35px;"></td>
+                        <td style="font-weight: bold; font-size: 20px; padding-top: 10px;">{{drinkList.count}}</td>
                       </tr>
                       <tr v-else>
-                        <th style="color: #0064C8;">{{drinkList.num}}</th>
-                        <td><img :src="'images/drink/' + drinkList.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                        <td style="font-weight: bold; font-size: 20px;">{{drinkList.count}}</td>
+                        <th style="color: #0064C8; padding-top: 10px;">{{drinkList.num}}</th>
+                        <td style="padding-top: 7px;"><img :src="'images/drink/' + drinkList.drink_name + '.png'" style="width:22px; height: 35px;"></td>
+                        <td style="font-weight: bold; font-size: 20px; padding-top: 10px;">{{drinkList.count}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -309,68 +324,83 @@
         <div class="collums55DivideDiv">
           <!-- 데이터 제목과 데이터를 구분하기 위해 1:9로 DIV를 분할. -->
           
-          <div class="titleContentDivideDiv">
-            <div id="scrollBar" class="collums55DivideDiv">
+          <div class="titleContentDivideDiv" id="titleContentDivideDiv1">
+            <div class="collums55DivideDiv" id="scrollBar" style="margin-top: 15px;">
               <div>
                 <span class="mainContents">음료별 판매순위</span>
               </div>
               <div>
-                <v-chip label :selected="drinkYearChip" outline color="secondary" @click="drinkRankDateChange('year')">년간</v-chip>
-                <v-chip label :selected="drinkMonthChip" outline color="secondary" @click="drinkRankDateChange('month')">월간</v-chip>
-                <v-chip label :selected="drinkWeekChip" outline color="secondary" @click="drinkRankDateChange('week')">주간</v-chip>
+                <v-chip label :selected="drinkYearChip" outline color="blue" @click="drinkRankDateChange('year')">년간</v-chip>
+                <v-chip label :selected="drinkMonthChip" outline color="blue" @click="drinkRankDateChange('month')">월간</v-chip>
+                <v-chip label :selected="drinkWeekChip" outline color="blue" @click="drinkRankDateChange('week')">주간</v-chip>
               </div>
             </div>
             <div>
               <bar-chart :chart-data="barChart" :options="barOptions" class="chartData" :width="600" :height="500"></bar-chart>
             </div>
           </div>
-          <div class="titleContentDivideDiv">
-            <div>
-              <span class="mainContents">음료 정보</span>
+          <div class="titleContentDivideDiv" id="titleContentDivideDiv2">
+            <div class="collums55DivideDiv"  style="margin-top: 15px;">
+              <div>
+                <span class="mainContents">음료 정보</span>
+              </div>
+              <div></div>
             </div>
-            <div class="collums73DivideDiv">
-              <table class="table table-hover">
-                <thead style="font-weight: bold;">
-                  <tr><td>음료</td><td>평균 소진량(개)</td><td>예상 소진일(일)</td><td>잔량(개)</td><td>주문</td></tr>
-                </thead>
-                <tbody v-for="array in drinkExhaustAnalysisArray" :key="array.drink_name">
-                  <tr v-if="(array.num%2) !== 0" style="background-color:#E5EFF9;">
-                      <td><img :src="'images/drink/' + array.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                      <th>{{array.avgSales}}</th>
-                      <th>{{array.prediction}}</th>
-                      <th>{{array.sum}}</th>
-                      <td v-if="array.prediction < 4"><img src="images/analysis/check.png" @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck" ></td>
-                      <td v-else><img src="images/analysis/uncheck.png"  @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
-                  </tr>
-                  <tr v-else>
-                      <td><img :src="'images/drink/' + array.drink_name + '.png'" style="width:22px; height: 35px;"></td>
-                      <th>{{array.avgSales}}</th>
-                      <th>{{array.prediction}}</th>
-                      <th>{{array.sum}}</th>
-                      <td v-if="array.prediction < 4"><img src="images/analysis/check.png" @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
-                      <td v-else><img src="images/analysis/uncheck.png"  @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
-                  </tr>
-                </tbody>
-              </table>
-              <div style="margin-left: 10%;">
-                <a @click="checkedProductOrder()">
-                  <img src="images/analysis/productOrder.png">
-                </a>
-                <table class="table borderless">
-                  <tr>
-                    <td>선택한 음료 수</td>
-                    <td>{{chooseDrinkProductCount}}</td>
-                    <td>개</td>
-                  </tr>
+            <div class="rows82DivideDiv">
+              <div>
+                <table class="table table-hover" style="color: #0064C8;">
+                  <thead style="font-weight: bold;">
+                    <tr>
+                      <td style="padding-top: 10px;">음료</td>
+                      <td style="padding-top: 10px;">평균 소진량(개)</td>
+                      <td style="padding-top: 10px;">예상 소진일(일)</td>
+                      <td style="padding-top: 10px;">잔량(개)</td>
+                      <td style="padding-top: 10px;">주문</td>
+                    </tr>
+                  </thead>
+                  <tbody v-for="array in drinkExhaustAnalysisArray" :key="array.drink_name">
+                    <tr v-if="(array.num%2) !== 0" style="background-color:#E5EFF9;">
+                        <td style="padding-top: 7px;"><img :src="'images/drink/' + array.drink_name + '.png'" style="width:22px; height: 35px;"></td>
+                        <th style="padding-top: 10px;">{{array.avgSales}}</th>
+                        <th style="padding-top: 10px;">{{array.prediction}}</th>
+                        <th style="padding-top: 10px;">{{array.sum}}</th>
+                        <td v-if="array.prediction < 4" style="padding-top: 10px;"><img src="images/analysis/check.png" @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck" ></td>
+                        <td v-else style="padding-top: 10px;"><img src="images/analysis/uncheck.png"  @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
+                    </tr>
+                    <tr v-else>
+                        <td style="padding-top: 7px;"><img :src="'images/drink/' + array.drink_name + '.png'" style="width:22px; height: 35px;"></td>
+                        <th style="padding-top: 10px;">{{array.avgSales}}</th>
+                        <th style="padding-top: 10px;">{{array.prediction}}</th>
+                        <th style="padding-top: 10px;">{{array.sum}}</th>
+                        <td v-if="array.prediction < 4" style="padding-top: 10px;"><img src="images/analysis/check.png" @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
+                        <td v-else style="padding-top: 10px;"><img src="images/analysis/uncheck.png"  @click="checkImgChange(array.stock_id)" :id="array.stock_id" name="drinkCheck"></td>
+                    </tr>
+                  </tbody>
                 </table>
               </div>
-              
+              <div class="collums64DivideDiv">
+                <div>
+                  <a @click="checkedProductOrder()">
+                    <img src="images/analysis/productOrder.png">
+                  </a>
+                </div>
+                <div  style="margin-top: 35px;">
+                  <table class="table borderless">
+                    <tr>
+                      <td>선택한 음료 수</td>
+                      <td>{{chooseDrinkProductCount}}</td>
+                      <td>개</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
             </div>
-            
-            
           </div>
-          <div class="collums55DivideDiv">
-            <div id="scrollLine">
+        </div>
+        <div class="collums333DivideDiv">
+          
+            <div id="scrollLine" class="rows19DivideDiv">
+              <div>
               <v-menu :nudge-width="200" v-model="yearProductMenu">
                 <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('year')">년간 판매량</v-btn>
                 <v-card>
@@ -410,95 +440,108 @@
                   </v-card-actions>
                 </v-card>
               </v-menu>
+              </div>
+              <div>
               <line-chart :chart-data="lineChart" :options="lineOptions" class="chartData" :width="300" :height="300"></line-chart>
+              </div>
             </div>
-            <div>
-              <v-menu :nudge-width="200" v-model="monthProductMenu">
-                <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('month')">월간 판매량</v-btn>
-                <v-card>
-                  <v-list>
-                    <v-list-tile avatar>
-                      <v-list-tile-content>
-                        <v-list-tile-title>월간 판매량 통계</v-list-tile-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
-                  </v-list>
-                  <v-list>
-                    <v-list-tile>
-                      <v-list-tile-title>이번주 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFirstData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>저번주 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFSecondData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>한 달간 최고 판매주</v-list-tile-title>
-                      <v-list-tile-title>{{statisticThirdData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>한 달간 최저 판매주</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFourthData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>주 평균 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFifthData}}개</v-list-tile-title>
-                    </v-list-tile>
-                  </v-list>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn flat @click="menu = false">Cancel</v-btn>
-                    <v-btn color="primary" flat @click="menu = false">Ok</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-menu>
-              <line-chart2 :chart-data="lineChart2" :options="lineOptions2" class="chartData" :width="300" :height="300"></line-chart2>
+            <div class="rows19DivideDiv">
+              <div>
+                <v-menu :nudge-width="200" v-model="monthProductMenu">
+                  <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('month')">월간 판매량</v-btn>
+                  <v-card>
+                    <v-list>
+                      <v-list-tile avatar>
+                        <v-list-tile-content>
+                          <v-list-tile-title>월간 판매량 통계</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                    </v-list>
+                    <v-list>
+                      <v-list-tile>
+                        <v-list-tile-title>이번주 판매량</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFirstData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>저번주 판매량</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFSecondData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>한 달간 최고 판매주</v-list-tile-title>
+                        <v-list-tile-title>{{statisticThirdData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>한 달간 최저 판매주</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFourthData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>주 평균 판매량</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFifthData}}개</v-list-tile-title>
+                      </v-list-tile>
+                    </v-list>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn flat @click="menu = false">Cancel</v-btn>
+                      <v-btn color="primary" flat @click="menu = false">Ok</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-menu>
+              </div>
+              <div>
+                <line-chart2 :chart-data="lineChart2" :options="lineOptions2" class="chartData" :width="300" :height="300"></line-chart2>  
+              </div>
+              
             </div>
-          </div>
-          <div class="collums55DivideDiv">
-            <div>
-              <v-menu :nudge-width="200" v-model="weekProductMenu">
-                <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('week')">주간 판매량</v-btn>
-                <v-card>
-                  <v-list>
-                    <v-list-tile avatar>
-                      <v-list-tile-content>
-                        <v-list-tile-title>주간 판매량 통계</v-list-tile-title>
-                      </v-list-tile-content>
-                    </v-list-tile>
-                  </v-list>
-                  <v-list>
-                    <v-list-tile>
-                      <v-list-tile-title>오늘 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFirstData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>어제 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFSecondData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>주간 최고 판매일</v-list-tile-title>
-                      <v-list-tile-title>{{statisticThirdData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>주간 최저 판매일</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFourthData}}개</v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile>
-                      <v-list-tile-title>일 평균 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFifthData}}개</v-list-tile-title>
-                    </v-list-tile>
-                  </v-list>
-                  <v-card-actions>
-                    <v-spacer></v-spacer>
-                    <v-btn flat @click="menu = false">Cancel</v-btn>
-                    <v-btn color="primary" flat @click="menu = false">Ok</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-menu>
-              <line-chart3 :chart-data="lineChart2" :options="lineOptions3" class="chartData" :width="300" :height="300"></line-chart3>
+       
+            <div class="rows19DivideDiv">
+              <div>
+                <v-menu :nudge-width="200" v-model="weekProductMenu">
+                  <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('week')">주간 판매량</v-btn>
+                  <v-card>
+                    <v-list>
+                      <v-list-tile avatar>
+                        <v-list-tile-content>
+                          <v-list-tile-title>주간 판매량 통계</v-list-tile-title>
+                        </v-list-tile-content>
+                      </v-list-tile>
+                    </v-list>
+                    <v-list>
+                      <v-list-tile>
+                        <v-list-tile-title>오늘 판매량</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFirstData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>어제 판매량</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFSecondData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>주간 최고 판매일</v-list-tile-title>
+                        <v-list-tile-title>{{statisticThirdData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>주간 최저 판매일</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFourthData}}개</v-list-tile-title>
+                      </v-list-tile>
+                      <v-list-tile>
+                        <v-list-tile-title>일 평균 판매량</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFifthData}}개</v-list-tile-title>
+                      </v-list-tile>
+                    </v-list>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn flat @click="menu = false">Cancel</v-btn>
+                      <v-btn color="primary" flat @click="menu = false">Ok</v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-menu>
+              </div>
+              <div>
+                <line-chart3 :chart-data="lineChart2" :options="lineOptions3" class="chartData" :width="300" :height="300"></line-chart3>
+              </div>
             </div>
-          </div>
+          
+        </div>
+        <div class="collums55DivideDiv" id="drinkProductBackground">
           <div class="collums55DivideDiv">
             <div>
               <h4 style="font-weight: bold; color:#0064C8;">학교 음료별 판매 비율</h4>
@@ -519,7 +562,10 @@
               <pie-chart4 :chart-data="pieChart4" :options="pieOptions4" class="chartData" :width="300" :height="300"></pie-chart4>
             </div>
           </div>
+
         </div>
+          
+        
       </div>
     </div>
     
@@ -606,7 +652,7 @@
         analysisVdId    : 0,      // 현재 클릭 된 자판기 ID
         analysisVdName  : '',     // 현재 클릭 된 자판기 name
         analysisVdSp    : '',
-
+        allVendingCount : 0,
         radarChart       : null, 
         radarOption      : null,
       
@@ -933,8 +979,15 @@
         this.analysisVdName = vd_name;
         this.analysisVdSp   = vd_supplementer;
         
+
         if(this.rankVdSort == 'asc'){
-          vd_num = Math.abs(vd_num - 113);
+          let url = "/analysis/getVdCount";
+
+          //전체 자판기 수를 알기 위한 axios이다
+          this.axios.get(url).then((response) =>{
+            this.allVendingCount = response.data;  
+          }); 
+          vd_num = Math.abs(vd_num - (this.allVendingCount+1));
           switch(vd_num){
             case 1:
               this.clickVdSrc1 = '/images/analysis/arrow.png';
@@ -1203,7 +1256,8 @@
             response.data[0][i].getSales = response.data[0][i].getSales.toString().replace(regexp, ',');
           };
           response.data[1][0].value = response.data[1][0].value.toString().replace(regexp, ',');
-          
+    
+     
           if(this.realtimeVdId !== 0){
             for(let i = 0 ; i < response.data[2].length ; i++){
               if(response.data[2][i].vd_id == this.realtimeVdId){
@@ -1584,18 +1638,10 @@
   display     : grid;
   grid-template-rows: 0.05fr 0.95fr;
   margin-right: 5%;
-
+  
 }
 #analysisLineChartBackgroundDiv .speed-dial {
   position: fixed;
-}
-
-/* ----- 상단 실시간 데이터 부분 DIV ----- */
-.collums73DivideDiv{
-  display     : grid;
-  grid-template-columns: 0.6fr 0.4fr;
-  width: 100%;
-  height: 100%;
 }
 .collums64DivideDiv{
   display     : grid;
@@ -1603,6 +1649,13 @@
   width: 100%;
   height: 100%;
   padding-bottom: 1%;
+}
+.rows82DivideDiv{
+  display     : grid;
+  grid-template-rows: 0.8fr 0.2fr;
+  width: 100%;
+  height: 100%;
+
 }
 #anaylsisRealDataSecondDiv{
   display     : grid;
@@ -1637,6 +1690,33 @@
   color: #0064C8;
   width: 100%;
 }
+.collums333DivideDiv{
+  display     : grid;
+  grid-template-columns: 0.33fr 0.33fr 0.33fr;
+  font-weight: bold ;
+  color: #0064C8;
+  width: 100%;
+  background-color:  #ffffff;
+  border-radius: 10px 10px 10px 10px; 
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding: 1%;
+  box-shadow: 1px 1px 5px;
+}
+
+#drinkProductBackground{
+  background-color:  #ffffff;
+  border-radius: 10px 10px 10px 10px; 
+  box-shadow: 1px 1px 5px;
+  padding: 1%;
+  margin-bottom: 10%;
+}
+.rows19DivideDiv{
+  display     : grid;
+  width: 100%;
+  height: 100%;
+  grid-template-rows: 0.1fr 0.9fr;
+}
 #analysisVdDiv{
   display     : grid;
   grid-template-columns: 0.5fr 0.5fr;
@@ -1668,16 +1748,13 @@
   float: right;
 }
 
+
 .titleContentDivideDiv{
   display     : grid;
   width: 100%;
   height: 100%;
   grid-template-rows: 0.1fr 0.9fr;
   background-color:  #ffffff;
-  padding: 1%;
-  padding-left: 3%;
-  margin-right: 1%;
-  margin-bottom: 1%;
   border-radius: 10px 10px 10px 10px; 
   box-shadow: 1px 1px 5px;
 }
@@ -1722,9 +1799,19 @@ a:link { text-decoration: none; color: #000000;}
     color: #0064C8;
 }
 
+#titleContentDivideDiv1{
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+#titleContentDivideDiv2{
+  margin-left: 2%;
+  margin-bottom: 2%;
+
+}
+
 .mainContents{
-  font-family: "Nanum+Gothic";
-  font-size: 15pt;
+  font-family: "Nanum Gothic";
+  font-size: 20pt;
   text-align: left;
 }
 .table{
@@ -1733,7 +1820,9 @@ a:link { text-decoration: none; color: #000000;}
 #chartData{
   float: left;
 }
+/* 테이블 내 글자 무조건 한 줄로 다나오게 하는것 */
+thead{
+  white-space: nowrap;
+}
+
 </style>
-
-
-

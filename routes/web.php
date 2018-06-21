@@ -23,6 +23,7 @@ Route::get('analysis/pieGraphData', 'analysisController@pieGraphData'); // pie �
 Route::get('analysis/setLineChangeNote/{vd_id}/{existingDrink}/{changeDrink}', 'analysisController@setLineChangeNote');  // 자판기의 음료 변경 지시한 것을 작업지시서에 추가 
 Route::get('analysis/differenceVdAnalysis/{vd_id}/{date}', 'analysisController@differenceVdAnalysis'); // 관심 자판기 데이터 
 Route::get('analysis/setLineChangeVerTwo/{vd_id}/{existingDrink}/{changeDrink}', 'analysisController@setLineChangeVerTwo');
+Route::get('analysis/getVdCount', 'analysisController@getVdCount'); // 자판기 수
 
 // <----------- realtime ----------->
 Route::get('realtime/list/{local}/{subLocal}', 'realtimeController@vdList');
