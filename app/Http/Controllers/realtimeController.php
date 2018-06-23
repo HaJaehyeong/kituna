@@ -372,7 +372,7 @@ class realtimeController extends Controller
         // // //vd stock update 쿼리 생성 및 실행
         $result = DB::table('vd_stock')
             ->where('vd_id', $vd_id)
-            ->update(['stock' => 35]);
+            ->update(['stock' => 10]);
     
         //vendingmachine update 쿼리 생성 및 실행
         $result = DB::table('vendingmachine')
