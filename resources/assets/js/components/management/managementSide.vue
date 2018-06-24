@@ -41,13 +41,45 @@
       <b-modal id="spInsertModal" hide-footer ref="spInsertRef" title="보충기사 등록">
         <div>
           <img id="insertBlah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
-          <input type="file" accept=".png" id="insertFile" @change="readURL('insertFile')">
-          <b-form-input type="text" placeholder="Enter your name" id="spInputName"></b-form-input>
-          <b-form-input type="text" placeholder="Enter your id" id="spInputId"></b-form-input>
-          <b-form-input type="text" placeholder="Enter your password" id="spInputPasswd"></b-form-input>
-          <b-form-input type="text" placeholder="Enter your mail adress" id="spInputMail"></b-form-input>
-          <b-form-input type="text" placeholder="Enter your phoneNumber" id="spInputPhone"></b-form-input>
-          <b-form-input type="text" placeholder="Enter your address" id="spInputAddress"></b-form-input>
+          <input type="file" accept=".png" id="insertFile" @change="readURL('insertFile')"><br>
+          <b-container fluid>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">이름:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" placeholder="Enter your name" id="spInputName"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">아이디:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" placeholder="Enter your id" id="spInputId"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">비밀번호:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" placeholder="Enter your password" id="spInputPasswd"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">메일주소:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" placeholder="Enter your mail adress" id="spInputMail"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">전화번호:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" placeholder="Enter your phoneNumber" id="spInputPhone"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">주소:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" placeholder="Enter your address" id="spInputAddress"></b-form-input>
+              </b-col>
+            </b-row>
+          </b-container>
         </div>
         <br>
         <div>
@@ -59,13 +91,45 @@
       <b-modal id="spUploadModal" hide-footer ref="spUploadRef" title="보충기사 수정">
         <div>
           <img id="uploadBlah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
-          <input type="file" accept=".png" id="uploadFile" @change="readURL('uploadFile')">
-          <b-form-input type="text" :value="spInputNameChange" id="spInputNameChange"></b-form-input>
-          <b-form-input type="text" :value="spInputIdChange" id="spInputIdChange"></b-form-input>
-          <b-form-input type="text" :value="spInputPasswdChange" id="spInputPasswdChange"></b-form-input>
-          <b-form-input type="text" :value="spInputMailChange" id="spInputMailChange"></b-form-input>
-          <b-form-input type="text" :value="spInputPhoneChange" id="spInputPhoneChange"></b-form-input>
-          <b-form-input type="text" :value="spInputAddressChange" id="spInputAddressChange"></b-form-input>
+          <input type="file" accept=".png" id="uploadFile" @change="readURL('uploadFile')"><br>
+          <b-container fluid>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">이름:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" :value="spInputNameChange" id="spInputNameChange"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">아이디:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" :value="spInputIdChange" id="spInputIdChange"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">비밀번호:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" :value="spInputPasswdChange" id="spInputPasswdChange"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">메일주소:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" :value="spInputMailChange" id="spInputMailChange"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">전화번호:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" :value="spInputPhoneChange" id="spInputPhoneChange"></b-form-input>
+              </b-col>
+            </b-row>
+            <b-row class="my-1">
+              <b-col sm="3"><label for="input-none">주소:</label></b-col>
+              <b-col sm="9">
+                <b-form-input type="text" :value="spInputAddressChange" id="spInputAddressChange"></b-form-input>
+              </b-col>
+            </b-row>
+          </b-container>
         </div>
         <br>
         <div>
@@ -74,7 +138,187 @@
         </div>
       </b-modal>
     </div>
-  </div>
+    
+
+    <div  v-if="pageName == '자판기'">
+      <!-- ********************** 자판기 등록창********************** -->
+      <v-layout row justify-center>
+        <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
+          <v-btn slot="activator" @click="DrinkList">자판기 등록</v-btn>
+          <v-card  color="light-blue darken-1">
+            <v-toolbar>
+              <v-btn icon @click.native="dialog = false">
+                <v-icon>close</v-icon>
+              </v-btn>
+              <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-items>
+                <v-btn color="white" flat @click.native="close">Cancel</v-btn>
+                <v-btn color="white" flat @click.native="save">Save</v-btn>
+              </v-toolbar-items>
+              <br>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">자판기 기본정보</span>
+                </v-card-title>
+                <v-card-text>
+                  <!-- ********************** 자판기 기본 등록 및 수정 내부 창 ********************** -->
+                  <v-container grid-list-md>
+                    <v-layout wrap>
+                      <v-flex xs2 order-md1 order-xs3>
+                        <v-text-field color="light-blue darken-4"  name="input-3-4" label="자판기 이름"  class="input-group--focused"  :rules="[() => editedItem.Ven_Name.length > 0 || 'Vendingmachine name is required']"  required v-model="editedItem.Ven_Name"></v-text-field>
+                      </v-flex>
+                      <v-flex xs2 order-md1 order-xs4>
+                        <v-text-field color="light-blue darken-4 " name="input-3-4" label="위치"  class="input-group--focused"  :rules="[() => editedItem.Location.length > 0 || 'ex)Buk-gu, Daegu, Republic of Korea']"  required   v-model="editedItem.Location"></v-text-field>
+                      </v-flex> 
+                      <v-flex xs2 order-md1 order-xs3>
+                        <v-select
+                          :items="select"
+                          label="관리자명"
+                          item-value="text"
+                          v-model ="editedItem.Manager">
+                        </v-select>
+                      </v-flex>
+                      <v-flex xs3 order-md1  order-xs6>
+                        <label>
+                          <gmap-autocomplete @place_changed="setPlace"></gmap-autocomplete>
+                          <button @click="addMarker">Add</button>
+                        </label>
+                      </v-flex>
+                      <v-flex xs2 order-md1  order-xs5 >
+                        <gmap-map :center="center" :zoom="zoom" style="width:350px;  height: 250px;">
+                          <gmap-marker
+                            :key="index"
+                            v-for="(m, index) in markers"
+                            :position="m.position"
+                            :markers="m.markers"
+                            @click="center=m.position"
+                            :draggable="m.draggable">
+                          </gmap-marker>
+                        </gmap-map>
+                      </v-flex>
+                    </v-layout>
+                  </v-container>]
+                </v-card-text>
+                <v-card-actions></v-card-actions>
+              </v-card>
+              <!-- ********************** 자판기 음료 등록 및 수정 ********************** -->
+              <v-card>
+                <v-card-title><span class="headline">{{ formSubTitle }}</span></v-card-title>
+                <v-container fluid grid-list-md>
+                  <v-layout row wrap>
+                    <v-flex xs1>
+                      <v-subheader>음료라인 수</v-subheader>
+                    </v-flex>
+                    <v-flex xs1>
+                      <b-form-select v-model="selected" :options="options" class="mb-1"  />
+                    </v-flex>
+                  </v-layout>
+                  <v-layout row wrap v-if="editedIndex!=-1">
+                    <v-flex xs1>
+                      <!-- Edit일 경우 뜨는 현재 음료 리스트  -->
+                      <v-subheader>현재 음료 리스트</v-subheader>
+                    </v-flex>
+                    <v-layout  xs2 md2 lg2 v-for="(drinkItem, index) in editedItem_drink" :key="index">
+                      <v-flex  v-for="(item2, index)  in drinkItem" :key="index">
+                        <v-card-title>{{index}}</v-card-title>
+                        <v-card-media   height="70px">   
+                          <v-card><img xs3 md3 lg3 :src="item2" style=" height:70px; width:30px;"></v-card>
+                          <v-spacer></v-spacer>
+                        </v-card-media>  
+                      </v-flex> 
+                    </v-layout>
+                  </v-layout>
+                  <br>
+                  <v-layout row wrap>
+                    <v-flex xs1>
+                      <v-subheader>음료 설정</v-subheader>
+                    </v-flex> 
+                    <!-- Set Drink List Card -->
+                    <v-flex xs5 md5 lg5>
+                      <v-layout row wrap>
+                        <v-flex xs3 md3 lg3 v-for="(value, index) in InputDrinkItem" :key="index">
+                          <v-card width="150px" height="200px">
+                            <draggable :id="index" v-model="itemList_All" :options="{group:'itemList_All'}" @start="drag=true" @end="drag=false" @add="newLine">
+                              <v-card-title class="headline"> 
+                                {{ capLetter(index) }}
+                              </v-card-title>
+                              <v-card v-for="(item2, index)  in value" :key="index">
+                                <v-card-media  height="70px">  
+                                  <v-spacer></v-spacer>  
+                                  <img :src="item2" style=" height:70px; width:30px;" >
+                                  <v-spacer></v-spacer>
+                                </v-card-media>
+                              </v-card> 
+                            </draggable>
+                          </v-card>
+                        </v-flex>
+                      </v-layout>       
+                    </v-flex>          
+                    <v-flex xs1></v-flex>       
+                    <!-- All Drink list Card -->      
+                    <v-flex xs5>  
+                      총 음료 리스트 (원하는 음료를 드래그해주세요)   
+                      <v-layout row wrap>
+                        <v-flex xs2 md2 lg2 v-for="(drinkItem, index) in itemList_All" :key="index">
+                          <draggable :id="index" v-model="itemList_All" :options="{group: { name:'itemList_All', pull:'clone', put:'false'}}" @start="drag=true" @end="drag=false" :move="chooseItem">
+                            <v-card class="ma-2 pa-1">
+                              <v-card-media  height="70px">
+                                <v-spacer></v-spacer>
+                                <img :src="drinkItem.path" style=" height:70px; width:30px;">
+                                <v-spacer></v-spacer>
+                              </v-card-media> 
+                            </v-card>      
+                          </draggable>          
+                        </v-flex>            
+                      </v-layout>            
+                    </v-flex>            
+                  </v-layout>
+                </v-container>
+              </v-card>
+            </v-toolbar>
+          </v-card>                  
+        </v-dialog>
+      </v-layout>
+    
+      
+      
+      <!-- vending machine List -->
+      <v-card-title>
+        <v-text-field
+          append-icon="search"
+          label="Please enter search keywords"
+          single-line
+          hide-details
+          v-model="search">
+        </v-text-field>
+      </v-card-title>
+      <v-data-table :headers="headers" :items="items" :search="search">
+        <template slot="items" slot-scope="props">
+          <tr :id="props.item.No" @mouseover="mouseover(props.item.No)" @mouseout="mouseout(props.item.No)" @click="trClick(props.item.No)">
+            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.No }}</td>
+            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.Ven_Name }}</td>
+            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Location }}</td>
+            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Manager }}</td>
+            <td class="justify-center layout px-0">
+              <v-btn icon class="mx-0" @click="editItem(props.item)">
+                <v-icon color="teal">edit</v-icon>
+              </v-btn>
+              <v-btn icon class="mx-0" @click="deleteItem(props.item)">
+                <v-icon color="pink">delete</v-icon>
+              </v-btn>
+            </td>
+          </tr>
+        </template>
+        <template slot="no-data">
+          <v-btn color="primary" @click="vendingList">Reset</v-btn>
+        </template>
+        <v-alert slot="no-results" :value="true" color="error" icon="warning">
+          Your search for "{{ search }}" found no results.
+        </v-alert>
+      </v-data-table>
+    </div>
+  </div>        
 </template>
 
 <script>
@@ -617,6 +861,8 @@ export default {
         document.getElementById('vdBtn').setAttribute('class', "spBtnStyle btn btn--outline btn--depressed indigo--text");
       }
 
+      this.pageName = page;
+
       EventBus.$emit('contentPageChange', page); 
       this.vendingList();
     },
@@ -887,7 +1133,7 @@ export default {
 <style>
 .spListDivBackground {
   position: relative;
-  background-color: #0064c8;
+  background-color: rgb(48, 109, 170);
   width: 280px;
   height: 600px;
   border-radius: 15px;
@@ -928,5 +1174,60 @@ export default {
 .spBtnStyle {
   width: 115px;
   border-radius: 8px;
+}
+
+
+
+
+
+ .scroll-area {
+  position: relative;
+  margin: auto;
+  width: 300px;
+  height: 500px;
+}.fixed-table-container {
+    width: 400px;
+    height: 600px;
+    border: 1px solid #000;
+    position: relative;
+    padding-top: 30px; /* header-bg height값 */
+}
+.header-bg {
+    background: skyblue;
+    height: 30px; /* header-bg height값 */
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    border-bottom: 1px solid #000;
+}
+.table-wrapper {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+td {
+    border-bottom: 1px solid #ccc;
+    padding: 5px;
+}
+td + td {
+    border-left: 1px solid #ccc;
+}
+th {
+    padding: 0px; /* reset */
+}
+.th-text {
+    position: absolute;
+    top: 0;
+    width: inherit;
+    line-height: 30px; /* header-bg height값 */
+    border-left: 1px solid #000;
+}
+th:first-child .th-text {
+    border-left: none;
 }
 </style>

@@ -13,10 +13,10 @@ class analysisController extends Controller
         // 장소가 all인경우
         if ($place == "all"){
             /**이번달 판매량
-             * select    count(*) as count
-             * from        sell_data 
+             * select   count(*) as count
+             * from     sell_data 
              * where    date_format(sell_date, "%Y-%m") = date_format(now(), "%Y-%m")
-             * group by  date_format(sell_date, "%Y-%m")
+             * group by date_format(sell_date, "%Y-%m")
              */
             $getSalesThisMonth = DB::table('sell_data')
             ->select(DB::raw('count(*) as count'))

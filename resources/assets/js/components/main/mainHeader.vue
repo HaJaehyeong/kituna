@@ -1,18 +1,18 @@
 <template>
     <div class="topMenu">
-        <div class="menu" style="margin-left:1%; margin-top:1%;">
+        <div class="menuA" style="margin-left:1%; margin-top:0.8%;">
             <a  href="/mainPage"> <img width="45%" src="/images/logo_blue.png"> </a>
         </div>
-        <div class="menu" id="a1">
+        <div class="menuA" id="a1">
             <h5><a class="menuHeaderA"  href="/realtime"><strong> RealTime </strong></a></h5>
         </div>
-        <div class="menu" id="a2">
+        <div class="menuA" id="a2">
             <h5><a class="menuHeaderA" href="/analysis"><strong> Analysis </strong></a></h5>
         </div>
-        <div class="menu" id="a3">
+        <div class="menuA" id="a3">
             <h5><a class="menuHeaderA" href="/management"><strong>Management </strong></a></h5>
         </div>
-        <div class="menu" id="a4">
+        <div class="menuA" id="a4">
             <h5><a class="menuHeaderA" href="/product"><strong> Product</strong></a></h5>
         </div>
     </div>
@@ -40,9 +40,8 @@ div.topMenu {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   z-index: 3;
-  padding-bottom: 12px;
 }
-div.menu {
+div.menuA {
   width: 16%;
   margin-left: 2%;
   margin-top: 0.2%;
@@ -51,8 +50,8 @@ div.menu {
   display: block;
   color: white;
   text-align: center;
- /* padding: 4px 4px;
- */}
+  padding: 4px 4px;
+}
  #a1 {
    margin-top:25px;
  }

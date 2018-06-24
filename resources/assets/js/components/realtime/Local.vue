@@ -61,152 +61,100 @@
                     <img v-bind:src="item.imgSrc">
                   </v-avatar> {{item.supplementer}}　<button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">작업지시서</p></button>
                 </div>
-           <v-dialog v-model="orderJobModal" fullscreen>
-            <v-card flat>
-              <div id="spOrderListCutDiv">
-                <div id="spOrderListHeader">                        
+          <v-dialog v-model="orderJobModal" width="1000px">
+            <v-card>
+              <div class="contentsRowStyle" id="spOrderListCutDiv" style="margin: 50px;">
+                <div>
+                  <h3>{{spName}}님의 작업지시서</h3>
+                </div>
+                <div class="productStyle">
                   <div>
-                    <v-btn outline color="indigo" @click="dateChange(-1)" style="width: 20%; height: 20%;">◀</v-btn>
-                    <v-btn dark @click.native.stop="dialog = true" style="width: 20%; height: 20%;">{{today}}</v-btn>
-                    <v-btn outline color="indigo" @click="dateChange(1)" style="width: 20%; height: 20%;">▶</v-btn>
-                    <!-- 달력 띄우는 모달창 -->
-                     <v-dialog v-model="dialog" max-width="400">
-                      <v-card>
-                        <v-date-picker color="green lighten-1" v-model="pickerDate" :landscape="landscape" :reactive="reactive"></v-date-picker>
-                        <v-card-actions>
-                          <v-spacer></v-spacer>
-                          <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" >취소</v-btn>
-                          <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" @click="chooseDateChange()">확인</v-btn>
-                        </v-card-actions>
-                      </v-card>
-                    </v-dialog> 
-                    <!-- 달력 띄우는 모달창 -->
-                   </div>
-                  <div>
-                    <h3>작업지시서</h3>
+                    <table class="jobOrderTableStyle">
+                      <tr v-for="count in allProductTableRepeationCount" :key="count.index" style="width: 100%; height: 50%;">
+                        <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
+                          <div v-if="product.productCount != 0 && product.productCount != -1" class="productDivStyle">
+                            <img :src="product.productImgSrc" style="width: 65%; height: 60px; margin: 10px;">
+                            <h3 class="blueFontStyle" style="text-align: center;">{{product.productCount}}</h3>
+                          </div>
+                          <div v-else class="emptyDivStyle" style="position: relative;">
+                            <div style="position: absolute; bottom: 7px; left: 25px;">
+                              <h5 v-if="product.productCount == -1" style="color: white; text-align: center;">총 량</h5>
+                              <h3 v-if="product.productCount == -1" style="color: white; text-align: center;">{{allCount}}</h3>
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
                   <div>
-                    <h3 align="right">보충기사: {{spName}}</h3>
+                    <div style="margin-bottom: 90px;">
+                      <div>
+                        <v-btn outline small color="indigo" @click="dateChange(-1)" class="arrowImgSytle" style="border: 0px;">◀</v-btn>
+                        <v-btn outline small color="indigo" @click.native.stop="dialog = true" style="min-width: 0px; font-size: 18px; padding: 2px;">{{today}}</v-btn>
+                        <v-btn outline small color="indigo" @click="dateChange(1)" class="arrowImgSytle" style="border: 0px;">▶</v-btn>
+                      </div>
+
+                      <!-- 달력 띄우는 모달창 -->
+                      <v-dialog v-model="dialog" max-width="300">
+                        <v-card>
+                          <v-date-picker color="green lighten-1" v-model="pickerDate" :landscape="landscape" :reactive="reactive"></v-date-picker>
+                          <v-spacer></v-spacer>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" @click="chooseDateChange()">확인</v-btn>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" >취소</v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                      <!-- 달력 띄우는 모달창 -->
+
+                    </div>
+                    <div class="divRowHalf">
+                      <div style="margin-bottom: 10px;">
+                        <h5 class="blueFontStyle">보충기사 이름</h5>
+                        <h4>{{spName}}</h4>
+                      </div>
+                      <div class="divColumnHalf">
+                        <div>
+                          <h5 class="blueFontStyle">자판기 수</h5>
+                          <p><font size="5">{{allVDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">개</font></p>
+                        </div>
+                        <div>
+                          <h5 class="blueFontStyle">제품 수</h5>
+                          <p><font size="5">{{allPDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">종</font></p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div>
-                  <br>
-                  <table class="blueTable">
-                    <tbody v-for="count in allProductTableRepeationCount" :key="count.index">
-                      <tr>
-                        <th>음료명</th>
-                        <th v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
-                          {{product.productName}}
-                        </th>
-                      </tr>
-                      <tr>
-                        <th>필요량</th>
-                        <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
-                          {{product.productCount}}
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tbody>
-                      <tr>
-                        <th>자판기수</th><td colspan="2">{{allVDCount}}</td>
-                        <th>제품수</th><td colspan="2">{{allPDCount}}</td>
-                        <th>총량</th><td colspan="2">{{allCount}}</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <br>
-                  <table class="blueTable" v-if="allVDCount > 0">
-                    <thead>
-                      <th>자판기이름</th>
-                      <th colspan="2">라인1</th><th colspan="2">라인2</th><th colspan="2">라인3</th><th colspan="2">라인4</th>
-                      <th colspan="2">라인5</th><th colspan="2">라인6</th><th colspan="2">라인7</th><th colspan="2">라인8</th>
-                      <th>비고</th>
+                
+                  <!-- 작업지시서 본 내용 -->
+                  <table class="orderTableStyle">
+                    <thead style="text-align: center;">
+                      <th style="width: 13%;"><font size="4">자판기 명</font></th>
+                      <th v-for="n in 8" :key="n.index"><font size="4">{{n}}</font></th>
+                      <th style="width: 16%;"><font size="4">비고</font></th>
                     </thead>
                     <tbody>
                       <tr v-for="vending in sameVDArr" :key="vending.index">
-                        <td v-if="vending.orderNote == ''">{{vending.vd_name}}</td>
-                        <td v-else style="background-color: aqua;">{{vending.vd_name}}</td>
+                        <td><font size="4" color="#1565C0">{{vending.vd_name}}</font></td>
 
-                        <td v-if="vending.lineAndProduct[0].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[0].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[0].productName}}</td>
-                        <td v-if="vending.lineAndProduct[0].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[0].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[0].sp_val}}</td>
-
-                        <td v-if="vending.lineAndProduct[1].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[1].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[1].productName}}</td>
-                        <td v-if="vending.lineAndProduct[1].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[1].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[1].sp_val}}</td>
-
-                        <td v-if="vending.lineAndProduct[2].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[2].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[2].productName}}</td>
-                        <td v-if="vending.lineAndProduct[2].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[2].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[2].sp_val}}</td>
-
-                        <td v-if="vending.lineAndProduct[3].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[3].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[3].productName}}</td>
-                        <td v-if="vending.lineAndProduct[3].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[3].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[3].sp_val}}</td>
-
-                        <td v-if="vending.lineAndProduct[4].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[4].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[4].productName}}</td>
-                        <td v-if="vending.lineAndProduct[4].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[4].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[4].sp_val}}</td>
-
-                        <td v-if="vending.lineAndProduct[5].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[5].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[5].productName}}</td>
-                        <td v-if="vending.lineAndProduct[5].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[5].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[5].sp_val}}</td>
-
-                        <td v-if="vending.lineAndProduct[6].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[6].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[6].productName}}</td>
-                        <td v-if="vending.lineAndProduct[6].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[6].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[6].sp_val}}</td>
-
-                        <td v-if="vending.lineAndProduct[7].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[7].productName}}</td>
-                        <td v-else>{{vending.lineAndProduct[7].productName}}</td>
-                        <td v-if="vending.lineAndProduct[7].sp_val >= 27" style="background-color: yellow;">{{vending.lineAndProduct[7].sp_val}}</td>
-                        <td v-else>{{vending.lineAndProduct[7].sp_val}}</td>
+                        <td v-for="productValue in vending.lineAndProduct" :key="productValue.index">
+                          <img :src="productValue.imgSrc" style="width: 25px; height: 35px; margin-left: 10px; margin-right: 10px;">
+                          <font size="4">{{productValue.sp_val}}</font>
+                        </td>                      
                         
-                        <td v-if="saveToday == today" @click="createNote(vending.vd_name, vending.vd_id)">{{vending.orderNote}}</td>
-                        <td v-else>{{vending.orderNote}}</td>
+                        <td style="width: 10%">{{vending.orderNote}}</td>
                       </tr>
                     </tbody>
                   </table>
-                  <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn color="green darken-1" flat="flat" @click.native="orderJobModal = false">확인</v-btn>
-                    </v-card-actions>
-                  <v-dialog v-model="orderJobDialog" max-width="520" max-height="300">
-                    <v-card>
-                      <v-card-title>
-                        <h2>작업 지시창</h2>
-                      </v-card-title>
-                      <v-card-text>
-                        <v-card-text>
-                          ● 현재 자판기 : {{jobOrderVDName}}
-                          <v-spacer></v-spacer>
-                          ● 보충 기사 : {{spName}}
-                        </v-card-text>
-                        <v-select
-                          :items="select"
-                          label="Please Select List"
-                          item-value="text"
-                          v-model ="selectedItem">
-                        </v-select>
-                        <div v-if="selectedItem=='기타'">
-                          <v-text-field  label="작업지시를 적어주세요" v-model="selectedItem_etc"></v-text-field>
-                        </div>
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn color="green darken-1" flat="flat" @click.native="orderJobDialog = false">cancel</v-btn>
-                        <v-btn color="green darken-1" flat="flat" @click.native="orderJobDialog = sendNote(selectedItem,selectedItem_etc)">submit</v-btn>
-                      </v-card-actions>
-                    </v-card>
-                   </v-dialog>
-                   </div>
-                  </div>
-                </v-card>
+                </div>
+              </div>
+              <div style="position: relative;">
+                <v-btn style="position: absolute; right: 50px; bottom: 10px;" color="primary" @click.native="orderJobModal = false"><h3>확인</h3></v-btn>
+              </div>
+            </v-card>
                </v-dialog>
               </div>
             </div> 
@@ -285,28 +233,29 @@ export default {
   },
 
   methods: {
-    // watch를 통해 보충기사 및 날짜에 변화가 있을 경우 해당 메서드로 오게 된다.
-    joborderRenew(){
-      // 보충기사가 클릭 됬는지 확인하는 if문
-      if(this.spName){
-        //보충기사의 그날 작업 지시서를 http통신을 통해 DB에서 가져온다.
-        this.axios.get("/management/jobOrder/" + this.spName + "/" + this.today)
+    joborderRenew() {
+      this.axios.get("/management/jobOrder/" + this.spName + "/" + this.today)
         .then((response) => {
-          this.allProductCountArr = [];
-          this.sameVDArr = [];
-          this.allCount = 0;
+          this.allProductCountArr = [];       // 모든 제품 정보 초기화
+          this.sameVDArr = [];                // 같은 자판기의 제품 정보 초기화
+          this.allCount = 0;                  // 총 작업지시 제품 수 초기화
 
           for(var i = 0; i < response.data.length; i++) {
             var productObj = {
               productName: "",
-              productCount: 0
+              productNoUnderLineName: "",
+              productCount: 0,
+              productImgSrc: ""
             }
 
             productObj.productName = response.data[i].drink_name;
+            productObj.productNoUnderLineName = response.data[i].drink_name.replace("_", "\n");
             productObj.productCount = response.data[i].sp_val;
+            productObj.productImgSrc = "/images/drink/" + response.data[i].drink_name + "_back.png";
             this.allCount += productObj.productCount;
+            // 작업지시 제품 수 정리
 
-            var is_nameSame = false;
+            var is_nameSame = false;    // 같은 이름 제품 유무
 
             for (var j = 0; j < this.allProductCountArr.length; j++) {
               if (this.allProductCountArr[j].productName == productObj.productName) {
@@ -325,7 +274,7 @@ export default {
             for (var j = 0; j < this.sameVDArr.length; j++) {
               if (this.sameVDArr[j].vd_id == response.data[i].vd_id) {
                 var pdName = response.data[i].drink_name.replace("_", "\n");
-                this.sameVDArr[j].lineAndProduct.push({lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val});
+                this.sameVDArr[j].lineAndProduct.push({lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"});
                 
                 if (response.data[i].note != null) {
                   this.sameVDArr[j].orderNote += "," + response.data[i].note;
@@ -340,23 +289,57 @@ export default {
               var pdName = response.data[i].drink_name.replace("_", "\n");
 
               if (response.data[i].note != null) {
-                this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: response.data[i].note, lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val}]});
+                this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: response.data[i].note, lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
               }
               else {
-                this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val}]});
+                this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
               }
             }
+            // 같은 이름 자판기 정보 정리
           }
+          // 해당 보충기사의 모든 작업지시 사항 정리
+          
+          for (var i = 0; i < this.allProductCountArr.length; i++) {
+            if (this.allProductCountArr[i].productCount == 0) {
+              this.allProductCountArr.splice(i, 1);
+            }
+          }
+          // 보충량 0인 제품 삭제
 
-          this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 8);
-          this.allProductCountArrCut = [];
+          this.allPDCount = this.allProductCountArr.length;   // 모든 제품 수
+
+          var inputEmptyObj = {
+            productName: "",
+            productCount: 0,
+            productImgSrc: ""
+          }
+          // 빈 값을 가진 객체
+
+          while (this.allProductCountArr.length < 12) {
+            if (this.allProductCountArr.length == 11) {
+                var inputLastEmptyObj = {
+                productName: "",
+                productCount: -1,
+                productImgSrc: ""
+              }
+
+              this.allProductCountArr.push(inputLastEmptyObj);
+            }
+            else {
+              this.allProductCountArr.push(inputEmptyObj);
+            }
+          }
+          // 공간 맞추기
+
+          this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 6);   // 모든 작업지시 테이블 줄 수 
+          this.allProductCountArrCut = [];                                                      // 모든 작업지시 제품 정보
           var cut = 0;
 
           for (var i = 0; i < this.allProductTableRepeationCount; i++) {
             this.allProductCountArrCut[i] = [];
 
             for (var j = cut; j < this.allProductCountArr.length; j++) {
-              if (j % 8 != 0 || j == cut) {
+              if (j % 6 != 0 || j == cut) {
                 this.allProductCountArrCut[i].push(this.allProductCountArr[j]);
               }
               else {
@@ -365,12 +348,14 @@ export default {
               }
             }
           }
+          // 줄 수에 맞게 제품 정보 입력
 
           this.allVDCount = this.sameVDArr.length;
           this.allPDCount = this.allProductCountArr.length;
-        });  
-      }
+        })
     },
+    // watch를 통해 보충기사 및 날짜에 변화가 있을 경우 해당 메서드로 오게 된다.
+    
     createNote(chooseVDName, vendingId) {
       this.orderJobDialog = true;
       this.jobOrderVDName = chooseVDName;
@@ -475,83 +460,124 @@ export default {
 
         this.axios.get("/management/jobOrder/" + this.spName + "/" + this.today)
         .then((response) => {
-          this.allProductCountArr = [];
-          this.sameVDArr = [];
-          this.allCount = 0;
+          this.allProductCountArr = [];       // 모든 제품 정보 초기화
+          this.sameVDArr = [];                // 같은 자판기의 제품 정보 초기화
+          this.allCount = 0;                  // 총 작업지시 제품 수 초기화
 
           for(var i = 0; i < response.data.length; i++) {
             var productObj = {
-            productName: "",
-            productCount: 0
-          }
-
-          productObj.productName = response.data[i].drink_name;
-          productObj.productCount = response.data[i].sp_val;
-          this.allCount += productObj.productCount;
-
-          var is_nameSame = false;
-
-          for (var j = 0; j < this.allProductCountArr.length; j++) {
-            if (this.allProductCountArr[j].productName == productObj.productName) {
-              this.allProductCountArr[j].productCount += productObj.productCount;
-              is_nameSame = true;
-              break;
+              productName: "",
+              productNoUnderLineName: "",
+              productCount: 0,
+              productImgSrc: ""
             }
-          }
 
-          if (is_nameSame == false) {
-            this.allProductCountArr.push(productObj);
-          }
+            productObj.productName = response.data[i].drink_name;
+            productObj.productNoUnderLineName = response.data[i].drink_name.replace("_", "\n");
+            productObj.productCount = response.data[i].sp_val;
+            productObj.productImgSrc = "/images/drink/" + response.data[i].drink_name + "_back.png";
+            this.allCount += productObj.productCount;
+            // 작업지시 제품 수 정리
 
-          var is_vdSame = false;
+            var is_nameSame = false;    // 같은 이름 제품 유무
 
-          for (var j = 0; j < this.sameVDArr.length; j++) {
-            if (this.sameVDArr[j].vd_id == response.data[i].vd_id) {
-              var pdName = response.data[i].drink_name.replace("_", "\n");
-              this.sameVDArr[j].lineAndProduct.push({lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val});
-              
-              if (response.data[i].note != null) {
-                this.sameVDArr[j].orderNote += "," + response.data[i].note;
+            for (var j = 0; j < this.allProductCountArr.length; j++) {
+              if (this.allProductCountArr[j].productName == productObj.productName) {
+                this.allProductCountArr[j].productCount += productObj.productCount;
+                is_nameSame = true;
+                break;
               }
-      
-              is_vdSame = true;
-              break;
             }
+
+            if (is_nameSame == false) {
+              this.allProductCountArr.push(productObj);
+            }
+
+            var is_vdSame = false;
+
+            for (var j = 0; j < this.sameVDArr.length; j++) {
+              if (this.sameVDArr[j].vd_id == response.data[i].vd_id) {
+                var pdName = response.data[i].drink_name.replace("_", "\n");
+                this.sameVDArr[j].lineAndProduct.push({lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"});
+                
+                if (response.data[i].note != null) {
+                  this.sameVDArr[j].orderNote += "," + response.data[i].note;
+                }
+        
+                is_vdSame = true;
+                break;
+              }
+            }
+            
+            if (is_vdSame == false) {
+              var pdName = response.data[i].drink_name.replace("_", "\n");
+
+              if (response.data[i].note != null) {
+                this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: response.data[i].note, lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
+              }
+              else {
+                this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
+              }
+            }
+            // 같은 이름 자판기 정보 정리
           }
+          // 해당 보충기사의 모든 작업지시 사항 정리
           
-          if (is_vdSame == false) {
-            var pdName = response.data[i].drink_name.replace("_", "\n");
-
-            if (response.data[i].note != null) {
-              this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: response.data[i].note, lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val}]});
-            }
-            else {
-              this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val}]});
+          for (var i = 0; i < this.allProductCountArr.length; i++) {
+            if (this.allProductCountArr[i].productCount == 0) {
+              this.allProductCountArr.splice(i, 1);
             }
           }
-        }
+          // 보충량 0인 제품 삭제
 
-        this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 8);
-        this.allProductCountArrCut = [];
-        var cut = 0;
+          this.allPDCount = this.allProductCountArr.length;   // 모든 제품 수
 
-        for (var i = 0; i < this.allProductTableRepeationCount; i++) {
-          this.allProductCountArrCut[i] = [];
+          var inputEmptyObj = {
+            productName: "",
+            productCount: 0,
+            productImgSrc: ""
+          }
+          // 빈 값을 가진 객체
 
-          for (var j = cut; j < this.allProductCountArr.length; j++) {
-            if (j % 8 != 0 || j == cut) {
-              this.allProductCountArrCut[i].push(this.allProductCountArr[j]);
+          while (this.allProductCountArr.length < 12) {
+            if (this.allProductCountArr.length == 11) {
+                var inputLastEmptyObj = {
+                productName: "",
+                productCount: -1,
+                productImgSrc: ""
+              }
+
+              this.allProductCountArr.push(inputLastEmptyObj);
             }
             else {
-              cut = j;
-              break;
+              this.allProductCountArr.push(inputEmptyObj);
             }
           }
-        }
+          // 공간 맞추기
 
-        this.allVDCount = this.sameVDArr.length;
-        this.allPDCount = this.allProductCountArr.length;
-      });       
+          this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 6);   // 모든 작업지시 테이블 줄 수 
+          this.allProductCountArrCut = [];                                                      // 모든 작업지시 제품 정보
+          var cut = 0;
+
+          for (var i = 0; i < this.allProductTableRepeationCount; i++) {
+            this.allProductCountArrCut[i] = [];
+
+            for (var j = cut; j < this.allProductCountArr.length; j++) {
+              if (j % 6 != 0 || j == cut) {
+                this.allProductCountArrCut[i].push(this.allProductCountArr[j]);
+              }
+              else {
+                cut = j;
+                break;
+              }
+            }
+          }
+          // 줄 수에 맞게 제품 정보 입력
+
+          this.allVDCount = this.sameVDArr.length;
+          this.allPDCount = this.allProductCountArr.length;
+        })
+             
     },
 
     //<-----------------National axios --------------------> 
@@ -1049,4 +1075,91 @@ label{
     font-family:"Nanum Gothic";
     color:#0064c8;
   }
+
+
+.contentsRowStyle {
+  display: grid;
+  grid-template-rows: 0.4fr 0.6fr;
+  height: 460px;
+  background-color: #FAFAFA;
+}
+
+.productStyle {
+  display: grid;
+  grid-template-columns: 0.7fr 0.3fr;
+}
+
+table.jobOrderTableStyle td {
+  width: 100px;
+  height: 130px;
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+.emptyDivStyle {
+  background-image: url("/images/management/blue_background.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  width:100%;
+  height: 100%;
+}
+
+.productDivStyle {
+  background-image: url("/images/management/white_background.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  width:100%;
+  height: 100%;
+  text-align: center;
+}
+
+.blueFontStyle{
+  color: #1565C0;
+}
+
+.arrowImgSytle {
+  min-width: 0px;
+  margin: 0px;
+  padding: 1px;
+}
+
+.printAndOrderCreateBtnStyle {
+  border: 0px;
+  min-width: 0px;
+  margin: 5px;
+  padding: 1px;
+  height: 100%;
+  border-radius: 15px;
+}
+
+.divRowHalf {
+  display: grid;
+  grid-template-rows: 0.5fr 0.5fr;
+}
+
+.divColumnHalf {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+}
+
+table.orderTableStyle {
+  width: 100%;
+}
+table.orderTableStyle th {
+  border-bottom: 3px #1565C0 solid;
+  color: #1565C0;
+}
+table.orderTableStyle td {
+  border-bottom: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+table.orderTableStyle tr:nth-child(even) {
+  background: #E3F2FD;
+}
 </style>

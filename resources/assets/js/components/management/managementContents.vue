@@ -6,7 +6,7 @@
     <div v-if="contentPage == '보충기사'">
       <div class="contentsUpperStyle">
         <div style="margin-right: 10px;">
-          <img :src="identifyImg" id="showImage" style="width: 100%; ">
+          <img :src="identifyImg" id="showImage">
         </div>
         <div style="margin-left: 10px;">
           <table class="spInfoTableStyle">
@@ -38,22 +38,20 @@
                 <div class="productStyle">
                   <div>
                     <table class="jobOrderTableStyle">
-                      <tbody>
-                        <tr v-for="count in allProductTableRepeationCount" :key="count.index" style="width: 100%; height: 50%;">
-                          <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
-                            <div v-if="product.productCount != 0 && product.productCount != -1" class="productDivStyle">
-                              <img :src="product.productImgSrc" style="width: 65%; height: 60px; margin: 10px;">
-                              <h3 class="blueFontStyle" style="text-align: center;">{{product.productCount}}</h3>
+                      <tr v-for="count in allProductTableRepeationCount" :key="count.index" style="width: 100%; height: 50%;">
+                        <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
+                          <div v-if="product.productCount != 0 && product.productCount != -1" class="productDivStyle">
+                            <img :src="product.productImgSrc" style="width: 65%; height: 60px; margin: 10px;">
+                            <h3 class="blueFontStyle" style="text-align: center;">{{product.productCount}}</h3>
+                          </div>
+                          <div v-else class="emptyDivStyle" style="position: relative;">
+                            <div style="position: absolute; bottom: 7px; left: 25px;">
+                              <h5 v-if="product.productCount == -1" style="color: white; text-align: center;">총 량</h5>
+                              <h3 v-if="product.productCount == -1" style="color: white; text-align: center;">{{allCount}}</h3>
                             </div>
-                            <div v-else class="emptyDivStyle" style="position: relative;">
-                              <div style="position: absolute; bottom: 7px; left: 25px;">
-                                <h5 v-if="product.productCount == -1" style="color: white; text-align: center;">총 량</h5>
-                                <h3 v-if="product.productCount == -1" style="color: white; text-align: center;">{{allCount}}</h3>
-                              </div>
-                            </div>
-                          </td>
-                        </tr>
-                      </tbody>
+                          </div>
+                        </td>
+                      </tr>
                     </table>
                   </div>
                   <div>
@@ -65,9 +63,167 @@
                       </div>
                       <div style="display: grid; grid-template-columns: 0.5fr 0.5fr;">
                         <v-btn v-if="saveToday == today && jobOrderCheck == false" @click="createJobOrderBtn" class="printAndOrderCreateBtnStyle" color="primary">작업지시서<br>생성</v-btn>
-                        <v-btn v-else disabled  class="printAndOrderCreateBtnStyle" color="primary">작업지시서<br>생성</v-btn>
-                        <v-btn @click="printWindow" class="printAndOrderCreateBtnStyle" color="teal accent-4"><img src="/images/management/print_btn.png" style="width: 150%; height: 100%"></v-btn>
+                        <v-btn v-else disabled  class="printAndOrderCreateBtnStyle">작업지시서<br>생성</v-btn>
+
+                        <v-btn v-if="jobOrderCheck == true" @click="jobOrderDialog = true" class="printAndOrderCreateBtnStyle" color="primary">
+                          작업지시서<br>보기
+                        </v-btn>
+                        <v-btn v-else disabled class="printAndOrderCreateBtnStyle">
+                          작업지시서<br>보기
+                        </v-btn>
                       </div>
+
+                      <!-- 작업지시서 모달창 -->
+                      <v-dialog v-model="jobOrderDialog" width="1300px">
+                        <v-card style="display: grid; grid-template-columns: 0.05fr 0.9fr 0.05fr;" id="modalPrint">
+                          <div>
+                          
+                          </div>
+                          <div style="margin: 60px;">
+                            <div class="jobDialogDiv">
+                              <div style="border-top: 5px solid #1565C0; margin-right: 20px;">
+                                {{today}}
+                              </div>
+                              <div style="text-align: right; border-top: 5px solid #1565C0;">
+                                Print in {{saveToday}}
+                              </div>
+                            </div>
+                            <div class="jobDialogDiv">
+                              <div>
+                              
+                              </div>
+                              <div style="display: grid; grid-template-columns: 0.85fr 0.15fr;">
+                                <div>
+                                  <div>
+                                    <img src="/images/logo.png" style="width: 70px; height: 20px;">
+                                  </div>
+                                  <div>
+                                    <font size="5">작업지시서</font>
+                                    <font size="3">Work order</font>
+                                  </div>
+                                </div>
+                                <div>
+                                  <img src="/images/realtime/left_frame.png" style="width: 10px; height: 70%;">
+                                  <font size="6">{{spName}}</font>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="jobDialogDiv" style="margin-top: 50px;">
+                              <div style="text-align: right; margin-right: 20px; margin-top: 20px;">
+                                <font size="4">음료별 필요량</font>
+                              </div>
+                              <div>
+                                <table class="jobOrderTableStyle" style="margin-top: 0px;">
+                                  <tr v-for="count in allProductTableRepeationCount" :key="count.index" style="width: 100%; height: 50%;">
+                                    <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index" style="height: 90px;">
+                                      <div v-if="product.productCount != 0 && product.productCount != -1" style="height: 100%; border-top: 5px solid #1565C0;">
+                                        <div class="divColumnHalf">
+                                          <div>
+                                            <font size="3">{{product.productNoUnderLineName}}</font>
+                                          </div>
+                                          <div style="text-align: right;">
+                                            <font size="3">{{product.productCount}}</font>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                            <div class="jobDialogDiv">
+                              <div style="text-align: right; margin-right: 20px;">
+                                <font size="4">총계</font>
+                              </div>
+                              <div>
+                                <table class="jobOrderModalAllCountTable">
+                                  <tr>
+                                    <td>
+                                      <div class="divColumnHalf">
+                                        <div>
+                                          <font size="3">자판기 수</font>
+                                        </div>
+                                        <div style="text-align: right;">
+                                          <font size="3">{{allVDCount}}</font>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <td>
+                                      <div class="divColumnHalf">
+                                        <div>
+                                          <font size="3">제품 수</font>
+                                        </div>
+                                        <div style="text-align: right;">
+                                          <font size="3">{{allPDCount}}</font>
+                                        </div>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td>
+                                      <div class="divColumnHalf">
+                                        <div>
+                                          <font size="3">제품 총량</font>
+                                        </div>
+                                        <div style="text-align: right;">
+                                          <font size="3">{{allCount}}</font>
+                                        </div>
+                                      </div>
+                                    </td>
+                                    <th style="border-bottom: none; border-right: none; border-left: none; border-top:none;">
+
+                                    </th>
+                                  </tr>
+                                </table>
+                              </div>
+                            </div>
+                            <div class="jobDialogDiv">
+                              <div style="text-align: right; margin-right: 20px;">
+                                <font size="4">자판기별 필요량</font>
+                              </div>
+                              <div>
+                                <!-- 작업지시서 본 내용 -->
+                                <table class="orderTableStyle">
+                                  <thead style="text-align: center;">
+                                    <th style="width: 12%;"><font size="4">자판기 명</font></th>
+                                    <th v-for="n in 8" :key="n.index" style="width: 11%;"><font size="4">{{n}}</font></th>
+                                  </thead>
+                                  <tbody v-for="vending in sameVDArr" :key="vending.index">
+                                    <tr>
+                                      <td><font size="4" color="#1565C0">{{vending.vd_name}}</font></td>
+
+                                      <td v-for="productValue in vending.lineAndProduct" :key="productValue.index">
+                                        <div style="text-align: center; display: grid; grid-template-rows: 0.8fr 0.2fr; height: 100%;">
+                                          <div>
+                                            <font size="4">{{productValue.productName}}</font>
+                                          </div>
+                                          <div>
+                                             <font size="4">{{productValue.sp_val}}</font>
+                                          </div>
+                                        </div>
+                                      </td>                      
+                                      
+                                    </tr>
+                                    <tr>
+                                      <td><font size="4">비고</font></td>
+                                      <td colspan="8">{{vending.orderNote}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                          <div style="margin-top: 60px;">
+                            <v-btn id="jobOrderModalPrintBtn" @click="printWindow('modalPrint')" style="border: 0px; min-width: 0px; margin: 5px; padding: 1px; height: 100px; border-radius: 15px;" color="teal accent-4">
+                              <img src="/images/management/print_btn.png" style="width: 100px; height: 100px;">
+                            </v-btn>
+                            <v-btn id="jobOrderModalCheckBtn" style="border: 0px; min-width: 0px; margin: 5px; padding: 1px; width: 135px; height: 100px; border-radius: 15px;" color="primary" @click.native="jobOrderDialog = false" ><h2>확인</h2></v-btn>
+                          </div>
+                        </v-card>
+                      </v-dialog>
+                      <!-- 작업지시서 모달창 -->
+
+
 
                       <!-- 달력 띄우는 모달창 -->
                       <v-dialog v-model="dialog" max-width="300">
@@ -197,6 +353,7 @@
       </div>
     </div>
     <div v-else>
+    
     </div>
   </div>
 </template>
@@ -334,7 +491,8 @@
         jobOrderVDName                  : "",       // 작업지시 내리는 자판기 이름
         jobOrderVDId                    : "",       // 작어지시 내리는 자판기 아이디
         saveToday                       : "",       // 오늘 날짜
-        jobOrderCheck                   : false     // 작업지시서 생성 유무 확인
+        jobOrderCheck                   : false,    // 작업지시서 생성 유무 확인
+        jobOrderDialog                  : false     // 작업지시서 모달창 오픈 상태
       }
     },
     watch: {
@@ -441,6 +599,11 @@
               this.axios.get(createJobOrderUrl)
               .then((response) => {
                 if (response.data == true) {
+                  this.jobOrderDialog = true;
+
+                  var createJobOrderAudio = new Audio('/music/create_job_alert.mp3');
+                  createJobOrderAudio.play();
+
                   alert("오늘의 작업지시서가 생성되었습니다.");
                   this.jobOrderCheck = true;  // 작업지시서 생성 확인 
 
@@ -448,11 +611,10 @@
 
                   this.axios.post(sendPushAlertUrl)
                   .then((response) => {
-                    alert("앱으로 푸시알람이 갔습니다.");
+                    console.log("앱으로 푸시알람이 갔습니다.");
                   })
                   .catch((error) => {
                     console.log(error.response);
-                    alert("푸시알람 보내기가 실패하였습니다.");
                   })
                 }
                 else {
@@ -476,18 +638,26 @@
       // 작업지시서 생성
 
 
-	    printWindow(){
-        html2canvas(document.getElementById("spOrderListCutDiv")).then(function (canvas) {
+	    printWindow(divId){
+        document.getElementById("jobOrderModalPrintBtn").style.display = 'none';
+        document.getElementById("jobOrderModalCheckBtn").style.display = 'none';
+        // 버튼 이미지 안보이게 하기
+        
+        html2canvas(document.getElementById(divId)).then(function (canvas) {
           // 해당 div 이미지화
 
           const html = document.querySelector('html');  // 새 element 생성
 
           html.appendChild(canvas);                     // 이미지 넣기
-          document.body.style.display = 'none';
+          document.body.style.display = 'none';         // 화면 이미지 안보이게 하기
           window.print();                               // 인쇄
-          document.body.style.display = 'block';
-
+          document.body.style.display = 'block';        // 화면 이미지 보이게 하기
+          
           html.removeChild(html.lastChild);             // 이미지 제거
+
+          document.getElementById("jobOrderModalPrintBtn").style.display = 'block';
+          document.getElementById("jobOrderModalCheckBtn").style.display = 'block';
+          // 버튼 이미지 다시 보이게 하기
         });
 	    },
       // 인쇄
@@ -568,11 +738,13 @@
             for(var i = 0; i < response.data.length; i++) {
               var productObj = {
                 productName: "",
+                productNoUnderLineName: "",
                 productCount: 0,
                 productImgSrc: ""
               }
 
               productObj.productName = response.data[i].drink_name;
+              productObj.productNoUnderLineName = response.data[i].drink_name.replace("_", "\n");
               productObj.productCount = response.data[i].sp_val;
               productObj.productImgSrc = "/images/drink/" + response.data[i].drink_name + "_back.png";
               this.allCount += productObj.productCount;
@@ -904,6 +1076,7 @@ table.spInfoTableStyle td {
   height: 100%;
   text-align: center;
 }
+
 .emptyDivStyle {
   background-image: url("/images/management/blue_background.png");
   background-size: 100% 100%;
@@ -931,7 +1104,7 @@ table.spInfoTableStyle td {
   min-width: 0px;
   margin: 5px;
   padding: 1px;
-  height: 90%;
+  height: 100%;
   border-radius: 15px;
 }
 
@@ -980,8 +1153,25 @@ table.orderTableStyle tr:nth-child(even) {
   background: #E3F2FD;
 }
 
+table.jobOrderModalAllCountTable {
+  margin-bottom: 20px;
+}
+
+table.jobOrderModalAllCountTable td {
+  border-bottom: 10px solid white;
+  border-right: 10px solid white;
+  border-left: none;
+  border-top:none;
+  background: #E3F2FD;
+}
+
+.jobDialogDiv {
+  display: grid;
+  grid-template-columns: 0.2fr 0.8fr;
+}
+
 #showImage {
-  width: 150px;
+  width: 100%;
   height: 120px;
   margin-right: 10px;
 }
@@ -991,5 +1181,14 @@ table.orderTableStyle tr:nth-child(even) {
   grid-template-rows: 0.1fr 0.9fr;
 }
 
+
+
+/* #lateral .speed-dial,
+#lateral .btn--floating {
+  position: absolute;
+}
+#lateral .btn--floating {
+  margin: 746px 26px 56px 56px;
+} */
 
 </style>
