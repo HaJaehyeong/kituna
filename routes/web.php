@@ -9,7 +9,6 @@ Route::get('/management', function () {    return view('welcome'); });
 Route::get('/product', function () {    return view('welcome'); });
 Route::get('/mainPage', function () {    return view('welcome'); });
 
-
 Route::get('sell', 'realtimeController@sell');
 
 

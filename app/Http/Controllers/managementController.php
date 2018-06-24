@@ -9,7 +9,7 @@ use File;
 
 class managementController extends Controller
 {
-    //
+    // 보충기사 정보가져오기
     public function getSP() {
         $getSP = DB::table('supplementer')->get();
 
@@ -63,12 +63,12 @@ class managementController extends Controller
     
     // 자판기 등록
     public function registrationVD(Request $input) {
-        $vd_name= $input->get('ven_name'); 
-        $vd_address= $input->get('ven_Location'); 
-        $vd_supplementer= $input->get('ven_Manager'); 
-        $drink_arr= json_decode($input->get('drink_line'), true); 
-        $vd_latitude= $input->get('clickLat'); 
-        $vd_longitude= $input->get('clickLng'); 
+        $vd_name= $input->get('ven_name');                          // 자판기 이름
+        $vd_address= $input->get('ven_Location');                   // 자판기 주소
+        $vd_supplementer= $input->get('ven_Manager');               // 담당 보충기사
+        $drink_arr= json_decode($input->get('drink_line'), true);   // 음료 배열
+        $vd_latitude= $input->get('clickLat');                      // 자판기 위치 위도
+        $vd_longitude= $input->get('clickLng');                     // 자판기 위치 경도
   
           \Log::info($drink_arr["Line1"]);
           \Log::info($drink_arr["Line2"]);
@@ -83,6 +83,7 @@ class managementController extends Controller
          * insert into vendingmachine(vd_name, vd_latitude, vd_longitude, vd_address, vd_place,                                  vd_supplementer, vd_soldout, money_in_vd, out_money) 
          *                     valuse('', , , '', '', '', 0, 0, 0);
          */
+        // 자판기 삽입
            $result = DB::table('vendingmachine')->insert([
              'vd_name'           => $vd_name,
              'vd_latitude'       => $vd_latitude,
@@ -106,7 +107,7 @@ class managementController extends Controller
 
           \Log::info($getLastCountVal[0]->count);
           
-
+        // 해당 자판기의 음료 삽입
           for ($i = 1 ; $i < 9 ; $i++) {
             
               $result = DB::table('vd_stock')->insert([
@@ -123,12 +124,11 @@ class managementController extends Controller
           
         // 내일 날짜
         $tomorrow = date("Y-m-d", mktime(0,0,0,date("m") , date("d")+1, date("Y"))); 
-//기사번호가져오기
+        //기사번호가져오기
         $getSpId = DB::table('supplementer as sp')
         ->select('sp.sp_id')
         ->join('vendingmachine as vd', 'sp.sp_login_id', '=', 'vd.vd_supplementer')
         ->where('vd.vd_id', $getLastVdId[0]->vd_id)->get();
-
         
         // 작업지시서가 있는지 먼저 확인해야 한다.
         /* select * 
@@ -153,14 +153,17 @@ class managementController extends Controller
             ]);
         } 
 
+        // 작업지시서 가져오기
         $getJO = DB::table('job_order')
             ->where(DB::raw('substring(order_date, 1, 10)'), 
             DB::raw('substring(date_add(now(), interval +1 day), 1, 10)'))
             ->where('sp_id', $getSpId[0]->sp_id)->get();
 
+        // 작업지시서 정보 가져오기
         $getJC = DB::table('jo_column')->select('jc_id')
         ->where('jo_id', $getJO[0]->jo_id)->where('vd_id', $getLastVdId[0]->vd_id)->get();
 
+        // 작업지시서의 정보가 없다면
         if (!isset($getJC[0])) {
             $getJoColumnInfo =  DB::table('job_order')
             ->select(DB::raw('supplementer.sp_login_id as sp_login_id, vendingmachine.vd_id as vd_id, product_info.drink_name as drink_name, job_order.jo_id as jo_id, vd_stock.max_stock-vd_stock.stock as sp_val, vendingmachine.vd_name as vd_name,
@@ -195,17 +198,13 @@ class managementController extends Controller
                         'vd_soldout'        => 1
                     ]);
         }
-
-
-
-
          
-          // insert 성공하면 good반환 실패하면 fail반환
-          if ($result) {
-              return 'good';
-          } else {
-              return 'fail';
-          }
+        // insert 성공하면 good반환 실패하면 fail반환
+        if ($result) {
+            return 'good';
+        } else {
+            return 'fail';
+        }
      } 
 
     // // 하나의 자판기 정보가져오기
@@ -215,24 +214,21 @@ class managementController extends Controller
     //     return $result;
     // }
 
-     // 자판기 수정
-     public function updateVD(Request $update) {
-     
-         $vd_name= $update->get('ven_name'); 
-         $vd_id= $update->get('ven_no'); 
-         $vd_address= $update->get('ven_Location'); 
-         $vd_supplementer= $update->get('ven_Manager'); 
-         $drink_arr= json_decode($update->get('drink_line'), true); 
-            
+    // 자판기 수정
+    public function updateVD(Request $update) {
+        $vd_name= $update->get('ven_name'); 
+        $vd_id= $update->get('ven_no'); 
+        $vd_address= $update->get('ven_Location'); 
+        $vd_supplementer= $update->get('ven_Manager'); 
+        $drink_arr= json_decode($update->get('drink_line'), true); 
         
-     // 업데이트문
-         $result = DB::table('vendingmachine')->
-                     where('vd_id', $vd_id)->update([
-                         'vd_name'           => $vd_name,
-                         'vd_address'        => $vd_address,
-                         'vd_supplementer'   => $vd_supplementer
-                     ]);
-
+    // 업데이트문
+        $result = DB::table('vendingmachine')->
+                    where('vd_id', $vd_id)->update([
+                        'vd_name'           => $vd_name,
+                        'vd_address'        => $vd_address,
+                        'vd_supplementer'   => $vd_supplementer
+                    ]);
 
         //수정 전 음료 아이디 drink_id_before
         $drink_id_before = array();
@@ -377,12 +373,11 @@ class managementController extends Controller
 
     // 자판기 삭제
     public function deleteVD(Request $delete) {
-
+        // 자판기 아이디가져오기
         $vd_id= $delete->get('ven_id'); 
-
+        // 삭제
         $result = DB::table('vendingmachine')->where('vd_id', $vd_id)->delete();
 
-        
         // delete 성공하면 good반환 실패하면 fail반환
         if ($result) {
             // 성공하면 autoincrement -1 
@@ -564,7 +559,8 @@ class managementController extends Controller
         else {
             $imageFile = $request->file("imageFile");                                    // 파일 
             $imageFile->storeAs('\images\supplementer', $fileName.'.png');               // 파일 저장
-            
+
+            // 보충기사 정보들
             $sp_login_id = $request->get("sp_login_id");
             $sp_password = $request->get("sp_password");
             $sp_name = $request->get("sp_name");
@@ -573,7 +569,7 @@ class managementController extends Controller
             $sp_address = $request->get("sp_address");
             $sp_img_path = $request->get("sp_img_path");
             $sp_img_path = "/images/supplementer/".$fileName.".png";
-
+            // 보충기사 등록
             $result = DB::table('supplementer')->insert([
                 'sp_id'             => NULL,
                 'sp_login_id'       => $sp_login_id,
@@ -613,6 +609,7 @@ class managementController extends Controller
                 $spImage = $request->file('imageFile');                                        // 파일
                 $spImage->storeAs('\images\supplementer', $fileName.'.png');                   // 파일 저장
             
+                // 보충기사 정보들
                 $sp_id = (int)$request->get('sp_id');
                 $sp_login_id = (string)$request->get('sp_login_id');
                 $sp_password = (string)$request->get('sp_password');
@@ -622,8 +619,10 @@ class managementController extends Controller
                 $sp_address = (string)$request->get('sp_address');
                 $sp_img_path = '/images/supplementer/'.$fileName.'.png';
 
+                // 보충기사 정보
                 $getSpInfo = DB::table('supplementer')->where('sp_id', $sp_id)->get();
 
+                // 보충기사 정보와 비교 후 반환
                 if ($getSpInfo[0]->sp_login_id == $sp_login_id && 
                 $getSpInfo[0]->sp_password == $sp_password && 
                 $getSpInfo[0]->sp_name == $sp_name && 
@@ -632,7 +631,8 @@ class managementController extends Controller
                 $getSpInfo[0]->sp_address == $sp_address) {
                     return "good";
                 }
-                else {
+                else { // 보충기사 정보의 수정이 있으면
+                    // 수정한다
                     $result = DB::table('supplementer')
                     ->where('sp_id', $sp_id)->update([
                         'sp_id'             => $sp_id,
@@ -654,6 +654,7 @@ class managementController extends Controller
             }
         }
         else {
+            // 보충기사 정보
             $sp_id = $request->get('sp_id');
             $sp_login_id = $request->get('sp_login_id');
             $sp_password = $request->get('sp_password');
@@ -662,7 +663,7 @@ class managementController extends Controller
             $sp_phone = $request->get('sp_phone');
             $sp_address = $request->get('sp_address');
             $sp_img_path = '/images/supplementer/'.$fileNmae.'.png';
-
+            // 수정
             $result = DB::table('supplementer')
             ->where('sp_id', $sp_id)->update([
                 'sp_id'             => $sp_id,

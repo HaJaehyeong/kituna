@@ -7,7 +7,9 @@ use Illuminate\Support\Facades\DB;
 
 class realtimeController extends Controller
 {
+    // 자판기 리스트 가져오기
     public function vdList($local, $subLocal) {
+        // 자판기 정보 전부 가져오기
         $getVdList  = DB::table('vendingmachine')->get();
 
         $result = array();
@@ -15,14 +17,16 @@ class realtimeController extends Controller
         $vd_longitude = array();       
         $vd_address = array();
 
+        // 모든 자판기 주소별로 나누기
         for ($i = 0 ; $i < count($getVdList) ; $i++) {
+            // 주소 저장
             $vd_address[$i] = $getVdList[$i]->vd_address;
             if ($vd_address[$i] != null) {
                 $vd_address[$i] = explode(", ", $vd_address[$i]);
             } else {
                 $vd_address[$i] = 'not defined address';
             }
-            
+            // 주소가 넘어온 데이터와 같은 것을 저장한다.
             if ($vd_address[$i][0] == $subLocal && $vd_address[$i][1] == $local) {
                 $result[$i]['vd_id']            = $getVdList[$i]->vd_id;
                 $result[$i]['vd_latitude']      = $getVdList[$i]->vd_latitude;
@@ -52,8 +56,9 @@ class realtimeController extends Controller
         return $result;
     }
 
+    // 판매데이터 가져오기
     public function getSellData() {
-        
+        // 판매데이터 가져오기.
         $getSellData = DB::table('sell_data')
             ->select('sell_data.sell_date', 'product_info.drink_name',
                       DB::raw('count(\'product_info.drink_name\') as count'))
@@ -65,7 +70,9 @@ class realtimeController extends Controller
         return $getSellData;
     }
 
+    // 자판기의 음료 재고 가져오기
     public function getVdStock($vd_id) {
+        // 음료 재고 가져오기
         $getVdStock = DB::table(DB::raw('vd_stock vs'))
         ->select(DB::raw('vs.vd_id, vs.line, vs.stock, vs.max_stock, pi.drink_name, pi.drink_back_path, sm.expiration_date, pi.sell_price'))
         ->join(DB::raw('stock_management sm'), 'vs.drink_id', '=', 'sm.drink_id')
@@ -75,6 +82,7 @@ class realtimeController extends Controller
         return $getVdStock;
     }
 
+    // 보충기사별 자판기 가져오기
     public function vdListSP($spName) {
         $getVdList = DB::table('vendingmachine')
         ->where('vd_supplementer', $spName)->get();
@@ -82,6 +90,7 @@ class realtimeController extends Controller
         return $getVdList;
     }
 
+    // 동전 재고
     public function coinStock($vd_id){
         $getCoinStock = DB::table('vendingmachine')
         ->select(DB::raw('coin_1000 as won1000, coin_500 as won500, coin_100 as won100, 1000*coin_1000+500*coin_500+100*coin_100 as sum'))
@@ -90,6 +99,7 @@ class realtimeController extends Controller
         return $getCoinStock;
     }
 
+    // 자판기 이름으로 검색
     public function searchVdName($vd_name) {
         $getVdList = DB::table('vendingmachine')
         ->where('vd_name', $vd_name)->get();
@@ -97,6 +107,7 @@ class realtimeController extends Controller
         return $getVdList;
     }
 
+    // 판매 내역 리스트
     public function getSellDataList() {
         /* 판매 내역
          * select vd.vd_name, pi.drink_name, sd.sell_date, sd.coin_1000*1000+sd.coin_500*500            +sd.coin_100*100 as sell_price
@@ -357,6 +368,7 @@ class realtimeController extends Controller
         ]);
     }
 
+    // 판매하기
     public function sell(){
         for ($i = 0 ; $i < 1 ; $i++) {
             $vd_id = rand(1, 1);

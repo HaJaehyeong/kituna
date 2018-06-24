@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class analysisController extends Controller
 {
+    //실시간 데이터 뽑아내기 월 판매량, 일 판매량, 일 매출액
     public function analysisData($place) {
         $saveAll = array();
         // 장소가 all인경우
@@ -36,6 +37,7 @@ class analysisController extends Controller
                     DB::raw('date_format(now(), "%Y-%m-%d")'))
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m-%d")'))->get();
             
+            // 만약 존재하지 않으면..
             if (!isset($getSalesThisDay[0])) {
                 $getSalesThisDay = array();
                 $getSalesThisDay[0] = (object)array(
@@ -82,6 +84,7 @@ class analysisController extends Controller
             ->where('vd.vd_place', 'like', $place.'%')
             ->groupBy(DB::raw('date_format(sd.sell_date, "%Y-%m-%d")'))->get();
 
+            // 만약 존재하지 않으면..
             if (!isset($getSalesThisDay[0])) {
                 $getSalesThisDay = array();
                 $getSalesThisDay[0] = (object)array(
@@ -98,8 +101,9 @@ class analysisController extends Controller
         return $saveAll;
     }
 
+    // 장소, 시간, 정렬에 따른 자판기 리스트 5개
     public function ListOfDrinkSales($place, $date, $sort, $offset) {
-        $saveAll = array();
+        $saveAll = array();             // 저장할 배열
         $strDate = '';                  // mysql 날짜 형식을 저장할 문자열 변수
 
         $rank = array();
@@ -143,7 +147,7 @@ class analysisController extends Controller
              * order by value desc
              * limit 1
              */
-            if ($date == 'week') {
+            if ($date == 'week') { // 주간
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
                         DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
@@ -154,7 +158,7 @@ class analysisController extends Controller
                 ->orderBy('count', $sort)
                 ->offset($offset)->limit(5)->get();
 
-            } else {
+            } else { // 그 외
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
                         DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
@@ -165,11 +169,11 @@ class analysisController extends Controller
                 ->orderBy('count', $sort)
                 ->offset($offset)->limit(5)->get();
             }
-            if ($sort == 'desc') {
+            if ($sort == 'desc') { // 내림차순
                 for ($i = 0 ; $i < count($getListOfDrinkSales) ; $i++) {
                     $getListOfDrinkSales[$i]->num = $i+1;
                 }
-            } else if ($sort == 'asc') {
+            } else if ($sort == 'asc') { // 오름차순
                 $getVDCount = DB::table('vendingmachine')
                 ->select(DB::raw('count(*) as count'))->get();
 
@@ -177,8 +181,8 @@ class analysisController extends Controller
                     $getListOfDrinkSales[$i]->num = $getVDCount[0]->count-$i;
                 }
             }
-
-            if ($date == "week") {
+            // 매출 차이가 심한 자판기
+            if ($date == "week") { // 주간
                 $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 8 day), "%Y-%m-%d"), interval 15 day)
@@ -222,6 +226,7 @@ class analysisController extends Controller
                 ->limit(1)->get();
             }
 
+            // 전체 랭킹 매기기
             $all = DB::table('sell_data as sd')
                 ->select('sd.vd_id', DB::raw('count(*) as count'))
                 ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
@@ -230,6 +235,7 @@ class analysisController extends Controller
                 ->groupBy('sd.vd_id')
                 ->orderBy('count', $sort)->get();
 
+            // 객체로 저장
             for ($i = 0 ; $i < count($all) ; $i++) {
                 $rank[$i] =  (object)array(
                     'vd_id' => $all[$i]->vd_id,
@@ -253,7 +259,7 @@ class analysisController extends Controller
              * order by count desc
              * limit 5
              */
-            if ($date == 'week') {
+            if ($date == 'week') { // 주간
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
                         DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
@@ -264,7 +270,7 @@ class analysisController extends Controller
                 ->groupBy('sd.vd_id')
                 ->orderBy('count', $sort)
                 ->offset($offset)->limit(5)->get(); 
-            } else {
+            } else { // 그 외
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
                         DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
@@ -276,11 +282,11 @@ class analysisController extends Controller
                 ->orderBy('count', $sort)
                 ->offset($offset)->limit(5)->get(); 
             }
-            if ($sort == 'desc') {
+            if ($sort == 'desc') { // 내림차순
                 for ($i = 0 ; $i < count($getListOfDrinkSales) ; $i++) {
                     $getListOfDrinkSales[$i]->num = $i+1;
                 }
-            } else if ($sort == 'asc') {
+            } else if ($sort == 'asc') { // 오름차순
                 $getVDCount = DB::table('vendingmachine')
                 ->select(DB::raw('count(*) as count'))->get();
 
@@ -288,8 +294,8 @@ class analysisController extends Controller
                     $getListOfDrinkSales[$i]->num = $getVDCount[0]->count-$i;
                 }
             }
-
-            if ($date == "week") {
+            // 매출 차이가 심한 자판기
+            if ($date == "week") { // 주간
                 $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 8 day), "%Y-%m-%d"), interval 15 day)
@@ -304,7 +310,7 @@ class analysisController extends Controller
                 ->groupBy('sub1.vd_id')
                 ->orderBy('value', $sort)
                 ->limit(1)->get();
-            } else if ($date == "month") {
+            } else if ($date == "month") { // 월간
                 $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 30 day), "%Y-%m-%d"), interval 60 day)
@@ -319,7 +325,7 @@ class analysisController extends Controller
                 ->groupBy('sub1.vd_id')
                 ->orderBy('value', $sort)
                 ->limit(1)->get();
-            } else if ($date == "year") {
+            } else if ($date == "year") { // 년간
                 $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 365 day), "%Y-%m-%d"), interval 730 day)
@@ -336,6 +342,7 @@ class analysisController extends Controller
                 ->limit(1)->get();
             }
 
+            // 전체 랭킹 매기기
             $all = DB::table('sell_data as sd')
                 ->select('sd.vd_id', DB::raw('count(*) as count'))
                 ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
@@ -344,7 +351,7 @@ class analysisController extends Controller
                 ->where('vd.vd_place', 'like', $place.'%')
                 ->groupBy('sd.vd_id')
                 ->orderBy('count', $sort)->get();
-    
+            // 객체로 저장
             for ($i = 0 ; $i < count($all) ; $i++) {
                 $rank[$i] =  (object)array(
                     'vd_id' => $all[$i]->vd_id,
@@ -361,6 +368,7 @@ class analysisController extends Controller
         return $saveAll;
     }
 
+    // 매출순에서 클릭된 자판기 분석정보
     public function vendingmachineAnalysis($vd_id) {
         // 저장할 배열
         $saveAll = array();
@@ -380,10 +388,10 @@ class analysisController extends Controller
         ->groupBy('sd.drink_id')
         ->orderBy('count', 'desc')->get();
 
-        /**
+        /* 해당 자판기의 음료 아이디 가져오기
          * select drink_id
-       * from   vd_stock
-       * where  vd_id = $vd_id
+         * from   vd_stock
+         * where  vd_id = $vd_id
          */
         $weNeedItBecauseForUnderSQL1 = DB::table('vd_stock')
         ->select('drink_id')
@@ -394,7 +402,7 @@ class analysisController extends Controller
             $array[$i] = $weNeedItBecauseForUnderSQL1[$i]->drink_id;
         }
 
-        /**
+        /* 해당 자판기에 들지 않은 음료들 아이디를 가져오기
          * (select drink_id
          *  from product_info 
          *  where drink_id not in array)
@@ -472,6 +480,7 @@ class analysisController extends Controller
         return $saveAll;
     }
 
+    // 음료 판매 순위
     public function drinkSalesRank($date){
         $saveAll = array();
         $strDate = '';                  // mysql 날짜 형식을 저장할 문자열 변수
@@ -521,7 +530,7 @@ class analysisController extends Controller
         }
 
         /************위는 그래프 들어갈 값 밑은 표에 들어갈 값************/
-        /**
+        /* 7일 이내에 창고에 재고가 소진될 음료 가져오기
          * select pi.drink_name, count(*)/7 as count
          * from sell_data as sd
          * join product_info as pi on pi.drink_id = sd.drink_id
@@ -550,10 +559,13 @@ class analysisController extends Controller
         $array = array();
         $count = 0;
         
+        // 만약 그 개수가 7개보다 많다면 7개만 출력한다.
         $ICount = count($getAvgSalesValues);
         if ($ICount > 7) {
             $ICount = 7;
         }
+
+        // 예상소진일, 평균판매량, 음료 이름 저장
         for($i = 0 ; $i < $ICount ; $i++) {
             for($j = 0 ; $j < count($getStock) ; $j++) {
                 if ($getAvgSalesValues[$i]->drink_id == $getStock[$j]->drink_id){
@@ -569,6 +581,7 @@ class analysisController extends Controller
             }
         }
         
+        // 오름차순 정렬.
         usort($array, function($a, $b){
             if($a->prediction == $b->prediction){
                 return 0;
@@ -581,10 +594,12 @@ class analysisController extends Controller
             }
         });
 
+        // 순위 매기기
         for ($i = 0 ; $i < count($array) ; $i++) {
             $array[$i]->num = $i+1;
         }
 
+        // 저장
         $saveAll[0] = $getListOfDrinkSales;
         $saveAll[1] = $array;
         
@@ -592,6 +607,7 @@ class analysisController extends Controller
 
     }
 
+    // year, month, week 라인차트 데이터
     public function yearMonthWeekData($place) {
         $saveAll = array();
         /**년간 판매량 -> 최근 12개월 판매량과 매출
@@ -623,7 +639,7 @@ class analysisController extends Controller
             ->orderBy('date', 'desc')
             ->limit(7)->get();
         } else {
-            /**
+            /* 특정 장소의 판매량과 매출
              * select    date_format(sell_date, "%Y-%m-%d") as date, count(*) as count,
              *           sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales
              * from        sell_data as sd
@@ -668,6 +684,7 @@ class analysisController extends Controller
         return $saveAll;
     }
 
+    // 자판기의 음료 변경 지시한 것을 작업지시서에 추가
     public function setLineChangeVerTwo($vd_id, $existingDrink, $changeDrink) {
         // 자판기의 보충기사 아이디를 가져온다.
         $getSpId = DB::table('supplementer as sp')->select('sp.sp_id')
@@ -746,6 +763,7 @@ class analysisController extends Controller
         }
     }
 
+    // 기존 음료 변경, verTwo로 버전 업그레이드
     public function setLineChangeNote($vd_id, $existingDrink, $changeDrink) {
         $getSpId = DB::table('supplementer as sp')->select('sp.sp_id')
             ->join('vendingmachine as vd', 'sp.sp_login_id', '=', 'vd.vd_supplementer')
@@ -835,6 +853,7 @@ class analysisController extends Controller
             'vd_soldout'    => 3
         ]);
     }
+
     public function pieGraphData(){
         /* 장소별 음료 판매량 
          * select pi.drink_name, count(*) as count
@@ -845,6 +864,7 @@ class analysisController extends Controller
          * group by sd.drink_id
          * order by count desc
          */
+        // 학교
         $getSchoolData = DB::table('sell_data as sd')
         ->select('pi.drink_name', DB::raw('count(*) as count'))
         ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
@@ -853,6 +873,7 @@ class analysisController extends Controller
         ->groupBy('sd.drink_id')
         ->orderBy('count', 'desc')->get();
 
+        // 공원
         $getParkData = DB::table('sell_data as sd')
         ->select('pi.drink_name', DB::raw('count(*) as count'))
         ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
@@ -861,6 +882,7 @@ class analysisController extends Controller
         ->groupBy('sd.drink_id')
         ->orderBy('count', 'desc')->get();
 
+        // 회사
         $getCompanyData = DB::table('sell_data as sd')
         ->select('pi.drink_name', DB::raw('count(*) as count'))
         ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
@@ -869,6 +891,7 @@ class analysisController extends Controller
         ->groupBy('sd.drink_id')
         ->orderBy('count', 'desc')->get();
 
+        // 병원
         $getHospitalData = DB::table('sell_data as sd')
         ->select('pi.drink_name', DB::raw('count(*) as count'))
         ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
@@ -877,6 +900,7 @@ class analysisController extends Controller
         ->groupBy('sd.drink_id')
         ->orderBy('count', 'desc')->get();
 
+        // 배열에 저장!
         $saveArr = array();
         $saveArr[0] = $getSchoolData;
         $saveArr[1] = $getParkData;
@@ -885,6 +909,8 @@ class analysisController extends Controller
         
         return $saveArr;
     }
+
+    // 관심 자판기 데이터
     public function differenceVdAnalysis($vd_id, $date) {
         $saveAll = array();
 
@@ -904,7 +930,7 @@ class analysisController extends Controller
                 break;
         }
 
-        /**
+        /* 기간별 판매 데이터 가져오기
          * select pi.drink_name, count(*)
          * from sell_data as sd
          * join product_info as pi on pi.drink_id = sd.drink_id
@@ -912,6 +938,7 @@ class analysisController extends Controller
          * and date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format  * (now(), "%Y-%m-%d"), interval 30 day), "%Y-%m-%d"), interval 60 day)
          * group by sd.vd_id, sd.drink_id
          */
+        // 과거 판매데이터 (년간이면 작년)
         $getSalesRankLongTimeAgo = DB::table('sell_data as sd')
         ->select('pi.drink_name', DB::raw('count(*) as count'))
         ->join('product_info as pi', 'pi.drink_id', '=', 'sd.drink_id')
@@ -919,6 +946,7 @@ class analysisController extends Controller
         ->where(DB::raw('date_format(sell_date, "%Y-%m-%d")'), ">", DB::raw('date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval '.$first.' day), "%Y-%m-%d"), interval '.$second.' day)'))
         ->groupBy(DB::raw('sd.vd_id, sd.drink_id'))->get();
 
+        // 이번 판매데이터 (년간이면 올해)
         $getSalesRankNow = DB::table('sell_data as sd')
         ->select('pi.drink_name', DB::raw('count(*) as count'))
         ->join('product_info as pi', 'pi.drink_id', '=', 'sd.drink_id')
@@ -927,6 +955,7 @@ class analysisController extends Controller
         ->groupBy(DB::raw('sd.vd_id, sd.drink_id'))
         ->get();
 
+        // 저장
         $saveAll[0] = $getSalesRankLongTimeAgo;
         $saveAll[1] = $getSalesRankNow;
 
