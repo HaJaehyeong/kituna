@@ -53,16 +53,16 @@ div.menuA {
   padding: 4px 4px;
 }
  #a1 {
-   margin-top:25px;
+   margin-top:19px;
  }
  #a2 {
-   margin-top:25px;
+   margin-top:19px;
  }
   #a3 {
-   margin-top:25px;
+   margin-top:19px;
  }
  #a4 {
-   margin-top:25px;
+   margin-top:19px;
  }
 
 

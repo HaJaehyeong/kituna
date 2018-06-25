@@ -165,19 +165,19 @@ var LocalList = {
                 //신주쿠
                 { no: 0, name: '新宿', englishN: 'Shinjuku-ku, Tokyo-to, Japan', latitude: '35.690435', longitude: '139.700253' },
                 //다카다노바바
-                { no: 1, name: '高田馬場', latitude: '35.712550', longitude: '139.702653' },
+                { no: 1, name: '高田馬場', englishN: 'Eunpyeong-gu, Seoul', latitude: '35.712550', longitude: '139.702653' },
                 //오쿠보
-                { no: 2, name: '大久保', latitude: '35.697168', longitude: '139.701166' },
+                { no: 2, name: '大久保', englishN: 'Eunpyeong-gu, Seoul', latitude: '35.697168', longitude: '139.701166' },
                 //가구라자카
-                { no: 3, name: '神楽坂', latitude: '35.702283', longitude: '139.740766' },
+                { no: 3, name: '神楽坂', englishN: 'Seongbuk-gu, Seoul', latitude: '35.702283', longitude: '139.740766' },
                 //이치가야
-                { no: 4, name: '市谷', latitude: '35.691225', longitude: '139.735823' },
+                { no: 4, name: '市谷', englishN: 'Dongdaemun-gu, Seoul', latitude: '35.691225', longitude: '139.735823' },
                 //우시고메
-                { no: 5, name: '牛込', latitude: '35.699890', longitude: '139.725372' },
+                { no: 5, name: '牛込', englishN: 'Seodaemun-gu, Seoul', latitude: '35.699890', longitude: '139.725372' },
                 //니시신주쿠
-                { no: 6, name: '西新宿', latitude: '35.692996', longitude: '139.692695' },
+                { no: 6, name: '西新宿', englishN: 'Seongbuk-gu, Seoul', latitude: '35.692996', longitude: '139.692695' },
                 //요쓰야
-                { no: 7, name: '四谷', latitude: '35.686571', longitude: '139.730476' }
+                { no: 7, name: '四谷', englishN: 'Eunpyeong-gu, Seoul', latitude: '35.686571', longitude: '139.730476' }
 
             ]
         },

@@ -11,27 +11,27 @@
         <div style="margin-left: 10px;">
           <table class="spInfoTableStyle">
             <tr class="even">
-              <th class="blueFontStyle"><font size="3">사원번호</font></th>
-              <td><font size="3">{{identifyNo}}</font></td>
-              <th class="blueFontStyle"><font size="3">전화번호</font></th>
-              <td><font size="3">{{identifyPhoneNum}}</font></td>
+              <th class="blueFontStyle"><font size="3" style="font-family: 'Nanum+Gothic';">사원번호</font></th>
+              <td><font size="3" style="font-family: 'Nanum+Gothic'">{{identifyNo}}</font></td>
+              <th class="blueFontStyle"><font size="3" style="font-family: 'Nanum+Gothic';">전화번호</font></th>
+              <td><font size="3" style="font-family: 'Nanum+Gothic'">{{identifyPhoneNum}}</font></td>
             </tr>
             <tr>
-              <th class="blueFontStyle"><font size="3">이름</font></th>
-              <td><font size="3">{{identifyName}}</font></td>
-              <th class="blueFontStyle"><font size="3">이메일</font></th>
-              <td><font size="3">{{identifyEmail}}</font></td>
+              <th class="blueFontStyle"><font size="3" style="font-family: 'Nanum+Gothic';">이름</font></th>
+              <td><font size="3" style="font-family:'Nanum+Gothic';">{{identifyName}}</font></td>
+              <th class="blueFontStyle"><font size="3" style="font-family: 'Nanum+Gothic';">이메일</font></th>
+              <td><font size="3" style="font-family:'Nanum+Gothic';">{{identifyEmail}}</font></td>
             </tr>
             <tr class="even">
-              <th class="blueFontStyle"><font size="3">주소</font></th>
-              <td colspan="3"><font size="3">{{identifyAddress}}</font></td>
+              <th class="blueFontStyle"><font size="3" style="font-family: 'Nanum+Gothic';">주소</font></th>
+              <td colspan="3"><font size="3" style="font-family:'Nanum+Gothic';">{{identifyAddress}}</font></td>
             </tr>
           </table>
         </div>
       </div>
       <div>
-        <v-tabs v-model="active" color="grey lighten-5" slider-color="indigo">
-          <v-tab v-for="choose in spInforPageList" :key="choose">{{ choose }}</v-tab>
+        <v-tabs v-model="active" color="grey lighten-5" slider-color="primary">
+          <v-tab v-for="choose in spInforPageList" :key="choose"><font size="5" color="#0064c8" style="font-family: 'Nanum+Gothic';"><strong>{{ choose }}</strong></font></v-tab>
           <v-tab-item v-for="choose in spInforPageList" :key="choose">
             <div v-if="choose=='작업지시서'">
               <div class="contentsRowStyle" id="spOrderListCutDiv">
@@ -42,12 +42,12 @@
                         <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index">
                           <div v-if="product.productCount != 0 && product.productCount != -1" class="productDivStyle">
                             <img :src="product.productImgSrc" style="width: 65%; height: 60px; margin: 10px;">
-                            <h3 class="blueFontStyle" style="text-align: center;">{{product.productCount}}</h3>
+                            <h3 class="blueFontStyle" style="text-align: center; font-family: 'Fugaz+One';">{{product.productCount}}</h3>
                           </div>
                           <div v-else class="emptyDivStyle" style="position: relative;">
                             <div style="position: absolute; bottom: 7px; left: 25px;">
-                              <h5 v-if="product.productCount == -1" style="color: white; text-align: center;">총 량</h5>
-                              <h3 v-if="product.productCount == -1" style="color: white; text-align: center;">{{allCount}}</h3>
+                              <h5 v-if="product.productCount == -1" style="color: white; text-align: center; font-family: 'Nanum+Gothic';">총 량</h5>
+                              <h3 v-if="product.productCount == -1" style="color: white; text-align: center; font-family: 'Fugaz+One';">{{allCount}}</h3>
                             </div>
                           </div>
                         </td>
@@ -57,18 +57,18 @@
                   <div>
                     <div style="margin-bottom: 10px;">
                       <div>
-                        <v-btn outline small color="indigo" @click="dateChange(-1)" class="arrowImgSytle" style="border: 0px;">◀</v-btn>
-                        <v-btn outline small color="indigo" @click.native.stop="dialog = true" style="min-width: 0px; font-size: 18px; padding: 2px;">{{today}}</v-btn>
-                        <v-btn outline small color="indigo" @click="dateChange(1)" class="arrowImgSytle" style="border: 0px;">▶</v-btn>
+                        <v-btn outline small color="primary" @click="dateChange(-1)" class="arrowImgSytle" style="border: 0px;">◀</v-btn>
+                        <v-btn outline small color="primary" @click.native.stop="dialog = true" style="min-width: 0px; font-size: 18px; padding: 2px; font-family: 'Fugaz+One';">{{today}}</v-btn>
+                        <v-btn outline small color="primary" @click="dateChange(1)" class="arrowImgSytle" style="border: 0px;">▶</v-btn>
                       </div>
                       <div style="display: grid; grid-template-columns: 0.5fr 0.5fr;">
-                        <v-btn v-if="saveToday == today && jobOrderCheck == false" @click="createJobOrderBtn" class="printAndOrderCreateBtnStyle" color="primary">작업지시서<br>생성</v-btn>
-                        <v-btn v-else disabled  class="printAndOrderCreateBtnStyle">작업지시서<br>생성</v-btn>
+                        <v-btn v-if="saveToday == today && jobOrderCheck == false" @click="createJobOrderBtn" class="printAndOrderCreateBtnStyle" color="primary" style="font-family: 'Nanum+Gothic';">작업지시서<br>생성</v-btn>
+                        <v-btn v-else disabled  class="printAndOrderCreateBtnStyle" style="font-family: 'Nanum+Gothic';">작업지시서<br>생성</v-btn>
 
-                        <v-btn v-if="jobOrderCheck == true" @click="jobOrderDialog = true" class="printAndOrderCreateBtnStyle" color="primary">
+                        <v-btn v-if="jobOrderCheck == true" @click="jobOrderDialog = true" class="printAndOrderCreateBtnStyle" color="primary" style="font-family: 'Nanum+Gothic';">
                           작업지시서<br>보기
                         </v-btn>
-                        <v-btn v-else disabled class="printAndOrderCreateBtnStyle">
+                        <v-btn v-else disabled class="printAndOrderCreateBtnStyle" style="font-family: 'Nanum+Gothic';">
                           작업지시서<br>보기
                         </v-btn>
                       </div>
@@ -81,10 +81,10 @@
                           </div>
                           <div style="margin: 60px;">
                             <div class="jobDialogDiv">
-                              <div style="border-top: 5px solid #1565C0; margin-right: 20px;">
+                              <div style="border-top: 5px solid #0064c8; margin-right: 20px;">
                                 {{today}}
                               </div>
-                              <div style="text-align: right; border-top: 5px solid #1565C0;">
+                              <div style="text-align: right; border-top: 5px solid #0064c8;">
                                 Print in {{saveToday}}
                               </div>
                             </div>
@@ -98,28 +98,28 @@
                                     <img src="/images/logo.png" style="width: 70px; height: 20px;">
                                   </div>
                                   <div>
-                                    <font size="5">작업지시서</font>
-                                    <font size="3">Work order</font>
+                                    <font size="5" style="font-family: 'Nanum+Gothic';">작업지시서</font>
+                                    <font size="3" style="font-family:'Dosis';">Work order</font>
                                   </div>
                                 </div>
                                 <div>
                                   <img src="/images/realtime/left_frame.png" style="width: 10px; height: 70%;">
-                                  <font size="6">{{spName}}</font>
+                                  <font size="6" style="font-family:'Dosis';">{{spName}}</font>
                                 </div>
                               </div>
                             </div>
                             <div class="jobDialogDiv" style="margin-top: 50px;">
-                              <div style="text-align: right; margin-right: 20px; margin-top: 20px;">
+                              <div style="text-align: right; margin-right: 20px; margin-top: 20px; font-family: 'Nanum+Gothic';">
                                 <font size="4">음료별 필요량</font>
                               </div>
                               <div>
                                 <table class="jobOrderTableStyle" style="margin-top: 0px;">
                                   <tr v-for="count in allProductTableRepeationCount" :key="count.index" style="width: 100%; height: 50%;">
                                     <td v-for="product in allProductCountArrCut[count - 1]" :key="product.index" style="height: 90px;">
-                                      <div v-if="product.productCount != 0 && product.productCount != -1" style="height: 100%; border-top: 5px solid #1565C0;">
+                                      <div v-if="product.productCount != 0 && product.productCount != -1" style="height: 100%; border-top: 5px solid #0064c8;">
                                         <div class="divColumnHalf">
                                           <div>
-                                            <font size="3">{{product.productNoUnderLineName}}</font>
+                                            <font size="3" style="font-family: 'Dosis';">{{product.productNoUnderLineName}}</font>
                                           </div>
                                           <div style="text-align: right;">
                                             <font size="3">{{product.productCount}}</font>
@@ -132,7 +132,7 @@
                               </div>
                             </div>
                             <div class="jobDialogDiv">
-                              <div style="text-align: right; margin-right: 20px;">
+                              <div style="text-align: right; margin-right: 20px; font-family: 'Nanum+Gothic';">
                                 <font size="4">총계</font>
                               </div>
                               <div>
@@ -141,9 +141,9 @@
                                     <td>
                                       <div class="divColumnHalf">
                                         <div>
-                                          <font size="3">자판기 수</font>
+                                          <font size="3" style="font-family: 'Nanum+Gothic';">자판기 수</font>
                                         </div>
-                                        <div style="text-align: right;">
+                                        <div style="text-align: right; font-family: 'Fugaz+One';">
                                           <font size="3">{{allVDCount}}</font>
                                         </div>
                                       </div>
@@ -151,9 +151,9 @@
                                     <td>
                                       <div class="divColumnHalf">
                                         <div>
-                                          <font size="3">제품 수</font>
+                                          <font size="3" style="font-family: 'Nanum+Gothic';">제품 수</font>
                                         </div>
-                                        <div style="text-align: right;">
+                                        <div style="text-align: right; font-family: 'Fugaz+One';">
                                           <font size="3">{{allPDCount}}</font>
                                         </div>
                                       </div>
@@ -163,9 +163,9 @@
                                     <td>
                                       <div class="divColumnHalf">
                                         <div>
-                                          <font size="3">제품 총량</font>
+                                          <font size="3" style="font-family: 'Nanum+Gothic';">제품 총량</font>
                                         </div>
-                                        <div style="text-align: right;">
+                                        <div style="text-align: right; font-family: 'Fugaz+One';">
                                           <font size="3">{{allCount}}</font>
                                         </div>
                                       </div>
@@ -178,35 +178,35 @@
                               </div>
                             </div>
                             <div class="jobDialogDiv">
-                              <div style="text-align: right; margin-right: 20px;">
+                              <div style="text-align: right; margin-right: 20px; font-family: 'Nanum+Gothic';">
                                 <font size="4">자판기별 필요량</font>
                               </div>
                               <div>
                                 <!-- 작업지시서 본 내용 -->
                                 <table class="orderTableStyle">
                                   <thead style="text-align: center;">
-                                    <th style="width: 12%;"><font size="4">자판기 명</font></th>
-                                    <th v-for="n in 8" :key="n.index" style="width: 11%;"><font size="4">{{n}}</font></th>
+                                    <th style="width: 12%; font-family: 'Nanum+Gothic';"><font size="4">자판기 명</font></th>
+                                    <th v-for="n in 8" :key="n.index" style="width: 11%; font-family: 'Fugaz+One';"><font size="4">{{n}}</font></th>
                                   </thead>
                                   <tbody v-for="vending in sameVDArr" :key="vending.index">
                                     <tr>
-                                      <td><font size="4" color="#1565C0">{{vending.vd_name}}</font></td>
+                                      <td><font size="4" color="#0064c8" style="font-family: 'Nanum+Gothic';">{{vending.vd_name}}</font></td>
 
                                       <td v-for="productValue in vending.lineAndProduct" :key="productValue.index">
                                         <div style="text-align: center; display: grid; grid-template-rows: 0.8fr 0.2fr; height: 100%;">
                                           <div>
-                                            <font size="4">{{productValue.productName}}</font>
+                                            <font size="4" style="font-family: 'Nanum+Gothic';">{{productValue.productName}}</font>
                                           </div>
                                           <div>
-                                             <font size="4">{{productValue.sp_val}}</font>
+                                             <font size="4" style="font-family: 'Fugaz+One';">{{productValue.sp_val}}</font>
                                           </div>
                                         </div>
                                       </td>                      
                                       
                                     </tr>
                                     <tr>
-                                      <td><font size="4">비고</font></td>
-                                      <td colspan="8">{{vending.orderNote}}</td>
+                                      <td><font size="4" style="font-family: 'Nanum+Gothic';">비고</font></td>
+                                      <td colspan="8" style="font-family: 'Nanum+Gothic';">{{vending.orderNote}}</td>
                                     </tr>
                                   </tbody>
                                 </table>
@@ -217,7 +217,7 @@
                             <v-btn id="jobOrderModalPrintBtn" @click="printWindow('modalPrint')" style="border: 0px; min-width: 0px; margin: 5px; padding: 1px; height: 100px; border-radius: 15px;" color="teal accent-4">
                               <img src="/images/management/print_btn.png" style="width: 100px; height: 100px;">
                             </v-btn>
-                            <v-btn id="jobOrderModalCheckBtn" style="border: 0px; min-width: 0px; margin: 5px; padding: 1px; width: 135px; height: 100px; border-radius: 15px;" color="primary" @click.native="jobOrderDialog = false" ><h2>확인</h2></v-btn>
+                            <v-btn id="jobOrderModalCheckBtn" style="border: 0px; min-width: 0px; margin: 5px; padding: 1px; width: 135px; height: 100px; border-radius: 15px; font-family: 'Nanum+Gothic';" color="primary" @click.native="jobOrderDialog = false" ><h2>확인</h2></v-btn>
                           </div>
                         </v-card>
                       </v-dialog>
@@ -242,17 +242,17 @@
                     </div>
                     <div class="divRowHalf">
                       <div style="margin-bottom: 10px;">
-                        <h5 class="blueFontStyle">보충기사 이름</h5>
-                        <h4>{{spName}}</h4>
+                        <h5 class="blueFontStyle" style="font-family: 'Nanum+Gothic';">보충기사 이름</h5>
+                        <h4 style="font-family: 'Dosis';">{{spName}}</h4>
                       </div>
                       <div class="divColumnHalf">
                         <div>
-                          <h5 class="blueFontStyle">자판기 수</h5>
-                          <p><font size="5">{{allVDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">개</font></p>
+                          <h5 class="blueFontStyle" style="font-family: 'Nanum+Gothic';">자판기 수</h5>
+                          <p><font size="5" style="font-family: 'Fugaz+One';">{{allVDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">개</font></p>
                         </div>
                         <div>
-                          <h5 class="blueFontStyle">제품 수</h5>
-                          <p><font size="5">{{allPDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">종</font></p>
+                          <h5 class="blueFontStyle" style="font-family: 'Nanum+Gothic';">제품 수</h5>
+                          <p><font size="5" style="font-family: 'Fugaz+One';">{{allPDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">종</font></p>
                         </div>
                       </div>
                     </div>
@@ -263,21 +263,21 @@
                   <!-- 작업지시서 본 내용 -->
                   <table class="orderTableStyle">
                     <thead style="text-align: center;">
-                      <th style="width: 13%;"><font size="4">자판기 명</font></th>
-                      <th v-for="n in 8" :key="n.index"><font size="4">{{n}}</font></th>
-                      <th style="width: 16%;"><font size="4">비고</font></th>
+                      <th style="width: 13%; font-family: 'Nanum+Gothic';"><font size="4">자판기 명</font></th>
+                      <th v-for="n in 8" :key="n.index" style="font-family: 'Fugaz+One';"><font size="4">{{n}}</font></th>
+                      <th style="width: 16%; font-family: 'Nanum+Gothic';"><font size="4">비고</font></th>
                     </thead>
                     <tbody>
                       <tr v-for="vending in sameVDArr" :key="vending.index">
-                        <td><font size="4" color="#1565C0">{{vending.vd_name}}</font></td>
+                        <td><font size="4" color="#0064c8">{{vending.vd_name}}</font></td>
 
                         <td v-for="productValue in vending.lineAndProduct" :key="productValue.index">
                           <img :src="productValue.imgSrc" style="width: 25px; height: 35px; margin-left: 10px; margin-right: 10px;">
-                          <font size="4">{{productValue.sp_val}}</font>
+                          <font size="4" style="font-family: 'Fugaz+One';">{{productValue.sp_val}}</font>
                         </td>                      
                         
-                        <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)" style="width: 10%">{{vending.orderNote}}</td>
-                        <td v-else style="width: 10%">{{vending.orderNote}}</td>
+                        <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)" style="width: 10%; font-family: 'Nanum+Gothic';">{{vending.orderNote}}</td>
+                        <td v-else style="width: 10%; font-family: 'Nanum+Gothic';">{{vending.orderNote}}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -352,9 +352,179 @@
         </v-tabs>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="contentPage == '자판기'">
+   <div v-if="itemList!=''" id="lateral"> 
+     <div>
+     <div>
+      <p  style="font-size: 25px;text-align:left;font-family:'Gothic A1';font-weight:bold;" >　　{{vending_name}}</p>
+      <div style="margin-top:2%">
+      <!-- Line 1 -->
+      <div id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==0)" >
+      
+      <td border="0">
+             <tr border="0"><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr  id="table_background" style="text-align:center;border:0;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr border="0"><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td border="0">
+             <br /><br />
+             <tr border="0"><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr border="0"><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
+       <!-- Line 2 -->
+      <div id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==1)" >
+      <td border="0">
+             <tr><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr id="table_background" style="text-align:center;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td>
+             <br /><br />
+             <tr><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
+       <!-- Line 3 -->
+      <div  id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==2)" >
+      <td border="0">
+             <tr><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr id="table_background" style="text-align:center;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td border="0">
+             <br /><br />
+             <tr><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
+
+       <!-- Line 4 -->
+      <div id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==3)" >
+      <td border="0">
+             <tr><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr id="table_background" style="text-align:center;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td border="0">
+             <br /><br />
+             <tr><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
     
+         <!-- Line 5 -->
+      <div id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==4)" >   
+      <td border="0">
+             <tr><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr id="table_background" style="text-align:center;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td border="0">
+             <br /><br />
+             <tr><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
+  
+       <!-- Line 6 -->
+      <div id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==5)" > 
+      <td border="0">
+             <tr><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr id="table_background" style="text-align:center;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td border="0">
+             <br /><br />
+             <tr><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
+      <!-- Line 7 -->
+      <div  id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==6)">
+      <td border="0">
+             <tr><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr id="table_background" style="text-align:center;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td>
+             <br /><br />
+             <tr><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
+       <!-- Line 8 -->
+      <div  id="tdBackground1" v-for="(item, index) in itemList" :key="index" v-if="(index==7)" >
+      <td border="0">
+             <tr><p id="table_title">Line  {{item.line}}</p></tr>
+             <tr id="table_background" style="text-align:center;vertical-align:middle " ><br /><img v-bind:src="item.drink_img_path" style=" height:60px; width:60px; "></tr>
+             <tr><p id="table_price">{{item.Sell_price}}￦</p></tr>
+      </td>　
+      <td border="0">
+             <br /><br />
+             <tr><p id="table_stock">제품 재고</p><p id="table_stock_number">{{item.stock}}개</p></tr>
+             <tr><p id="table_price2">{{item.expiration_date}}</p></tr>
+      </td>
+      </div>
+     </div>
     </div>
+    <br />
+    <br />
+    <br />
+     <!-- 잔고 리스트 -->
+    <div id="bottom_center" v-for="(item, index) in itemList_c" :key="index">
+      <br />
+       <br />
+        <table>
+          <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
+          <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
+          <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.won1000}}개</td></tr>
+        </table>
+        <p id="CoinStockFont" style="text-align:left; font-size: 1.3em; ">　잔고 현황</p>
+        <table id="trBgColor" style="margin-top:-15px">
+         <tr id="CoinStockFont" ><td style="padding-left:180px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right;font-size: 0.7em; ">총 합 </td></tr>
+         <tr id="sumFont"><td style="padding-left:180px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}￦</td></tr>
+        </table>
+    </div>
+    <!-- 작업지시 모달창 -->
+    <div id="bottom_center2">
+      <v-btn style="width:100px;"  @click.native.stop="dialog = true">
+        <img id="add_button" src="/images/realtime/order_button.png" >
+      </v-btn>
+    </div>
+      <v-layout row justify-center>
+          <v-dialog v-model="dialog" max-width="520" max-height="300">
+            <v-card>
+              <v-card-title>
+                <h2>작업 지시창</h2>
+              </v-card-title>
+              <v-card-text>
+                <v-card-text>
+                  ● 현재 자판기 : {{vending_name}}
+                  <v-spacer></v-spacer>
+                  ● 보충 기사 : {{vending_manager}}
+                </v-card-text>
+                <v-select
+                  :items="select"
+                  label="Please Select List"
+                  item-value="text"
+                  v-model ="selectedItem">
+                </v-select>
+                <div v-if="selectedItem=='기타'">
+                  <v-text-field  label="작업지시를 적어주세요" v-model="selectedItem_etc"></v-text-field>
+                </div>
+              </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">cancel</v-btn>
+                <v-btn color="green darken-1" flat="flat" @click.native="dialog = submit(selectedItem,selectedItem_etc)">submit</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-layout>
+      </div>
+    </div>
+  </div>
   </div>
 </template>
 <script type="text/javascript" src="jquery.min.js"></script>
@@ -363,7 +533,7 @@
   let obj_c =[];
 
   import { EventBus } from '../../app.js';
-  import html2canvas from 'html2canvas'          // 캔버스 사용
+  import html2canvas from 'html2canvas';          // 캔버스 사용
   export default{  
     data(){
       return{
@@ -427,43 +597,6 @@
         identifyAddress   : '',
         identifyImg       : '/images/default.png',
         
-        fields: [{
-          key: 'Line',
-          sortable: true,
-          variant: 'danger'
-        },
-        {
-          key: 'Name',
-          sortable: false
-        },
-        {
-          key: 'Stock',
-          sortable: true
-        },
-        {
-          key: 'expiration_date',
-          sortable: true
-        },
-        {
-          key: 'Sell_price',
-          sortable: true
-        }],
-        fields_c: [{
-          key: 'won1000',
-          sortable: false
-        },
-        {
-          key: 'won500',
-          sortable: false
-        },
-        {
-          key: 'won100',
-          sortable: false
-        },
-        {
-          key: 'sum',
-          sortable: false
-        }],
         itemList:[],
         itemList_c:[],
         vending_name:'',          /* 모달창 자판기 이름 */
@@ -528,60 +661,89 @@
         this.vending_manager = arg2; 
         this.vending_id = arg3;
       });
-      //<------------- 재고 EventBus ------------->
-      EventBus.$on('StockEventBus',(response) => { 
-        this.data = [];
-          if(obj==[]){
-            for(let key in response){
-              this.data[key]={
-                Line:response[key].line  ,
-                Name:response[key].drink_name,
-                Stock:response[key].stock ,
-              }
-              obj.push({Line:this.data[key].Line, Name:this.data[key].Name, Stock:this.data[key].Stock});
-            }
-          }else{
-            obj.splice(0);
-            obj=[];
-            for(let key in response){
-              this.data[key]={
-                Line:response[key].line  ,
-                Name:response[key].drink_name,
-                Stock:response[key].stock ,
-                expiration_date:response[key].expiration_date,
-                Sell_price:response[key].sell_price
-              }
-              obj.push({Line:this.data[key].Line, Name:this.data[key].Name,
-                        Stock:this.data[key].Stock, expiration_date:this.data[key].expiration_date,
-                        Sell_price:this.data[key].Sell_price});
-            }
-          }
-          this.itemList = obj;
-      });
-     //<------------- 잔고 EventBus ------------->
-      EventBus.$on('CoinEventBus',(response) => {
-        this.data = [];
+      /* <----------- 현 자판기  재고 이벤트 버스  -------------->*/
+     EventBus.$on('StockEventBus',(response) =>{
 
-        if(obj_c==[]){
-          for(let key in response){
-             this.data[key]={won1000:response[key].won1000, won500:response[key].won500,
-                            won100:response[key].won100, sum:response[key].sum};
-             obj_c.push({won1000:this.data[key].won1000, won500:this.data[key].won500,
-                       won100:this.data[key].won100, sum:this.data[key].sum});
-          }
-        }else{
-          obj_c.splice(0);
-          obj_c=[];
-          for(let key in response){
-             this.data[key]={won1000:response[key].won1000, won500:response[key].won500,
-                            won100:response[key].won100, sum:response[key].sum};
-             obj_c.push({won1000:this.data[key].won1000, won500:this.data[key].won500,
-                       won100:this.data[key].won100, sum:this.data[key].sum});
-          }
-        }
+           let key;
+           let obj =[];    
+           let array = [];
+  
+           if(obj==[]){
+             for(key in response){
+                array[key] = {
+                 line : response[key].line,
+                 stock  : response[key].stock,
+                 drink_img_path : response[key].drink_back_path,
+                 expiration_date:response[key].expiration_date,
+                 Sell_price:response[key].sell_price
+                }
+                obj.push({line:array[key].line,
+                         stock:array[key].stock,
+                         drink_img_path:array[key].drink_img_path,
+                         expiration_date:array[key].expiration_date,
+                         Sell_price:array[key].Sell_price});
+              }
+           }
+           else{
+             obj.splice(0,);
+              for(key in response){
+               array[key] = {
+                 line : response[key].line,
+                 stock  : response[key].stock,
+                 drink_img_path : response[key].drink_back_path,
+                 expiration_date:response[key].expiration_date,
+                 Sell_price:response[key].sell_price
+                }
+                obj.push({line:array[key].line,
+                         stock:array[key].stock,
+                         drink_img_path:array[key].drink_img_path,
+                         expiration_date:array[key].expiration_date,
+                         Sell_price:array[key].Sell_price});
+              } 
+           } 
+           
+        this.itemList = obj;         /*   재고 전체 받아오는 변수   */
+          });
 
-        this.itemList_c = obj_c;
-      });
+     /* <----------- 현 자판기 잔고 이벤트 버스  -------------->*/
+      EventBus.$on('CoinEventBus',(response) =>{
+           let key;
+           let obj_c=[];
+           let array = [];
+         
+           if(obj_c==[]){
+             for(key in response){
+                array[key] = {
+                 won1000 : response[key].won1000,
+                 won500  : response[key].won500,
+                 won100 : response[key].won100,
+                 sum : response[key].sum
+                 
+                }
+                obj_c.push({won1000:array[key].won1000,
+                         won500:array[key].won500,
+                         won100:array[key].won100,
+                         sum:array[key].sum});
+              } 
+           }
+           else{
+             obj_c.splice(0,);
+              for(key in response){
+                array[key] = {
+                 won1000 : response[key].won1000,
+                 won500  : response[key].won500,
+                 won100 : response[key].won100,
+                 sum : response[key].sum
+                }
+                 obj_c.push({won1000:array[key].won1000,
+                         won500:array[key].won500,
+                         won100:array[key].won100,
+                         sum:array[key].sum});
+              } 
+           } 
+         this.itemList_c=obj_c;        /*   잔고 전체 받아오는 변수   */  
+
+        });
     },
     methods: {
       createJobOrderBtn() {
@@ -1133,15 +1295,15 @@ table.jobOrderTableStyle td {
 }
 
 .blueFontStyle{
-  color: #1565C0;
+  color: #0064c8;
 }
 
 table.orderTableStyle {
   width: 100%;
 }
 table.orderTableStyle th {
-  border-bottom: 3px #1565C0 solid;
-  color: #1565C0;
+  border-bottom: 3px #0064c8 solid;
+  color: #0064c8;
 }
 table.orderTableStyle td {
   border-bottom: none;
@@ -1183,12 +1345,118 @@ table.jobOrderModalAllCountTable td {
 
 
 
-/* #lateral .speed-dial,
-#lateral .btn--floating {
-  position: absolute;
+/* <----------------------------- 자판기 조회 ----------------------->*/
+/* 테이블 전체 설정 */
+#stock_table{
+ margin-left:10px;
 }
-#lateral .btn--floating {
-  margin: 746px 26px 56px 56px;
-} */
+
+/* 테이블 라인 폰트 */
+#table_title{
+ font-size: 15px;
+ text-align:left;
+ font-style:italic;
+ font-weight: bold;
+ font-family:'Nanum Gothic';
+ color:#0064c8;
+}
+/* 테이블 내 가격 폰트 */
+#table_price{
+ font-size: 15px;
+ text-align:left;
+ font-weight: bold;
+
+ font-family:"Fugaz One";
+ color:#0064c8;
+}
+
+/* 테이블 내 유통기간 폰트 */
+#table_price2{
+ font-size: 12px;
+ text-align:left;
+ 
+ font-family:"Fugaz One";
+ color:#000000;
+}
+
+/* 테이블 내 재고  폰트 */
+#table_stock{
+ font-size: 12px;
+ text-align:left;
+ color:#0064c8;
+ font-family:'Nanum Gothic';
+
+}
+
+/* 테이블 내 재고 숫자 폰트 */
+#table_stock_number{
+ font-size: 25px;
+ text-align:left;
+ font-weight: bold;
+
+ font-family:"Fugaz One";
+ color:#000000;
+}
+
+/* 테이블 내 배경 사진 */
+#table_background{
+    background-image: url("/images/management/slot.png");
+    background-position: center; 
+    background-size: 80px 90px;
+    width:  90px;
+    height: 100px;
+}
+
+/* 라인 당 왼쪽 td부분 */
+#tdBackground1{
+  border:0px;
+  margin-left: 3%;
+  margin-right: 3%;
+  width: 170px;
+  float: left;
+}
+
+/* 라인 당 오른쪽 td부분 */
+#tdBackground2{
+  border: 0px;
+  margin-right: 2%;
+  padding-right: 3%;
+  width: 170px;
+}
+
+ /* 잔고 테이블 */
+  #coin_stock_table1{
+    font-family:"Fugaz One";
+    color: rgb(48, 109, 170);
+    font-size: 1.5em
+  }
+  #coin_stock_table2{
+   font-family:"Fugaz One";
+    color: black;
+    font-size: 1.5em
+  }
+  #sumFont{
+    font-family:"Fugaz One";
+    color: rgb(48, 109, 170);
+    font-size: 1.5em
+  }
+  /* 테이블 배경 색 */
+  #trBgColor{
+  background-color:  rgb(229, 239, 248);
+  }
+    /* 잔고현황 타이틀 설정 */
+  #CoinStockFont{
+    font-family:"Nanum Gothic";
+    color: black;
+    font-size: 1.7em
+  }
+    /* 잔고 리스트 */
+  #bottom_center{
+    float: left;
+    
+    margin-top: 30px;
+    margin-right:150px;
+    margin-left:7%;
+    }
 
 </style>

@@ -1063,7 +1063,7 @@ class test{
                 //vd_stock update
 
                 //vd stock update 쿼리 생성 및 실행
-                $query = "UPDATE ".VD_STOCK." SET stock = 35 WHERE vd_id = ".$_GET['vending_id'];
+                $query = "UPDATE ".VD_STOCK." SET stock = 10 WHERE vd_id = ".$_GET['vending_id'];
                 if ($result = $this->conn->query($query)) {}
 
                 //jo_column update

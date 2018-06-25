@@ -1,157 +1,94 @@
 <template>
 
 <div id="mainBackgroundDiv">
-    <div id="mainImageButtonDiv">
-        <router-link to="/realtime" id="realTime">
-            <div class="partInfo" style="margin-left:3%;">
-                <img src="/images/mainPageImage/realtime.png" class="icon">
-            </div>
-        </router-link>
-        <router-link to="/analysis" id="analyst">
-            <div class="partInfo">
-                <img src="/images/mainPageImage/analysis.png" class="icon">
-            </div>
-        </router-link>
-        <router-link to="/management"  id="management">
-            <div class="partInfo">
-                <img src="/images/mainPageImage/vending-machine.png" class="icon">
-            </div>
-        </router-link>
-        <router-link to="/product" id="order">
-            <div class="partInfo">
-                <img src="/images/mainPageImage/can.png" class="icon">
-            </div>
-        </router-link>
-    </div>
-    <div id="mainCharaterDiv">
-        <div class="menu" id="menuOne" style="margin-left:3%;">
-            <h4>RealTime</h4>
-        </div>
-        <div class="menu" id="menuTwo">
-            <h4>Analysis</h4>
-        </div>
-        <div class="menu" id="menuThree">
-            <h4>VendingMachine Management</h4>
-        </div>
-        <div class="menu" id="menuFour">
-            <h4>Product Management</h4>
+    <div id="mainBackgroundSecondDiv">
+        <div id="topLogoBar" >
+            <img src="/images/mainPageImage/logo.png"  width="100" height="50" >
+            <v-btn round color="cyan" style="float: right; color: white;">Sign-in-></v-btn>
         </div>
         <div>
-            <img src="/images/mainPageImage/menu.png" style="margin-left:3%;">
+            <br>
+            <div>
+                <v-btn small round color="cyan" style="color: white; padding-bottom: 5px;">Introduce</v-btn>
+            </div>
+            
+            <h3 style="color: white;">자판기에 IoT기술을 접목시켜</h3>
+            <h3 style="color: white;">간편한 판매데이터 수집 및 분석과</h3>
+            <h3 style="color: white;">보충기사의 편의성까지 고려한</h3>
+            <h3 style="color: white;">실시간 자판기 통합관리 서비스입니다.</h3>
+        </div>
+        <div id="mainImageButtonDiv">
+            <router-link to="/realtime" id="realTime">
+                <div class="partInfo">
+                    <img src="/images/mainPageImage/realtime.png" class="icon">
+                </div>
+            </router-link>
+            <router-link to="/analysis" id="analyst">
+                <div class="partInfo">
+                    <img src="/images/mainPageImage/analysis.png" class="icon">
+                </div>
+            </router-link>
+            <router-link to="/management"  id="management">
+                <div class="partInfo">
+                    <img src="/images/mainPageImage/vending-machine.png" class="icon">
+                </div>
+            </router-link>
+            <router-link to="/product" id="order">
+                <div class="partInfo">
+                    <img src="/images/mainPageImage/can.png" class="icon">
+                </div>
+            </router-link>
         </div>
     </div>
 
-    <div id="logo">
-  
-        <h1 id="logoText">KI-TUNA</h1>
-    </div>
-    
-    <!-- <div class="one">
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-    </div> -->
+
 </div>
 </template>
 
 <style>
 #mainBackgroundDiv {
   /* The image used */
-  background-image: url("/images/mainPageImage/backgroundVending.jpg");
-
+  background-image: url("/images/mainPageImage/backgroundVending.png");
   /* Set a specific height */
-  height: 100vh;
-  width: 100%;
-
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  height: 100%;
+  width: 100%;  
 }
-#mainImageButtonDiv {
-  height: 60%;
-  background-color: rgba(88, 88, 88, 0.4);
-  overflow-x:hidden;
-  overflow-y:hidden;
+#mainBackgroundSecondDiv{
+  display: grid;
+  grid-template-rows: 0.1fr 0.4fr 0.6fr;
+  height: 100%;
+  width: 80%;  
+  margin: auto;
 }
+#topLogoBar{
 
-#mainCharaterDiv {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  background-color: rgba(88, 88, 88, 0.4);
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
-  z-index: 3;
+  margin-top: 2%;
+  padding-bottom: 1%;
+  border-bottom: 1px solid #FFFFFF;
 }
-
-/* div.one {
-  width:100%;
-  height:60%;
-  margin-top:4%;
-  overflow-x:hidden;
-  overflow-y:hidden;
-  z-index:2;
-  background:linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 20%);
-  padding-top:20%;
-} */
-
-
-div.menu {
-  width: 20%;
-  margin-left: 1.5%;
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-}
-
-#logo {
-  position: relative;
-  top: 0;
-  padding: 4%;
-  z-index: 3;
-  text-align: center;
-}
-
-
 .partInfo {
-  width: 20%;
+  width: 23%;
   height: 80%;
-  margin-left: 1%;
   margin-top: 5%;
-  background-color: rgba(0, 0, 0, 0.6);
   display: inline-block;
   overflow-x:hidden;
   overflow-y:hidden;
   color: rgb(255, 255, 255);
   border-radius: 20px;
   text-align: center;
+  
+}
+#analyst, #management, #order{
+  margin-left: 2%;
 }
 
 .icon {
-  width:50%;
-  height: 40%;
-  margin-top: 10%;
+  width:100%;
+  height: 100%;
 }
 
-#logoTextK{
-  font-family: 'Black Ops One', cursive;
-  color:#FFFFFF;
-  display:inline-block;
-  font-size:58px;
-  font-family: 'Black Ops One', cursive;
-}
-#logoText{
-  font-family: 'Black Ops One', cursive;
-  color:#FFFFFF;
-  display:inline-block;
-  font-size:58px;
-}
 .partInfo:hover .icon{
-    opacity: 0.3
+    opacity: 0.7
 }
 </style>
 <script>

@@ -1,10 +1,12 @@
 <template>
   <div>
     <br>
-    <h3>Management</h3>
+    <div style="text-align:left; font-family:'Dosis'; margin-left: 60px;">
+      <h2><strong>Management</strong></h2>
+    </div>
     <div>
-      <v-btn id="spBtn" class="spBtnStyle" outline color="indigo" @click="contentPageChange('보충기사')"><h6>보충기사 조회</h6></v-btn>
-      <v-btn id="vdBtn" class="spBtnStyle" outline color="grey lighten-1" @click="contentPageChange('자판기')"><h6>자판기 조회</h6></v-btn>
+      <v-btn id="spBtn" class="spBtnStyle" outline color="primary" @click="contentPageChange('보충기사')" style="font-family: 'Nanum+Gothic';"><h6>보충기사 조회</h6></v-btn>
+      <v-btn id="vdBtn" class="spBtnStyle" outline color="grey lighten-1" @click="contentPageChange('자판기')" style="font-family: 'Nanum+Gothic';"><h6>자판기 조회</h6></v-btn>
     </div>
     <div v-if="pageName == '보충기사'">
       <div class="spListDivBackground">
@@ -14,8 +16,8 @@
               <img :src="sp.Pic" id="spImage" class="imgRodius">
             </div>
             <div style="margin: 15px;">
-              <h4 :name="sp.Name" style="color: white">{{sp.Name}}</h4>
-              <h6 :name="sp.Name" style="color: white">Supplement</h6>
+              <h4 :name="sp.Name" style="color: white; font-family:'Dosis';">{{sp.Name}}</h4>
+              <h6 :name="sp.Name" style="color: white; font-family:'Dosis';">Supplement</h6>
             </div>
           </div>
           <div v-else class="spListDiv" @click="spInfor(sp.Id, sp.sp_id, sp.Name, false)" :id="sp.sp_id">
@@ -29,13 +31,13 @@
           </div>
         </div>
         <div class="spInsertBtn" v-b-modal.spInsertModal>
-          <h1 style="color: skyblue">+</h1>
-          <h5 style="color: skyblue">새로운 보충기사 등록하기</h5>
+          <h1 style="color: skyblue;">+</h1>
+          <h5 style="color: skyblue; font-family: 'Nanum+Gothic';">새로운 보충기사 등록하기</h5>
         </div>
         <div class="spUpdateAndspRemoveBtn">
-          <v-btn v-if="clickedSpTrId == ''" class="spBtnStyle" @click="spUploadFunc(true)"><h6 style="color: #1565C0;">보충기사 수정</h6></v-btn>
-          <v-btn v-else class="spBtnStyle" v-b-modal.spUploadModal @click="spUploadFunc(true)"><h6 style="color: #1565C0;">보충기사 수정</h6></v-btn>
-          <v-btn color="error" class="spBtnStyle" @click="spRemoveFunc"><h6>보충기사 삭제</h6></v-btn>
+          <v-btn v-if="clickedSpTrId == ''" class="spBtnStyle" @click="spUploadFunc(true)"><h6 style="color: #0064c8; font-family: 'Nanum+Gothic';">보충기사 수정</h6></v-btn>
+          <v-btn v-else class="spBtnStyle" v-b-modal.spUploadModal @click="spUploadFunc(true)"><h6 style="color: #0064c8; font-family: 'Nanum+Gothic';">보충기사 수정</h6></v-btn>
+          <v-btn color="error" class="spBtnStyle" @click="spRemoveFunc" style="font-family: 'Nanum+Gothic';"><h6>보충기사 삭제</h6></v-btn>
         </div>
       </div>
       <b-modal id="spInsertModal" hide-footer ref="spInsertRef" title="보충기사 등록">
@@ -141,23 +143,28 @@
     
 
     <div  v-if="pageName == '자판기'">
-      <!-- ********************** 자판기 등록창********************** -->
-      <v-layout row justify-center>
-        <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
-          <v-btn slot="activator" @click="DrinkList">자판기 등록</v-btn>
-          <v-card  color="light-blue darken-1">
-            <v-toolbar>
-              <v-btn icon @click.native="dialog = false">
-                <v-icon>close</v-icon>
-              </v-btn>
-              <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-toolbar-items>
-                <v-btn color="white" flat @click.native="close">Cancel</v-btn>
-                <v-btn color="white" flat @click.native="save">Save</v-btn>
-              </v-toolbar-items>
-              <br>
-              <v-card>
+   
+ <!-- vending machine List -->
+     <div id="left_frame" >
+       <v-card-title>
+            <!-- ********************** 자판기 등록창********************** -->
+             <v-layout row justify-center>
+              <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
+                <v-btn slot="activator" @click="DrinkList">자판기 등록</v-btn>
+                <v-card  color="blue darken-3">
+                  <v-toolbar >
+                    <v-btn icon @click.native="dialog = false" >
+                      <v-icon>close</v-icon>
+                    </v-btn>
+                    <v-toolbar-title>{{ formTitle }}</v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-toolbar-items>
+                      <v-btn color="white" flat @click.native="close">Cancel</v-btn>
+                      <v-btn color="white" flat @click.native="save">Save</v-btn>
+                    </v-toolbar-items>
+                  </v-toolbar>
+                  <br>
+                <v-card>
                 <v-card-title>
                   <span class="headline">자판기 기본정보</span>
                 </v-card-title>
@@ -198,125 +205,127 @@
                         </gmap-map>
                       </v-flex>
                     </v-layout>
-                  </v-container>]
+                  </v-container>
                 </v-card-text>
                 <v-card-actions></v-card-actions>
-              </v-card>
-              <!-- ********************** 자판기 음료 등록 및 수정 ********************** -->
-              <v-card>
-                <v-card-title><span class="headline">{{ formSubTitle }}</span></v-card-title>
-                <v-container fluid grid-list-md>
-                  <v-layout row wrap>
-                    <v-flex xs1>
-                      <v-subheader>음료라인 수</v-subheader>
-                    </v-flex>
-                    <v-flex xs1>
-                      <b-form-select v-model="selected" :options="options" class="mb-1"  />
-                    </v-flex>
-                  </v-layout>
-                  <v-layout row wrap v-if="editedIndex!=-1">
-                    <v-flex xs1>
-                      <!-- Edit일 경우 뜨는 현재 음료 리스트  -->
-                      <v-subheader>현재 음료 리스트</v-subheader>
-                    </v-flex>
-                    <v-layout  xs2 md2 lg2 v-for="(drinkItem, index) in editedItem_drink" :key="index">
-                      <v-flex  v-for="(item2, index)  in drinkItem" :key="index">
-                        <v-card-title>{{index}}</v-card-title>
-                        <v-card-media   height="70px">   
-                          <v-card><img xs3 md3 lg3 :src="item2" style=" height:70px; width:30px;"></v-card>
-                          <v-spacer></v-spacer>
-                        </v-card-media>  
-                      </v-flex> 
+                </v-card> 
+                <!-- ********************** 자판기 음료 등록 및 수정 ********************** -->
+                 <v-card>
+                  <v-card-title><span class="headline">{{ formSubTitle }}</span></v-card-title>
+                  <v-container fluid grid-list-md>
+                    <v-layout row wrap>
+                      <v-flex xs1>
+                        <v-subheader>음료라인 수</v-subheader>
+                      </v-flex>
+                      <v-flex xs1>
+                        <b-form-select v-model="selected" :options="options" class="mb-1"  />
+                      </v-flex>
                     </v-layout>
-                  </v-layout>
-                  <br>
-                  <v-layout row wrap>
-                    <v-flex xs1>
-                      <v-subheader>음료 설정</v-subheader>
-                    </v-flex> 
-                    <!-- Set Drink List Card -->
-                    <v-flex xs5 md5 lg5>
-                      <v-layout row wrap>
-                        <v-flex xs3 md3 lg3 v-for="(value, index) in InputDrinkItem" :key="index">
-                          <v-card width="150px" height="200px">
-                            <draggable :id="index" v-model="itemList_All" :options="{group:'itemList_All'}" @start="drag=true" @end="drag=false" @add="newLine">
-                              <v-card-title class="headline"> 
-                                {{ capLetter(index) }}
-                              </v-card-title>
-                              <v-card v-for="(item2, index)  in value" :key="index">
-                                <v-card-media  height="70px">  
-                                  <v-spacer></v-spacer>  
-                                  <img :src="item2" style=" height:70px; width:30px;" >
-                                  <v-spacer></v-spacer>
-                                </v-card-media>
-                              </v-card> 
-                            </draggable>
-                          </v-card>
+                    <v-layout row wrap v-if="editedIndex!=-1">
+                      <v-flex xs1> 
+                        <!-- Edit일 경우 뜨는 현재 음료 리스트  -->
+                   <v-subheader>현재 음료 리스트</v-subheader>
+                      </v-flex>
+                      <v-layout  xs2 md2 lg2 v-for="(drinkItem, index) in editedItem_drink" :key="index">
+                        <v-flex  v-for="(item2, index)  in drinkItem" :key="index">
+                          <v-card-title>{{index}}</v-card-title>
+                          <v-card-media   height="70px">   
+                            <v-card><img xs3 md3 lg3 :src="item2" style=" height:70px; width:30px;"></v-card>
+                            <v-spacer></v-spacer>
+                          </v-card-media>  
+                        </v-flex> 
+                      </v-layout>
+                    </v-layout>
+                    <br />
+                    <v-layout row wrap>
+                      <v-flex xs1>
+                        <v-subheader>음료 설정</v-subheader>
+                      </v-flex> 
+                      <!-- Set Drink List Card -->
+                   <v-flex xs5 md5 lg5>
+                        <v-layout row wrap>
+                          <v-flex xs3 md3 lg3 v-for="(value, index) in InputDrinkItem" :key="index">
+                            <v-card width="150px" height="200px">
+                              <draggable :id="index" v-model="itemList_All" :options="{group:'itemList_All'}" @start="drag=true" 
+                                @end="drag=false" @add="newLine">
+                                <v-card-title class="headline"> 
+                                  {{ capLetter(index) }}
+                                </v-card-title>
+                                <v-card v-for="(item2, index)  in value" :key="index">
+                                  <v-card-media  height="70px">  
+                                    <v-spacer></v-spacer>  
+                                    <img :src="item2" style=" height:70px; width:30px;" >
+                                    <v-spacer></v-spacer>
+                                  </v-card-media>
+                                </v-card> 
+                              </draggable>
+                            </v-card>
+                          </v-flex>
+                        </v-layout>
+                      </v-flex>
+                      <v-flex xs1></v-flex> 
+                        <!-- All Drink list Card -->
+                        <v-flex xs5>  총 음료 리스트 (원하는 음료를 드래그해주세요)
+                          <v-layout row wrap>
+                            <v-flex xs2 md2 lg2 v-for="(drinkItem, index) in itemList_All" :key="index">
+                              <draggable :id="index" v-model="itemList_All" :options="{group: { name:'itemList_All', pull:'clone', put:'false'}}" @start="drag=true" 
+                                @end="drag=false" :move="chooseItem">
+                                <v-card class="ma-2 pa-1">
+                                  <v-card-media  height="70px">
+                                    <v-spacer></v-spacer>
+                                    <img :src="drinkItem.path" style=" height:70px; width:30px;">
+                                    <v-spacer></v-spacer>
+                                  </v-card-media>
+                                </v-card>
+                              </draggable>
+                            </v-flex>
+                          </v-layout>
                         </v-flex>
-                      </v-layout>       
-                    </v-flex>          
-                    <v-flex xs1></v-flex>       
-                    <!-- All Drink list Card -->      
-                    <v-flex xs5>  
-                      총 음료 리스트 (원하는 음료를 드래그해주세요)   
-                      <v-layout row wrap>
-                        <v-flex xs2 md2 lg2 v-for="(drinkItem, index) in itemList_All" :key="index">
-                          <draggable :id="index" v-model="itemList_All" :options="{group: { name:'itemList_All', pull:'clone', put:'false'}}" @start="drag=true" @end="drag=false" :move="chooseItem">
-                            <v-card class="ma-2 pa-1">
-                              <v-card-media  height="70px">
-                                <v-spacer></v-spacer>
-                                <img :src="drinkItem.path" style=" height:70px; width:30px;">
-                                <v-spacer></v-spacer>
-                              </v-card-media> 
-                            </v-card>      
-                          </draggable>          
-                        </v-flex>            
-                      </v-layout>            
-                    </v-flex>            
-                  </v-layout>
-                </v-container>
-              </v-card>
-            </v-toolbar>
-          </v-card>                  
-        </v-dialog>
-      </v-layout>
-    
-      
-      
-      <!-- vending machine List -->
-      <v-card-title>
-        <v-text-field
-          append-icon="search"
-          label="Please enter search keywords"
-          single-line
-          hide-details
-          v-model="search">
-        </v-text-field>
-      </v-card-title>
-      <v-data-table :headers="headers" :items="items" :search="search">
-        <template slot="items" slot-scope="props">
-          <tr :id="props.item.No" @mouseover="mouseover(props.item.No)" @mouseout="mouseout(props.item.No)" @click="trClick(props.item.No)">
-            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.No }}</td>
-            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.Ven_Name }}</td>
-            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Location }}</td>
-            <td class="text-xs-right" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager); routerLinkToDetails_c(props.item.No);">{{ props.item.Manager }}</td>
-            <td class="justify-center layout px-0">
+                      </v-layout>
+                    </v-container>
+                  </v-card>   
+                </v-card>
+              </v-dialog>
+            </v-layout>
+       </v-card-title>
+       <!-- 자판기 리스트  -->
+      <v-data-table  :items="items" :search="search"  hide-headers>
+            <template  slot="items" slot-scope="props" >
+              <br />
+              <div id="left_frame_in">
+              <br />
+              <tr  id="vending_info" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.Ven_Name }}</tr>
+              <tr  id="vending_info2" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.Location }}</tr>
+              <tr  id="vending_info" @click="routerLinkToDetails_s(props.item.No,props.item.Ven_Name,props.item.Manager);routerLinkToDetails_c(props.item.No);">{{ props.item.Manager }}　　　　　　　　　　　
+              </tr>
+              <td>　　　　　　　　　　　　　　　　　　　　　　　　
               <v-btn icon class="mx-0" @click="editItem(props.item)">
-                <v-icon color="teal">edit</v-icon>
+                    <v-icon color="teal">edit</v-icon>
               </v-btn>
               <v-btn icon class="mx-0" @click="deleteItem(props.item)">
-                <v-icon color="pink">delete</v-icon>
+                    <v-icon color="pink">delete</v-icon>
               </v-btn>
-            </td>
-          </tr>
-        </template>
-        <template slot="no-data">
-          <v-btn color="primary" @click="vendingList">Reset</v-btn>
-        </template>
-        <v-alert slot="no-results" :value="true" color="error" icon="warning">
-          Your search for "{{ search }}" found no results.
-        </v-alert>
-      </v-data-table>
+             </td>
+              </div>
+            </template>
+            <template slot="no-data">
+              <v-btn color="primary" @click="vendingList">Reset</v-btn>
+            </template>
+            <v-alert slot="no-results" :value="true" color="error" icon="warning">
+              Your search for "{{ search }}" found no results.
+            </v-alert>
+              <v-card-title>
+            <v-text-field
+                    id="left_frame_in_search"
+                    append-icon="search"
+                    single-line
+                    hide-details
+                    v-model="search">
+              </v-text-field>   
+            </v-card-title> 
+          </v-data-table>
+        
+         </div>  
     </div>
   </div>        
 </template>
@@ -573,7 +582,7 @@ export default {
           })
           .then((error) => {
             console.log(error);
-            alert("등록에 실패하였습니다.22");
+            console.log("등록에 실패하였습니다.22");
           })
         }
     },
@@ -708,8 +717,16 @@ export default {
         if (removeCheck == true) {
           // 삭제 진행 시
 
-          let spRemoveUrl = 'management/deleteSP/' + this.clickedSpTrId[this.clickedSpTrId.length-1];    // 보충기사 삭제 url
+          var removeSpId = "";
 
+          for (var i = 0; i < this.clickedSpTrId.length; i++) {
+            if (isNaN(this.clickedSpTrId[i]) == false) {
+              removeSpId += this.clickedSpTrId[i];
+            }
+          }
+
+          let spRemoveUrl = 'management/deleteSP/' + removeSpId;    // 보충기사 삭제 url
+          console.log(removeSpId);
           this.axios.get(spRemoveUrl)
           .then((response) => {
             if (response.data == "good") {
@@ -1133,7 +1150,7 @@ export default {
 <style>
 .spListDivBackground {
   position: relative;
-  background-color: rgb(48, 109, 170);
+  background-color: #0064c8;
   width: 280px;
   height: 600px;
   border-radius: 15px;
@@ -1230,4 +1247,58 @@ th {
 th:first-child .th-text {
     border-left: none;
 }
+
+/* <-------------------------- 자판기 조회 -------------------------------> */
+
+/* 왼쪽 파란색 부분 */
+#left_frame{
+  background-image: url("/images/management/left_frame.png");
+  background-size: 280px 980px;
+  background-repeat: no-repeat;
+  border-radius: 15px;
+  width:280px;
+  height: 990px;
+  text-align: center;
+}
+/* 왼쪽 파란색 안의 각 자판기 정보 담는 파란색 부분 */
+#left_frame_in{
+  background-image: url("/images/management/blue_bg.png");
+  background-size: 255px 141px;
+  background-repeat: no-repeat;
+  width:260px;
+  height: 143px;
+  margin-bottom: 2%;
+  margin-left: 4%;
+  text-align: left;
+  padding-top:2%;
+  padding-left:11%;
+}
+/* 왼쪽 파란색 안의 자판기 검색 창 */
+#left_frame_in_search{
+
+  background-image: url("/images/management/white_bg.png");
+  background-size: 180px 50px;
+  background-repeat: no-repeat;
+  width:180px;
+  height:50px ;
+  text-align: center;
+
+}
+
+/* 파란색 내부 글자 설정 */
+#vending_info{
+    font-size: 15px;
+    font-family:"Nanum Gothic";
+    color:#ffffff;
+    font-weight: bold;
+
+}
+
+#vending_info2{
+    font-size: 12px;
+    font-family:"Nanum Gothic";
+    color:#cac5c5;
+    font-weight: bold;
+}
+
 </style>

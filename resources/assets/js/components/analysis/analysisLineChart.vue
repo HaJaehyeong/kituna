@@ -24,7 +24,7 @@
     <!-- 자식 DIV 두개를 7:3비율로 나누어, Analysis글씨와, 실시간 판매량DIV로 구성한다. -->
     <div class="collums64DivideDiv">
       <div style="text-align:left;font-family:'Dosis'; margin-left: 10%;" >
-        <h2><strong>　　Real time Management </strong></h2>
+        <h2><strong>Analysis</strong></h2>
       </div>
       <!-- 실시간 판매량 데이터를 나타내는 DIv로 자식 DIV를 1:9로 나누어 제목과, 데이터창을 구분한다. -->
       <div id="anaylsisRealDataSecondDiv">
@@ -1358,7 +1358,9 @@
         let parkDataArray = [];
         let companyDataArray = [];
         let hospitalDataArray = [];
-
+        
+        // pieChart에 들어갈 데이터를 axios를 통해 가져와
+        // array에 음료 이름과 갯수를 넣어준다.
         let url = "/analysis/pieGraphData";
         this.axios.get(url).then((response) =>{
           for(let i = 0 ; i < response.data[0].length/2 ; i++){
@@ -1418,12 +1420,31 @@
             ]
           };
 
+          //pieOptios들의 옵션을 설정하는 것으로 legend값을 
+          //left로 지정해, 깖끔하게 정리한다.
           this.pieOptions = {
               responsive : false,
               maintainAspectRatio : false,
               legend :{
                 position: 'left'
               }
+              // scales: {
+              //   yAxes: [{
+              //     ticks: {
+              //       // Include a dollar sign in the ticks
+              //       callback: function(value, index, values) {
+              //         // y축에서 1000자리의 숫자에는 ','을 찍는다.
+              //         if(value.toString().length > 4){
+              //           value = value.toString().slice(0,2)+','+value.toString().slice(2,5);
+              //         }
+              //         else if(value.toString().length > 3){
+              //           value = value.toString().slice(0,1)+','+value.toString().slice(1,4);
+              //         }
+              //         return value;
+              //       }
+              //     }
+              //   }]
+              // }
           };
           this.pieOptions2 = {
               responsive : false,
@@ -1431,6 +1452,23 @@
               legend :{
                 position: 'left'
               }
+              // scales: {
+              //   yAxes: [{
+              //     ticks: {
+              //       // Include a dollar sign in the ticks
+              //       callback: function(value, index, values) {
+              //         // y축에서 1000자리의 숫자에는 ','을 찍는다.
+              //         if(value.toString().length > 4){
+              //           value = value.toString().slice(0,2)+','+value.toString().slice(2,5);
+              //         }
+              //         else if(value.toString().length > 3){
+              //           value = value.toString().slice(0,1)+','+value.toString().slice(1,4);
+              //         }
+              //         return value;
+              //       }
+              //     }
+              //   }]
+              // }
           };
           this.pieOptions3 = {
               responsive : false,
@@ -1438,6 +1476,23 @@
               legend :{
                 position: 'left'
               }
+              // scales: {
+              //   yAxes: [{
+              //     ticks: {
+              //       // Include a dollar sign in the ticks
+              //       callback: function(value, index, values) {
+              //         // y축에서 1000자리의 숫자에는 ','을 찍는다.
+              //         if(value.toString().length > 4){
+              //           value = value.toString().slice(0,2)+','+value.toString().slice(2,5);
+              //         }
+              //         else if(value.toString().length > 3){
+              //           value = value.toString().slice(0,1)+','+value.toString().slice(1,4);
+              //         }
+              //         return value;
+              //       }
+              //     }
+              //   }]
+              // }
           };
           this.pieOptions4 = {
               responsive : false,
@@ -1445,6 +1500,23 @@
               legend :{
                 position: 'left'
               }
+              // scales: {
+              //   yAxes: [{
+              //     ticks: {
+              //       // Include a dollar sign in the ticks
+              //       callback: function(value, index, values) {
+              //         // y축에서 1000자리의 숫자에는 ','을 찍는다.
+              //         if(value.toString().length > 4){
+              //           value = value.toString().slice(0,2)+','+value.toString().slice(2,5);
+              //         }
+              //         else if(value.toString().length > 3){
+              //           value = value.toString().slice(0,1)+','+value.toString().slice(1,4);
+              //         }
+              //         return value;
+              //       }
+              //     }
+              //   }]
+              // }
           };
          
         });
@@ -1523,6 +1595,7 @@
                   }
                 }]
               },
+              
             };
             // -----년간 판매량 차트 추가 옵션 부분 -----
 
