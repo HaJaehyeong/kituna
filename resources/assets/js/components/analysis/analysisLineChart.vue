@@ -73,7 +73,7 @@
             <div class="collums55DivideDiv">
               <div>
                 <span class="mainContents">매출순 자판기</span>
-                <img :src="rankVdSortImgSrc" @click="rankVdSortChange()">
+                <img id="productVdSortImg" :src="rankVdSortImgSrc" @click="rankVdSortChange()">
               </div>
               <div>
                 <v-chip label :selected="yearChip" outline color="blue" @click="rankVdDateChange('year')">년간</v-chip>
@@ -1819,6 +1819,7 @@
 
 .btnRightDiv{
   float: right;
+  cursor: pointer;
 }
 
 
@@ -1881,7 +1882,10 @@ a:link { text-decoration: none; color: #000000;}
   margin-bottom: 2%;
 
 }
-
+#productVdSortImg{
+  margin-bottom: 10px;
+  cursor: pointer;
+}
 .mainContents{
   font-family: "Nanum Gothic";
   font-size: 20pt;

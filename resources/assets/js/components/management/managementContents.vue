@@ -1,7 +1,12 @@
 <template>
   <div class="rowStyle">
-    <div>
-        <br><br><br>
+    <div style="height: 100%;">
+      <v-alert v-model="alertOpen" type="info" dismissible>
+        <font size="5">오늘의 작업지시서가 생성되었습니다.</font>
+      </v-alert>
+      <v-alert v-model="jobOrderCheck" type="warning">
+        <font size="5">작업지시서가 이미 생성되어있습니다.</font>
+      </v-alert>
     </div>
     <div v-if="contentPage == '보충기사'">
       <div class="contentsUpperStyle">
@@ -273,7 +278,7 @@
 
                         <td v-for="productValue in vending.lineAndProduct" :key="productValue.index">
                           <img :src="productValue.imgSrc" style="width: 25px; height: 35px; margin-left: 10px; margin-right: 10px;">
-                          <font size="4" style="font-family: 'Fugaz+One';">{{productValue.sp_val}}</font>
+                          <font size="5" style="font-family: 'Fugaz+One';">{{productValue.sp_val}}</font>
                         </td>                      
                         
                         <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)" style="width: 10%; font-family: 'Nanum+Gothic';">{{vending.orderNote}}</td>
@@ -625,7 +630,8 @@
         jobOrderVDId                    : "",       // 작어지시 내리는 자판기 아이디
         saveToday                       : "",       // 오늘 날짜
         jobOrderCheck                   : false,    // 작업지시서 생성 유무 확인
-        jobOrderDialog                  : false     // 작업지시서 모달창 오픈 상태
+        jobOrderDialog                  : false,    // 작업지시서 모달창 오픈 상태
+        alertOpen                       : false     // 작업지시서 생성 알람창 오픈 상태
       }
     },
     watch: {
@@ -766,7 +772,9 @@
                   var createJobOrderAudio = new Audio('/music/create_job_alert.mp3');
                   createJobOrderAudio.play();
 
-                  alert("오늘의 작업지시서가 생성되었습니다.");
+                  // alert("오늘의 작업지시서가 생성되었습니다.");
+                  this.alertOpen = true;
+
                   this.jobOrderCheck = true;  // 작업지시서 생성 확인 
 
                   let sendPushAlertUrl = "android_db_conn_source/push_notification.php";  // 푸시 알람 url
@@ -1221,7 +1229,7 @@ table.spInfoTableStyle td {
 .rowStyle {
   height: 100%;
   display: grid;
-  grid-template-rows: 0.115fr 0.885fr;
+  grid-template-rows: 0.17fr 0.18fr 0.65fr;
 }
 
 .contentsUpperStyle {
@@ -1310,6 +1318,7 @@ table.orderTableStyle td {
   border-top: none;
   border-left: none;
   border-right: none;
+  color: #0064c8;
 }
 table.orderTableStyle tr:nth-child(even) {
   background: #E3F2FD;
