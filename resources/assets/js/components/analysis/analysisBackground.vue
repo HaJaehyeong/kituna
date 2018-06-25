@@ -39,5 +39,5 @@
         grid-template-rows: 0.04fr 0.96fr;
         /* background-image: url("/images/mainPageImage/backgroundVending.jpg"); */
     }
-  
+
 </style>

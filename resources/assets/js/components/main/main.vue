@@ -3,13 +3,16 @@
 <div id="mainBackgroundDiv">
     <div id="mainBackgroundSecondDiv">
         <div id="topLogoBar" >
-            <img src="/images/mainPageImage/logo.png"  width="100" height="50" >
-            <v-btn round color="cyan" style="float: right; color: white;">Sign-in-></v-btn>
+            <img src="/images/mainPageImage/logo.png"  width="140" height="30" style="margin-top: 1%;">
+            <div id="signDiv">
+                Sign-in→
+                <!-- <v-btn round color="cyan" style="float: right; color: white; padding-bottom: 35px;">Sign-in-></v-btn> -->
+            </div>
         </div>
         <div>
             <br>
             <div>
-                <v-btn small round color="cyan" style="color: white; padding-bottom: 5px;">Introduce</v-btn>
+                <v-btn small round color="cyan" style="color: white; padding-bottom: 30px;">Introduce</v-btn>
             </div>
             
             <h3 style="color: white;">자판기에 IoT기술을 접목시켜</h3>
@@ -61,8 +64,7 @@
   margin: auto;
 }
 #topLogoBar{
-
-  margin-top: 2%;
+  margin-top: 1%;
   padding-bottom: 1%;
   border-bottom: 1px solid #FFFFFF;
 }
@@ -81,7 +83,18 @@
 #analyst, #management, #order{
   margin-left: 2%;
 }
-
+#signDiv{
+ float: right; 
+ width: 100px; 
+ height: 30px; 
+ color: white;
+ font-size: 15pt;
+ font-style: "Dosis";
+ background-color: #00BCD4;
+ border-radius: 20px 20px 20px 20px; 
+ padding-left: 5px;
+ margin-top: 1%;
+}
 .icon {
   width:100%;
   height: 100%;
