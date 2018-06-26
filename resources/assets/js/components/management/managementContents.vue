@@ -15,6 +15,7 @@
         </div>
         <div style="margin-left: 10px;">
           <table class="spInfoTableStyle">
+            
             <tr class="even">
               <th class="blueFontStyle"><font size="3" style="font-family: 'Nanum+Gothic';">사원번호</font></th>
               <td><font size="3" style="font-family: 'Nanum+Gothic'">{{identifyNo}}</font></td>
@@ -50,9 +51,10 @@
                             <h3 class="blueFontStyle" style="text-align: center; font-family: 'Fugaz+One';">{{product.productCount}}</h3>
                           </div>
                           <div v-else class="emptyDivStyle" style="position: relative;">
-                            <div style="position: absolute; bottom: 7px; left: 25px;">
+                            <div style="position: absolute; bottom: 25px; left: 25px;">
                               <h5 v-if="product.productCount == -1" style="color: white; text-align: center; font-family: 'Nanum+Gothic';">총 량</h5>
                               <h3 v-if="product.productCount == -1" style="color: white; text-align: center; font-family: 'Fugaz+One';">{{allCount}}</h3>
+                              <h1 v-else style="color: white; margin-left: 10px; margin-bottom: 20px;">+</h1>
                             </div>
                           </div>
                         </td>

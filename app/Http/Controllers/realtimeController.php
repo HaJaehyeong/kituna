@@ -398,4 +398,73 @@ class realtimeController extends Controller
         else return 'fail';
     }
 
+    public function newData() {
+        // for ($i = 0 ; $i < 3000 ; $i++) {
+        //     $randYear = rand(2017, 2018);
+        //     $randMonth = 0;
+        //     $randDay = 0;
+        //     if ($randYear == 2018) {
+        //         $randMonth = rand(1, 6);
+        //         if ($randMonth == 6)
+        //             $randDay = rand(1, 25);
+        //         else
+        //             $randDay = rand(1, 30);
+        //     } else {
+        //         $randMonth = rand(1, 12);
+        //         $randDay = rand(1, 30);
+        //     }
+
+        //     $date = $randYear."-".$randMonth."-".$randDay." 00:00:00";
+        //     $vd_id = rand(1, 122);
+        //     $line = rand(1, 8);
+
+        //     $getDrinkId = DB::table('vd_stock')
+        //     ->select('drink_id')
+        //     ->where('vd_id', $vd_id)
+        //     ->where('line', $line)->get();
+
+        //     DB::table('sell_data')->insert([
+        //         'vd_id'     => $vd_id,
+        //         'line'      => $line,
+        //         'drink_id'  => $getDrinkId[0]->drink_id,
+        //         'sell_date' => $date,
+        //         'coin_1000' => 0,
+        //         'coin_500'  => 1,
+        //         'coin_100'  => 3
+        //     ]);
+        // }
+        for ($i = 0 ; $i < 3000 ; $i++) {
+            $randYear = 2018;
+            $randMonth = 0;
+            $randDay = 0;
+
+            $randMonth = rand(5, 6);
+
+            if ($randMonth == 6)
+                $randDay = rand(1, 25);
+            else if ($randMonth == 5)
+                $randDay = rand(1, 31);
+
+            $date = $randYear."-".$randMonth."-".$randDay." 00:00:00";
+            $vd_id = rand(1, 122);
+            $line = rand(1, 8);
+
+            $getDrinkId = DB::table('vd_stock')
+            ->select('drink_id')
+            ->where('vd_id', $vd_id)
+            ->where('line', $line)->get();
+
+            DB::table('sell_data')->insert([
+                'vd_id'     => $vd_id,
+                'line'      => $line,
+                'drink_id'  => $getDrinkId[0]->drink_id,
+                'sell_date' => $date,
+                'coin_1000' => 0,
+                'coin_500'  => 1,
+                'coin_100'  => 3
+            ]);
+        }
+
+    }
+
 }

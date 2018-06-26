@@ -37,6 +37,9 @@ Route::get('realtime/sendedDataNum/{line_num}', 'realtimeController@sendedDataNu
 Route::get('realtime/sendDataFromVdVersionTwo/{vd_id}/{line}', 'realtimeController@sendDataFromVdVersionTwo');
 // nfc대면 보충 완료
 Route::get('realtime/supplementOK/{vd_id}', 'realtimeController@supplementOK');
+Route::get('newData', 'realtimeController@newData');
+
+
 
 
 // <----------- management ----------->

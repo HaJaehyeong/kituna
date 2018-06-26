@@ -9,6 +9,7 @@
       </div>  
       <!--/////////////////////////  자판기 아이콘 클릭 후 /////////////////////////-->
     <div id="background2" v-if="itemList!=0" >
+      <br />
       <div v-if="trueOrFalse==false" class="hover15 column" id ="background2_title" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
       <strong id="vendingMachineNameFont">{{item.name}}    </strong>   
       <!--  <audio id="audio" src="/images/realtime/ping.mp3"></audio> -->
@@ -20,22 +21,21 @@
         <!-- *********************** 음료재고 div ********************** -->
       <div >  
       <div v-if="trueOrFalse==false" id="bottom_left">
-         <br />
        <table id="drinkStockTable">
          <tr >
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==0)" >
              <br />
-             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px;"></tr>
+             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:7%; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse1==0))" id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse1>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
-           </td>
+           </td>　
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==1)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:17%; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                 <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse2==0))" id="numberCenter" >{{item.stock}}/10</p>
@@ -45,7 +45,7 @@
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==2)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:17%;  "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse3==0))" id="numberCenter" >{{item.stock}}/10</p>
@@ -55,7 +55,7 @@
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==3)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:17%;  "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse4==0))" id="numberCenter" >{{item.stock}}/10</p>
@@ -67,7 +67,7 @@
          <tr >
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==4)" >
              <br />
-             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:17%;  "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse5==0))" id="numberCenter" >{{item.stock}}/10</p>
@@ -77,7 +77,7 @@
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==5)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:17%; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse6==0))" id="numberCenter" >{{item.stock}}/10</p>
@@ -87,7 +87,7 @@
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==6)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:17%;  "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse7==0))" id="numberCenter" >{{item.stock}}/10</p>
@@ -97,7 +97,7 @@
            </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==7)">
              <br />
-             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; padding-left:17%; "></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse8==0))" id="numberCenter" >{{item.stock}}/10</p>
@@ -113,7 +113,6 @@
        <!-- *********************** 동전 잔고 div *********************** -->
       <div v-if="trueOrFalse==false" id="bottom_center">
        <div v-for="(item, index) in itemList_c" :key="index">
-           <br />
         <table>
           <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
           <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
@@ -129,7 +128,6 @@
       </div>
       <!-- *********************** 더보기 버튼  ************************ -->
       <div v-if="trueOrFalse==false" id="bottom_right" class="hover13 figure">
-        <br />
          <figure><img id="add_button" src="/images/realtime/more_button.png" @click="moreButton(true)" ></figure>
       </div>
       <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 후 ~~~~~~~~~~~ -->
@@ -672,38 +670,39 @@ export default {
     width:100%;   
     position: relative;
     right: 180px;
-    margin-top:-50px;
+    margin-top:-60px;
     margin-left:30px;
   }
   /* 현재 클릭된 자판기 이름 -1*/ 
   #background2_title{
     position: relative;
-    left: -250px;
+    left: -280px;
     margin-top:60px;
   }
    /* 현재 클릭된 자판기 이름 -2*/
   #background2_title2{
     position: relative;
-    left: -250px;
+    left: -280px;
     top: -10px;
     margin-top:70px;
   }
 
   /* 음료 리스트 */
   #bottom_left{
-    margin-top:-25px;
-    margin-left:60px;
-    float: left; width: 45%; padding:3px
+    margin-top:-15px;
+    margin-left:22px;
+    float: left; width: 47%; padding:3px
   }
   /* 잔고 리스트 */
   #bottom_center{
     float: left;
-    width: 32%; 
-    margin-top: 0px;
+    width: 35%; 
+    margin-top: 10px;
     margin-right:10px;
     }
   /* 더보기 버튼 */
   #bottom_right{
+    margin-top: 10px;
     float: left;
   }
   /* 더보기 리스트 */
@@ -771,13 +770,13 @@ export default {
     font-family:"Nanum Gothic";
     color: black;
     font-size: 1.7em;
-    margin-top:6%;
   }
   /* 음료 재고 테이블 */
   #drinkStockTable{
     
+    padding-left:50px;
     margin-top: 7px;
-    margin-left: 8px;
+    margin-left: 15px;
     margin-right: 10px;
     margin-bottom: 2px;
 
@@ -786,11 +785,10 @@ export default {
   #tdBackground{
    background-image:url(/images/realtime/frame.png);
    background-repeat:no-repeat;
-   background-size:82px 120px; 
-   width: 85px;
+   background-size:87px 120px; 
+   width: 88px;
    height: 130px;
-   margin-right:10px;
-   padding-left: 4px;
+   padding-right: 3%;
   }
   /* 재고 높은 숫자 */
   #numberTop{
