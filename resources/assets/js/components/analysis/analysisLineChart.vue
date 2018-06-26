@@ -12,7 +12,7 @@
         <v-btn fab dark small> <v-icon>show_chart</v-icon> </v-btn>
       </a>
       <!-- ID가 scrollBar인 태그를 찾아 바로 그 태그로 이동한다. -->
-      <a href="#" v-scroll-to="'#scrollBar'">
+      <a href="#" v-scroll-to="'#speedDial2'">
         <v-btn fab dark small> <v-icon>bar_chart</v-icon> </v-btn>
       </a>
       <!-- ID가 div_AnalysisHeader인 DIV태그를 찾아 바로 그 태그로 이동한다. -->
@@ -29,8 +29,7 @@
       <!-- 실시간 판매량 데이터를 나타내는 DIv로 자식 DIV를 1:9로 나누어 제목과, 데이터창을 구분한다. -->
       <div id="anaylsisRealDataSecondDiv">
         <div>
-          <h4 style="text-align:right; font-weight: bold; margin-top: 1%; margin-right: 20px; color:#0064C8;">실시간 판매량</h4>
-          <img src="/images/analysis/refresh.png">
+          <h4 style="text-align:right; font-weight: bold;margin-right: 20px; margin-top: 15%; color:#0064C8;">실시간 판매량</h4>
         </div>
         <!-- 3:7 비율로 데이터 안의 현재판매량이란 글자와, 데이터를 나타내는 DIV들의 비율을 나눈다. -->
         <div id="anaylsisRealDataSecondContentDiv">
@@ -134,6 +133,7 @@
                     </tbody>
                 </table>
                 </div>
+                <div id="speedDial2"></div>
               </div>
               <div>
                 <table class="table borderless" > 
@@ -348,7 +348,7 @@
             </div>
             <div class="rows82DivideDiv">
               <div>
-                <table class="table table-hover" style="color: #0064C8;">
+                <table class="table table-hover" style="color: #0064C8; text-align:center;">
                   <thead style="font-weight: bold;">
                     <tr>
                       <td style="padding-top: 10px;">음료</td>

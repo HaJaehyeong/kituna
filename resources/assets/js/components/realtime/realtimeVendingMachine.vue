@@ -10,32 +10,29 @@
       <!--/////////////////////////  자판기 아이콘 클릭 후 /////////////////////////-->
     <div id="background2" v-if="itemList!=0" >
       <div v-if="trueOrFalse==false" class="hover15 column" id ="background2_title" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
-      <strong id="vendingMachineNameFont">{{item.name}}    </strong>    <div class="hover13 figure">
-         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')"></figure>
-      </div>
+      <strong id="vendingMachineNameFont">{{item.name}}    </strong>   
       <!--  <audio id="audio" src="/images/realtime/ping.mp3"></audio> -->
       </div> 
       <div v-if="trueOrFalse==true" class="hover15 column" id ="background2_title2" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
-      <strong id="vendingMachineNameFont">{{item.name}}    </strong>    <div class="hover13 figure">
-         <figure><img id="add_button" src="/images/realtime/refresh.png"  @click="refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3')"></figure>
-      </div>
+      <strong id="vendingMachineNameFont">{{item.name}}    </strong>    
       </div> 
       <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 전 ~~~~~~~~~~~ -->
         <!-- *********************** 음료재고 div ********************** -->
       <div >  
       <div v-if="trueOrFalse==false" id="bottom_left">
+         <br />
        <table id="drinkStockTable">
          <tr >
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==0)" >
              <br />
-             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
+             <tr style="text-align:center;vertical-align:middle " ><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px;"></tr>
              <tr>
                <p v-if="(item.stock<4)" id="numberTop" class="blink" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse1==0))" id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="((item.stock>=4)&&(item.stock<=9)&&(colorTrueOrFalse1>=1))" class="blink3"  id="numberCenter" >{{item.stock}}/10</p>
                <p v-if="(item.stock==10)" id="numberBottom" class="blink2" >{{item.stock}}/10</p>
              </tr>
-           </td>　
+           </td>
            <td id="tdBackground" v-for="(item, index) in itemList" :key="index" v-if="(index==1)">
              <br />
              <tr><img v-bind:src="item.drink_img_path" style=" height:55px; width:55px; "></tr>
@@ -116,6 +113,7 @@
        <!-- *********************** 동전 잔고 div *********************** -->
       <div v-if="trueOrFalse==false" id="bottom_center">
        <div v-for="(item, index) in itemList_c" :key="index">
+           <br />
         <table>
           <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
           <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
@@ -123,7 +121,7 @@
         </table>
         <p id="CoinStockFont" style="text-align:left; font-size: 1.3em; ">　잔고 현황</p>
         <table id="trBgColor" style="margin-top:-15px">
-         <tr id="CoinStockFont" ><td style="padding-left:180px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right;font-size: 1.0em; ">총 합 </td></tr>
+         <tr id="CoinStockFont" ><td style="padding-left:180px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right;font-size: 0.7em; ">총 합 </td></tr>
          <tr id="sumFont"><td style="padding-left:180px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}￦</td></tr>
         </table>
        </div>
@@ -131,6 +129,7 @@
       </div>
       <!-- *********************** 더보기 버튼  ************************ -->
       <div v-if="trueOrFalse==false" id="bottom_right" class="hover13 figure">
+        <br />
          <figure><img id="add_button" src="/images/realtime/more_button.png" @click="moreButton(true)" ></figure>
       </div>
       <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 후 ~~~~~~~~~~~ -->
@@ -151,7 +150,7 @@
          <tr>
          <td> <!-- 판매목록 -->
            <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;"  @click.stop="dialog = true" @click="sale_history()" src="/images/realtime/sell_button.png" ><p>　</p></figure>
-          </td>
+         </td>
          <td> <!-- 작업지시 작성 -->
            <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:4%;" @click.stop="dialog2 = true"  src="/images/realtime/order_button.png" ></figure>
           </td>
@@ -186,7 +185,7 @@
                     <v-card-title >  ● 보충기사 : {{item.supplementer}}</v-card-title>
                    </div>
                 </v-card>
-                <v-card> -->
+                <v-card> 
                   <!-- data table pagenation -->
                  <v-data-table
                       :headers="headers"
@@ -392,7 +391,7 @@ export default {
            } 
         this.itemList = obj;         /*   재고 전체 받아오는 변수   */
         this.itemList_before=obj;   /*   재고만 받아오는 변수      */  
-
+ console.log(this.itemList);
          })
        .catch(function (error) {
          console.log(error);
@@ -673,19 +672,19 @@ export default {
     width:100%;   
     position: relative;
     right: 180px;
-    margin-top:-55px;
+    margin-top:-50px;
     margin-left:30px;
   }
   /* 현재 클릭된 자판기 이름 -1*/ 
   #background2_title{
     position: relative;
-    left: -200px;
+    left: -250px;
     margin-top:60px;
   }
    /* 현재 클릭된 자판기 이름 -2*/
   #background2_title2{
     position: relative;
-    left: -200px;
+    left: -250px;
     top: -10px;
     margin-top:70px;
   }
@@ -694,12 +693,12 @@ export default {
   #bottom_left{
     margin-top:-25px;
     margin-left:60px;
-    float: left; width: 42%; padding:3px
+    float: left; width: 45%; padding:3px
   }
   /* 잔고 리스트 */
   #bottom_center{
     float: left;
-    width: 35%; 
+    width: 32%; 
     margin-top: 0px;
     margin-right:10px;
     }
@@ -771,25 +770,27 @@ export default {
   #vendingMachineNameFont{
     font-family:"Nanum Gothic";
     color: black;
-    font-size: 1.7em
+    font-size: 1.7em;
+    margin-top:6%;
   }
   /* 음료 재고 테이블 */
   #drinkStockTable{
     
-    padding-left:50px;
-    margin-top: 4px;
-    margin-left: 15px;
+    margin-top: 7px;
+    margin-left: 8px;
     margin-right: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 
   }
   /* 테이블 배경사진 */
   #tdBackground{
    background-image:url(/images/realtime/frame.png);
    background-repeat:no-repeat;
-   background-size:77px 120px; 
-   width: 80px;
+   background-size:82px 120px; 
+   width: 85px;
    height: 130px;
+   margin-right:10px;
+   padding-left: 4px;
   }
   /* 재고 높은 숫자 */
   #numberTop{

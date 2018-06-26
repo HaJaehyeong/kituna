@@ -80,7 +80,7 @@ export default {
 <style>
 #mainBackgroundDiv {
   /* The image used */
-  background-image: url("/images/mainPageImage/backgroundVending.jpg");
+  background-image: url("/images/mainPageImage/backgroundVending.png");
 
   /* Set a specific height */
   height: 100vh;
