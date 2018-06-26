@@ -1,6 +1,6 @@
 <template>
   <div class="rowStyle">
-    <div style="height: 100%;">
+    <div>
       <v-alert v-model="alertOpen" type="info" dismissible>
         <font size="5">오늘의 작업지시서가 생성되었습니다.</font>
       </v-alert>
