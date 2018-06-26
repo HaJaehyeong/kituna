@@ -1209,7 +1209,13 @@
               responsive : false,
               maintainAspectRatio : false,
               legend :{
-                position: 'bottom'
+                position: 'bottom',
+                labels: {
+                  fontSize: 15,
+                  fontFamily: 'Nanum Gothic',
+                  fontColor: '#0064C8',
+                  fontStyle: 'bold',
+                }
               }
               // scales: {
               //   yAxes: [{

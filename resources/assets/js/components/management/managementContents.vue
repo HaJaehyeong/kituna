@@ -272,15 +272,15 @@
                     <thead style="text-align: center;">
                       <th style="width: 13%; font-family: 'Nanum+Gothic';"><font size="4">자판기 명</font></th>
                       <th v-for="n in 8" :key="n.index" style="font-family: 'Fugaz+One';"><font size="4">{{n}}</font></th>
-                      <th style="width: 16%; font-family: 'Nanum+Gothic';"><font size="4">비고</font></th>
+                      <th style="width: 11%; font-family: 'Nanum+Gothic';"><font size="4">비고</font></th>
                     </thead>
                     <tbody>
                       <tr v-for="vending in sameVDArr" :key="vending.index">
                         <td><font size="4" color="#0064c8">{{vending.vd_name}}</font></td>
 
-                        <td v-for="productValue in vending.lineAndProduct" :key="productValue.index">
+                        <td v-for="productValue in vending.lineAndProduct" :key="productValue.index" style="text-align: center;">
                           <img :src="productValue.imgSrc" style="width: 25px; height: 35px; margin-left: 10px; margin-right: 10px;">
-                          <font size="5" style="font-family: 'Fugaz+One';">{{productValue.sp_val}}</font>
+                          <strong><font size="4" style="font-family: 'Fugaz+One';">{{productValue.sp_val}}</font></strong><font size="1" color="gray">/10</font>
                         </td>                      
                         
                         <td v-if="jobOrderCheck == false" @click="createNote(vending.vd_name, vending.vd_id)" style="width: 10%; font-family: 'Nanum+Gothic';">{{vending.orderNote}}</td>
