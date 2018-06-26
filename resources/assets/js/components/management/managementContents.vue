@@ -4,9 +4,9 @@
       <v-alert v-model="alertOpen" type="info" dismissible>
         <font size="5">오늘의 작업지시서가 생성되었습니다.</font>
       </v-alert>
-      <v-alert v-model="jobOrderCheck" type="warning">
+      <!-- <v-alert v-model="jobOrderCheck" type="warning">
         <font size="5">작업지시서가 이미 생성되어있습니다.</font>
-      </v-alert>
+      </v-alert> -->
     </div>
     <div v-if="contentPage == '보충기사'">
       <div class="contentsUpperStyle">
