@@ -39,6 +39,8 @@ Route::get('realtime/sendDataFromVdVersionTwo/{vd_id}/{line}', 'realtimeControll
 Route::get('realtime/supplementOK/{vd_id}', 'realtimeController@supplementOK');
 Route::get('newData', 'realtimeController@newData');
 
+Route::get('codingTest/{A}/{B}/{N}', 'realtimeController@codingTest');
+
 
 
 

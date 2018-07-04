@@ -18,39 +18,39 @@ class realtimeController extends Controller
         $vd_address = array();
 
         // 모든 자판기 주소별로 나누기
-        for ($i = 0 ; $i < count($getVdList) ; $i++) {
+        for ($x = 0 ; $x < count($getVdList) ; $x++) {
             // 주소 저장
-            $vd_address[$i] = $getVdList[$i]->vd_address;
-            if ($vd_address[$i] != null) {
-                $vd_address[$i] = explode(", ", $vd_address[$i]);
+            $vd_address[$x] = $getVdList[$x]->vd_address;
+            if ($vd_address[$x] != null) {
+                $vd_address[$x] = explode(", ", $vd_address[$x]);
             } else {
-                $vd_address[$i] = 'not defined address';
+                $vd_address[$x] = 'not defined address';
             }
             // 주소가 넘어온 데이터와 같은 것을 저장한다.
-            if ($vd_address[$i][0] == $subLocal && $vd_address[$i][1] == $local) {
-                $result[$i]['vd_id']            = $getVdList[$i]->vd_id;
-                $result[$i]['vd_latitude']      = $getVdList[$i]->vd_latitude;
-                $result[$i]['vd_longitude']     = $getVdList[$i]->vd_longitude;
-                $result[$i]['vd_name']          = $getVdList[$i]->vd_name;
-                $result[$i]['vd_supplementer']  = $getVdList[$i]->vd_supplementer;
-                $result[$i]['vd_address']       = $getVdList[$i]->vd_address;
-                $result[$i]['vd_soldout']       = $getVdList[$i]->vd_soldout;
-            } else if ($vd_address[$i][1] == $local && $subLocal == "all") {
-                $result[$i]['vd_id']            = $getVdList[$i]->vd_id;
-                $result[$i]['vd_latitude']      = $getVdList[$i]->vd_latitude;
-                $result[$i]['vd_longitude']     = $getVdList[$i]->vd_longitude;
-                $result[$i]['vd_name']          = $getVdList[$i]->vd_name;
-                $result[$i]['vd_supplementer']  = $getVdList[$i]->vd_supplementer;
-                $result[$i]['vd_address']       = $getVdList[$i]->vd_address;
-                $result[$i]['vd_soldout']       = $getVdList[$i]->vd_soldout;
+            if ($vd_address[$x][0] == $subLocal && $vd_address[$x][1] == $local) {
+                $result[$x]['vd_id']            = $getVdList[$x]->vd_id;
+                $result[$x]['vd_latitude']      = $getVdList[$x]->vd_latitude;
+                $result[$x]['vd_longitude']     = $getVdList[$x]->vd_longitude;
+                $result[$x]['vd_name']          = $getVdList[$x]->vd_name;
+                $result[$x]['vd_supplementer']  = $getVdList[$x]->vd_supplementer;
+                $result[$x]['vd_address']       = $getVdList[$x]->vd_address;
+                $result[$x]['vd_soldout']       = $getVdList[$x]->vd_soldout;
+            } else if ($vd_address[$x][1] == $local && $subLocal == "all") {
+                $result[$x]['vd_id']            = $getVdList[$x]->vd_id;
+                $result[$x]['vd_latitude']      = $getVdList[$x]->vd_latitude;
+                $result[$x]['vd_longitude']     = $getVdList[$x]->vd_longitude;
+                $result[$x]['vd_name']          = $getVdList[$x]->vd_name;
+                $result[$x]['vd_supplementer']  = $getVdList[$x]->vd_supplementer;
+                $result[$x]['vd_address']       = $getVdList[$x]->vd_address;
+                $result[$x]['vd_soldout']       = $getVdList[$x]->vd_soldout;
             } else if ($local == "all" && $subLocal == "all"){
-                $result[$i]['vd_id']            = $getVdList[$i]->vd_id;
-                $result[$i]['vd_latitude']      = $getVdList[$i]->vd_latitude;
-                $result[$i]['vd_longitude']     = $getVdList[$i]->vd_longitude;
-                $result[$i]['vd_name']          = $getVdList[$i]->vd_name;
-                $result[$i]['vd_supplementer']  = $getVdList[$i]->vd_supplementer;
-                $result[$i]['vd_address']       = $getVdList[$i]->vd_address;
-                $result[$i]['vd_soldout']       = $getVdList[$i]->vd_soldout;
+                $result[$x]['vd_id']            = $getVdList[$x]->vd_id;
+                $result[$x]['vd_latitude']      = $getVdList[$x]->vd_latitude;
+                $result[$x]['vd_longitude']     = $getVdList[$x]->vd_longitude;
+                $result[$x]['vd_name']          = $getVdList[$x]->vd_name;
+                $result[$x]['vd_supplementer']  = $getVdList[$x]->vd_supplementer;
+                $result[$x]['vd_address']       = $getVdList[$x]->vd_address;
+                $result[$x]['vd_soldout']       = $getVdList[$x]->vd_soldout;
             }
         }
         return $result;
@@ -157,27 +157,27 @@ class realtimeController extends Controller
         
         $count = 0;
         // vd_soldout = 1 이 없는 경우 만들어서 배열에 넣어준다 
-        for($i = 0 ; $i < count($getNumOfVd) ; $i++) {
+        for($x = 0 ; $x < count($getNumOfVd) ; $x++) {
             // 마지막 값이 하나이면 마지막에 하나의 값을 만들어서 넣어준다.
-            if (!isset($getNumOfVd[$i+1]) && $getNumOfVd[$i]->address != $getNumOfVd[$i-1]->address) {
-                $array[$count] = $getNumOfVd[$i];
+            if (!isset($getNumOfVd[$x+1]) && $getNumOfVd[$x]->address != $getNumOfVd[$x-1]->address) {
+                $array[$count] = $getNumOfVd[$x];
                 $count++;
                 $array[$count] = (object) array(
-                    'address'    => $getNumOfVd[$i]->address,
+                    'address'    => $getNumOfVd[$x]->address,
                     'count'      => 0,
                     'vd_soldout' => 1
                 );
-            } else if ($getNumOfVd[$i]->address == $getNumOfVd[$i+1]->address) { // 값이 두개 일 때
-                $array[$count] = $getNumOfVd[$i];
+            } else if ($getNumOfVd[$x]->address == $getNumOfVd[$x+1]->address) { // 값이 두개 일 때
+                $array[$count] = $getNumOfVd[$x];
                 $count++;
-                $i++;
-                $array[$count] = $getNumOfVd[$i];
+                $x++;
+                $array[$count] = $getNumOfVd[$x];
                 $count++;
             } else { //  값이 하나 일 때
-                $array[$count] = $getNumOfVd[$i];
+                $array[$count] = $getNumOfVd[$x];
                 $count++;
                 $array[$count] = (object) array(
-                    'address'    => $getNumOfVd[$i]->address,
+                    'address'    => $getNumOfVd[$x]->address,
                     'count'      => 0,
                     'vd_soldout' => 1
                 );
@@ -185,9 +185,9 @@ class realtimeController extends Controller
             }
         }
 
-        for ($i = 0 ; $i < count($array) ; $i++) {
-            $array[$i]->count = $array[$i]->count+$array[$i+1]->count;
-            $i++;
+        for ($x = 0 ; $x < count($array) ; $x++) {
+            $array[$x]->count = $array[$x]->count+$array[$x+1]->count;
+            $x++;
         }
         return $array;
     }
@@ -236,18 +236,18 @@ class realtimeController extends Controller
             ->where('vd.vd_id', $vd_id)->where('jo.jo_id', $getJobOrder[0]->jo_id)->get();
 
             // 값을 넣기라능!!
-            for ($i = 0 ; $i < count($getJoColumnInfo) ; $i++) {
-                if ($i == 0) {
+            for ($x = 0 ; $x < count($getJoColumnInfo) ; $x++) {
+                if ($x == 0) {
                     DB::table('jo_column')->insert([
                         'jc_id'       => NULL,
-                        'jo_id'       => $getJoColumnInfo[$i]->jo_id,
-                        'vd_id'       => $getJoColumnInfo[$i]->vd_id,
-                        'vd_name'     => $getJoColumnInfo[$i]->vd_name,
-                        'sp_login_id' => $getJoColumnInfo[$i]->vd_supplementer,
-                        'drink_name'  => $getJoColumnInfo[$i]->drink_name,
-                        'drink_path'  => $getJoColumnInfo[$i]->drink_img_path,
-                        'sp_val'      => $getJoColumnInfo[$i]->sp_val,
-                        'drink_line'  => $getJoColumnInfo[$i]->line,
+                        'jo_id'       => $getJoColumnInfo[$x]->jo_id,
+                        'vd_id'       => $getJoColumnInfo[$x]->vd_id,
+                        'vd_name'     => $getJoColumnInfo[$x]->vd_name,
+                        'sp_login_id' => $getJoColumnInfo[$x]->vd_supplementer,
+                        'drink_name'  => $getJoColumnInfo[$x]->drink_name,
+                        'drink_path'  => $getJoColumnInfo[$x]->drink_img_path,
+                        'sp_val'      => $getJoColumnInfo[$x]->sp_val,
+                        'drink_line'  => $getJoColumnInfo[$x]->line,
                         'note'        => $note,
                         'sp_check'    => 0
                     ]);
@@ -255,14 +255,14 @@ class realtimeController extends Controller
                 }
                 DB::table('jo_column')->insert([
                     'jc_id'       => NULL,
-                    'jo_id'       => $getJoColumnInfo[$i]->jo_id,
-                    'vd_id'       => $getJoColumnInfo[$i]->vd_id,
-                    'vd_name'     => $getJoColumnInfo[$i]->vd_name,
-                    'sp_login_id' => $getJoColumnInfo[$i]->vd_supplementer,
-                    'drink_name'  => $getJoColumnInfo[$i]->drink_name,
-                    'drink_path'  => $getJoColumnInfo[$i]->drink_img_path,
-                    'sp_val'      => $getJoColumnInfo[$i]->sp_val,
-                    'drink_line'  => $getJoColumnInfo[$i]->line,
+                    'jo_id'       => $getJoColumnInfo[$x]->jo_id,
+                    'vd_id'       => $getJoColumnInfo[$x]->vd_id,
+                    'vd_name'     => $getJoColumnInfo[$x]->vd_name,
+                    'sp_login_id' => $getJoColumnInfo[$x]->vd_supplementer,
+                    'drink_name'  => $getJoColumnInfo[$x]->drink_name,
+                    'drink_path'  => $getJoColumnInfo[$x]->drink_img_path,
+                    'sp_val'      => $getJoColumnInfo[$x]->sp_val,
+                    'drink_line'  => $getJoColumnInfo[$x]->line,
                     'note'        => NULL,
                     'sp_check'    => 0
                 ]);
@@ -336,17 +336,17 @@ class realtimeController extends Controller
             ->join('job_order as jo', 'jo.sp_id', '=', 'sm.sp_id')
             ->where('vd.vd_id', $vd_id)->where('jo.jo_id', $findJobOrder[0]->jo_id)->get();
 
-            for ($i = 0 ; $i < count($getJoColumnInfo) ; $i++) {
+            for ($x = 0 ; $x < count($getJoColumnInfo) ; $x++) {
                 DB::table('jo_column')->insert([
                     'jc_id'       => NULL,
-                    'jo_id'       => $getJoColumnInfo[$i]->jo_id,
-                    'vd_id'       => $getJoColumnInfo[$i]->vd_id,
-                    'vd_name'     => $getJoColumnInfo[$i]->vd_name,
-                    'sp_login_id' => $getJoColumnInfo[$i]->vd_supplementer,
-                    'drink_name'  => $getJoColumnInfo[$i]->drink_name,
-                    'drink_path'  => $getJoColumnInfo[$i]->drink_img_path,
-                    'sp_val'      => $getJoColumnInfo[$i]->sp_val,
-                    'drink_line'  => $getJoColumnInfo[$i]->line,
+                    'jo_id'       => $getJoColumnInfo[$x]->jo_id,
+                    'vd_id'       => $getJoColumnInfo[$x]->vd_id,
+                    'vd_name'     => $getJoColumnInfo[$x]->vd_name,
+                    'sp_login_id' => $getJoColumnInfo[$x]->vd_supplementer,
+                    'drink_name'  => $getJoColumnInfo[$x]->drink_name,
+                    'drink_path'  => $getJoColumnInfo[$x]->drink_img_path,
+                    'sp_val'      => $getJoColumnInfo[$x]->sp_val,
+                    'drink_line'  => $getJoColumnInfo[$x]->line,
                     'note'        => NULL,
                     'sp_check'    => 0
                 ]);
@@ -370,9 +370,9 @@ class realtimeController extends Controller
 
     // 판매하기
     public function sell(){
-        for ($i = 0 ; $i < 1 ; $i++) {
-            $vd_id = rand(1, 1);
-            $line = rand(1, 1);
+        for ($x = 0 ; $x < 3000 ; $x++) {
+            $vd_id = rand(1, 122);
+            $line = rand(1, 8);
             
             realtimeController::sendDataFromVdVersionTwo($vd_id, $line); 
         }
@@ -399,7 +399,7 @@ class realtimeController extends Controller
     }
 
     public function newData() {
-        // for ($i = 0 ; $i < 3000 ; $i++) {
+        // for ($x = 0 ; $x < 3000 ; $x++) {
         //     $randYear = rand(2017, 2018);
         //     $randMonth = 0;
         //     $randDay = 0;
@@ -433,7 +433,7 @@ class realtimeController extends Controller
         //         'coin_100'  => 3
         //     ]);
         // }
-        for ($i = 0 ; $i < 3000 ; $i++) {
+        for ($x = 0 ; $x < 3000 ; $x++) {
             $randYear = 2018;
             $randMonth = 0;
             $randDay = 0;
