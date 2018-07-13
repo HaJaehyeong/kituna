@@ -84,7 +84,7 @@ if(isset($_POST['message'])){
 
 //받지 않았다면 기본 메세지를 출력한다.
 if ($myMessage == ""){
-    $myMessage = "작업지시가 추가 되었습니다.";
+    $myMessage = "作業の指示が追加されました";
 }
 
 $message = array("message" => $myMessage);
