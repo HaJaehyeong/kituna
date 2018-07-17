@@ -93,7 +93,7 @@ class realtimeController extends Controller
     // 동전 재고
     public function coinStock($vd_id){
         $getCoinStock = DB::table('vendingmachine')
-        ->select(DB::raw('coin_1000 as won1000, coin_500 as won500, coin_100 as won100, 1000*coin_1000+500*coin_500+100*coin_100 as sum'))
+        ->select(DB::raw('coin_100 as en100, coin_50 as en50, coin_10 as en10, 100*coin_100+50*coin_50+10*coin_10 as sum'))
         ->where('vd_id', $vd_id)->get();
 
         return $getCoinStock;
@@ -118,7 +118,7 @@ class realtimeController extends Controller
          * order by sd.sell_date desc
          */
         $getSellData = DB::table('sell_data as sd')
-        ->select('vd.vd_name', 'pi.drink_name', 'sd.sell_date', DB::raw('sd.sell_date, sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100 as sell_price'))
+        ->select('vd.vd_name', 'pi.drink_name', 'sd.sell_date', DB::raw('sd.sell_date, sd.coin_100*100+sd.coin_50*50+sd.coin_10*10 as sell_price'))
         ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
         ->join('product_info as pi', 'pi.drink_id', '=', 'sd.drink_id')
         ->where(DB::raw('date_format(sd.sell_date, "%Y-%m-%d")'), DB::raw('date_sub(date_format(now(), "%Y-%m-%d"), interval 0 day)'))
@@ -363,8 +363,8 @@ class realtimeController extends Controller
             'vd_id'     => $vd_id,
             'line'      => $line,
             'drink_id'  => $getDrinkId[0]->drink_id,
-            'coin_500'  => 1,
-            'coin_100'  => 3
+            'coin_50'  => 1,
+            'coin_10'  => 3
         ]);
     }
 
@@ -459,9 +459,9 @@ class realtimeController extends Controller
                 'line'      => $line,
                 'drink_id'  => $getDrinkId[0]->drink_id,
                 'sell_date' => $date,
-                'coin_1000' => 0,
-                'coin_500'  => 1,
-                'coin_100'  => 3
+                'coin_100' => 0,
+                'coin_50'  => 1,
+                'coin_10'  => 3
             ]);
         }
 

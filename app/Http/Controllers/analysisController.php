@@ -32,7 +32,7 @@ class analysisController extends Controller
              */
             $getSalesThisDay = DB::table('sell_data')
             ->select(DB::raw('count(*) as count'), 
-            DB::raw('sum(coin_1000*1000+coin_500*500+coin_100*100) as getSales'))
+            DB::raw('sum(coin_100*100+coin_50*50+coin_10*10) as getSales'))
             ->where(DB::raw('date_format(sell_date, "%Y-%m-%d")'), 
                     DB::raw('date_format(now(), "%Y-%m-%d")'))
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m-%d")'))->get();
@@ -77,7 +77,7 @@ class analysisController extends Controller
              */
             $getSalesThisDay = DB::table('sell_data as sd')
             ->select(DB::raw('count(*) as count'), 
-            DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'))
+            DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'))
             ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
             ->where(DB::raw('date_format(sd.sell_date, "%Y-%m-%d")'), 
                     DB::raw('date_format(now(), "%Y-%m-%d")'))
@@ -150,7 +150,7 @@ class analysisController extends Controller
             if ($date == 'week') { // 주간
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
-                        DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
+                        DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'), 'vd_supplementer')
                 ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
                 ->where(DB::raw('date_format(sell_date, "'.$strDate.'")'), '>', 
                         DB::raw('date_sub(date_format(now(), "'.$strDate.'"), interval 8 day)'))
@@ -161,7 +161,7 @@ class analysisController extends Controller
             } else { // 그 외
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
-                        DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
+                        DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'), 'vd_supplementer')
                 ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
                 ->where(DB::raw('date_format(sell_date, "'.$strDate.'")'), 
                         DB::raw('date_format(now(), "'.$strDate.'")'))
@@ -183,12 +183,12 @@ class analysisController extends Controller
             }
             // 매출 차이가 심한 자판기
             if ($date == "week") { // 주간
-                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
+                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 8 day), "%Y-%m-%d"), interval 15 day)
                 group by vd_id) as sub1'))
                 ->select('sub1.vd_id', 'vd.vd_name', 'vd.vd_supplementer', DB::raw('sub2.sum - sub1.sum as value'))
-                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum 
+                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum 
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(now(), "%Y-%m-%d"), interval 8 day)
                 group by vd_id) as sub2'), 'sub1.vd_id', '=', 'sub2.vd_id')
@@ -197,12 +197,12 @@ class analysisController extends Controller
                 ->orderBy('value', $sort)
                 ->limit(1)->get();
             } else if ($date == "month") {
-                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
+                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 30 day), "%Y-%m-%d"), interval 60 day)
                 group by vd_id) as sub1'))
                 ->select('sub1.vd_id', 'vd.vd_name', 'vd.vd_supplementer', DB::raw('sub2.sum - sub1.sum as value'))
-                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum 
+                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum 
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(now(), "%Y-%m-%d"), interval 30 day)
                 group by vd_id) as sub2'), 'sub1.vd_id', '=', 'sub2.vd_id')
@@ -211,12 +211,12 @@ class analysisController extends Controller
                 ->orderBy('value', $sort)
                 ->limit(1)->get();
             } else if ($date == "year") {
-                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
+                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 365 day), "%Y-%m-%d"), interval 730 day)
                 group by vd_id) as sub1'))
                 ->select('sub1.vd_id', 'vd.vd_name', 'vd.vd_supplementer', DB::raw('sub2.sum - sub1.sum as value'))
-                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum 
+                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum 
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(now(), "%Y-%m-%d"), interval 365 day)
                 group by vd_id) as sub2'), 'sub1.vd_id', '=', 'sub2.vd_id')
@@ -262,7 +262,7 @@ class analysisController extends Controller
             if ($date == 'week') { // 주간
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
-                        DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
+                        DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'), 'vd_supplementer')
                 ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
                 ->where(DB::raw('date_format(sell_date, "'.$strDate.'")'), '>', 
                         DB::raw('date_sub(date_format(now(), "'.$strDate.'"), interval 8 day)'))
@@ -273,7 +273,7 @@ class analysisController extends Controller
             } else { // 그 외
                 $getListOfDrinkSales = DB::table('sell_data as sd')
                 ->select('sd.vd_id', 'vd.vd_name', DB::raw('count(*) as count'), 
-                        DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'), 'vd_supplementer')
+                        DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'), 'vd_supplementer')
                 ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
                 ->where(DB::raw('date_format(sell_date, "'.$strDate.'")'), 
                         DB::raw('date_format(now(), "'.$strDate.'")'))
@@ -296,12 +296,12 @@ class analysisController extends Controller
             }
             // 매출 차이가 심한 자판기
             if ($date == "week") { // 주간
-                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
+                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 8 day), "%Y-%m-%d"), interval 15 day)
                 group by vd_id) as sub1'))
                 ->select('sub1.vd_id', 'vd.vd_name', 'vd.vd_supplementer', DB::raw('sub2.sum - sub1.sum as value'))
-                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum 
+                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum 
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(now(), "%Y-%m-%d"), interval 8 day)
                 group by vd_id) as sub2'), 'sub1.vd_id', '=', 'sub2.vd_id')
@@ -311,12 +311,12 @@ class analysisController extends Controller
                 ->orderBy('value', $sort)
                 ->limit(1)->get();
             } else if ($date == "month") { // 월간
-                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
+                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 30 day), "%Y-%m-%d"), interval 60 day)
                 group by vd_id) as sub1'))
                 ->select('sub1.vd_id', 'vd.vd_name', 'vd.vd_supplementer', DB::raw('sub2.sum - sub1.sum as value'))
-                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum 
+                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum 
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(now(), "%Y-%m-%d"), interval 30 day)
                 group by vd_id) as sub2'), 'sub1.vd_id', '=', 'sub2.vd_id')
@@ -326,12 +326,12 @@ class analysisController extends Controller
                 ->orderBy('value', $sort)
                 ->limit(1)->get();
             } else if ($date == "year") { // 년간
-                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum
+                $getBestSalesDifference = DB::table(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(date_sub(date_format(now(), "%Y-%m-%d"), interval 365 day), "%Y-%m-%d"), interval 730 day)
                 group by vd_id) as sub1'))
                 ->select('sub1.vd_id', 'vd.vd_name', 'vd.vd_supplementer', DB::raw('sub2.sum - sub1.sum as value'))
-                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as sum 
+                ->join(DB::raw('(select vd_id, count(*), sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as sum 
                 from    sell_data as sd
                 where date_format(sell_date, "%Y-%m-%d") > date_sub(date_format(now(), "%Y-%m-%d"), interval 365 day)
                 group by vd_id) as sub2'), 'sub1.vd_id', '=', 'sub2.vd_id')
@@ -620,21 +620,21 @@ class analysisController extends Controller
          */
         if ($place == 'all'){
             $getYearData = DB::table('sell_data')
-            ->select(DB::raw('date_format(sell_date, "%Y-%m") as date'), DB::raw('count(*) as count'),DB::raw('sum(coin_1000*1000+coin_500*500+coin_100*100) as getSales'))
+            ->select(DB::raw('date_format(sell_date, "%Y-%m") as date'), DB::raw('count(*) as count'),DB::raw('sum(coin_100*100+coin_50*50+coin_10*10) as getSales'))
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m")'))
             ->orderBy('date', 'desc')
             ->limit(12)->get();
 
             // 월간 판매량, 매출
             $getMonthData = DB::table('sell_data')
-            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(coin_1000*1000+coin_500*500+coin_100*100) as getSales'))
+            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(coin_100*100+coin_50*50+coin_10*10) as getSales'))
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m-%d")'))
             ->orderBy('date', 'desc')
             ->limit(31)->get();
 
             // 일주일간 판매량, 매출
             $getWeekData = DB::table('sell_data')
-            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(coin_1000*1000+coin_500*500+coin_100*100) as getSales'))
+            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(coin_100*100+coin_50*50+coin_10*10) as getSales'))
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m-%d")'))
             ->orderBy('date', 'desc')
             ->limit(7)->get();
@@ -650,7 +650,7 @@ class analysisController extends Controller
              * limit 31
              */
             $getYearData = DB::table('sell_data as sd')
-            ->select(DB::raw('date_format(sell_date, "%Y-%m") as date'), DB::raw('count(*) as count'),DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'))
+            ->select(DB::raw('date_format(sell_date, "%Y-%m") as date'), DB::raw('count(*) as count'),DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'))
             ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
             ->where('vd.vd_place', 'like', $place.'%')
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m")'))
@@ -659,7 +659,7 @@ class analysisController extends Controller
 
             // 월간 판매량, 매출
             $getMonthData = DB::table('sell_data as sd')
-            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'))
+            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'))
             ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
             ->where('vd.vd_place', 'like', $place.'%')
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m-%d")'))
@@ -668,7 +668,7 @@ class analysisController extends Controller
 
             // 일주일간 판매량, 매출
             $getWeekData = DB::table('sell_data as sd')
-            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(sd.coin_1000*1000+sd.coin_500*500+sd.coin_100*100) as getSales'))
+            ->select(DB::raw('date_format(sell_date, "%Y-%m-%d") as date'), DB::raw('count(*) as count'), DB::raw('sum(sd.coin_100*100+sd.coin_50*50+sd.coin_10*10) as getSales'))
             ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
             ->where('vd.vd_place', 'like', $place.'%')
             ->groupBy(DB::raw('date_format(sell_date, "%Y-%m-%d")'))
