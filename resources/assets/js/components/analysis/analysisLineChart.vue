@@ -176,7 +176,7 @@
                   <radar-chart :chart-data="radarChart" :options="radarOption" class="chartData" id="chartData" :width="350" :height="350"></radar-chart>  
                 </div>
                 <div> 
-                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">その他飲み物ランキング及び販売数</h4>
+                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">その他飲み物ランキング<br>及び販売数</h4>
                   <!-- 클릭 된 자판기 내에 없는 음료들의 순위를 데이터 테이블을 이용해 순위순으로 나타내었다. -->
                   <table class="table table-hover" style="color: #0064C8;">
                     <tbody v-for="drinkList in theRestDrinkRankArray" :key="drinkList.num">
