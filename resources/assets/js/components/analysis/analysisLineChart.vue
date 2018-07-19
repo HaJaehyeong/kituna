@@ -22,14 +22,14 @@
     </v-speed-dial>
 
     <!-- 자식 DIV 두개를 7:3비율로 나누어, Analysis글씨와, 실시간 판매량DIV로 구성한다. -->
-    <div class="collums64DivideDiv">
-      <div style="text-align:left;font-family:'Dosis'; margin-left: 10%;" >
+    <div class="collums64DivideDiv" style="padding-right: 4%;">
+      <div style="text-align:left;font-family:'Dosis'; margin-left: 20%;" >
         <h2><strong>Analysis</strong></h2>
       </div>
       <!-- 실시간 판매량 데이터를 나타내는 DIv로 자식 DIV를 1:9로 나누어 제목과, 데이터창을 구분한다. -->
       <div id="anaylsisRealDataSecondDiv">
         <div>
-          <h4 style="text-align:right; font-weight: bold;margin-right: 20px; margin-top: 15%; color:#0064C8;">실시간 판매량</h4>
+          <h4 style="text-align:right; font-weight: bold;margin-right: 20px; margin-top: 15%; color:#0064C8;">リアルタイム販売数</h4>
         </div>
         <!-- 3:7 비율로 데이터 안의 현재판매량이란 글자와, 데이터를 나타내는 DIV들의 비율을 나눈다. -->
         <div id="anaylsisRealDataSecondContentDiv">
@@ -37,15 +37,14 @@
             <h6 style="color:#0064C8; font-weight: bold; text-align:left; margin-left: 50px;">현재 판매량(개)</h6>
           </div> -->
           <!-- 3:3:3으로 DIV를 나누어 데이터를 적는다. -->
-          
           <div style="color:#FFFFFF; font-weight: bold; padding-top: 20px;">
-            월 판매량 <br><h3>{{nowMonthProduct}}</h3>     
+            月販売数 <br><h3>{{nowMonthProduct}}</h3>     
           </div>
           <div style="color:#FFFFFF; font-weight: bold; padding-top: 20px;">
-            일 판매량 <h3>{{nowDayProduct}}</h3>
+            日販売数 <h3>{{nowDayProduct}}</h3>
           </div>
           <div style="color:#FFFFFF; font-weight: bold; padding-top: 20px;">
-            일 매출액 <h3>{{nowDaySales}}</h3>
+            日販売額 <h3>{{nowDaySales}}</h3>
           </div>   
         </div>
       </div>
@@ -66,18 +65,18 @@
           <img :src="parkBtnSrc" class="btnRightDiv" id="parkBtn" @click="placeChange('park')">
         </div>
       </div>
-      <div>
+      <div style="width: 100%;">
         <div id="analysisVdDiv">
           <div>
             <div class="collums55DivideDiv">
               <div>
-                <span class="mainContents">매출순 자판기</span>
-                <img id="productVdSortImg" :src="rankVdSortImgSrc" @click="rankVdSortChange()">
+                <span class="mainContents">売上順自販機</span>
+                <img id="productVdSortImg" :src="rankVdSortImgSrc" @click="rankVdSortChange()" style="margin-top: 5px;">
               </div>
               <div>
-                <v-chip label :selected="yearChip" outline color="blue" @click="rankVdDateChange('year')">년간</v-chip>
-                <v-chip label :selected="monthChip" outline color="blue" @click="rankVdDateChange('month')">월간</v-chip>
-                <v-chip label :selected="weekChip" outline color="blue" @click="rankVdDateChange('week')">주간</v-chip>
+                <v-chip label :selected="yearChip" outline color="blue" @click="rankVdDateChange('year')">年間</v-chip>
+                <v-chip label :selected="monthChip" outline color="blue" @click="rankVdDateChange('month')">月間</v-chip>
+                <v-chip label :selected="weekChip" outline color="blue" @click="rankVdDateChange('week')">週間</v-chip>
               </div> 
             </div>
             <div id="tableArrowDiv">
@@ -85,10 +84,10 @@
                 <table class="table table-hover" style="color: #0064C8;">
                   <thead style="font-weight: bold; font-family: Nanum+Gothic; border-bottom: 2px solid #0064C8;">
                     <tr>
-                      <td style="padding-top: 10px;">순위</td>
-                      <td style="padding-top: 10px;">자판기명</td>
-                      <td style="padding-top: 10px;">판매량</td>
-                      <td style="padding-top: 10px;">매출액</td>
+                      <td style="padding-top: 10px;">順位</td>
+                      <td style="padding-top: 10px;">自販機名</td>
+                      <td style="padding-top: 10px;">販売数</td>
+                      <td style="padding-top: 10px;">販売額</td>
                     </tr>
                   </thead>
                   <!-- rankVdDataArray배열을 for문을 돌며, 값을 테이블에 한줄 씩 넣는다. -->
@@ -100,13 +99,13 @@
                       <th style="padding-top: 10px;">{{vdData.count}}</th>
                       <th style="padding-top: 10px;">{{vdData.getSales}}</th>
                     </tr>
-                    <tr v-else-if="(vdData.num%2) !== 0" style="background-color:#E5EFF9;" @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
+                    <tr v-else-if="(vdData.num%2) !== 0" style="background-color:#E5EFF9;" :id="vdData.vd_name" @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
                       <th style="padding-top: 10px;"> {{vdData.num}}</th>
                       <td  style="font-weight: bold; font-size: 15px; padding-top: 10px;">{{vdData.vd_name}}</td>
                       <th style="padding-top: 10px;">{{vdData.count}}</th>
                       <th style="padding-top: 10px;">{{vdData.getSales}}</th>
                     </tr>  
-                    <tr v-else @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
+                    <tr v-else :id="vdData.vd_name" @click="vdIdChange(vdData.vd_id, vdData.vd_name, vdData.vd_supplementer, vdData.num)">
                       <th style="padding-top: 10px;"> {{vdData.num}}</th>
                       <td  style="font-weight: bold; font-size: 15px; padding-top: 10px;">{{vdData.vd_name}}</td>
                       <th style="padding-top: 10px;">{{vdData.count}}</th>
@@ -119,9 +118,9 @@
                   <table class="table" id="interestVdTableDiv"> 
                     <thead style="font-weight: bold;">
                       <tr>
-                        <td style="padding-top: 10px;">자판기명</td>
-                        <td style="padding-top: 10px;">담당 보충기사</td>
-                        <td style="padding-top: 10px;">매출액 차이</td>
+                        <td style="padding-top: 10px;">自販機名</td>
+                        <td style="padding-top: 10px;">担当オペレーター</td>
+                        <td style="padding-top: 10px;">販売額差</td>
                       </tr>
                     </thead>
                     <tbody>
@@ -132,8 +131,8 @@
                       </tr>
                     </tbody>
                 </table>
-                </div>
                 <div id="speedDial2"></div>
+                </div>
               </div>
               <div>
                 <table class="table borderless" > 
@@ -167,17 +166,17 @@
           <div style="height:550px;">
             <div>
               <!-- 현재 선택된 자판기 이름이 analysisVdName에 저장되어 있다. -->
-              <h2 id="clickVdName">{{analysisVdName}} 자판기</h2>
+              <h2 id="clickVdName">{{analysisVdName}} 自販機</h2>
             </div>
             <div id="graphDrinkRankDivideDiv">
               <div class="collums64DivideDiv">
                 <div>
-                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">자판기 내 음료별 판매량</h4>
+                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">自販機内飲み物別販売数</h4>
                   <!-- radar차트를 이용해, 데이터 비교가 가능하게 해두었다. -->
                   <radar-chart :chart-data="radarChart" :options="radarOption" class="chartData" id="chartData" :width="350" :height="350"></radar-chart>  
                 </div>
                 <div> 
-                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">그 외 음료순위 및 판매량</h4>
+                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">その他飲み物ランキング及び販売数</h4>
                   <!-- 클릭 된 자판기 내에 없는 음료들의 순위를 데이터 테이블을 이용해 순위순으로 나타내었다. -->
                   <table class="table table-hover" style="color: #0064C8;">
                     <tbody v-for="drinkList in theRestDrinkRankArray" :key="drinkList.num">
@@ -194,16 +193,15 @@
                     </tbody>
                   </table>
                   <div>
-                    <span style="float: left; font-size: 20px; color:#0064C8;">평균보충주기 : </span><span style="float: right; font-size: 20px; color:#0064C8;">일</span><span style="float: right; font-size: 20px; font-weight: bold;">{{avgSupplementCycle}}</span><br><br>
-                    <span style="float: left; font-size: 20px; color:#0064C8;">컴플레인 : </span><span style="float: right; font-size: 20px; color:#0064C8;">회</span><span style="float: right; font-size: 20px; font-weight: bold;">{{complain}}</span><br><br>
-                    <span style="float: left; font-size: 20px; color:#0064C8;">판매장소 : </span><span style="float: right; font-size: 20px; font-weight: bold;">{{sellPlace}}</span><br>
+                    <span style="float: left; font-size: 20px; color:#0064C8;">平均補充周期 : </span><span style="float: right; font-size: 20px; color:#0064C8;">日</span><span style="float: right; font-size: 20px; font-weight: bold;">{{avgSupplementCycle}}</span><br><br>
+                    <span style="float: left; font-size: 20px; color:#0064C8;">コンプレイン : </span><span style="float: right; font-size: 20px; color:#0064C8;">回</span><span style="float: right; font-size: 20px; font-weight: bold;">{{complain}}</span><br><br>
+                    <span style="float: left; font-size: 20px; color:#0064C8;">販売場所 : </span><span style="float: right; font-size: 20px; font-weight: bold;">{{sellPlace}}</span><br>
                     <div class="collums55DivideDiv">
-                      <v-btn @click.native.stop="jobOrderDialog = true" style="height: 156px;">
-                        <img src="images/analysis/jobOrderImg.png" style="height: 156px;">
+                      <v-btn @click.native.stop="jobOrderDialog = true" style="height: 140px;">
+                        <img src="images/analysis/jobOrderImg.png" style="height: 140px;">
                       </v-btn>
-                   
-                      <v-btn @click="dialogOpen()" style="height: 156px;"> 
-                        <img src="images/analysis/lineChangeImg.png" style="height: 156px;">
+                      <v-btn @click="dialogOpen()" style="height: 140px;"> 
+                        <img src="images/analysis/lineChangeImg.png" style="height: 140px;">
                       </v-btn>
                     </div>
 
@@ -211,14 +209,14 @@
             <v-dialog v-model="jobOrderDialog" max-width="520" max-height="300">
               <v-card>
                 <v-card-title>
-                  <h2>작업 지시창</h2>
+                  <h2>作業指示</h2>
                 </v-card-title>
                 <v-card-text>
                   <!-- 작업 지시를 하는 자판기 이름과 해당 자판기 보충기사를 보여준다.  -->
                   <v-card-text>
-                    ● 현재 자판기 : {{analysisVdName}}
+                    ● 今自販機 : {{analysisVdName}}
                     <v-spacer></v-spacer>
-                    ● 보충 기사 : {{analysisVdSp}}
+                    ● オペレーター : {{analysisVdSp}}
                   </v-card-text>
                   <v-select
                     :items="jobOrderSelect"
@@ -241,19 +239,75 @@
     
             <!-- 라인변경 모달창 -->
             <v-layout row justify-center>
-              <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">            
+              <v-dialog v-model="dialog" max-width="1000" transition="dialog-bottom-transition">
                 <v-card>
+                  <div class="collums262DivideDiv">
+                    <div style="background-color: #0064C8; color: white;">
+                      <h4>
+                        Supporter Name
+                      </h4>
+                       {{analysisVdSp}} 
+                      <h4>
+                        Arrea
+                      </h4>
+                        {{analysisVdName}} 自販機 
+                    </div>            
+                    <div>
+                      <div class="collums25DivideDiv" style="">
+                        <div v-for="(drink, index) in vendingDrinkList" :key="index" style="color: #0064C8; font-weight: bold; padding: 10%;">
+                          Line {{index+1}}
+                          <v-card :hover="true" v-bind:style="{ 'background-image': 'url(images/analysis/slot.png)' }">
+                            <img :src="drink.drink_img_path" @click="lineChangeBeforeDrink(drink.drink_id, drink.drink_name, drink.drink_img_path)" style=" height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
+                          </v-card>
+                        </div>
+                      </div>
+                      <br><br><br>
+                      <h3 style="color: #D48C5B;">Recommend</h3>                        
+                      <div class="collums25DivideDiv">
+                        <div v-for="(drink, index) in theRestDrinkRankArray" :key="index">
+                          <v-card :hover="true" v-bind:style="{ 'background-image': 'url(images/analysis/slot2.png)' }">
+                            <img :src="drink.drink_img_path" @click="lineChangeAfterDrink(drink.drink_id, drink.drink_name, drink.drink_img_path)" style=" height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
+                          </v-card>
+                        </div> 
+                      </div> 
+                    </div> 
+                    <div class="rows333DivideDiv">
+                      <div style="background-image: url(images/analysis/slot3.png);">
+                        <img :src="vdDrinkPath" style="height:100px;  margin-left: auto; margin-right: auto; display: block;">
+                      </div>
+                      <img src="images/analysis/change.png" style="margin-left: auto; margin-right: auto; display: block;">
+                      <div style="background-image: url(images/analysis/slot3.png);">
+                        <img :src="changeDrinkPath" style="height:100px; margin-left: auto; margin-right: auto; margin-top: auto; display: block;">
+                      </div>
+                      <!-- <v-card v-bind:style="{ 'background-image': 'url(images/analysis/slot3.png)'}">
+                        <img :src="vdDrinkPath" style="height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
+                      </v-card>
+                      <img src="images/analysis/change.png" style="margin-left: auto; margin-right: auto; display: block;">
+                      <v-card v-bind:style="{ 'background-image': 'url(images/analysis/slot3.png)'}">
+                        <img :src="changeDrinkPath" style="height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
+                      </v-card> -->
+                      <div>
+                        <v-btn @click.native="dialog = false, snackbar = true" @click="setLineChangeNote(analysisVdId, vdDrinkId, changeDrinkId)">変更指示</v-btn>
+                        <v-btn @click.native="dialog = false" @click="lineChangeDrinkReset()">変更キャンセル</v-btn>  
+                      </div>
+                      
+                    </div>
+                  </div>            
+                  
+                </v-card>
+                
+                <!-- <v-card>
                   <v-toolbar dark color="cyan">
-                    <!-- 음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다. -->
+                    음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다.
                     <v-btn icon dark @click.native="dialog = false" @click="lineChangeDrinkReset()">
                       <v-icon>close</v-icon>
                     </v-btn>
                     <v-toolbar-title>{{analysisVdName}} 자판기 라인 변경</v-toolbar-title>
                     <v-spacer></v-spacer>   
                     <v-toolbar-items>
-                      <!-- 음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다. -->
+                      음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다.
                       <v-btn dark flat @click.native="dialog = false" @click="lineChangeDrinkReset()">변경 취소</v-btn>
-                      <!-- 음료 라인 변경 지시 시, setLineChangeNote메서드를 호출해, 작업지시서에 추가되도록 한다.. -->
+                      음료 라인 변경 지시 시, setLineChangeNote메서드를 호출해, 작업지시서에 추가되도록 한다..
                       <v-btn dark flat @click.native="dialog = false, snackbar = true" @click="setLineChangeNote(analysisVdId, vdDrinkId, changeDrinkId)">변경 지시</v-btn>
                     </v-toolbar-items>
                   </v-toolbar>
@@ -298,7 +352,7 @@
                     </div>   
 
                   </v-list>
-                </v-card>
+                </v-card> -->
                 <v-card>
                 </v-card>
               </v-dialog>
@@ -307,7 +361,7 @@
 
             <!-- 라인변경 지시 완료시 뜨는 스낵바 -->
             <v-snackbar :timeout="timeout" :top="y === 'top'" v-model="snackbar" >
-            {{analysisVdName}} 자판기 라인 변경 지시 완료
+            {{analysisVdName}} 自販機飲み物変更指示完了
               <v-btn flat color="pink" @click.native="snackbar = false">Close</v-btn>
             </v-snackbar>
             <!-- 라인변경 지시 완료시 뜨는 스낵바 -->
@@ -327,12 +381,12 @@
           <div class="titleContentDivideDiv" id="titleContentDivideDiv1">
             <div class="collums55DivideDiv" id="scrollBar" style="margin-top: 15px;">
               <div>
-                <span class="mainContents">음료별 판매순위</span>
+                <span class="mainContents">飲み物別販売ランキング</span>
               </div>
               <div>
-                <v-chip label :selected="drinkYearChip" outline color="blue" @click="drinkRankDateChange('year')">년간</v-chip>
-                <v-chip label :selected="drinkMonthChip" outline color="blue" @click="drinkRankDateChange('month')">월간</v-chip>
-                <v-chip label :selected="drinkWeekChip" outline color="blue" @click="drinkRankDateChange('week')">주간</v-chip>
+                <v-chip label :selected="drinkYearChip" outline color="blue" @click="drinkRankDateChange('year')">年間</v-chip>
+                <v-chip label :selected="drinkMonthChip" outline color="blue" @click="drinkRankDateChange('month')">月間</v-chip>
+                <v-chip label :selected="drinkWeekChip" outline color="blue" @click="drinkRankDateChange('week')">週間</v-chip>
               </div>
             </div>
             <div>
@@ -342,7 +396,7 @@
           <div class="titleContentDivideDiv" id="titleContentDivideDiv2">
             <div class="collums55DivideDiv"  style="margin-top: 15px;">
               <div>
-                <span class="mainContents">음료 정보</span>
+                <span class="mainContents">飲み物情報</span>
               </div>
               <div></div>
             </div>
@@ -351,11 +405,11 @@
                 <table class="table table-hover" style="color: #0064C8; text-align:center;">
                   <thead style="font-weight: bold;">
                     <tr>
-                      <td style="padding-top: 10px;">음료</td>
-                      <td style="padding-top: 10px;">평균 소진량(개)</td>
-                      <td style="padding-top: 10px;">예상 소진일(일)</td>
-                      <td style="padding-top: 10px;">잔량(개)</td>
-                      <td style="padding-top: 10px;">주문</td>
+                      <td style="padding-top: 10px;">飲み物</td>
+                      <td style="padding-top: 10px;">平均販売数</td>
+                      <td style="padding-top: 10px;">予想売れきれ日</td>
+                      <td style="padding-top: 10px;">残数</td>
+                      <td style="padding-top: 10px;">注文</td>
                     </tr>
                   </thead>
                   <tbody v-for="array in drinkExhaustAnalysisArray" :key="array.drink_name">
@@ -387,9 +441,9 @@
                 <div  style="margin-top: 35px;">
                   <table class="table borderless">
                     <tr>
-                      <td>선택한 음료 수</td>
+                      <td>選んだ飲み物数</td>
                       <td>{{chooseDrinkProductCount}}</td>
-                      <td>개</td>
+                      <td>個</td>
                     </tr>
                   </table>
                 </div>
@@ -402,35 +456,35 @@
             <div id="scrollLine" class="rows19DivideDiv">
               <div>
               <v-menu :nudge-width="200" v-model="yearProductMenu">
-                <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('year')">년간 판매량</v-btn>
+                <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('year')">年間販売数</v-btn>
                 <v-card>
                   <v-list>
                     <v-list-tile avatar>
                       <v-list-tile-content>
-                        <v-list-tile-title>년간 판매량 통계</v-list-tile-title>
+                        <v-list-tile-title>年間販売数統計</v-list-tile-title>
                       </v-list-tile-content>
                     </v-list-tile>
                   </v-list>
                   <v-list>
                     <v-list-tile>
-                      <v-list-tile-title>이번달 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFirstData}}개</v-list-tile-title>
+                      <v-list-tile-title>今月販売数</v-list-tile-title>
+                      <v-list-tile-title>{{statisticFirstData}}個</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile>
-                      <v-list-tile-title>저번달 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFSecondData}}개</v-list-tile-title>
+                      <v-list-tile-title>先月販売数</v-list-tile-title>
+                      <v-list-tile-title>{{statisticFSecondData}}個</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile>
-                      <v-list-tile-title>1년간 최고 판매달</v-list-tile-title>
-                      <v-list-tile-title>{{statisticThirdData}}개</v-list-tile-title>
+                      <v-list-tile-title>1年間最高販売月</v-list-tile-title>
+                      <v-list-tile-title>{{statisticThirdData}}個</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile>
-                      <v-list-tile-title>1년간 최저 판매달</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFourthData}}개</v-list-tile-title>
+                      <v-list-tile-title>1年間最低販売月</v-list-tile-title>
+                      <v-list-tile-title>{{statisticFourthData}}個</v-list-tile-title>
                     </v-list-tile>
                     <v-list-tile>
-                      <v-list-tile-title>월 평균 판매량</v-list-tile-title>
-                      <v-list-tile-title>{{statisticFifthData}}개</v-list-tile-title>
+                      <v-list-tile-title>月別平均販売数</v-list-tile-title>
+                      <v-list-tile-title>{{statisticFifthData}}個</v-list-tile-title>
                     </v-list-tile>
                   </v-list>
                   <v-card-actions>
@@ -448,35 +502,35 @@
             <div class="rows19DivideDiv">
               <div>
                 <v-menu :nudge-width="200" v-model="monthProductMenu">
-                  <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('month')">월간 판매량</v-btn>
+                  <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('month')">月間販売数</v-btn>
                   <v-card>
                     <v-list>
                       <v-list-tile avatar>
                         <v-list-tile-content>
-                          <v-list-tile-title>월간 판매량 통계</v-list-tile-title>
+                          <v-list-tile-title>月間販売数統計</v-list-tile-title>
                         </v-list-tile-content>
                       </v-list-tile>
                     </v-list>
                     <v-list>
                       <v-list-tile>
-                        <v-list-tile-title>이번주 판매량</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFirstData}}개</v-list-tile-title>
+                        <v-list-tile-title>今週販売数</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFirstData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>저번주 판매량</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFSecondData}}개</v-list-tile-title>
+                        <v-list-tile-title>先週販売数</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFSecondData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>한 달간 최고 판매주</v-list-tile-title>
-                        <v-list-tile-title>{{statisticThirdData}}개</v-list-tile-title>
+                        <v-list-tile-title>一ヶ月間最高販売週</v-list-tile-title>
+                        <v-list-tile-title>{{statisticThirdData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>한 달간 최저 판매주</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFourthData}}개</v-list-tile-title>
+                        <v-list-tile-title>一ヶ月間最低販売週</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFourthData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>주 평균 판매량</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFifthData}}개</v-list-tile-title>
+                        <v-list-tile-title>週間平均販売数</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFifthData}}個</v-list-tile-title>
                       </v-list-tile>
                     </v-list>
                     <v-card-actions>
@@ -496,35 +550,35 @@
             <div class="rows19DivideDiv">
               <div>
                 <v-menu :nudge-width="200" v-model="weekProductMenu">
-                  <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('week')">주간 판매량</v-btn>
+                  <v-btn slot="activator" round outline dark style="font-weight: bold; color:#0064C8;" @click="statistic('week')">週間販売数</v-btn>
                   <v-card>
                     <v-list>
                       <v-list-tile avatar>
                         <v-list-tile-content>
-                          <v-list-tile-title>주간 판매량 통계</v-list-tile-title>
+                          <v-list-tile-title>週間販売数統計</v-list-tile-title>
                         </v-list-tile-content>
                       </v-list-tile>
                     </v-list>
                     <v-list>
                       <v-list-tile>
-                        <v-list-tile-title>오늘 판매량</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFirstData}}개</v-list-tile-title>
+                        <v-list-tile-title>今日販売数</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFirstData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>어제 판매량</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFSecondData}}개</v-list-tile-title>
+                        <v-list-tile-title>昨日販売数</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFSecondData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>주간 최고 판매일</v-list-tile-title>
-                        <v-list-tile-title>{{statisticThirdData}}개</v-list-tile-title>
+                        <v-list-tile-title>週間最高販売日</v-list-tile-title>
+                        <v-list-tile-title>{{statisticThirdData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>주간 최저 판매일</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFourthData}}개</v-list-tile-title>
+                        <v-list-tile-title>週間最低販売日</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFourthData}}個</v-list-tile-title>
                       </v-list-tile>
                       <v-list-tile>
-                        <v-list-tile-title>일 평균 판매량</v-list-tile-title>
-                        <v-list-tile-title>{{statisticFifthData}}개</v-list-tile-title>
+                        <v-list-tile-title>一日平均販売数</v-list-tile-title>
+                        <v-list-tile-title>{{statisticFifthData}}個</v-list-tile-title>
                       </v-list-tile>
                     </v-list>
                     <v-card-actions>
@@ -544,21 +598,21 @@
         <div class="collums55DivideDiv" id="drinkProductBackground">
           <div class="collums55DivideDiv">
             <div>
-              <h4 style="font-weight: bold; color:#0064C8;">학교 음료별 판매 비율</h4>
+              <h4 style="font-weight: bold; color:#0064C8;">学校の飲み物別販売比率</h4>
               <pie-chart :chart-data="pieChart" :options="pieOptions" class="chartData" :width="300" :height="300"></pie-chart>
             </div>
             <div>
-              <h4 style="font-weight: bold; color:#0064C8;">공원 음료별 판매 비율</h4>
+              <h4 style="font-weight: bold; color:#0064C8;">公園の飲み物別販売比率</h4>
               <pie-chart2 :chart-data="pieChart2" :options="pieOptions2" class="chartData" :width="300" :height="300"></pie-chart2>
             </div>
           </div>
           <div class="collums55DivideDiv">
             <div>
-              <h4 style="font-weight: bold; color:#0064C8;">회사 음료별 판매 비율</h4>
+              <h4 style="font-weight: bold; color:#0064C8;">会社の飲み物別販売比率</h4>
               <pie-chart3 :chart-data="pieChart3" :options="pieOptions3" class="chartData" :width="300" :height="300"></pie-chart3>
             </div>
             <div>
-              <h4 style="font-weight: bold; color:#0064C8;">병원 음료별 판매 비율</h4>
+              <h4 style="font-weight: bold; color:#0064C8;">病院の飲み物別販売比率</h4>
               <pie-chart4 :chart-data="pieChart4" :options="pieOptions4" class="chartData" :width="300" :height="300"></pie-chart4>
             </div>
           </div>
@@ -628,7 +682,7 @@
       /* ----- 좌측 장소 버튼 이미지 src 저장 데이터 ----- */  
 
       /* ----- 자판기 랭킹순으로 정렬 데이터 ----- */
-
+        beforeClickVd : '',
         clickVdSrc1 : '/images/analysis/arrow.png',
         clickVdSrc2 : '',
         clickVdSrc3 : '',
@@ -672,11 +726,11 @@
         // ----- 작업지시 모달창 필요 변수 -----
         jobOrderDialog : false,
         jobOrderSelect : [ 
-                            { text: '긴급! 음료 재고 부족' },
-                            { text: '긴급! 잔고 부족' },
-                            { text: '축제 기간 ( 재고잔고 확인 요망 )' },
-                            { text: '기계 이상 및 고장' },
-                            { text: '기타' }
+                            { text: '緊急! 飲み物在庫不足' },
+                            { text: '緊急! 残高不足' },
+                            { text: '祭り期間(在庫管理要望)' },
+                            { text: '機械異常及び故障' },
+                            { text: 'その他' }
                           ],
         selectedItem : '',
         selectedItem_etc : '',
@@ -979,10 +1033,15 @@
         this.analysisVdName = vd_name;
         this.analysisVdSp   = vd_supplementer;
         
-
+        let beforeClickVd = document.getElementById(this.beforeClickVd);
+        beforeClickVd.style.border = '';
+        let nowClickVd = document.getElementById(vd_name);
+        nowClickVd.style.border = '3px solid #0064C8';
+        this.beforeClickVd = vd_name;
+        
+        
         if(this.rankVdSort == 'asc'){
           let url = "/analysis/getVdCount";
-
           //전체 자판기 수를 알기 위한 axios이다
           this.axios.get(url).then((response) =>{
             this.allVendingCount = response.data;  
@@ -1157,16 +1216,16 @@
           
           if(this.yearChip == true){
             pushDate = 'year';
-            nowDate = '올해';
-            beforDate = '작년';
+            nowDate = '今年';
+            beforDate = '去年';
           }else if(this.monthChip == true){
             pushDate = 'month';
-            nowDate = '이번달';
-            beforDate = '저번달';
+            nowDate = '今月';
+            beforDate = '先月';
           }else{
             pushDate = 'week';
-            nowDate = '이번주';
-            beforDate = '저번주';
+            nowDate = '今週';
+            beforDate = '先週';
           }
 
           this.theOtherAnalysis(vd_id);  
@@ -1272,11 +1331,13 @@
             }
           }else{
             this.rankVdDataArray = response.data[0];                   // 처음 최상단에 올라오는 자판기 데이터
+            
             this.analysisVdId = response.data[0][0].vd_id;             
             this.analysisVdName = response.data[0][0].vd_name;
             this.analysisVdSp = response.data[0][0].vd_supplementer;
             this.vendingAnalysis(this.analysisVdId);
-
+            this.beforeClickVd = this.rankVdDataArray[0].vd_name;
+            
           }
 
           this.interestVdDataArray = response.data[1];               // 관심 자판기 데이터
@@ -1562,7 +1623,7 @@
               labels: yearLabelsArray,
               datasets: [
                 {
-                  label: '음료 판매량(개)', 
+                  label: '飲み物販売数(個)', 
                   borderColor: "#0064C8",
                   pointBorderColor: "#0064C8",
                   pointBackgroundColor: "#80b6f4",
@@ -1611,7 +1672,7 @@
               labels: monthLabelsArray,
               datasets: [
                 {
-                  label: '음료 판매량(개)', 
+                  label: '飲み物販売数(個)', 
                   borderColor: "#0064C8",
                   pointBorderColor: "#0064C8",
                   pointBackgroundColor: "#80b6f4",
@@ -1659,7 +1720,7 @@
               labels: weekLabelsArray,
               datasets: [
                 {
-                  label: '음료 판매량(개)', 
+                  label: '飲み物販売数(個)', 
                   borderColor: "#0064C8",
                   pointBorderColor: "#0064C8",
                   pointBackgroundColor: "#80b6f4",
@@ -1738,10 +1799,10 @@
 }
 #anaylsisRealDataSecondDiv{
   display     : grid;
-  grid-template-columns: 0.3fr 0.7fr;
+  grid-template-columns: 0.4fr 0.6fr;
   width: 100%;
   height: 100%;
-  margin-top: 1%;
+
 }
 #anaylsisRealDataSecondContentDiv{
   border-radius: 20px 20px 20px 20px; 
@@ -1755,7 +1816,13 @@
   width: 100%;
   height: 100%;
 }
+.collums262DivideDiv{
+  display     : grid;
+  grid-template-columns: 0.2fr 0.6fr 0.2fr;
+  width: 100%;
+  height: 100%;
 
+}
 .collums25DivideDiv{
   display     : grid;
   grid-template-columns: 0.25fr 0.25fr 0.25fr 0.25fr;
@@ -1782,7 +1849,15 @@
   padding: 1%;
   box-shadow: 1px 1px 5px;
 }
+.rows333DivideDiv{
+  display     : grid;
+  grid-template-rows: 0.3fr 0.1fr 0.3fr 0.3fr;
+  width: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  padding: 1%;
 
+}
 #drinkProductBackground{
   background-color:  #ffffff;
   border-radius: 10px 10px 10px 10px; 

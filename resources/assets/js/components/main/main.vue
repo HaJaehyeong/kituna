@@ -11,14 +11,14 @@
         </div>
         <div>
             <br>
-            <div>
+            <div>ㅡ 
                 <v-btn small round color="cyan" style="color: white; padding-bottom: 30px;">Introduce</v-btn>
             </div>
-            
-            <h3 style="color: white;">자판기에 IoT기술을 접목시켜</h3>
-            <h3 style="color: white;">간편한 판매데이터 수집 및 분석과</h3>
-            <h3 style="color: white;">보충기사의 편의성까지 고려한</h3>
-            <h3 style="color: white;">실시간 자판기 통합관리 서비스입니다.</h3>
+
+            <h3 style="color: white; font-style: Nanum Gothic">自販機にIoT技術を合わせて</h3>
+            <h3 style="color: white; font-style: Nanum Gothic">手軽に販売データの収集及び分析</h3>
+            <h3 style="color: white; font-style: Nanum Gothic">そして補充オペレーターの利便性まで考えた</h3>
+            <h3 style="color: white; font-style: Nanum Gothic">リアルタイム自動販売機統合管理サービスです。</h3>
         </div>
         <div id="mainImageButtonDiv">
             <router-link to="/realtime" id="realTime">
@@ -58,7 +58,7 @@
 }
 #mainBackgroundSecondDiv{
   display: grid;
-  grid-template-rows: 0.1fr 0.4fr 0.6fr;
+  grid-template-rows: 0.1fr 0.3fr 0.6fr;
   height: 100%;
   width: 80%;  
   margin: auto;
@@ -71,7 +71,7 @@
 .partInfo {
   width: 23%;
   height: 80%;
-  margin-top: 5%;
+  margin-top: 3%;
   display: inline-block;
   overflow-x:hidden;
   overflow-y:hidden;
@@ -101,7 +101,7 @@
 }
 
 .partInfo:hover .icon{
-    opacity: 0.7
+    opacity: 0.3
 }
 </style>
 <script>
