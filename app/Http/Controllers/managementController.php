@@ -55,7 +55,7 @@ class managementController extends Controller
     //coin Stock
     public function coinStock($vd_id){
         $getCoinStock = DB::table('coin_stock as cs')
-        ->select(DB::raw('cs.1000 as won1000, cs.500 as won500, cs.100 as won100, 1000*cs.1000+500*cs.500+100*cs.100 as sum'))
+        ->select(DB::raw('cs.1000 as en100, cs.500 as en50, cs.100 as en10, 1000*cs.1000+500*cs.500+100*cs.100 as sum'))
         ->where('vd_id', $vd_id)->get();
 
         return $getCoinStock;

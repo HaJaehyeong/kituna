@@ -483,9 +483,9 @@
       <br />
        <br />
         <table>
-          <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
-          <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.won1000}}개</td></tr>
-          <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.won1000}}개</td></tr>
+          <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.en100}}개</td></tr>
+          <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.en100}}개</td></tr>
+          <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.en100}}개</td></tr>
         </table>
         <p id="CoinStockFont" style="text-align:left; font-size: 1.3em; ">　잔고 현황</p>
         <table id="trBgColor" style="margin-top:-15px">
@@ -722,15 +722,15 @@
            if(obj_c==[]){
              for(key in response){
                 array[key] = {
-                 won1000 : response[key].won1000,
-                 won500  : response[key].won500,
-                 won100 : response[key].won100,
+                 en100 : response[key].en100,
+                 en50  : response[key].en50,
+                 en10 : response[key].en10,
                  sum : response[key].sum
                  
                 }
-                obj_c.push({won1000:array[key].won1000,
-                         won500:array[key].won500,
-                         won100:array[key].won100,
+                obj_c.push({en100:array[key].en100,
+                         en50:array[key].en50,
+                         en10:array[key].en10,
                          sum:array[key].sum});
               } 
            }
@@ -738,14 +738,14 @@
              obj_c.splice(0,);
               for(key in response){
                 array[key] = {
-                 won1000 : response[key].won1000,
-                 won500  : response[key].won500,
-                 won100 : response[key].won100,
+                 en100 : response[key].en100,
+                 en50  : response[key].en50,
+                 en10 : response[key].en10,
                  sum : response[key].sum
                 }
-                 obj_c.push({won1000:array[key].won1000,
-                         won500:array[key].won500,
-                         won100:array[key].won100,
+                 obj_c.push({en100:array[key].en100,
+                         en50:array[key].en50,
+                         en10:array[key].en10,
                          sum:array[key].sum});
               } 
            } 
