@@ -4,20 +4,20 @@
     <v-layout>    
     <v-flex xs8>   
     </v-flex>
-     <v-flex xs6 sm6 class="py-2">    
+     <v-flex xs8 sm8 class="py-2">    
         <!-- 상단바 버튼  -->
         <v-btn-toggle v-model="icon" id="buttonFont">
               <v-btn flat value="left" @click="googleButton(0)" >
-                <v-icon>brightness_1</v-icon><span>　전 체</span>
+                <v-icon>brightness_1</v-icon><span>　全 体</span>
               </v-btn>
               <v-btn flat value="center" @click="googleButton(2)">
-                <v-icon>brightness_3</v-icon><span>　매진</span>
+                <v-icon>brightness_3</v-icon><span>　売り切れ</span>
               </v-btn>
               <v-btn flat value="right" @click="googleButton(1)">
-                <v-icon>brightness_2</v-icon><span>　매진임박</span>
+                <v-icon>brightness_2</v-icon><span>　完売間近</span>
               </v-btn>
               <v-btn flat value="justify" @click="googleButton(3)" >
-                <v-icon>border_color</v-icon><span> 작업지시</span>
+                <v-icon>border_color</v-icon><span>　作業指示</span>
               </v-btn>
          </v-btn-toggle>
       </v-flex>
@@ -26,7 +26,7 @@
     <gmap-map
       :center="center"
       :zoom="zoom"
-      style="width:100%;  height: 300px;"
+      style="width:100%;  height: 280px;"
     >  
     <!-- cluster 적용  -->
     <gmap-cluster :grid-size="gridSize" v-if="clustering" >
@@ -214,6 +214,7 @@ export default {
 
     //<--------------- 전국 EventBus ---------------->
     EventBus.$on('NationEvent',(arg1, arg2,arg3,arg4) => {
+                console.log(arg1, arg2,arg3,arg4);
                 var count = arg4;
                 count++;
 
@@ -647,5 +648,6 @@ margin-bottom:0px;
   width:100%;
   transition:800ms ease all;
 }
+
 
 </style>

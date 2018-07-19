@@ -1,45 +1,50 @@
 <template>
-     <div>
-        <table id="companyInfoTable">
-            <thead>
-                <tr>
-                    <th>회사명</th><th>제품수</th><th>담당자</th><th>전화번호</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="contact in contacts" :key="contact.id" :id="contact.cp_name" @click="clickTr(contact.cp_name)" @mouseover="trColorChange(contact.cp_name)" @mouseout="trOriginColorChange(contact.cp_name)">
-                    <td>{{contact.cp_name}}</td>
-                    <td>{{contact.drink_val_of_company}}</td>
-                    <td>{{contact.cp_leader}}</td>
-                    <td>{{contact.cp_phone}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <br>
-        <div>
-            <b-btn v-b-modal.modal1 @click="companyRegistration">회사등록</b-btn>
-            <b-btn @click="companyInfoUpdate">회사수정</b-btn>
-            <b-btn @click="companyRemove">회사삭제</b-btn>
+     <div style="width: 100%">
+        <!-- 회사 정보 테이블 -->
+        <div style="text-align:left; font-family:'Dosis';">
+            <h2><strong>Product</strong></h2>
+        </div>
+        <div style="width: 100%; height: 650px; background-color: #0064c8; padding-top: 15px; border-radius: 15px; position: relative;">
+            <div v-for="contact in contacts" :key="contact.id" style="width: 90%; height: 100px; margin: 15px; display: grid; grid-template-columns: 0.7fr 0.3fr;">
+                <div :id="contact.cp_name" @click="clickTr(contact.cp_name)" @mouseover="trColorChange(contact.cp_name)" @mouseout="trOriginColorChange(contact.cp_name)" style="margin-right: 5px; border-radius: 15px; width: 95%; background-color: white;">
+                    <h4 style="font-family: 'Dosis'; color: #0064c8; margin-top: 5px;">{{contact.cp_name}}</h4>
+                    <h4 style="font-family: 'Dosis';">{{contact.cp_leader}}</h4>
+                    <h4 style="font-family: 'Fugaz+One'; color: #0064c8;"><strong>{{contact.cp_phone}}</strong></h4>
+                </div>
+                <div style="border-radius: 15px; width: 100%; background-color: white;">
+                    <h4 style="margin-top: 10px;">製品数</h4>
+                    <strong><font size="6" style="font-family: 'Fugaz+One';" color="#0064c8">{{contact.drink_val_of_company}}</font></strong>
+                </div>
+            </div>
+            <div v-b-modal.modal1 @click="companyRegistration" style="align: center; width: 90%; border-radius: 15px; height: 100px; background-color: white; color: #0064c8;">
+                <font size="6">+</font>
+                <h4>新しい会社を追加する</h4>
+            </div>
+            <div style="position: absolute; left: 70px; bottom: 5px;">
+                <v-btn @click="companyInfoUpdate" style="border-radius: 8px;"><h6 style="color: #0064c8;">会社情報修正</h6></v-btn>
+                <v-btn @click="companyRemove" color="error" style="border-radius: 8px;"><h6>会社削除</h6></v-btn>
+            </div>
         </div>
         <div>
+            <!-- 회사 등록, 수정 모달창 -->
             <b-modal id="modal1" :title="modalTitle" hide-footer ref="company">
                 <div>
                     <table>
                         <tr>
-                            <th>회사명</th><td><input type="text" :id="inputCompanyName" class="inputOrderCount"></td>
+                            <th>会社名</th><td><input type="text" :id="inputCompanyName" class="inputOrderCount"></td>
                         </tr>
                         <tr>
-                            <th>담당자</th><td><input type="text" :id="inputCompanyLeader" class="inputOrderCount"></td>
+                            <th>担当者</th><td><input type="text" :id="inputCompanyLeader" class="inputOrderCount"></td>
                         </tr>
                         <tr>
-                            <th>전화번호</th><td><input type="text" :id="inputCompanyPhone" class="inputOrderCount"></td>
+                            <th>電話番号</th><td><input type="text" :id="inputCompanyPhone" class="inputOrderCount"></td>
                         </tr>
                         <tr>
-                            <th>메일</th>
+                            <th>メール</th>
                             <td>
                                 <input type="text" :id="inputLeaderMail_id" class="inputOrderCount">@<input type="text" :id="inputLeaderMail_site" class="inputOrderCount">
                                 <select id="site" @change="changeSite">
-                                    <option value="input">직접입력</option>
+                                    <option value="input">直接入力</option>
                                     <option value="naver.com">naver</option><option value="google.com">google</option>
                                     <option value="daum.net">daum</option><option value="nate.com">nate</option>
                                     <option value="yjp.co.kr">yjp</option><option value="yahoo.com">yahoo</option>
@@ -47,48 +52,51 @@
                             </td>
                         </tr>
                         <tr>
-                            <th>팩스번호</th><td><input type="text" :id="inputCompanyFax" class="inputOrderCount"></td>
+                            <th>ファックス番号</th><td><input type="text" :id="inputCompanyFax" class="inputOrderCount"></td>
                         </tr>
                     </table>
                 </div>
                 <br>
                 <div v-if="registration == true">
-                    <b-btn @click="finish">등록</b-btn>
-                    <b-btn @click="cancel">취소</b-btn>
+                    <b-btn @click="finish">登録する</b-btn>
+                    <b-btn @click="cancel">取り消し</b-btn>
                 </div>
                 <div v-else>
-                    <b-btn @click="finish">수정</b-btn>
-                    <b-btn @click="cancel">취소</b-btn>
+                    <b-btn @click="finish">修正する</b-btn>
+                    <b-btn @click="cancel">取り消し</b-btn>
                 </div>
             </b-modal>
+            <!-- 회사 등록, 수정 모달창 -->
         </div>
         <div>
+            <!-- 회사 삭제 모달창 -->
             <b-modal id="modal2" :title="modalTitle" hide-footer ref="companyRemove">
                 <div>
                     <table>
                         <tr>
-                            <th>회사명</th><td>{{removeInfoArr[0]}}</td>
+                            <th>会社名</th><td>{{removeInfoArr[0]}}</td>
                         </tr>
                         <tr>
-                            <th>담당자</th><td>{{removeInfoArr[1]}}</td>
+                            <th>担当者</th><td>{{removeInfoArr[1]}}</td>
                         </tr>
                         <tr>
-                            <th>전화번호</th><td>{{removeInfoArr[2]}}</td>
+                            <th>電話番号</th><td>{{removeInfoArr[2]}}</td>
                         </tr>
                         <tr>
-                            <th>메일</th><td>{{removeInfoArr[3]}}</td>
+                            <th>メール</th><td>{{removeInfoArr[3]}}</td>
                         </tr>
                         <tr>
-                            <th>팩스번호</th><td>{{removeInfoArr[4]}}</td>
+                            <th>ファックス番号</th><td>{{removeInfoArr[4]}}</td>
                         </tr>
                     </table>
                 </div>
                 <br>
                 <div>
-                    <b-btn @click="finish">삭제</b-btn>
-                    <b-btn @click="cancel">취소</b-btn>
+                    <b-btn @click="finish">削除する</b-btn>
+                    <b-btn @click="cancel">取り消し</b-btn>
                 </div>
             </b-modal>
+            <!-- 회사 삭제 모달창 -->
         </div>
     </div>    
 </template>
@@ -96,22 +104,22 @@
     export default {
         data(){
             return{
-                contacts: [],                                   // 회사정보
-                clickedTrId: "",                                // 클릭한 tr 아이디
-                inputCompanyName: "inputCompanyName",           // 회사이름 입력 태그 아이디
-                inputCompanyLeader: "inputCompanyLeader",       // 담당자 입력 태그 아이디
-                inputCompanyPhone: "inputCompanyPhone",         // 전화번호 입력 태그 아이디
-                inputCompanyFax: "inputCompanyFax",             // 팩스 입력 태그 아이디
-                inputLeaderMail_id: "inputLeaderMail_id",       // 이메일 아이디 입력 태그 아이디
-                inputLeaderMail_site: "inputLeaderMail_site",   // 이메일 사이트 입력 태그 아이디
-                companyInfo: [],                                // 수정할 회사 정보
-                uploadCp_id: "",                                // 수정할 회사 아이디
-                removeCp_id: "",                                // 삭제할 회사 아이디
-                registration: false,                            // 회사 등록 모달창 상태
-                upload: false,                                  // 회사 정보 수정 모달창 상태
-                remove: false,                                  // 회사 삭제 모달창 상태
-                modalTitle: "",                                 // 모달창 제목
-                removeInfoArr: []                               // 삭제할 회사 정보
+                contacts                : [],                           // 회사정보
+                clickedTrId             : "",                           // 클릭한 tr 아이디
+                inputCompanyName        : "inputCompanyName",           // 회사이름 입력 태그 아이디
+                inputCompanyLeader      : "inputCompanyLeader",         // 담당자 입력 태그 아이디
+                inputCompanyPhone       : "inputCompanyPhone",          // 전화번호 입력 태그 아이디
+                inputCompanyFax         : "inputCompanyFax",            // 팩스 입력 태그 아이디
+                inputLeaderMail_id      : "inputLeaderMail_id",         // 이메일 아이디 입력 태그 아이디
+                inputLeaderMail_site    : "inputLeaderMail_site",       // 이메일 사이트 입력 태그 아이디
+                companyInfo             : [],                           // 수정할 회사 정보
+                uploadCp_id             : "",                           // 수정할 회사 아이디
+                removeCp_id             : "",                           // 삭제할 회사 아이디
+                registration            : false,                        // 회사 등록 모달창 상태
+                upload                  : false,                        // 회사 정보 수정 모달창 상태
+                remove                  : false,                        // 회사 삭제 모달창 상태
+                modalTitle              : "",                           // 모달창 제목
+                removeInfoArr           : []                            // 삭제할 회사 정보
             }
         },
         mounted(){
@@ -134,20 +142,26 @@
                 document.getElementById(this.inputCompanyFax).value = "";
                 document.getElementById("site").value = "input";
                 this.modalTitle = "회사등록";
+                // 모달창 초기화
             },
             // 회사 등록 모달창 오픈
 
 
             finish: function() {
                 if (this.registration == true) {
+                    // 회사 등록
+
                     var companyName = document.getElementById(this.inputCompanyName).value;
                     var companyLeader = document.getElementById(this.inputCompanyLeader).value;
                     var companyPhone = document.getElementById(this.inputCompanyPhone).value;
                     var inputMail_id = document.getElementById(this.inputLeaderMail_id).value;
                     var inputMail_site = document.getElementById(this.inputLeaderMail_site).value;
                     var companyFax = document.getElementById(this.inputCompanyFax).value;
+                    // 현재 값 가져오기
 
                     if (Number(companyFax) == NaN) {
+                        // 팩스번호가 숫자가 아닌 경우
+
                         alert("숫자를 입력하시오.");
                         document.getElementById(this.inputCompanyFax).value = "";
                     }
@@ -170,9 +184,11 @@
                         else if (companyFax == "") {
                             alert("팩스를 입력하시오.");
                         }
+                        // 값 유무확인
+
                         else {
-                            var registrationUrl = "product/registerCompanyInfo";
-                            var mail = inputMail_id + "@" + inputMail_site;
+                            var registrationUrl = "product/registerCompanyInfo";    // 등록 url
+                            var mail = inputMail_id + "@" + inputMail_site;         // 입력한 이메일 주소
 
                             const formData = new FormData();
                             formData.append("cp_name", companyName);
@@ -180,6 +196,7 @@
                             formData.append("cp_phone", companyPhone);
                             formData.append("cp_mail", mail);
                             formData.append("cp_fax", companyFax);
+                            // 전송할 데이터
 
                             this.axios.post(registrationUrl, formData)
                             .then((response) => {
@@ -190,25 +207,30 @@
                                     this.$refs.company.hide();
                                 }
                                 else {
-                                    alert("등록에 실패하였습니다.");
+                                    console.log("등록에 실패하였습니다.");
                                 }
                             })
                             .catch((error) => {
                                 console.log(error.response);
-                                alert("등록에 실패하였습니다.");
+                                console.log("등록에 실패하였습니다.");
                             })
                         }
                     }
                 }
                 else if (this.upload == true) {
+                    // 회사 정보 수정
+
                     var companyName = document.getElementById(this.inputCompanyName).value;
                     var companyLeader = document.getElementById(this.inputCompanyLeader).value;
                     var companyPhone = document.getElementById(this.inputCompanyPhone).value;
                     var inputMail_id = document.getElementById(this.inputLeaderMail_id).value;
                     var inputMail_site = document.getElementById(this.inputLeaderMail_site).value;
                     var companyFax = document.getElementById(this.inputCompanyFax).value;
+                    // 현재값 가져오기
 
                     if (Number(companyFax) == NaN) {
+                        // 팩스번호가 숫자가 아닌 경우
+
                         alert("숫자를 입력하시오.");
                         document.getElementById(this.inputCompanyFax).value = "";
                     }
@@ -231,9 +253,11 @@
                         else if (companyFax == "") {
                             alert("팩스를 입력하시오.");
                         }
+                        // 값 유무확인
+
                         else {
-                            var uploadUrl = "product/updateCompanyInfo";
-                            var mail = inputMail_id + "@" + inputMail_site;
+                            var uploadUrl = "product/updateCompanyInfo";        // 수정 url
+                            var mail = inputMail_id + "@" + inputMail_site;     // 입력한 이메일 주소
 
                             const formData = new FormData();
                             formData.append("cp_id", this.uploadCp_id);
@@ -242,6 +266,7 @@
                             formData.append("cp_phone", companyPhone);
                             formData.append("cp_mail", mail);
                             formData.append("cp_fax", companyFax);
+                            // 전송할 데이터
 
                             this.axios.post(uploadUrl, formData)
                             .then((response) => {
@@ -255,22 +280,26 @@
                                     inputMail_site = "";
                                     companyFax = "";
                                     document.getElementById("site").value = "input";
+                                    // 모달창 값 초기화
 
                                     this.upload = false;
                                     this.$refs.company.hide();
                                 }
                                 else {
-                                    
+                                    console.log("수정에 실패하였습니다.");
                                 }
                             })
                             .catch((error) => {
                                 console.log(error.response);
+                                console.log("수정에 실패하였습니다.");
                             })
                         }
                     }
                 }
                 else {
-                    var removeUrl = "product/deleteCompanyInfo/" + this.removeCp_id;
+                    // 회사 삭제
+
+                    var removeUrl = "product/deleteCompanyInfo/" + this.removeCp_id;    // 삭제 url
 
                     this.axios.get(removeUrl)
                     .then((response) => {
@@ -280,12 +309,12 @@
                             this.$refs.companyRemove.hide();
                         }
                         else {
-                            alert("아직 회사의 제품이 남아있습니다.");
+                            console.log("아직 회사의 제품이 남아있습니다.");
                         }
                     })
                     .catch((error) => {
                         console.log(error.response);
-                        alert("삭제에 실패하였습니다.");
+                        console.log("삭제에 실패하였습니다.");
                     })
                 }
             },
@@ -316,7 +345,7 @@
 
             trColorChange: function(trCompnayName) {
                 if (this.clickedTrId != trCompnayName) {
-                    document.getElementById(trCompnayName).style.backgroundColor = 'rgba(88, 88, 88, 0.4)';
+                    document.getElementById(trCompnayName).style.backgroundColor = 'skyblue';
                 }
             },
             // 현재 마우스가 있는 tr 태그 원래 색으로 배경색 변경
@@ -331,6 +360,7 @@
                 })
                 .catch((error) => {
                     console.log(error.response);
+                    console.log("회사 정보를 가져오기가 실패하였습니다.");
                 })
             },
             // 모든 회사 정보 데이터 저장
@@ -338,19 +368,23 @@
 
             companyInfoUpdate: function() {
                 if (this.clickedTrId == "") {
+                    // 선택한 회사가 없을 경우
+
                     alert("회사를 선택하시오.");
                 }
                 else {
                     this.upload = true;
 
-                    var getCompanyInfo = "product/getCompanyInfo";
+                    var getCompanyInfoUrl = "product/getCompanyInfo";      // 선택한 회사 정보 가져올 url
 
-                    this.axios.get(getCompanyInfo)
+                    this.axios.get(getCompanyInfoUrl)
                     .then((response) => {
                         this.companyInfo = response.data;
 
                         for (var i = 0; i < this.companyInfo.length; i++) {
                             if (this.clickedTrId == this.companyInfo[i].cp_name) {
+                                // 선택한 회사 찾기
+
                                 this.uploadCp_id = this.companyInfo[i].cp_id;
                                 document.getElementById(this.inputCompanyName).value = this.companyInfo[i].cp_name;
                                 document.getElementById(this.inputCompanyLeader).value = this.companyInfo[i].cp_leader;
@@ -361,6 +395,7 @@
                                 
                                 document.getElementById(this.inputLeaderMail_id).value = mailFrontEnd[0];
                                 document.getElementById(this.inputLeaderMail_site).value = mailFrontEnd[1];
+                                // 찾은 회사 정보 입력
                                 
                                 break;
                             }
@@ -371,7 +406,8 @@
                         this.$refs.company.show();
                     })
                     .catch((error) => {
-
+                        console.log(error.response);
+                        console.log("선택한 회사정보를 가져오는 것에 실패하였습니다.");
                     })
                 }
             },
@@ -380,19 +416,23 @@
 
             companyRemove: function() {
                 if (this.clickedTrId == "") {
+                    // 선택한 회사가 없을 경우
+
                     alert("회사를 선택하시오.");
                 }
                 else {
                     this.remove = true;
 
-                    var getCompanyInfo = "product/getCompanyInfo";
+                    var getCompanyInfoUrl = "product/getCompanyInfo";   // 선택한 회사 정보 가져올 url
 
-                    this.axios.get(getCompanyInfo)
+                    this.axios.get(getCompanyInfoUrl)
                     .then((response) => {
                         this.companyInfo = response.data;
 
                         for (var i = 0; i < this.companyInfo.length; i++) {
                             if (this.clickedTrId == this.companyInfo[i].cp_name) {
+                                // 선택한 회사 찾기
+
                                 this.removeCp_id = this.companyInfo[i].cp_id;
 
                                 this.removeInfoArr.push(this.companyInfo[i].cp_name);
@@ -400,6 +440,7 @@
                                 this.removeInfoArr.push(this.companyInfo[i].cp_phone);
                                 this.removeInfoArr.push(this.companyInfo[i].cp_mail);
                                 this.removeInfoArr.push(this.companyInfo[i].cp_fax);
+                                // 찾은 회사 정보 입력
                                 
                                 break;
                             }
@@ -410,7 +451,8 @@
                         this.$refs.companyRemove.show();
                     })
                     .catch((error) => {
-
+                        console.log(error.response);
+                        console.log("선택한 회사정보를 가져오는 것에 실패하였습니다.");
                     })
                 }
             },
@@ -421,6 +463,7 @@
                 if (this.clickedTrId != "") {
                     document.getElementById(this.clickedTrId).style.backgroundColor = '#f6f9fa';
                 }
+                // 원래 선택되어 있던 tr 원래 색으로 변경
 
                 this.clickedTrId = clickTrId
                 document.getElementById(clickTrId).style.backgroundColor = "#5f95a7";
@@ -444,12 +487,10 @@
         width: 400px;
         border: 1px solid rgb(153, 200, 223);
     }
-
     #companyInfoTable th {
         border: 1px solid rgb(153, 200, 223);
         background-color: rgb(153, 200, 223);
     }
-
     #companyInfoTable tr {
         border: 1px solid rgb(153, 200, 223);
     }

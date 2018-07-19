@@ -1,7 +1,8 @@
 <template>
     <div>
         <div>
-            <center><h1>제품&nbsp;등록</h1></center><br>
+            <center><h1>製品登録</h1></center><br>
+            <!-- 업로드한 이미지 미리보기 -->
             <div id="leftDiv">
                 <picture-input
                     :id="showImg" 
@@ -15,15 +16,16 @@
                     buttonClass="btn"
                     :customStrings="{
                         upload: '<h1>Bummer!</h1>',
-                        drag: '이미지를 넣어주세요'
+                        drag: 'イメージを入ってください。'
                     }">
                 </picture-input>
             </div>
+            <!-- 업로드한 이미지 미리보기 -->
             <div id="rightDiv">
                 <v-container fluid>
                     <v-layout row>
                         <v-flex xs2 md2>
-                            <v-subheader>제품명</v-subheader>
+                            <v-subheader>製品名</v-subheader>
                         </v-flex>
                         <v-flex xs4 md4>
                             <v-text-field class="input-group--focused" :id="productName"></v-text-field>
@@ -31,7 +33,7 @@
                     </v-layout>
                     <v-layout row>
                         <v-flex xs2 md2>
-                            <v-subheader>최대재고</v-subheader>
+                            <v-subheader>最大在庫</v-subheader>
                         </v-flex>
                         <v-flex xs4 md4>
                             <v-text-field class="input-group--focused" :id="maxCount"></v-text-field>
@@ -39,7 +41,7 @@
                     </v-layout>
                     <v-layout row>
                         <v-flex xs2 md2>
-                            <v-subheader>현재재고</v-subheader>
+                            <v-subheader>現在在庫</v-subheader>
                         </v-flex>
                         <v-flex xs4 md4>
                             <v-text-field class="input-group--focused" :id="nowCount"></v-text-field>
@@ -47,7 +49,7 @@
                     </v-layout>
                     <v-layout row>
                         <v-flex xs2 md2>
-                            <v-subheader>단가</v-subheader>
+                            <v-subheader>単価</v-subheader>
                         </v-flex>
                         <v-flex xs4 md4>
                             <v-text-field class="input-group--focused" :id="productPrice"></v-text-field>
@@ -55,7 +57,7 @@
                     </v-layout>
                     <v-layout row>
                         <v-flex xs2 md2>
-                            <v-subheader>유통기한</v-subheader>
+                            <v-subheader>保存期間</v-subheader>
                         </v-flex>
                         <v-flex xs4 md4>
                             <v-btn dark @click.native.stop="dialog = true, calendar = true" style="width: 100%; height: 90%;">{{limitDate}}</v-btn>
@@ -63,33 +65,33 @@
                     </v-layout>
                     <v-layout row>
                         <v-flex xs2 md2>
-                            <v-subheader>회사명</v-subheader>
+                            <v-subheader>会社名</v-subheader>
                         </v-flex>
                         <v-flex xs2 md2>
                             <v-text-field class="input-group--focused" :id="companyName" readonly :value="findCompanyName"></v-text-field>
                         </v-flex>
                         <v-flex xs2 md2>
-                            <v-btn  dark @click.native.stop="dialog = true" style="width: 100%; height: 60%;" @click="modalClick">찾기</v-btn>
+                            <v-btn  dark @click.native.stop="dialog = true" style="width: 100%; height: 60%;" @click="modalClick">探す</v-btn>
                         </v-flex>
                     </v-layout>
                     <v-layout row>
                         <v-flex xs2 md3>
-                            <v-btn @click="upload">등록</v-btn>
+                            <v-btn @click="upload">登録する</v-btn>
                         </v-flex>
                         <v-flex xs2 md3>
-                            <v-btn @click="onClickButton">취소</v-btn>
+                            <v-btn @click="onClickButton">取り消し</v-btn>
                         </v-flex>
                     </v-layout>
                 </v-container>
 
-                <!-- 모달창 -->
+                <!-- 달력 및 회사 검색 모달창 -->
                 <v-dialog v-model="dialog" max-width="400">
                     <v-card v-if="calendar == true">
                         <v-date-picker color="green lighten-1" v-model="pickerDate" :landscape="landscape" :reactive="reactive"></v-date-picker>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false, calendar = false" >취소</v-btn>
-                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false, calendar = false" @click="limitDateChange()">확인</v-btn>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false, calendar = false" >取り消し</v-btn>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false, calendar = false" @click="limitDateChange()">確認</v-btn>
                         </v-card-actions>
                     </v-card>
                     <v-card v-else>
@@ -99,17 +101,17 @@
                                     <v-text-field class="input-group--focused" :id="inputCompanyName"></v-text-field>
                                 </v-flex>
                                 <v-flex xs2>
-                                    <v-btn dark @click="getData" style="width: 100%; height: 50%;">검색</v-btn>
+                                    <v-btn dark @click="getData" style="width: 100%; height: 50%;">検索</v-btn>
                                 </v-flex>
                             </v-layout>
                         </v-container>
                         <v-container fluid>
                             <v-layout row>
                                 <v-flex xs5>
-                                    <v-subheader>회사명</v-subheader>
+                                    <v-subheader>会社名</v-subheader>
                                 </v-flex>
                                 <v-flex xs3>
-                                    <v-subheader>제품수</v-subheader>
+                                    <v-subheader>製品数</v-subheader>
                                 </v-flex>
                             </v-layout>
                             <v-layout row v-for="company in searchCompany" :key="company.id">
@@ -125,17 +127,18 @@
                         </v-container>
                         <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">확인</v-btn>
-                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">취소</v-btn>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">確認</v-btn>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false">取り消し</v-btn>
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
+                <!-- 달력 및 회사 검색 모달창 -->
             </div>
         </div>
     </div>    
 </template>
 <script>
-    import PictureInput from 'vue-picture-input'
+    import PictureInput from 'vue-picture-input'            // 업로드한 이미지 미리보기
 
     export default {
         components: {
@@ -143,24 +146,24 @@
         },
         data(){
             return{
-                zIndexValue: 1,                             // 이미지 업로드 태그 우선 순위 설정 값
-                showImg: "showImg",                         // 업로드할 이미지 태그 아이디
-                productName: "productName",                 // 제품명 입력 태그 아이디
-                maxCount: "maxCount",                       // 최대재고 입력 태그 아이디
-                nowCount: "nowCount",                       // 현재재고 입력 태그 아이디
-                inputCompanyName: "inputCompanyName",       // 회사 검색에서 회사명 입력 태그 아이디
-                companyName: "companyName",                 // 회사명 입력 태그 아이디
-                contacts: [],                               // 회사 정보
-                searchCompany:[],                           // 검색한 회사의 정보
-                productPrice: "productPrice",               // 단가 입력 태그 아이디
-                contactsProduct: [],                        // 검색 모달 창에 보여줄 회사 정보
-                limitDate: "",                              // 유통기한
-                dialog     : false,                         // 모달 창 상태
-                pickerDate : null,                          // 모달 안 달력에서 클릭 되는 날짜
-                landscape  : false,                         // 달력 상태
-                reactive   : false,                         // 달력 상태
-                calendar: false,                            // 달력 모달창 상태
-                findCompanyName: ""                         // 선택한 회사 이름
+                zIndexValue         : 1,                    // 이미지 업로드 태그 우선 순위 설정 값
+                showImg             : "showImg",            // 업로드할 이미지 태그 아이디
+                productName         : "productName",        // 제품명 입력 태그 아이디
+                maxCount            : "maxCount",           // 최대재고 입력 태그 아이디
+                nowCount            : "nowCount",           // 현재재고 입력 태그 아이디
+                inputCompanyName    : "inputCompanyName",   // 회사 검색에서 회사명 입력 태그 아이디
+                companyName         : "companyName",        // 회사명 입력 태그 아이디
+                contacts            : [],                   // 회사 정보
+                searchCompany       :[],                    // 검색한 회사의 정보
+                productPrice        : "productPrice",       // 단가 입력 태그 아이디
+                contactsProduct     : [],                   // 검색 모달 창에 보여줄 회사 정보
+                limitDate           : "",                   // 유통기한
+                dialog              : false,                // 모달 창 상태
+                pickerDate          : null,                 // 모달 안 달력에서 클릭 되는 날짜
+                landscape           : false,                // 달력 상태
+                reactive            : false,                // 달력 상태
+                calendar            : false,                // 달력 모달창 상태
+                findCompanyName     : ""                    // 선택한 회사 이름
             }
         },
         mounted() {
@@ -188,12 +191,11 @@
 
 
             modalClick: function() {
-                let url = "product/getCompanyData";
+                let getCompanyUrl = "product/getCompanyData";       // 회사 정보 url
 
-                this.axios.get(url)
+                this.axios.get(getCompanyUrl)
                 .then((response) => {
                     this.contactsProduct.push(response.data);
-                    // 회사정보 가져오기
                     
                     this.searchCompany = [];
             
@@ -212,20 +214,18 @@
 
 
             getData: function() {
-                let url = "product/getCompanyData";
+                let getCompanyUrl = "product/getCompanyData";       // 회사 정보 url
 
-                this.axios.get(url)
+                this.axios.get(getCompanyUrl)
                 .then((response) => {
                     this.contacts.push(response.data);
-                    // 회사 정보 가져오기
 
-                    this.picked = "";
-                    this.searchCompany = [];
-                    var inputText = document.getElementById(this.inputCompanyName).value;
+                    this.searchCompany = [];                                                    // 입력한 값이 들어간 회사 정보 배열 초기화
+                    var inputText = document.getElementById(this.inputCompanyName).value;       // 입력한 값
 
                     for(var i = 0; i < this.contacts[0].length; i++) {
                         if(this.contacts[0][i].cp_name.toLowerCase().match(inputText.toLowerCase())) {
-                            // 해당 회사 정보 확인
+                            // 입력한 값이 들어간 회사 찾기
 
                             this.searchCompany.push({"cp_name":this.contacts[0][i].cp_name, "drink_count":this.contacts[0][i].drink_count});
                         }
@@ -242,6 +242,7 @@
                 var inputProductPrice = document.getElementById(this.productPrice).value;
                 var inputCompanyName = document.getElementById(this.companyName).value;
                 var inputImg = document.getElementById(this.showImg).value;
+                // 현재 입력된 값
 
                 if(inputProdctName == "") {
                     alert("제품명을 입력하시오");
@@ -262,6 +263,10 @@
                     alert("이미지파일을 입력하시오");
                 }
                 else {
+                    // 값 유무 확인
+
+                    let uploadUrl = 'product/productImgSave';       // 업로드 url
+
                     const fileInput = document.getElementById(this.showImg);
                     const formData = new FormData();
                     formData.append('image', fileInput.files[0]);
@@ -272,8 +277,9 @@
                     formData.append('stock', inputNowCount);
                     formData.append('max_stock', inputMaxCount);
                     formData.append('expiration_date', this.limitDate);
+                    // 전송할 데이터
 
-                    this.axios.post ('product/productImgSave', formData)
+                    this.axios.post (uploadUrl, formData)
                     .then((response) => {
                         if(response.data == inputProdctName) {
                             alert("같은 이름의 제품이 있습니다. 이름을 변경해주세요");
@@ -284,6 +290,7 @@
                         }
                     })
                     .catch((error) => {
+                        console.log(error.response);
                         alert("업로드에 실패하였습니다.");
                     })
                 }                

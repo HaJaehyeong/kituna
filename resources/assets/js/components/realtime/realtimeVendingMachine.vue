@@ -114,14 +114,14 @@
       <div v-if="trueOrFalse==false" id="bottom_center">
        <div v-for="(item, index) in itemList_c" :key="index">
         <table>
-          <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.en100}}개</td></tr>
-          <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.en100}}개</td></tr>
-          <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100￦</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.en100}}개</td></tr>
+          <tr id="trBgColor"><td  id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:5px;">1,000円</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.en100}}個</td></tr>
+          <tr><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　500円</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;">{{item.en50}}個</td></tr>
+          <tr id="trBgColor"><td id="coin_stock_table1" style="padding-left:10px;padding-right:10px;padding-top:5px;padding-bottom:5px;">　100円</td><td id="coin_stock_table2" style="padding-left:120px;padding-right:10px;" >{{item.en10}}個</td></tr>
         </table>
-        <p id="CoinStockFont" style="text-align:left; font-size: 1.3em; ">　잔고 현황</p>
+        <p id="CoinStockFont" style="text-align:left; font-size: 1.3em; ">　残高現況</p>
         <table id="trBgColor" style="margin-top:-15px">
-         <tr id="CoinStockFont" ><td style="padding-left:180px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right;font-size: 0.7em; ">총 합 </td></tr>
-         <tr id="sumFont"><td style="padding-left:180px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}￦</td></tr>
+         <tr id="CoinStockFont" ><td style="padding-left:180px;padding-right:10px;padding-top:5px;padding-bottom:5px;text-align:right;font-size: 0.7em; ">総合 </td></tr>
+         <tr id="sumFont"><td style="padding-left:180px;padding-right:10px;padding-top:1px;padding-bottom:2px;">{{item.sum}}円</td></tr>
         </table>
        </div>
       </div>
@@ -150,16 +150,16 @@
            <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;"  @click.stop="dialog = true" @click="sale_history()" src="/images/realtime/sell_button.png" ><p>　</p></figure>
          </td>
          <td> <!-- 작업지시 작성 -->
-           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:4%;" @click.stop="dialog2 = true"  src="/images/realtime/order_button.png" ></figure>
+           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;" @click.stop="dialog2 = true"  src="/images/realtime/order_button.png" ></figure>
           </td>
          <td> <!-- 분석 보기 -->
            <router-link :to="route_analysis" id="analyst" >
-           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:4%;" src="/images/realtime/analysis_button.png" ></figure>
+           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;" src="/images/realtime/analysis_button.png" ></figure>
            </router-link>
          </td>
          <td> <!-- 자판기 관리 -->
            <router-link :to="route_management" id="management">
-           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:4%;" src="/images/realtime/vending_button.png" ></figure>
+           <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;" src="/images/realtime/vending_button.png" ></figure>
            </router-link>
          </td>
          </tr>
@@ -171,7 +171,7 @@
                   <v-btn icon @click.native="dialog = false" >
                     <v-icon>close</v-icon>
                   </v-btn>
-                  <v-toolbar-title>판매내역</v-toolbar-title>
+                  <v-toolbar-title>販売内訳</v-toolbar-title>
                   <v-spacer></v-spacer>
                   <v-toolbar-items>
                     <v-btn color="white" flat @click.native="dialog = false">Cancel</v-btn>
@@ -179,8 +179,8 @@
                 </v-toolbar>
                 <v-card>
                    <div v-for="(item, index) in itemList_v" :key="index">
-                    <v-card-title > ● 현 자판기 명 : {{item.name}} </v-card-title>
-                    <v-card-title >  ● 보충기사 : {{item.supplementer}}</v-card-title>
+                    <v-card-title > ● 自販機名 : {{item.name}} </v-card-title>
+                    <v-card-title >  ● 補充技師 : {{item.supplementer}}</v-card-title>
                    </div>
                 </v-card>
                 <v-card> 
@@ -209,12 +209,12 @@
               <v-dialog v-model="dialog2" max-width="520" max-height="300">
                   <v-card>
                   <v-card-title>
-                  <h2>　　　　　　작업 지시창</h2>
+                  <h2>　　　　　　作業指示</h2>
                   </v-card-title>
                   <v-card-text>
                      <div v-for="(item, index) in itemList_v" :key="index">
-                    <v-card-text>● 현재 자판기 : {{item.name}}  <v-spacer></v-spacer>
-                  ● 보충 기사 : {{item.supplementer}} </v-card-text>
+                    <v-card-text>● 現自販機 : {{item.name}}  <v-spacer></v-spacer>
+                  ● 補充技師 : {{item.supplementer}} </v-card-text>
                      </div>
                   <v-select
                       :items="select"
@@ -223,8 +223,8 @@
                       v-model ="selectedItem"
                     >
                   </v-select>
-                    <div v-if="selectedItem=='기타'">
-                    <v-text-field  label="작업지시를 적어주세요" v-model="selectedItem_etc"></v-text-field>
+                    <div v-if="selectedItem=='その他'">
+                    <v-text-field  label="作業指示を書いてください" v-model="selectedItem_etc"></v-text-field>
                 </div> </v-card-text>
               
                 <v-card-actions>
@@ -269,23 +269,23 @@ export default {
       /* 판매내역 테이블 헤더 */
     headers: [
       {
-        text: '날짜',
+        text: '日付',
         align: 'left',
         value: 'name'
       },
-      { text: '자판기명',align: 'center', value: 'sell_date' },
-      { text: '가격',align: 'center', value: 'price' },
-      { text: '상품명', align: 'center',value: 'dName' }
+      { text: '自販機名',align: 'center', value: 'sell_date' },
+      { text: '価格',align: 'center', value: 'price' },
+      { text: '商品名', align: 'center',value: 'dName' }
      ],
       vending_name:'', /* 모달창 자판기 이름 */
       vending_manager:'', /* 모달창 자판기 매니저 이름 */
       vending_id : '',/* 모달창 자판기 아이디 */
       select: [  /* 모달창 선택지 */
-      { text: '긴급! 음료 재고 부족' },
-      { text: '긴급! 잔고 부족' },
-      { text: '축제 기간 ( 재고잔고 확인 요망 )' },
-      { text: '기계 이상 및 고장' },
-      { text: '기타' }
+      { text: '緊急!飲料在庫不足' },
+      { text: '緊急!残高不足' },
+      { text: '祭り期間 ( 在庫や残高の確認要望 )' },
+      { text: '機械異常や故障' },
+      { text: 'その他' }
       ],
       selectedItem:'',
       selectedItem_etc:'',
@@ -682,9 +682,9 @@ export default {
    /* 현재 클릭된 자판기 이름 -2*/
   #background2_title2{
     position: relative;
-    left: -280px;
-    top: -10px;
-    margin-top:70px;
+    left: -280px; 
+    margin-top: 60px;
+   
   }
 
   /* 음료 리스트 */
@@ -707,20 +707,20 @@ export default {
   }
   /* 더보기 리스트 */
   #bottom_left2{
-    margin-left:80px;
-    margin-top:-10px;
-    float: left; width: 63%;  
+    margin-left:60px;
+    margin-top:6px;
+    float: left; width: 66%;  
     background-image:url(/images/realtime/vertical_frame.png);
     background-repeat:no-repeat;
-    background-size:600px 250px; 
-    width: 600px;
+    background-size:650px 240px; 
+    width: 660px;
     height: 250px; 
   }
   /* 백 버튼 */
   #bottom_right2{
     float: left; 
-    margin-top:-10px;
-    margin-left:35px;
+    margin-top:14px;
+    margin-left:15px;
   }
 .hover13 figure:hover img {
   opacity: 1;
@@ -911,7 +911,7 @@ export default {
   #img_info_settting{
     width:70%;
     margin-left: -280%;
-    margin-top: -87%;
+    margin-top: -127%;
   
   }
   /* 새로고침 버튼 */
@@ -919,3 +919,7 @@ export default {
     width: 78% ;
   }
 </style>
+
+
+
+

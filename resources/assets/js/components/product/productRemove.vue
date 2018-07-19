@@ -1,18 +1,18 @@
 <template>
     <div>
         <div>
-            <center><h1>제품&nbsp;삭제</h1></center>
+            <center><h1>製品削除</h1></center>
         </div>
         <br>
         <div>
             <div>
                 <table id="removeTable1">
                     <thead>
-                        <th>제품명</th>
-                        <th>회사명</th>
-                        <th>회사재고(BOX)</th>
-                        <th>최대재고(BOX)</th>
-                        <th>단가(원)</th>
+                        <th>製品名</th>
+                        <th>会社名</th>
+                        <th>会社在庫(BOX)</th>
+                        <th>最大在庫(BOX)</th>
+                        <th>単価(円)</th>
                     </thead>
                     <tbody>
                         <tr>
@@ -39,8 +39,8 @@
             <div>
                 <table id="removeTable2">
                     <thead>
-                        <th>회사명</th>
-                        <th>제품수</th>
+                        <th>会社名</th>
+                        <th>製品数</th>
                     </thead>
                     <tbody>
                         <td>
@@ -55,31 +55,31 @@
         </div>
         <br><br>
         <div>
-            <b-button @click="productRemove">제품삭제</b-button>
-            <b-button @click="remove">재고삭제</b-button>
-            <b-button @click="cancel">취소</b-button>
+            <b-button @click="productRemove">製品削除</b-button>
+            <b-button @click="remove">在庫削除</b-button>
+            <b-button @click="cancel">取り消し</b-button>
         </div>
     </div>    
 </template>
 <script>
     export default {
-        props: ['sendProductId'],       // 부모에게 전달 받은 삭제할 제품명
+        props: ['sendProductId'],            // 부모에게 전달 받은 삭제할 제품명
         data() {
             return {
-                contactsProduct: [],    // 제품의 정보
-                contactsCompany: [],    // 회사의 정보
-                companyName: "",        // 회사 이름
-                productName: "",        // 제품 이름
-                nowCount: 0             // 현재 재고
+                contactsProduct     : [],    // 제품의 정보
+                contactsCompany     : [],    // 회사의 정보
+                companyName         : "",    // 회사 이름
+                productName         : "",    // 제품 이름
+                nowCount            : 0      // 현재 재고
             }
         },
         mounted() {
-            this.getData();             // 정보 호출
+            this.getCompanyProductData();    // 정보 호출
         },
         methods: {
-            getData: function() {
-                let urlProduct = "product/getProductData";   
-                let urlCompany = "product/getCompanyData";        
+            getCompanyProductData: function() {
+                let urlProduct = "product/getProductData";      // 제품 정보 url
+                let urlCompany = "product/getCompanyData";      // 회사 정보 url
 
                 this.axios.get(urlProduct)
                 .then((response) => {
@@ -87,14 +87,21 @@
 
                     for (var i = 0; i < this.contactsProduct.length; i++) {
                         if (this.contactsProduct[i].stock_id == this.sendProductId) {
+                            // 해당 되는 제품 정보 찾기
+
                             this.productName = this.contactsProduct[i].drink_name
                             this.companyName = this.contactsProduct[i].cp_name;
                             this.nowCount = this.contactsProduct[i].stock;
                             document.getElementById("maxStock").innerText = this.contactsProduct[i].max_stock;
                             document.getElementById("prodcutPrice").innerText = this.contactsProduct[i].drink_price;
+
                             break;
                         }
                     }
+                })
+                .catch((error) => {
+                    console.log(error.response);
+                    alert("제품정보를 가져오는 것에 실패하였습니다.");
                 })
 
                 this.axios.get(urlCompany)
@@ -103,22 +110,31 @@
 
                     for (var i = 0; i < this.contactsCompany.length; i++) {
                         if (this.contactsCompany[i].cp_name == this.companyName) {
+                            // 해당되는 회사 정보 찾기
+
                             document.getElementById("productCount").innerText = this.contactsCompany[i].drink_val_of_company;
                            
                             break;
                         }
                     }
                 })
+                .catch((error) => {
+                    console.log(error.response);
+                    alert("회사정보를 가져오는 것에 실패하였습니다.");
+                })
             },
             // 회사 정보 및 제품 정보 중 해당 되는 회사의 데이터 입력
 
 
             productRemove: function() {
+                let productRemoveUrl = 'product/deleteProduct';     // 제품 삭제 url
+
                 const formData = new FormData();
                 formData.append('stock_id', this.sendProductId);
                 formData.append('drink_name', this.productName);
+                // 전송할 데이터
 
-                this.axios.post('product/deleteProduct', formData)
+                this.axios.post(productRemoveUrl, formData)
                 .then((response) => {
                     console.log(response.data);
                     
@@ -138,7 +154,7 @@
             // 제품 삭제
 
             remove: function() {
-                var removeUrl = "product/deleteStockManagement/" + this.sendProductId;
+                var removeUrl = "product/deleteStockManagement/" + this.sendProductId;      // 재고 삭제 url
 
                 this.axios.get(removeUrl)
                 .then((response) => {

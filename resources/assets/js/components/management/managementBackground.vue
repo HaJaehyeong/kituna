@@ -21,15 +21,12 @@
             return{
                 
             }
-        },
+        }
     }
 </script>
 
 <style>
     #managementcontents{
-        /* display     : grid;
-        grid-template-columns : 0.15fr 0.2fr 0.5fr 0.15fr; */
-
         width: 80%;
     }
 </style>

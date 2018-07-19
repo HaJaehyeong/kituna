@@ -5,8 +5,8 @@
       <h2><strong>Management</strong></h2>
     </div>
     <div>
-      <v-btn id="spBtn" class="spBtnStyle" outline color="primary" @click="contentPageChange('보충기사')" style="font-family: 'Nanum+Gothic';"><h6>보충기사 조회</h6></v-btn>
-      <v-btn id="vdBtn" class="spBtnStyle" outline color="grey lighten-1" @click="contentPageChange('자판기')" style="font-family: 'Nanum+Gothic';"><h6>자판기 조회</h6></v-btn>
+      <v-btn id="spBtn" class="spBtnStyle" outline color="primary" @click="contentPageChange('보충기사')"><h6>オペレーター</h6></v-btn>
+      <v-btn id="vdBtn" class="spBtnStyle" outline color="grey lighten-1" @click="contentPageChange('자판기')"><h6>自販機</h6></v-btn>
     </div>
     <div v-if="pageName == '보충기사'">
       <div class="spListDivBackground">
@@ -32,51 +32,51 @@
         </div>
         <div class="spInsertBtn" v-b-modal.spInsertModal>
           <h1 style="color: skyblue;">+</h1>
-          <h5 style="color: skyblue; font-family: 'Nanum+Gothic';">새로운 보충기사 등록하기</h5>
+          <h5 style="color: skyblue;">新しいオペレーターを登録する</h5>
         </div>
         <div class="spUpdateAndspRemoveBtn">
-          <v-btn v-if="clickedSpTrId == ''" class="spBtnStyle" @click="spUploadFunc(true)"><h6 style="color: #0064c8; font-family: 'Nanum+Gothic';">보충기사 수정</h6></v-btn>
-          <v-btn v-else class="spBtnStyle" v-b-modal.spUploadModal @click="spUploadFunc(true)"><h6 style="color: #0064c8; font-family: 'Nanum+Gothic';">보충기사 수정</h6></v-btn>
-          <v-btn color="error" class="spBtnStyle" @click="spRemoveFunc" style="font-family: 'Nanum+Gothic';"><h6>보충기사 삭제</h6></v-btn>
+          <v-btn v-if="clickedSpTrId == ''" class="spBtnStyle" @click="spUploadFunc(true)"><h6 style="color: #0064c8;">オペレーター修正</h6></v-btn>
+          <v-btn v-else class="spBtnStyle" v-b-modal.spUploadModal @click="spUploadFunc(true)"><h6 style="color: #0064c8;">オペレーター修正</h6></v-btn>
+          <v-btn color="error" class="spBtnStyle" @click="spRemoveFunc"><h6>オペレーター削除</h6></v-btn>
         </div>
       </div>
-      <b-modal id="spInsertModal" hide-footer ref="spInsertRef" title="보충기사 등록">
+      <b-modal id="spInsertModal" hide-footer ref="spInsertRef" title="オペレーター登録">
         <div>
           <img id="insertBlah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
           <input type="file" accept=".png" id="insertFile" @change="readURL('insertFile')"><br>
           <b-container fluid>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">이름:</label></b-col>
+              <b-col sm="3"><label for="input-none">名前:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" placeholder="Enter your name" id="spInputName"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">아이디:</label></b-col>
+              <b-col sm="3"><label for="input-none">ID:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" placeholder="Enter your id" id="spInputId"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">비밀번호:</label></b-col>
+              <b-col sm="3"><label for="input-none">PASSWORD:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" placeholder="Enter your password" id="spInputPasswd"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">메일주소:</label></b-col>
+              <b-col sm="3"><label for="input-none">メール:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" placeholder="Enter your mail adress" id="spInputMail"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">전화번호:</label></b-col>
+              <b-col sm="3"><label for="input-none">電話番号:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" placeholder="Enter your phoneNumber" id="spInputPhone"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">주소:</label></b-col>
+              <b-col sm="3"><label for="input-none">アドレス:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" placeholder="Enter your address" id="spInputAddress"></b-form-input>
               </b-col>
@@ -85,48 +85,48 @@
         </div>
         <br>
         <div>
-          <b-btn @click="spInsertFunc">등록</b-btn>
-          <b-btn @click="$refs.spInsertRef.hide()">취소</b-btn>
+          <b-btn @click="spInsertFunc">登録する</b-btn>
+          <b-btn @click="$refs.spInsertRef.hide()">取り消し</b-btn>
         </div>
       </b-modal>
 
-      <b-modal id="spUploadModal" hide-footer ref="spUploadRef" title="보충기사 수정">
+      <b-modal id="spUploadModal" hide-footer ref="spUploadRef" title="オペレーター修正">
         <div>
           <img id="uploadBlah" src="http://placehold.it/180" alt="your image" style="width: 180px; height: 180px;">
           <input type="file" accept=".png" id="uploadFile" @change="readURL('uploadFile')"><br>
           <b-container fluid>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">이름:</label></b-col>
+              <b-col sm="3"><label for="input-none">名前:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" :value="spInputNameChange" id="spInputNameChange"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">아이디:</label></b-col>
+              <b-col sm="3"><label for="input-none">ID:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" :value="spInputIdChange" id="spInputIdChange"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">비밀번호:</label></b-col>
+              <b-col sm="3"><label for="input-none">PASSWORD:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" :value="spInputPasswdChange" id="spInputPasswdChange"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">메일주소:</label></b-col>
+              <b-col sm="3"><label for="input-none">メール:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" :value="spInputMailChange" id="spInputMailChange"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">전화번호:</label></b-col>
+              <b-col sm="3"><label for="input-none">電話番号:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" :value="spInputPhoneChange" id="spInputPhoneChange"></b-form-input>
               </b-col>
             </b-row>
             <b-row class="my-1">
-              <b-col sm="3"><label for="input-none">주소:</label></b-col>
+              <b-col sm="3"><label for="input-none">アドレス:</label></b-col>
               <b-col sm="9">
                 <b-form-input type="text" :value="spInputAddressChange" id="spInputAddressChange"></b-form-input>
               </b-col>
@@ -135,8 +135,8 @@
         </div>
         <br>
         <div>
-          <b-btn @click="spUploadFunc(false)">수정</b-btn>
-          <b-btn @click="$refs.spUploadRef.hide()">취소</b-btn>
+          <b-btn @click="spUploadFunc(false)">修正する</b-btn>
+          <b-btn @click="$refs.spUploadRef.hide()">取り消し</b-btn>
         </div>
       </b-modal>
     </div>
@@ -150,7 +150,7 @@
             <!-- ********************** 자판기 등록창********************** -->
              <v-layout row justify-center>
               <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
-                <v-btn slot="activator" @click="DrinkList">자판기 등록</v-btn>
+                <v-btn slot="activator" @click="DrinkList">自販機登録</v-btn>
                 <v-card  color="blue darken-3">
                   <v-toolbar >
                     <v-btn icon @click.native="dialog = false" >
@@ -166,22 +166,22 @@
                   <br>
                 <v-card>
                 <v-card-title>
-                  <span class="headline">자판기 기본정보</span>
+                  <span class="headline">自販機の基本情報</span>
                 </v-card-title>
                 <v-card-text>
                   <!-- ********************** 자판기 기본 등록 및 수정 내부 창 ********************** -->
                   <v-container grid-list-md>
                     <v-layout wrap>
                       <v-flex xs2 order-md1 order-xs3>
-                        <v-text-field color="light-blue darken-4"  name="input-3-4" label="자판기 이름"  class="input-group--focused"  :rules="[() => editedItem.Ven_Name.length > 0 || 'Vendingmachine name is required']"  required v-model="editedItem.Ven_Name"></v-text-field>
+                        <v-text-field color="light-blue darken-4"  name="input-3-4" label="自販機名"  class="input-group--focused"  :rules="[() => editedItem.Ven_Name.length > 0 || 'Vendingmachine name is required']"  required v-model="editedItem.Ven_Name"></v-text-field>
                       </v-flex>
                       <v-flex xs2 order-md1 order-xs4>
-                        <v-text-field color="light-blue darken-4 " name="input-3-4" label="위치"  class="input-group--focused"  :rules="[() => editedItem.Location.length > 0 || 'ex)Buk-gu, Daegu, Republic of Korea']"  required   v-model="editedItem.Location"></v-text-field>
+                        <v-text-field color="light-blue darken-4 " name="input-3-4" label="場所"  class="input-group--focused"  :rules="[() => editedItem.Location.length > 0 || 'ex)Buk-gu, Daegu, Republic of Korea']"  required   v-model="editedItem.Location"></v-text-field>
                       </v-flex> 
                       <v-flex xs2 order-md1 order-xs3>
                         <v-select
                           :items="select"
-                          label="관리자명"
+                          label="管理者名"
                           item-value="text"
                           v-model ="editedItem.Manager">
                         </v-select>
@@ -215,7 +215,7 @@
                   <v-container fluid grid-list-md>
                     <v-layout row wrap>
                       <v-flex xs1>
-                        <v-subheader>음료라인 수</v-subheader>
+                        <v-subheader>飲料ライン数</v-subheader>
                       </v-flex>
                       <v-flex xs1>
                         <b-form-select v-model="selected" :options="options" class="mb-1"  />
@@ -224,7 +224,7 @@
                     <v-layout row wrap v-if="editedIndex!=-1">
                       <v-flex xs1> 
                         <!-- Edit일 경우 뜨는 현재 음료 리스트  -->
-                   <v-subheader>현재 음료 리스트</v-subheader>
+                   <v-subheader>現在飲料リスト</v-subheader>
                       </v-flex>
                       <v-layout  xs2 md2 lg2 v-for="(drinkItem, index) in editedItem_drink" :key="index">
                         <v-flex  v-for="(item2, index)  in drinkItem" :key="index">
@@ -239,7 +239,7 @@
                     <br />
                     <v-layout row wrap>
                       <v-flex xs1>
-                        <v-subheader>음료 설정</v-subheader>
+                        <v-subheader>飲料設定</v-subheader>
                       </v-flex> 
                       <!-- Set Drink List Card -->
                    <v-flex xs5 md5 lg5>
@@ -265,7 +265,7 @@
                       </v-flex>
                       <v-flex xs1></v-flex> 
                         <!-- All Drink list Card -->
-                        <v-flex xs5>  총 음료 리스트 (원하는 음료를 드래그해주세요)
+                        <v-flex xs5> 総飲料リスト（希望飲み物をドラッグしてください）
                           <v-layout row wrap>
                             <v-flex xs2 md2 lg2 v-for="(drinkItem, index) in itemList_All" :key="index">
                               <draggable :id="index" v-model="itemList_All" :options="{group: { name:'itemList_All', pull:'clone', put:'false'}}" @start="drag=true" 
@@ -490,10 +490,10 @@ export default {
   //<------------------ search filtering ----------------------->
   computed : {
       formTitle () {
-        return this.editedIndex === -1 ? '새 자판기 등록' : '자판기 정보 수정'
+        return this.editedIndex === -1 ? '新しい自動販売機登録' : '自販機情報修正'
       },
       formSubTitle(){ 
-        return this.editedIndex === -1 ? '자판기 음료 등록' : '자판기 음료 수정'
+        return this.editedIndex === -1 ? '自販機飲料登録' : '自販機飲料修正'
       }
   },
   watch: {
@@ -577,7 +577,7 @@ export default {
               // 새로고침
             }
             else {
-              alert("등록에 실패하였습니다.11");
+              console.log("등록에 실패하였습니다.11");
             }
           })
           .then((error) => {
@@ -627,7 +627,7 @@ export default {
           })
           .catch((error) => {
             console.log(error.response);
-            alert("보충기사 정보찾기에 실패하였습니다.");
+            console.log("보충기사 정보찾기에 실패하였습니다.");
           })
         }
       }
@@ -692,12 +692,12 @@ export default {
               this.spList();
             }
             else {
-              alert("수정에 실패하였습니다.11");
+              console.log("수정에 실패하였습니다.11");
             }
           })
           .catch((error) => {
             console.log(error);
-            alert("수정에 실패하였습니다.22");
+            console.log("수정에 실패하였습니다.22");
           })
         }
       }
@@ -736,12 +736,12 @@ export default {
               // 새로고침
             }
             else {
-              alert("담당하고 있는 자판기가 아직 있습니다.");
+              console.log("담당하고 있는 자판기가 아직 있습니다.");
             }
           })
           .catch((error) => {
             console.log(error.response);
-            alert("보충기사 삭제에 실패하였습니다.");
+            console.log("보충기사 삭제에 실패하였습니다.");
           })
         }
       }
@@ -1247,6 +1247,7 @@ th {
 th:first-child .th-text {
     border-left: none;
 }
+
 
 /* <-------------------------- 자판기 조회 -------------------------------> */
 

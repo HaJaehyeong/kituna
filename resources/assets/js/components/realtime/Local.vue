@@ -5,9 +5,9 @@
     </div>
     <div id="tab_container">
         <input id="select1" name="sex" type="radio" checked>
-        <button id="btn1"><label for="select1" class="local" @click="tokyo(139.700442,35.706269)">지역별</label></button>
+        <button id="btn1"><label for="select1" class="local" @click="tokyo(139.700442,35.706269)">地域別</label></button>
         <input id="select2" name="sex" type="radio">
-        <button id="btn2"><label for="select2" class="supporter">보충기사별</label></button>
+        <button id="btn2"><label for="select2" class="supporter">オペレーター別</label></button>
 
         <!-- ****************** Local list ****************** --> 
         <div class="page1" id="page_1">
@@ -59,13 +59,13 @@
                 <div id="supprter_frame_2" @click="supplementerEmit(item.supplementer)">
                   <v-avatar >
                     <img v-bind:src="item.imgSrc">
-                  </v-avatar> {{item.supplementer}}　<button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">작업지시서</p></button>
+                  </v-avatar> {{item.supplementer}}　<button class="work_order_button" @click="orderList(item.supplementer)"><p id="work_order_font">作業指示書</p></button>
                 </div>
           <v-dialog v-model="orderJobModal" width="1000px">
             <v-card>
               <div class="contentsRowStyle" id="spOrderListCutDiv" style="margin: 50px;">
                 <div>
-                  <h3>{{spName}}님의 작업지시서</h3>
+                  <h3>{{spName}}の作業指示書</h3>
                 </div>
                 <div class="productStyle">
                   <div>
@@ -78,7 +78,7 @@
                           </div>
                           <div v-else class="emptyDivStyle" style="position: relative;">
                             <div style="position: absolute; bottom: 7px; left: 25px;">
-                              <h5 v-if="product.productCount == -1" style="color: white; text-align: center;">총 량</h5>
+                              <h5 v-if="product.productCount == -1" style="color: white; text-align: center;">総量</h5>
                               <h3 v-if="product.productCount == -1" style="color: white; text-align: center;">{{allCount}}</h3>
                             </div>
                           </div>
@@ -101,7 +101,7 @@
                           <v-spacer></v-spacer>
                           <v-card-actions>
                             <v-spacer></v-spacer>
-                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" @click="chooseDateChange()">확인</v-btn>
+                            <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" @click="chooseDateChange()">確認</v-btn>
                             <v-btn color="green darken-1" flat="flat" @click.native="dialog = false" >취소</v-btn>
                           </v-card-actions>
                         </v-card>
@@ -111,17 +111,17 @@
                     </div>
                     <div class="divRowHalf">
                       <div style="margin-bottom: 10px;">
-                        <h5 class="blueFontStyle">보충기사 이름</h5>
+                        <h5 class="blueFontStyle">オペレーター名</h5>
                         <h4>{{spName}}</h4>
                       </div>
                       <div class="divColumnHalf">
                         <div>
-                          <h5 class="blueFontStyle">자판기 수</h5>
-                          <p><font size="5">{{allVDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">개</font></p>
+                          <h5 class="blueFontStyle">自販機数</h5>
+                          <p><font size="5">{{allVDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">個</font></p>
                         </div>
                         <div>
-                          <h5 class="blueFontStyle">제품 수</h5>
-                          <p><font size="5">{{allPDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">종</font></p>
+                          <h5 class="blueFontStyle">製品数</h5>
+                          <p><font size="5">{{allPDCount}}</font>&nbsp;&nbsp;&nbsp;&nbsp;<font class="blueFontStyle" size="3">種類</font></p>
                         </div>
                       </div>
                     </div>
@@ -132,9 +132,9 @@
                   <!-- 작업지시서 본 내용 -->
                   <table class="orderTableStyle">
                     <thead style="text-align: center;">
-                      <th style="width: 13%;"><font size="4">자판기 명</font></th>
+                      <th style="width: 13%;"><font size="4">自販機名</font></th>
                       <th v-for="n in 8" :key="n.index"><font size="4">{{n}}</font></th>
-                      <th style="width: 16%;"><font size="4">비고</font></th>
+                      <th style="width: 16%;"><font size="4">備考</font></th>
                     </thead>
                     <tbody>
                       <tr v-for="vending in sameVDArr" :key="vending.index">
@@ -152,7 +152,7 @@
                 </div>
               </div>
               <div style="position: relative;">
-                <v-btn style="position: absolute; right: 50px; bottom: 10px;" color="primary" @click.native="orderJobModal = false"><h3>확인</h3></v-btn>
+                <v-btn style="position: absolute; right: 50px; bottom: 10px;" color="primary" @click.native="orderJobModal = false"><h3>確認</h3></v-btn>
               </div>
             </v-card>
                </v-dialog>
