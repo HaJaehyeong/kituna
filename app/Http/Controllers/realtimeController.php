@@ -121,7 +121,7 @@ class realtimeController extends Controller
         ->select('vd.vd_name', 'pi.drink_name', 'sd.sell_date', DB::raw('sd.sell_date, sd.coin_100*100+sd.coin_50*50+sd.coin_10*10 as sell_price'))
         ->join('vendingmachine as vd', 'vd.vd_id', '=', 'sd.vd_id')
         ->join('product_info as pi', 'pi.drink_id', '=', 'sd.drink_id')
-        ->where(DB::raw('date_format(sd.sell_date, "%Y-%m-%d")'), DB::raw('date_sub(date_format(now(), "%Y-%m-%d"), interval 0 day)'))
+        ->where(DB::raw('date_format(sd.sell_date, "%Y-%m-%d")'), DB::raw('date_sub(date_format(now(), "%Y-%m-%d"), interval 3 day)'))
         ->orderBy('sd.sell_date', 'desc')->get();
             
         return $getSellData;
