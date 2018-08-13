@@ -119,7 +119,7 @@
                     <thead style="font-weight: bold;">
                       <tr>
                         <td style="padding-top: 10px;">自販機名</td>
-                        <td style="padding-top: 10px;">担当オペレーター</td>
+                        <td style="padding-top: 10px;">オペレーター</td>
                         <td style="padding-top: 10px;">販売額差</td>
                       </tr>
                     </thead>
@@ -176,7 +176,7 @@
                   <radar-chart :chart-data="radarChart" :options="radarOption" class="chartData" id="chartData" :width="350" :height="350"></radar-chart>  
                 </div>
                 <div> 
-                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">その他飲み物ランキング<br>及び販売数</h4>
+                  <h4 style="font-weight: bold; color:#0064C8; margin-top: 1%;">その他飲み物ランキング及び販売数</h4>
                   <!-- 클릭 된 자판기 내에 없는 음료들의 순위를 데이터 테이블을 이용해 순위순으로 나타내었다. -->
                   <table class="table table-hover" style="color: #0064C8;">
                     <tbody v-for="drinkList in theRestDrinkRankArray" :key="drinkList.num">
@@ -196,11 +196,11 @@
                     <span style="float: left; font-size: 20px; color:#0064C8;">平均補充周期 : </span><span style="float: right; font-size: 20px; color:#0064C8;">日</span><span style="float: right; font-size: 20px; font-weight: bold;">{{avgSupplementCycle}}</span><br><br>
                     <span style="float: left; font-size: 20px; color:#0064C8;">コンプレイン : </span><span style="float: right; font-size: 20px; color:#0064C8;">回</span><span style="float: right; font-size: 20px; font-weight: bold;">{{complain}}</span><br><br>
                     <span style="float: left; font-size: 20px; color:#0064C8;">販売場所 : </span><span style="float: right; font-size: 20px; font-weight: bold;">{{sellPlace}}</span><br>
-                    <div class="collums55DivideDiv">
-                      <v-btn @click.native.stop="jobOrderDialog = true" style="height: 140px;">
+                    <div id="dialogDivDived">
+                      <v-btn @click="dialogOpen('jobOrderDialog')" style="height: 140px;">
                         <img src="images/analysis/jobOrderImg.png" style="height: 140px;">
                       </v-btn>
-                      <v-btn @click="dialogOpen()" style="height: 140px;"> 
+                      <v-btn @click="dialogOpen('dialog')" style="height: 140px;"> 
                         <img src="images/analysis/lineChangeImg.png" style="height: 140px;">
                       </v-btn>
                     </div>
@@ -239,21 +239,25 @@
     
             <!-- 라인변경 모달창 -->
             <v-layout row justify-center>
-              <v-dialog v-model="dialog" max-width="1000" transition="dialog-bottom-transition">
+              <v-dialog v-model="dialog" persistent max-width="1000" transition="dialog-bottom-transition">
                 <v-card>
                   <div class="collums262DivideDiv">
-                    <div style="background-color: #0064C8; color: white;">
+                    <div style="background-color: #0064C8; color: white; padding-left: 5%;">
                       <h4>
-                        Supporter Name
+                        オペレーター
                       </h4>
+                      <h5>
                        {{analysisVdSp}} 
+                      </h5>
                       <h4>
-                        Arrea
+                        Area
                       </h4>
+                      <h5>
                         {{analysisVdName}} 自販機 
+                      </h5>
                     </div>            
                     <div>
-                      <div class="collums25DivideDiv" style="">
+                      <div class="collums25DivideDiv">
                         <div v-for="(drink, index) in vendingDrinkList" :key="index" style="color: #0064C8; font-weight: bold; padding: 10%;">
                           Line {{index+1}}
                           <v-card :hover="true" v-bind:style="{ 'background-image': 'url(images/analysis/slot.png)' }">
@@ -287,72 +291,13 @@
                         <img :src="changeDrinkPath" style="height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
                       </v-card> -->
                       <div>
-                        <v-btn @click.native="dialog = false, snackbar = true" @click="setLineChangeNote(analysisVdId, vdDrinkId, changeDrinkId)">変更指示</v-btn>
-                        <v-btn @click.native="dialog = false" @click="lineChangeDrinkReset()">変更キャンセル</v-btn>  
+                        <v-btn color= "blue darken-3" style="width:150px; color: #FFFFFF;" @click.native="dialog = false, snackbar = true" @click="setLineChangeNote(analysisVdId, vdDrinkId, changeDrinkId)"><font style="margin-bottom: 10px;">変更指示</font></v-btn>
+                        <v-btn color= "orange darken-1" style="width:150px; color:#FFFFFF;" @click.native="dialog = false" @click="lineChangeDrinkReset()"><font style="margin-bottom: 10px;">キャンセル</font></v-btn>  
                       </div>
-                      
                     </div>
                   </div>            
-                  
                 </v-card>
-                
-                <!-- <v-card>
-                  <v-toolbar dark color="cyan">
-                    음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다.
-                    <v-btn icon dark @click.native="dialog = false" @click="lineChangeDrinkReset()">
-                      <v-icon>close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title>{{analysisVdName}} 자판기 라인 변경</v-toolbar-title>
-                    <v-spacer></v-spacer>   
-                    <v-toolbar-items>
-                      음료 라인 변경 취소 시, lineChangeDrinkReset메서드를 호출해, 데이터를 초기화 시켜줍니다.
-                      <v-btn dark flat @click.native="dialog = false" @click="lineChangeDrinkReset()">변경 취소</v-btn>
-                      음료 라인 변경 지시 시, setLineChangeNote메서드를 호출해, 작업지시서에 추가되도록 한다..
-                      <v-btn dark flat @click.native="dialog = false, snackbar = true" @click="setLineChangeNote(analysisVdId, vdDrinkId, changeDrinkId)">변경 지시</v-btn>
-                    </v-toolbar-items>
-                  </v-toolbar>
-                  <v-list style="width: 30%;">
-                    <h4 style="font-weight: bold; color:black;">{{analysisVdName}} 자판기 내 음료 리스트</h4>
-                    <div class="collums25DivideDiv">
-                        <div v-for="(drink, index) in vendingDrinkList" :key="index">
-                          <v-card :hover="true">
-                            <img :src="drink.drink_img_path" @click="lineChangeBeforeDrink(drink.drink_id, drink.drink_name, drink.drink_img_path)" style=" height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
-                          </v-card>
-                        </div>
-                    </div>   
-                  </v-list>
-                  <v-divider></v-divider>
-                  <v-list style="width: 30%;">
-                    <h4 style="font-weight: bold; color:black;">추천 음료 리스트</h4>
-                    <div class="collums25DivideDiv">
-                        <div v-for="(drink, index) in theRestDrinkRankArray" :key="index">
-                          <v-card :hover="true">
-                            <img :src="drink.drink_img_path" @click="lineChangeAfterDrink(drink.drink_id, drink.drink_name, drink.drink_img_path)" style=" height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
-                          </v-card>
-                        </div>
-                    </div>   
-                  </v-list>
-                  <v-list>
-                    <h4 style="font-weight: bold; color:black;">교체 작업</h4>
-                    <div class="collums25DivideDiv">
-                        <div>
-                          현재음료
-                          <v-card :hover="true">
-                            {{vdDrinkName}}
-                            <img :src="vdDrinkPath" style="height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
-                          </v-card>
-                        </div>
-                        <div>
-                          바뀔 음료
-                          <v-card :hover="true">
-                            {{changeDrinkName}}
-                            <img :src="changeDrinkPath" style="height:100px; width:50px; margin-left: auto; margin-right: auto; display: block;">
-                          </v-card>
-                        </div>
-                    </div>   
 
-                  </v-list>
-                </v-card> -->
                 <v-card>
                 </v-card>
               </v-dialog>
@@ -375,7 +320,7 @@
           </div>
         </div>
         <!-- 메인 DIV로, 5:5 비율로 나누어 데이터를 구분하여 나오게 하였다. -->
-        <div class="collums55DivideDiv">
+        <div id="collums55DivideDiv2">
           <!-- 데이터 제목과 데이터를 구분하기 위해 1:9로 DIV를 분할. -->
           
           <div class="titleContentDivideDiv" id="titleContentDivideDiv1">
@@ -433,10 +378,11 @@
                 </table>
               </div>
               <div class="collums64DivideDiv">
-                <div>
-                  <a @click="checkedProductOrder()">
+                <div @click="checkedProductOrder()" style="margin-bottom: 150px;">
+                  
                     <img src="images/analysis/productOrder.png">
-                  </a>
+                  
+
                 </div>
                 <div  style="margin-top: 35px;">
                   <table class="table borderless">
@@ -851,7 +797,7 @@
 
       /* <----- 모달창 내용 db전송 -----> */
       submit(selectedItem,selectedItem_etc){
-
+        
         if(selectedItem_etc == ''){
           const formData = new FormData();
           formData.append('ven_id',this.analysisVdId);
@@ -872,7 +818,6 @@
         
           this.axios.post("management/addJobOrder", formData)
           .then((Response) => {
-            // console.log(Response.data);
             alert("작업지시가 완료되었습니다.");
           }).catch(ex => {
             console.log(ex.response);
@@ -1131,8 +1076,12 @@
 /* <----- 음료 라인 변경 클릭시 호출 되는 전체 메서드 -----> */
 
       /* <----- 음료 라인변경 모달창 오픈 메서드 -----> */
-      dialogOpen(){
-        this.dialog = true;
+      dialogOpen(argLog){
+        if(argLog == 'dialog')
+          this.dialog = true;
+        else
+          this.jobOrderDialog = true;
+        
       },
       /* <----- 음료 라인변경 모달창 오픈 메서드 -----> */
 
@@ -1834,7 +1783,19 @@
   grid-template-columns: 0.5fr 0.5fr;
   font-weight: bold ;
   color: #0064C8;
+}
+#collums55DivideDiv2{
+  display     : grid;
+  grid-template-columns: 0.4fr 0.6fr;
+  width: 500px;
+  height: 575px;
+  float: left;
+}
+#dialogDivDived{
+  display     : grid;
+  grid-template-columns: 0.5fr 0.5fr;
   width: 100%;
+  height: 100%;
 }
 .collums333DivideDiv{
   display     : grid;
@@ -1903,11 +1864,10 @@
   cursor: pointer;
 }
 
-
 .titleContentDivideDiv{
   display     : grid;
   width: 100%;
-  height: 100%;
+  height: 550px;
   grid-template-rows: 0.1fr 0.9fr;
   background-color:  #ffffff;
   border-radius: 10px 10px 10px 10px; 
