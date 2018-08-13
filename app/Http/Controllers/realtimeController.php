@@ -189,6 +189,7 @@ class realtimeController extends Controller
             $array[$x]->count = $array[$x]->count+$array[$x+1]->count;
             $x++;
         }
+        
         return $array;
     }
     
@@ -370,12 +371,25 @@ class realtimeController extends Controller
 
     // 판매하기
     public function sell(){
-        for ($x = 0 ; $x < 3000 ; $x++) {
+        // for ($x = 0 ; $x < 3000 ; $x++) {
+        //     $vd_id = rand(1, 122);
+        //     $line = rand(1, 8);
+            
+        //     realtimeController::sendDataFromVdVersionTwo($vd_id, $line); 
+        // }
+
+        for ($x = 0 ; $x < 1000 ; $x++) {
             $vd_id = rand(1, 122);
-            $line = rand(1, 8);
+
+            if ($vd_id == 1 || $vd_id == 5 || $vd_id == 10 || $vd_id == 12 || $vd_id == 14 || $vd_id == 17 || $vd_id == 18 || $vd_id == 27 || $vd_id == 31 || $vd_id == 35 || $vd_id == 44 || $vd_id == 45 || $vd_id == 49 || $vd_id == 50 || $vd_id == 58 || $vd_id == 59 || $vd_id == 61 || $vd_id == 62 || $vd_id == 64 || $vd_id == 68 || $vd_id == 72 || $vd_id == 77 || $vd_id == 82 || $vd_id == 94 || $vd_id == 96 || $vd_id == 99 || $vd_id == 100 || $vd_id == 115 || $vd_id == 116 || $vd_id == 117 || $vd_id == 119 || $vd_id == 120 || $vd_id == 121 || $vd_id == 122 ) {
+                $line = rand(1, 8);
+            } else {
+                continue;
+            }
             
             realtimeController::sendDataFromVdVersionTwo($vd_id, $line); 
         }
+
     }
 
     // nfc대면 보충 완료

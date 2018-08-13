@@ -335,7 +335,7 @@
               </div>
             </div>
             <div>
-              <bar-chart :chart-data="barChart" :options="barOptions" class="chartData" :width="600" :height="500"></bar-chart>
+              <bar-chart :chart-data="barChart" :options="barOptions" class="chartData" :width="550" :height="500"></bar-chart>
             </div>
           </div>
           <div class="titleContentDivideDiv" id="titleContentDivideDiv2">
@@ -378,10 +378,9 @@
                 </table>
               </div>
               <div class="collums64DivideDiv">
-                <div @click="checkedProductOrder()" style="margin-bottom: 150px;">
+                <div @click="checkedProductOrder()">
                   
-                    <img src="images/analysis/productOrder.png">
-                  
+                    <img src="images/analysis/productOrder.png" style="width: 150px;">
 
                 </div>
                 <div  style="margin-top: 35px;">
@@ -1742,9 +1741,6 @@
 .rows82DivideDiv{
   display     : grid;
   grid-template-rows: 0.8fr 0.2fr;
-  width: 100%;
-  height: 100%;
-
 }
 #anaylsisRealDataSecondDiv{
   display     : grid;
@@ -1787,7 +1783,6 @@
 #collums55DivideDiv2{
   display     : grid;
   grid-template-columns: 0.4fr 0.6fr;
-  width: 500px;
   height: 575px;
   float: left;
 }
@@ -1919,7 +1914,7 @@ a:link { text-decoration: none; color: #000000;}
   margin-bottom: 2%;
 }
 #titleContentDivideDiv2{
-  margin-left: 2%;
+  margin-left: 3%;
   margin-bottom: 2%;
 
 }
