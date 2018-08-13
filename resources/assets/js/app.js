@@ -75,7 +75,8 @@ import Order from './components/product/order.vue'
 Vue.use(VueGoogleMaps, {
     load: {
         key: "AIzaSyBg0LRr7Zw8yIyAy2C2FHR7OzCYfVJ_wEM",
-        libraries: "places" // necessary for places input
+        language: 'ja',
+        libraries: ['places'] // necessary for places input
     }
 });
 

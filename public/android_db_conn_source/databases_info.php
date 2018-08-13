@@ -1,13 +1,13 @@
 <?php
 
 //user
-define("HOST"           , "52.78.83.17"     );
+define("HOST"           , "13.209.83.48"     );
 define("USER"           , "root"            );
 define("DB_NAME"        , "kituna"          );
 //define("PASSWORD"     , "autoset"         );  //autoset 설정으로 할 경우 주석을 제거하고
 define("PASSWORD"       , "Wkqla12!@"       );  //얘를 주석으로 한다
 
-//table
+//table13.209.83.48
 define("SUPPLE_TABLE"   , "supplementer"    );
 define("VENDING_TABLE"  , "vendingmachine"  );
 define("JOB_ORDER"      , "job_order"       );

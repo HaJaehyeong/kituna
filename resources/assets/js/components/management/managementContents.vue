@@ -1152,6 +1152,7 @@
 
       // 날짜 버튼 좌,우 화살표 버튼 클릭 시, 하루씩 이동하는 함수
       dateChange(arg){
+        this.alertOpen = false;     // 생성알람 끄기
         // 기존 날짜를 '-'를 기준으로 split한다. 년/월/일로 나뉘는 배열 생성
         let changeToday = this.today.split('-');
         // 현재 년/월의 마지막 날을 구해둔다.
