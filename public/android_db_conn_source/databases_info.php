@@ -1,7 +1,7 @@
 <?php
 
 //user
-define("HOST"           , "13.124.27.106"     );
+define("HOST"           , "13.125.90.207"     );
 define("USER"           , "root"            );
 define("DB_NAME"        , "kituna"          );
 //define("PASSWORD"     , "autoset"         );  //autoset 설정으로 할 경우 주석을 제거하고
