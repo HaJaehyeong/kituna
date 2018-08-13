@@ -698,7 +698,7 @@ export default {
     float: left;
     width: 35%; 
     margin-top: 10px;
-    margin-right:10px;
+    margin-right:6px;
     }
   /* 더보기 버튼 */
   #bottom_right{
