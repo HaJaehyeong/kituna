@@ -19,25 +19,24 @@ IT分野ではコミュニケーション能力が重要だという理由を正
 ためにメンバーとの報連相が重要だと感じました。
 
 </div>
-<br><br><br>
+<br><br>
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341048-c248e280-a4c1-11e8-8259-57c8a8b8c058.png"> 
-<br>  
-ジン・ソンギュ  <br>
-担当パート : バックエンド(データベース設計や管理)、Android(全般)
+
+**名前 : ジン・ソンギュ**
+**担当パート : バックエンド(データベース設計や管理)、Android(全般)**
 </div>
-<br><br><br>
+<br><br>
 <div>
-<img width="150" src="https://user-images.githubusercontent.com/37164351/44341050-c248e280-a4c1-11e8-9db9-4b9b3bd77a13.jpg"> 
+<img width="150" src="https://user-images.githubusercontent.com/37164351/44342293-7bf58280-a4c5-11e8-86d4-239fb71b405b.png"> 
 
 **名前 : イ・ソンミン**   
 **担当パート : ハードウェア(Arduino)、バックエンド(データベースの管理、PHP)**
 
 **このプロジェクトをしてから感じた点**  <br>
 
-
 </div>
-<br><br><br>
+<br><br>
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341052-c248e280-a4c1-11e8-94d4-1519fb1247cc.jpg"> 
 
@@ -49,7 +48,7 @@ Vue.jsというJavascriptのframeworkを自ら勉強して開発しましたサ�
 一つずつわかっていく過程が面白く、フロントエンドの方に自信ができました。
 
 </div>
-<br><br><br>
+<br><br>
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341050-c248e280-a4c1-11e8-9db9-4b9b3bd77a13.jpg"> 
 
