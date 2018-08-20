@@ -29,8 +29,27 @@
     * オペレーターの作業指示書を手軽に生成してくれる**作業指示書生成サービス**
   * 補充スタッフ - モバイル
     * 専用アプリを通じて作業指示書を確認
-    * 作業指示の量を積載
-    * 補充自販機の位置確認
+    * 車両に作業指示の量を積載
+    * アプリで補充自販機の位置確認
     * 最寄りの自販機の経路をお知らせ
-    * 飲み物の補充
+    * 自販機の飲み物の補充
 
+* 使用技術
+  * Back-end
+    * Apache
+    * MySQL
+    * PHP
+    * AWS
+    * laravel
+  * Front-end
+    * Vue.js
+    * BootStrap
+    * HTML JS CSS
+    * Google Maps API
+  * App&Hardware
+    * Android
+    * Firebase
+    * Arduino
+    * Google Maps API
+    
+### Images
