@@ -63,6 +63,7 @@ Vue.jsというJavascriptのframeworkを自ら勉強して開発しましたサ�
 </div>
 
 <hr>
+<br><br><br>
 
 * **槪要**  
   * 自販機と**IoT技術**を合わせて手軽に販売データの収集及び分析、  
