@@ -161,6 +161,11 @@ Vue.jsというJavascriptのframeworkを自ら勉強して開発しましたサ�
 <img width="400" src="https://user-images.githubusercontent.com/37164351/44340791-f53ea680-a4c0-11e8-82d7-cb13fb2e1cd0.jpg">
 <img width="400" src="https://user-images.githubusercontent.com/37164351/44340792-f53ea680-a4c0-11e8-9d39-063d17bd9051.jpg">
 </div>
+
+### ハードウェア
+<div>
+<img width="400" src="https://user-images.githubusercontent.com/37164351/44342642-a5fb7480-a4c6-11e8-9af7-3a4a0d358645.jpg">
+</div>
 <br><br><br>
  
 ## Ki-Tunaサービスの動画  
