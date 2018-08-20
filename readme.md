@@ -8,7 +8,9 @@
 
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44340745-c0caea80-a4c0-11e8-9a7e-8122ac67d55d.jpg"> 
+<br>  
 名前 : ハ・ジェヒョン（リーダー）
+担当パート : バックエンド(サーバー構築や管理、データベース設計や管理、PHP)
 </div>
 
 <hr>
