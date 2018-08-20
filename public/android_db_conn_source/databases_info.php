@@ -8,20 +8,20 @@ define("DB_NAME"        , ""          );
 define("PASSWORD"       , ""       );  //얘를 주석으로 한다
 
 //table13.209.83.48
-define("SUPPLE_TABLE"   , "supplementer"    );
-define("VENDING_TABLE"  , "vendingmachine"  );
-define("JOB_ORDER"      , "job_order"       );
-define("JOB_COLUMN"     , "jo_column"       );
-define("COINT_STOCK"    , "coin_stock"      );
-define("VD_STOCK"       , "vd_stock"        );
-define("SELL_DATA"      , "sell_data"       );
-define("STOCK_MANAGE"   , "stock_management");
-define("PRODUCT_INFO"   , "product_info"    );
-define("COMPANY_INFO"   , "company_info"    );
-define("ORDER_SHEET"    , "order_sheet"     );
-define("CAR_STOCK"      , "car_stock"       );
-define("TOKEN_INFO"     , "token_info"      );
+define("SUPPLE_TABLE"   , ""    );
+define("VENDING_TABLE"  , ""  );
+define("JOB_ORDER"      , ""       );
+define("JOB_COLUMN"     , ""       );
+define("COINT_STOCK"    , ""      );
+define("VD_STOCK"       , ""        );
+define("SELL_DATA"      , ""       );
+define("STOCK_MANAGE"   , "");
+define("PRODUCT_INFO"   , ""    );
+define("COMPANY_INFO"   , ""    );
+define("ORDER_SHEET"    , ""     );
+define("CAR_STOCK"      , ""       );
+define("TOKEN_INFO"     , ""      );
 
 //GOOGLE API KEY -> 푸시 알람용
-define("GOOGLE_API_KEY","AAAAWZvxvnk:APA91bEOenScpg7ViR_p6bg2omHugJNuLH_zqG4yE271cSYntty-D-6iBpBEZ_g-Zhlr0NAjJAG7MhESsgIbjURFNKEoE58ZgIkmvrYijr2R4pVfvlKTnSK16PQDQ2HsJDO6ZWA8hey8");
+define("GOOGLE_API_KEY","");
 ?>
