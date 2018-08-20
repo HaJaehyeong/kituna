@@ -23,7 +23,7 @@ IT分野ではコミュニケーション能力が重要だという理由を正
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341048-c248e280-a4c1-11e8-8259-57c8a8b8c058.png"> 
 
-**名前 : ジン・ソンギュ**
+**名前 : ジン・ソンギュ**  
 **担当パート : バックエンド(データベース設計や管理)、Android(全般)**
 </div>
 <br><br>
