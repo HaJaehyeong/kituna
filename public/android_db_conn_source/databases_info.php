@@ -1,11 +1,11 @@
 <?php
 
 //user
-define("HOST"           , "13.125.90.207"     );
-define("USER"           , "root"            );
-define("DB_NAME"        , "kituna"          );
-//define("PASSWORD"     , "autoset"         );  //autoset 설정으로 할 경우 주석을 제거하고
-define("PASSWORD"       , "Wkqla12!@"       );  //얘를 주석으로 한다
+define("HOST"           , ""     );
+define("USER"           , ""            );
+define("DB_NAME"        , ""          );
+//define("PASSWORD"     , ""         );  //autoset 설정으로 할 경우 주석을 제거하고
+define("PASSWORD"       , ""       );  //얘를 주석으로 한다
 
 //table13.209.83.48
 define("SUPPLE_TABLE"   , "supplementer"    );
