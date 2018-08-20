@@ -87,4 +87,5 @@
 <br><br><br>
 
 ## Ki-Tunaサービスの動画  
-[![Video Label](http://img.youtube.com/vi/GtdF_3lb4H8/0.jpg)](https://youtu.be/GtdF_3lb4H8?t=0s)
+[![Video Label](http://img.youtube.com/vi/GtdF_3lb4H8/0.jpg)](https://youtu.be/GtdF_3lb4H8?t=0s)  
+写真をクリックしたらYouTubeページに移動します。
