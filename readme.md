@@ -9,35 +9,35 @@
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44340745-c0caea80-a4c0-11e8-9a7e-8122ac67d55d.jpg"> 
 <br>  
-名前 : ハ・ジェヒョン（リーダー）  
+名前 : ハ・ジェヒョン（リーダー）<br>  
 担当パート : バックエンド(サーバー構築や管理、データベース設計や管理、PHP)
 </div>
 
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341048-c248e280-a4c1-11e8-8259-57c8a8b8c058.png"> 
 <br>  
-名前 : ジン・ソンギュ  
+名前 : ジン・ソンギュ  <br>
 担当パート : バックエンド(サーバー構築や管理、データベース設計や管理、PHP)
 </div>
 
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341050-c248e280-a4c1-11e8-9db9-4b9b3bd77a13.jpg"> 
 <br>  
-名前 : イ・ソンミン  
+名前 : イ・ソンミン  <br>
 担当パート : 
 </div>
 
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341052-c248e280-a4c1-11e8-94d4-1519fb1247cc.jpg"> 
 <br>  
-名前 : カク・ダイ  
+名前 : カク・ダイ  <br>
 担当パート : プロントエンド（リアルタイムページ、マネジメントページ-自販機管理、Vue.js）
 </div>
 
 <div>
 <img width="150" src="https://user-images.githubusercontent.com/37164351/44341050-c248e280-a4c1-11e8-9db9-4b9b3bd77a13.jpg"> 
 <br>  
-名前 : イ・セヒョク  
+名前 : イ・セヒョク  <br>
 担当パート : プロントエンド（商品ページ、マネジメントページ-オペレーター管理、Vue.js）
 </div>
 
