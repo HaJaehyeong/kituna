@@ -267,8 +267,8 @@ export default {
     itemList:[],
     itemList_c:[],
     itemList_v:[],
-    items:[], /* 판매내역 */
-      /* 판매내역 테이블 헤더 */
+    items:[], /* Sales details */
+      /* Sales History Table Header*/
     headers: [
       {
         text: '日付',
@@ -279,10 +279,10 @@ export default {
       { text: '価格',align: 'center', value: 'price' },
       { text: '商品名', align: 'center',value: 'dName' }
      ],
-      vending_name:'', /* 모달창 자판기 이름 */
-      vending_manager:'', /* 모달창 자판기 매니저 이름 */
-      vending_id : '',/* 모달창 자판기 아이디 */
-      select: [  /* 모달창 선택지 */
+      vending_name:'', /* Modal - vending machine name */
+      vending_manager:'', /*  Modal -  vending_manager  */
+      vending_id : '',/* Modal - vending_id */
+      select: [  /*  Modal -  select */
       { text: '緊急!飲料在庫不足' },
       { text: '緊急!残高不足' },
       { text: '祭り期間 ( 在庫や残高の確認要望 )' },
@@ -292,26 +292,26 @@ export default {
       selectedItem:'',
       selectedItem_etc:'',
       goToId:'',
-      route_analysis:'', /* 해당 분석 페이지 */
+      route_analysis:'', /*Corresponding Analysis Page */
       route_management:'' ,
-      trueOrFalse:false/* 더보기 버튼 클릭 유무 */,
-      itemList_before :'' ,/* 변화 전 item*/
-      vendingId_before :'' ,/* 변화 전 vending id*/
+      trueOrFalse:false/* Click More Button */,
+      itemList_before :'' ,/* before the change item */
+      vendingId_before :'' ,/* before the change vending id*/
 
-      colorTrueOrFalse1: 0,/* 라인 1번 숫자변화시 색깔 변화  */
-      colorTrueOrFalse2: 0,/* 라인 2번 숫자변화시 색깔 변화  */
-      colorTrueOrFalse3: 0,/* 라인 3번 숫자변화시 색깔 변화  */
-      colorTrueOrFalse4: 0,/* 라인 4번 숫자변화시 색깔 변화  */
-      colorTrueOrFalse5: 0,/* 라인 5번 숫자변화시 색깔 변화  */
-      colorTrueOrFalse6: 0,/* 라인 6번 숫자변화시 색깔 변화  */
-      colorTrueOrFalse7: 0,/* 라인 7번 숫자변화시 색깔 변화  */
-      colorTrueOrFalse8: 0,/* 라인 8번 숫자변화시 색깔 변화  */
+      colorTrueOrFalse1: 0,/* Change in color when line number 1 is changed  */
+      colorTrueOrFalse2: 0,/* Change in color when line number 2 is changed  */
+      colorTrueOrFalse3: 0,/* Change in color when line number 3 is changed  */
+      colorTrueOrFalse4: 0,/* Change in color when line number 4 is changed  */
+      colorTrueOrFalse5: 0,/* Change in color when line number 5 is changed  */
+      colorTrueOrFalse6: 0,/* Change in color when line number 6 is changed  */
+      colorTrueOrFalse7: 0,/* Change in color when line number 7 is changed  */
+      colorTrueOrFalse8: 0,/* Change in color when line number 8 is changed  */
 
     }
   },
   watch: {
 
-    /* 자동 refresh --- 물건 재고 및 잔고 */
+    /* Automatic refresh --- Inventory and Balance of Goods */
     itemList: function(){
 
       this.refresh('http://soundbible.com/mp3/Elevator Ding-SoundBible.com-685385892.mp3');
@@ -320,7 +320,7 @@ export default {
   },
   created: function() {
     
-     this.colorTrueOrFalse1=0; /* 색깔 숫자 초기화 */
+     this.colorTrueOrFalse1=0; /* Reset Color Numbers */
      this.colorTrueOrFalse2=0; 
      this.colorTrueOrFalse3=0; 
      this.colorTrueOrFalse4=0; 
@@ -329,8 +329,8 @@ export default {
      this.colorTrueOrFalse7=0;
      this.colorTrueOrFalse8=0;
 
-    /* 해당 자판기의 재고 및 잔고 */
-     //<-------------- 자판기 아이디 EventBus  ------------->
+    /* Stock and balance of the vending machine */
+     //<-------------- VendingId  EventBus  ------------->
     EventBus.$on('VendingId',(arg1,arg2,arg3,arg4) => {
   
     this.vendingId=arg1;
@@ -389,8 +389,8 @@ export default {
                          drink_img_path:array[key].drink_img_path});   
               } 
            } 
-        this.itemList = obj;         /*   재고 전체 받아오는 변수   */
-        this.itemList_before=obj;   /*   재고만 받아오는 변수      */  
+        this.itemList = obj;         /* Variables that receive the entire stock */
+        this.itemList_before=obj;   /*  variables that only receive stock  */  
  console.log(this.itemList);
          })
        .catch(function (error) {
@@ -435,7 +435,7 @@ export default {
                          sum:array[key].sum});
               } 
            } 
-         this.itemList_c=obj_c;       /*   잔고 전체 받아오는 변수   */  
+         this.itemList_c=obj_c;       /*  Variables that receive  */  
          })
        .catch(function (error) {
          console.log(error);
@@ -482,7 +482,7 @@ export default {
                          drink_img_path:array[key].drink_img_path});
               } 
            }   
-             this.itemList = obj;  /* 재고 전체 리스트 */
+             this.itemList = obj;  /* stock complete list */
          })
        .catch(function (error) {
          console.log(error);
@@ -525,7 +525,7 @@ export default {
                          sum:array[key].sum});
               } 
            }  
-            this.itemList_c=obj_c; /* 잔고 전체 리스트  */ 
+            this.itemList_c=obj_c; /* List of coin stock  */ 
          })
        .catch(function (error) {
          console.log(error);
@@ -660,14 +660,14 @@ export default {
 </script>
 
 <style>
-   /* 자판기 아이콘 누르기 전 */
+   /* Before click the vending icon*/
   #background1{
     width:60%;   
     position: relative;
     right: 100px; 
     margin-bottom:35%;
   }
-  /*  자판기 아이콘 누른 후  */
+  /* After click the vending icon  */
   #background2 {  
     width:100%;   
     position: relative;
@@ -675,13 +675,13 @@ export default {
     margin-top:-60px;
     margin-left:30px;
   }
-  /* 현재 클릭된 자판기 이름 -1*/ 
+  /* Current Clicked vending Name -1*/ 
   #background2_title{
     position: relative;
     left: -280px;
     margin-top:60px;
   }
-   /* 현재 클릭된 자판기 이름 -2*/
+   /* Current Clicked vending Name -2*/
   #background2_title2{
     position: relative;
     left: -280px; 
@@ -689,25 +689,25 @@ export default {
    
   }
 
-  /* 음료 리스트 */
+  /* Beverage list */
   #bottom_left{
     margin-top:-15px;
     margin-left:22px;
     float: left; width: 47%; padding:3px
   }
-  /* 잔고 리스트 */
+  /* coin stock list  */
   #bottom_center{
     float: left;
     width: 35%; 
     margin-top: 10px;
     margin-right:6px;
     }
-  /* 더보기 버튼 */
+  /* more button */
   #bottom_right{
     margin-top: 10px;
     float: left;
   }
-  /* 더보기 리스트 */
+  /* more list */
   #bottom_left2{
     margin-left:60px;
     margin-top:6px;
@@ -718,7 +718,7 @@ export default {
     width: 660px;
     height: 250px; 
   }
-  /* 백 버튼 */
+  /* back button */
   #bottom_right2{
     float: left; 
     margin-top:14px;
@@ -746,7 +746,7 @@ export default {
     }
   }
 
-  /* 잔고 테이블 */
+  /* coin stock table */
   #coin_stock_table1{
     font-family:"Fugaz One";
     color: rgb(48, 109, 170);
@@ -762,18 +762,18 @@ export default {
     color: rgb(48, 109, 170);
     font-size: 1.5em
   }
-  /* 테이블 배경 색 */
+  /* table background color */
   #trBgColor{
   background-color:  rgb(229, 239, 248);
   }
 
-  /* 자판기 이름 설정 */
+  /* Settion vending name */
   #vendingMachineNameFont{
     font-family:"Nanum Gothic";
     color: black;
     font-size: 1.7em;
   }
-  /* 음료 재고 테이블 */
+  /* Setting table drink stock  */
   #drinkStockTable{
     
     padding-left:50px;
@@ -783,7 +783,7 @@ export default {
     margin-bottom: 2px;
 
   }
-  /* 테이블 배경사진 */
+  /* table background image */
   #tdBackground{
    background-image:url(/images/realtime/frame.png);
    background-repeat:no-repeat;
@@ -792,7 +792,7 @@ export default {
    height: 130px;
    padding-right: 3%;
   }
-  /* 재고 높은 숫자 */
+  /* stock Top number */
   #numberTop{
     margin-left:5px;
     padding-left:5px;
@@ -800,7 +800,7 @@ export default {
     color: rgb(228, 142, 61);
     font-size: 1.5em
   }
-  /* 재고 중간 숫자 */
+  /* stock Middile number */
   #numberCenter{
     margin-left:5px;
     padding-left:5px;
@@ -808,7 +808,7 @@ export default {
     color: rgb(48, 109, 170);
      font-size: 1.5em
   }
-  /* 재고 낮은 숫자 */
+  /* stock Low number */
   #numberBottom{
     margin-left:5px;
     padding-left:5px;
@@ -816,7 +816,7 @@ export default {
     color: rgb(52, 196, 83);
      font-size: 1.5em
   }
-  /* 잔고현황 타이틀 설정 */
+  /* Setting residual status title  */
   #CoinStockFont{
     font-family:"Nanum Gothic";
     color: black;
@@ -848,7 +848,7 @@ export default {
     text-align: center;
   }
 
-  /* 매진임박일 경우 숫자 깜빡거림 설정 */
+  /* Set number flicker when sold out */
   .blink{
     color:rgb(255, 255, 255);
     font-size:20px;
@@ -859,7 +859,7 @@ export default {
       100% {color: rgb(228, 142, 61);}
   }
 
-  /* 완충일 경우 숫자 깜빡거림 설정 */
+  /* Set number flicker if buffer */
   .blink2{
     color:rgb(255, 255, 255);
     font-size:20px;
@@ -870,7 +870,7 @@ export default {
       100% {color: rgb(52, 196, 83)}
   }
   
-  /* 숫자 변화 될 경우 깜빡거림 설정 */
+  /* Set flicker if number changes */
   .blink3{
     color:rgb(255, 255, 255);
     font-size:20px;
@@ -881,19 +881,19 @@ export default {
       100% {color: rgb(248, 74, 149)}
   }
 
-  /* 더보기 기능 왼쪽 설명 부분 */
+  /* The left-hand description of the More View function */
   #add_table{
   float: left; width: 30%;  
   margin-left: -20px;
   }
-  /* 더보기 기능 오른쪽 버튼들 */
+  /* More View Right Button */
   #add_list_button{
   float :left;
   width: 60%; 
   margin-top: 5%;
   margin-left: 3%;
   }
-  /* 더보기 기능 왼쪽 설명 설정 */
+  /* More View Left Button */
   #top_info_settting{
     font-family:"Nanum Gothic";
     color: rgb(255, 255, 255);
@@ -916,7 +916,7 @@ export default {
     margin-top: -127%;
   
   }
-  /* 새로고침 버튼 */
+  /* Refresh button */
   #add_button{
     width: 78% ;
   }
