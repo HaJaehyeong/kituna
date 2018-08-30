@@ -1,13 +1,15 @@
 <template>
     <div id="allDivision">
-      <!--/////////////////////////  자판기 아이콘 클릭 전 /////////////////////////-->
+    
+      <!--/////////////////////////  Before clicking the vending machine icon /////////////////////////-->
       <div id="background1" v-if="itemList==0">
         <br /><br /><br /><br /><br /><br /><br />
          <img src="images/logo.png"  width="270px">
          <h5 style="text-align:center;font-family:'Dosis';" >Click on the vending machine icon in Google Maps</h5>
          <br /><br /><br /><br /><br /><br />
       </div>  
-      <!--/////////////////////////  자판기 아이콘 클릭 후 /////////////////////////-->
+      
+      <!--/////////////////////////  After clicking the vending machine icon /////////////////////////-->
     <div id="background2" v-if="itemList!=0" >
       <br />
       <div v-if="trueOrFalse==false" class="hover15 column" id ="background2_title" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
@@ -17,8 +19,8 @@
       <div v-if="trueOrFalse==true" class="hover15 column" id ="background2_title2" v-for="(item, index) in itemList_v" :key="index">    <!-- 클릭한 현재 자판기 이름 -->
       <strong id="vendingMachineNameFont">{{item.name}}    </strong>    
       </div> 
-      <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 전 ~~~~~~~~~~~ -->
-        <!-- *********************** 음료재고 div ********************** -->
+      <!-- ~~~~~~~~~~~~ Before pressing the More button  ~~~~~~~~~~~ -->
+        <!-- *********************** Beverage stock div ********************** -->
       <div >  
       <div v-if="trueOrFalse==false" id="bottom_left">
        <table id="drinkStockTable">
@@ -110,7 +112,7 @@
       
       <br />
       </div>
-       <!-- *********************** 동전 잔고 div *********************** -->
+       <!-- *********************** coin Stock div *********************** -->
       <div v-if="trueOrFalse==false" id="bottom_center">
        <div v-for="(item, index) in itemList_c" :key="index">
         <table>
@@ -126,12 +128,12 @@
        </div>
       </div>
       </div>
-      <!-- *********************** 더보기 버튼  ************************ -->
+      <!-- *********************** More button  ************************ -->
       <div v-if="trueOrFalse==false" id="bottom_right" class="hover13 figure">
          <figure><img id="add_button" src="/images/realtime/more_button.png" @click="moreButton(true)" ></figure>
       </div>
-      <!-- ~~~~~~~~~~~~ 더보기 버튼 누르기 후 ~~~~~~~~~~~ -->
-      <!-- *********************** 더보기 기능 div ********************** -->
+      <!-- ~~~~~~~~~~~~ Press More Button~~~~~~~~~~~ -->
+      <!-- *********************** More features div ********************** -->
       <div v-if="trueOrFalse==true" id="bottom_left2">
         <div id="add_table" v-for="(item, index) in itemList_v" :key="index">
           <br />
@@ -146,24 +148,24 @@
         <div id="add_list_button">
         <div class="hover13 figure">
          <tr>
-         <td> <!-- 판매목록 -->
+         <td> <!-- a sales list -->
            <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;"  @click.stop="dialog = true" @click="sale_history()" src="/images/realtime/sell_button.png" ><p>　</p></figure>
          </td>
-         <td> <!-- 작업지시 작성 -->
+         <td> <!-- Job order creation -->
            <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;" @click.stop="dialog2 = true"  src="/images/realtime/order_button.png" ></figure>
           </td>
-         <td> <!-- 분석 보기 -->
+         <td> <!-- View Analysis  -->
            <router-link :to="route_analysis" id="analyst" >
            <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;" src="/images/realtime/analysis_button.png" ></figure>
            </router-link>
          </td>
-         <td> <!-- 자판기 관리 -->
+         <td> <!-- Manage vending machines  -->
            <router-link :to="route_management" id="management">
            <figure><img id="add_button" style="width:100px;margin-top:2%;margin-right:24%;" src="/images/realtime/vending_button.png" ></figure>
            </router-link>
          </td>
          </tr>
-        </div>  <!-- ***************판매내역 모달창********************* -->
+        </div>  <!-- *************** Sales details modal ********************* -->
          <v-layout row justify-center>
             <v-dialog v-model="dialog" fullscreen transition="dialog-bottom-transition" :overlay="false">
              <v-card  color="light-blue darken-1">
@@ -204,7 +206,7 @@
              </v-card>
             </v-dialog>     
           </v-layout>
-          <!-- *************** 작업 지시 모달창 *************** -->
+          <!-- *************** Task Instruction Modal *************** -->
           <v-layout>
               <v-dialog v-model="dialog2" max-width="520" max-height="300">
                   <v-card>
@@ -237,7 +239,7 @@
         </v-layout>
         </div>
       </div>
-      <!-- *********************** back 버튼  ********************** -->
+      <!-- *********************** back button  ********************** -->
       <div v-if="trueOrFalse==true" id="bottom_right2" class="hover13 figure">
            <figure><img id="add_button" src="/images/realtime/back.png" @click="moreButton(false)" ></figure>
       </div>
@@ -354,7 +356,7 @@ export default {
     this.route_management ="/management?id="+temp;
     this.goToId = temp;
   
-    //<----------------- 물건 재고 axios ----------------------->
+    //<----------------- baverage stock axios ----------------------->
     this.axios.get("/realtime/getVdStock/"+this.vendingId)
        .then((response) =>{
            let key;
@@ -396,7 +398,7 @@ export default {
        });
        
        
-    //<----------------- 동전 잔고 axios ----------------------->
+    //<----------------- coin stock axios ----------------------->
     this.axios.get("/realtime/coinStock/"+this.vendingId)
        .then((response) =>{
            let key;
@@ -448,7 +450,7 @@ export default {
   //<----------------- refresh methods --------------------->
        refresh(sound){
 
-         //<-----------------refresh 물건 재고 axios ----------------------->
+         //<-----------------refresh baverage stock axios ----------------------->
         this.axios.get("/realtime/getVdStock/"+temp)
        .then((response) =>{
            let key;
@@ -486,7 +488,7 @@ export default {
          console.log(error);
        });
       
-       //<----------------- refresh 동전 잔고 axios ----------------------->
+       //<----------------- refresh coin stock axios ----------------------->
        this.axios.get("/realtime/coinStock/"+this.vendingId)
        .then((response) =>{
            let key;
@@ -530,18 +532,18 @@ export default {
        }); 
       
 
-      /* 재고 숫자가 바뀔 경우 효과음 냄 */
+      /* Sound effective when inventory numbers change */
      if(this.vendingId==this.vendingId_before){
       for (var i=0; i<8;i++){
         if((this.itemList[i].line==this.itemList_before[i].line)){
            if(this.itemList[i].stock!=this.itemList_before[i].stock){
       
-             if(sound) {  /* 효과음 부분 */
+             if(sound) {  /* an effective part */
                  var audio = new Audio(sound);
                  audio.play();
               }
 
-             /* 숫자 바뀔 경우 색 변환 */
+             /*Convert Color When Numeric */
              if(this.itemList[i].line==1){
                 this.colorTrueOrFalse1++;
              }
@@ -571,8 +573,8 @@ export default {
        }
      }
        
-        this.vendingId_before = this.vending_id; //현재 아이디를 비교 대상 아이디변수에 값 넣기
-        this.itemList_before = this.itemList; //현재 재고리스트를 비교 대상 재고리스트 배열에 값 넣기
+        this.vendingId_before = this.vending_id; //Put the current ID into the ID variable being compared
+        this.itemList_before = this.itemList; //Place current inventory list in the inventory list array for comparison
 
        } ,
     
@@ -620,7 +622,7 @@ export default {
         this.items = obj_sell;                   
       })
     },
-    /* <---------------------모달창 내용 db전송 --------------------> */
+    /* <---------------------- Send modal contents db --------------------> */
     submit(selectedItem,selectedItem_etc){
         // console.log(selectedItem_etc);
          console.log(this.vending_id);
@@ -649,7 +651,7 @@ export default {
        } 
         this.dialog = false
     },
-    /* <---------------------더보기 버튼 클릭 유무--------------------> */
+    /* <--------------------Click More Button-------------------> */
     moreButton(arg1){
      this.trueOrFalse=arg1;
     }
