@@ -94,7 +94,7 @@
                         <v-btn outline small color="indigo" @click="dateChange(1)" class="arrowImgSytle" style="border: 0px;">▶</v-btn>
                       </div>
 
-                      <!-- 달력 띄우는 모달창 -->
+                      <!-- a calendar modal -->
                       <v-dialog v-model="dialog" max-width="300">
                         <v-card>
                           <v-date-picker color="green lighten-1" v-model="pickerDate" :landscape="landscape" :reactive="reactive"></v-date-picker>
@@ -106,7 +106,7 @@
                           </v-card-actions>
                         </v-card>
                       </v-dialog>
-                      <!-- 달력 띄우는 모달창 -->
+                      <!-- a calendar modal -->
 
                     </div>
                     <div class="divRowHalf">
@@ -129,7 +129,7 @@
                 </div>
                 <div>
                 
-                  <!-- 작업지시서 본 내용 -->
+                  <!-- Work order view content -->
                   <table class="orderTableStyle">
                     <thead style="text-align: center;">
                       <th style="width: 13%;"><font size="4">自販機名</font></th>
@@ -174,7 +174,7 @@ export default {
   name: 'Local',
   data() {
     return {      
-      //탭 조회 버튼을 위한 변수
+      //Variables for Tabbed Lookup buttons
       spOrVdCard : { 0 : '지역별', 1 : '보충기사별'},
       active: null,
       itemList : LocalList.itemList,
@@ -184,7 +184,7 @@ export default {
       seoul : {lat : 36.877033, lng: 127.95517},
       itemList2:[],
       itemsCount:[],
-      select: [  /* 모달창 선택지 */
+      select: [  /* Modal selection*/
         { text: '긴급! 음료 재고 부족' },
         { text: '긴급! 잔고 부족' },
         { text: '축제 기간 ( 재고잔고 확인 요망 )' },
@@ -211,8 +211,8 @@ export default {
       jobOrderVDName: "",
       jobOrderVDId: "",
       saveToday: "",
-      spName : '',    // 작업지시서 내 보충 기사 이름
-      today  : '',     // 오늘 날짜,
+      spName : '',    // Name of supplement in job order
+      today  : '',    
     }
   },
   mounted(){
@@ -226,7 +226,7 @@ export default {
     this.todayFunction();
   },
   watch: {
-    //오늘 날짜가 바뀌는 것을 실시간으로 감시한다.
+    //We monitor today's date in real time.
     today: function(){
       this.joborderRenew();
     }
@@ -236,9 +236,9 @@ export default {
     joborderRenew() {
       this.axios.get("/management/jobOrder/" + this.spName + "/" + this.today)
         .then((response) => {
-          this.allProductCountArr = [];       // 모든 제품 정보 초기화
-          this.sameVDArr = [];                // 같은 자판기의 제품 정보 초기화
-          this.allCount = 0;                  // 총 작업지시 제품 수 초기화
+          this.allProductCountArr = [];       // Initialize all product information
+          this.sameVDArr = [];                // Initialize product information for the same vending machine
+          this.allCount = 0;                  // Initialize Total Work Orders
 
           for(var i = 0; i < response.data.length; i++) {
             var productObj = {
@@ -253,9 +253,9 @@ export default {
             productObj.productCount = response.data[i].sp_val;
             productObj.productImgSrc = "/images/drink/" + response.data[i].drink_name + "_back.png";
             this.allCount += productObj.productCount;
-            // 작업지시 제품 수 정리
-
-            var is_nameSame = false;    // 같은 이름 제품 유무
+            // Job order product count 
+	    
+            var is_nameSame = false;    // Product with same name
 
             for (var j = 0; j < this.allProductCountArr.length; j++) {
               if (this.allProductCountArr[j].productName == productObj.productName) {
@@ -295,25 +295,25 @@ export default {
                 this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
               }
             }
-            // 같은 이름 자판기 정보 정리
+            // Organize same name vending machine information
           }
-          // 해당 보충기사의 모든 작업지시 사항 정리
+          // Clean up all work orders for the supplement
           
           for (var i = 0; i < this.allProductCountArr.length; i++) {
             if (this.allProductCountArr[i].productCount == 0) {
               this.allProductCountArr.splice(i, 1);
             }
           }
-          // 보충량 0인 제품 삭제
+          //Delete Product with Supplement 0
 
-          this.allPDCount = this.allProductCountArr.length;   // 모든 제품 수
+          this.allPDCount = this.allProductCountArr.length;   // All Products
 
           var inputEmptyObj = {
             productName: "",
             productCount: 0,
             productImgSrc: ""
           }
-          // 빈 값을 가진 객체
+          // Objects with empty values
 
           while (this.allProductCountArr.length < 12) {
             if (this.allProductCountArr.length == 11) {
@@ -329,10 +329,10 @@ export default {
               this.allProductCountArr.push(inputEmptyObj);
             }
           }
-          // 공간 맞추기
+          // space matching
 
-          this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 6);   // 모든 작업지시 테이블 줄 수 
-          this.allProductCountArrCut = [];                                                      // 모든 작업지시 제품 정보
+          this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 6);   // All work order table lines
+          this.allProductCountArrCut = [];                                                      // All job order product information
           var cut = 0;
 
           for (var i = 0; i < this.allProductTableRepeationCount; i++) {
@@ -348,20 +348,20 @@ export default {
               }
             }
           }
-          // 줄 수에 맞게 제품 정보 입력
+          //Enter product information to fit the number of lines
 
           this.allVDCount = this.sameVDArr.length;
           this.allPDCount = this.allProductCountArr.length;
         })
     },
-    // watch를 통해 보충기사 및 날짜에 변화가 있을 경우 해당 메서드로 오게 된다.
+    // Watch will lead to the method if there is a change in the supplemental engineer and date.
     
     createNote(chooseVDName, vendingId) {
       this.orderJobDialog = true;
       this.jobOrderVDName = chooseVDName;
       this.jobOrderVDId = vendingId;
     },
-    // 오늘 날짜를 구하는 함수
+    // Function for today's date
       todayFunction(){
         let date = new Date();
         let year = date.getFullYear();
@@ -381,7 +381,7 @@ export default {
         this.saveToday = this.today;
       },
 
-      //달력을 통해 클릭된 날로 바꾸는 함수
+      //Function to change to a clicked day through the calendar
       chooseDateChange(){
         this.today = this.pickerDate;
       },
@@ -419,7 +419,7 @@ export default {
           this.today = changeToday[0] + "-" + changeToday[1] + "-" + changeToday[2];
         }
       },
-      /* <---------------------모달창 내용 db전송 --------------------> */
+      /* <---------------------Send modal contents db--------------------> */
       submit(selectedItem,selectedItem_etc){
         // console.log(selectedItem_etc);
         // console.log(selectedItem);
@@ -432,7 +432,7 @@ export default {
           this.axios.post("management/addJobOrder", formData)
           .then((Response) => {
             // console.log(Response.data);
-            alert("작업지시가 완료되었습니다.");
+            alert("Job instruction is complete!");
           })
           .catch(ex=>{
             console.log(ex.response);
@@ -446,7 +446,7 @@ export default {
           this.axios.post("management/addJobOrder", formData)
           .then((Response) => {
             // console.log(Response.data);
-            alert("작업지시가 완료되었습니다.");
+            alert("Job instruction is complete!");
           }).catch(ex => {
             console.log(ex.response);
           }) 
@@ -460,9 +460,9 @@ export default {
 
         this.axios.get("/management/jobOrder/" + this.spName + "/" + this.today)
         .then((response) => {
-          this.allProductCountArr = [];       // 모든 제품 정보 초기화
-          this.sameVDArr = [];                // 같은 자판기의 제품 정보 초기화
-          this.allCount = 0;                  // 총 작업지시 제품 수 초기화
+          this.allProductCountArr = [];       // Initialize all product information
+          this.sameVDArr = [];                // Initialize product information for the same vending machine
+          this.allCount = 0;                  // Initialize Total Work Orders
 
           for(var i = 0; i < response.data.length; i++) {
             var productObj = {
@@ -477,10 +477,10 @@ export default {
             productObj.productCount = response.data[i].sp_val;
             productObj.productImgSrc = "/images/drink/" + response.data[i].drink_name + "_back.png";
             this.allCount += productObj.productCount;
-            // 작업지시 제품 수 정리
+            // Job order product count
 
-            var is_nameSame = false;    // 같은 이름 제품 유무
-
+            var is_nameSame = false;    //Product with same name
+	    
             for (var j = 0; j < this.allProductCountArr.length; j++) {
               if (this.allProductCountArr[j].productName == productObj.productName) {
                 this.allProductCountArr[j].productCount += productObj.productCount;
@@ -519,25 +519,25 @@ export default {
                 this.sameVDArr.push({vd_id: response.data[i].vd_id, vd_name: response.data[i].vd_name, orderNote: "", lineAndProduct: [{lineNum: response.data[i].drink_line, productName: pdName, sp_val: response.data[i].sp_val, imgSrc: "/images/drink/" + response.data[i].drink_name + ".png"}]});
               }
             }
-            // 같은 이름 자판기 정보 정리
+            // Organize same name vending machine information
           }
-          // 해당 보충기사의 모든 작업지시 사항 정리
+          // Clean up all work orders for the supplement
           
           for (var i = 0; i < this.allProductCountArr.length; i++) {
             if (this.allProductCountArr[i].productCount == 0) {
               this.allProductCountArr.splice(i, 1);
             }
           }
-          // 보충량 0인 제품 삭제
+          // Delete Product with Supplement 0
 
-          this.allPDCount = this.allProductCountArr.length;   // 모든 제품 수
+          this.allPDCount = this.allProductCountArr.length;   // All Products
 
           var inputEmptyObj = {
             productName: "",
             productCount: 0,
             productImgSrc: ""
           }
-          // 빈 값을 가진 객체
+          // Objects with empty values
 
           while (this.allProductCountArr.length < 12) {
             if (this.allProductCountArr.length == 11) {
@@ -553,10 +553,10 @@ export default {
               this.allProductCountArr.push(inputEmptyObj);
             }
           }
-          // 공간 맞추기
+          // space matching
 
-          this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 6);   // 모든 작업지시 테이블 줄 수 
-          this.allProductCountArrCut = [];                                                      // 모든 작업지시 제품 정보
+          this.allProductTableRepeationCount = Math.ceil(this.allProductCountArr.length / 6);   // All work order table lines
+          this.allProductCountArrCut = [];                                                      // All job order product information
           var cut = 0;
 
           for (var i = 0; i < this.allProductTableRepeationCount; i++) {
@@ -572,7 +572,7 @@ export default {
               }
             }
           }
-          // 줄 수에 맞게 제품 정보 입력
+          // Enter product information to fit the number of lines
 
           this.allVDCount = this.sameVDArr.length;
           this.allPDCount = this.allProductCountArr.length;
@@ -646,7 +646,7 @@ export default {
       EventBus.$emit('supplementerEvent',arg1);
   
     },
-    //<--------------------- 지역별 자판기 개수 및 매진임박 개수 ------------------------>
+    //<--------------------- Number of vending machines sold by region ------------------------>
     localCount:function(){
      this.axios.get('realtime/getNumOfVd')
         .then((response) =>{
@@ -692,7 +692,7 @@ export default {
 
 <style>
 
-/* 전체 구역 마진 설정 */
+/* Full zone margin setting  */
 #allDivision{
 margin-top:-20px;
 margin-right:1px;
@@ -700,7 +700,7 @@ margin-bottom:10px;
 margin-left:80px;
 font-family:"Gothic A1";
 }
-/* 하이퍼링크 설정 */
+/* Hyperlink Settings */
  #a:link { color: rgb(198, 198, 198); text-decoration: none;}
  #a:visited { color: rgb(65, 39, 39); text-decoration: none;}
  #a:hover { color: rgb(154, 169, 156); text-decoration: underline;}
@@ -732,7 +732,7 @@ h1 {
    color: rgb(255, 255, 255);
    text-align: center;
 }
-/* 지역별 조회 배경 설정 */
+/* Set regional query background */
 #page_1{
     width:  400px;
     height: 550px;
@@ -746,7 +746,7 @@ h1 {
     
 }
 
-/* 지역별 조회 배경 설정 */
+/* Set regional query background */
 #page_2{
     width:  400px;
     height: 550px;
@@ -758,7 +758,7 @@ h1 {
     
 }
 
-/* 지역별 조회 버튼 css 설정 */
+/* Local lookup button css settings */
 input#select1,input#select2{
   display:none;
 }
@@ -773,7 +773,7 @@ input#select2:checked ~ .page2{
   display:block;
 }
 
-/* 이름 설정 */
+/* Name Settings */
 label{
     display:inline-block;
     width: 200px;
@@ -789,7 +789,7 @@ label{
 #tab_container{
    font-family:"Rounded Mplus 1c";
 }
-/* ------------------------- 버튼1- 지역별 조회 설정 ----------------------*/
+/* ------------------------- Button1- Region Settings ----------------------*/
 #btn1 {
     position: relative;
     border: 3px solid  #0064c8;
@@ -842,7 +842,7 @@ label{
   font-weight: bold;
 }
 
-/* ------------------ 버튼2- 보충기사별 조회 설정 -----------------*/
+/* ------------------ Button2 - Query settings by supplemental engineer-----------------*/
 #btn2{
     position: relative;
     border: 3px solid  #0064c8;
@@ -893,7 +893,7 @@ label{
   font-weight: bold;
 }
 
-/* 각 지역 버튼 설정 */
+/* Set each region button */
 #localBtn{
   color: #ffffff;
   font-size: 20px;
@@ -902,7 +902,7 @@ label{
   font-weight: bold;
   
 }
-/* 각 지역별 버튼*/
+/*Set each region button*/
 .subLocalBtnFrame{  
 
     padding-left : -19px;
@@ -965,7 +965,7 @@ label{
   color: #0064c8;
   font-weight: bold;
 }
-/* 각 지역별 내부 폰트 */
+/* Internal Font by Region */
 #subLocalButton{
   color: #0064c8;
   font-size: 21px;
@@ -974,14 +974,14 @@ label{
   font-weight: bold; 
 }
 
-/* 각지역별 내부 폰트 - 첫번째 숫자  */
+/*Internal Font by Region - Number 1 */
 #subLocalButton_1{
   color: #306ca8;
   font-size: 26px;
   text-align: center;
   font-family:"Fugaz One";
 }
-/* 각지역별 내부 폰트 - 두번째 숫자  */
+/* Internal Font by Region - Number 2  */
 #subLocalButton_2{
   color: #79a9da;
   font-size: 17px;
@@ -989,7 +989,7 @@ label{
   font-family:"Fugaz One";
 }
 
-/* 보충기사별  테두리 */
+/* Border by supplemental engineer */
  #supporter_frame{
   
     background-color: #ffffff;
@@ -1014,7 +1014,7 @@ label{
   margin-top: -10%;
 
  }
-  /* 작업지시서 버튼 */
+  /* Job order button */
   .work_order_button{
     position: relative;
     width: 130px;
