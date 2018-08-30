@@ -5,7 +5,7 @@
     <v-flex xs8>   
     </v-flex>
      <v-flex xs8 sm8 class="py-2">    
-        <!-- 상단바 버튼  -->
+        <!-- Top Bar Button  -->
         <v-btn-toggle v-model="icon" id="buttonFont">
               <v-btn flat value="left" @click="googleButton(0)" >
                 <v-icon>brightness_1</v-icon><span>　全 体</span>
@@ -22,13 +22,13 @@
          </v-btn-toggle>
       </v-flex>
    </v-layout>
-   <!-- 구글 맵  -->              
+   <!--Google Maps  -->              
     <gmap-map
       :center="center"
       :zoom="zoom"
       style="width:100%;  height: 280px;"
     >  
-    <!-- cluster 적용  -->
+    <!-- cluster Application  -->
     <gmap-cluster :grid-size="gridSize" v-if="clustering" >
      <gmap-info-window :options="infoOptions" 
         :position="infoWindowPos" 
@@ -60,7 +60,7 @@
      </gmap-marker>
   </gmap-cluster>
 
-     <!-- cluster 미적용  -->
+     <!-- cluster Not applied  -->
     <div v-if="!clustering">
      <gmap-info-window :options="infoOptions" 
        :position="infoWindowPos" 
@@ -162,7 +162,7 @@ export default {
     }
   },
   created: function() {
-     //<--------------- 전국 EventBus -------------->
+     //<--------------- Nationwide EventBus -------------->
     EventBus.$on('tokyo',(arg1,arg2) => {
 
                 arg1 = parseFloat(arg1);
@@ -178,7 +178,7 @@ export default {
                 this.zoom =parseInt(11);
    
    });
-    //<-------------- 지역 EventBus --------------->
+    //<-------------- Local EventBus --------------->
     EventBus.$on('LocalEvent',(arg1,arg2) => {
 
                 arg1 = parseFloat(arg1);
@@ -195,7 +195,7 @@ export default {
    
    });
 
-    //<------------- 전국 각지 EventBus ------------->
+    //<------------- all over the country EventBus ------------->
     EventBus.$on('NationWideEvent',(arg1, arg2) => {
                
                 arg1 = parseFloat(arg1);;
@@ -212,7 +212,7 @@ export default {
                 this.zoom = parseInt(14);     
     });
 
-    //<--------------- 전국 EventBus ---------------->
+    //<--------------- Nationwide EventBus ---------------->
     EventBus.$on('NationEvent',(arg1, arg2,arg3,arg4) => {
                 console.log(arg1, arg2,arg3,arg4);
                 var count = arg4;
@@ -269,7 +269,7 @@ export default {
              }      
           });
 
-        //<----------- 보충자 EventBus ------------->
+        //<----------- Supplement EventBus ------------->
         EventBus.$on('supplementerEvent',(arg1) => {
         this.name = arg1;
         var this_1= this;
@@ -287,12 +287,12 @@ export default {
   },
 
   methods: {
-    /*  현재 구글맵 위치  */
+    /*  Current Google Maps location  */
     setPlace(place) {
       this.currentPlace = place;
     },
     
-   //<----------------- 전체  자판기 정보 전송 --------------------> 
+   //<----------------- Send full keyboard information --------------------> 
     vendingStock: function (m,index) {
     
     this.selectTrue=false;
@@ -317,7 +317,7 @@ export default {
            EventBus.$emit('VendingId',vendingId,vendingName,vendingSupplementer,venAddress); 
           
           
-         /*<------------------------ 클릭시 마커 색 변경 -------------------------->*/
+         /*<------------------------Change marker color when clicked -------------------------->*/
              this.marker_color = []; 
              this.marker_color = { 
                 lat : vendingLat,
@@ -342,7 +342,7 @@ export default {
  
                 if((response[key].vd_latitude==vendingLat)&&(response[key].vd_longitude==vendingLng)){
                 
-                    // 일반 자판기일 경우 하이라이팅 변화
+                    // Highlights change for normal vending machines
                       if(response[key].vd_soldout==0){ 
                       
                       this.markers[key].icon="/images/realtime/vending_black.png"; 
@@ -351,7 +351,7 @@ export default {
                         this.markers[key].icon ="/images/realtime/vending_black_yel.png"
                       }
                     } 
-                    // 매진임박 자판기일 경우 하이라이팅 변화
+                    //High lighting changes for sold-out machines
                       else if(response[key].vd_soldout==1){
                      
                       this.markers[key].icon="/images/realtime/vending_red.png"; 
@@ -367,7 +367,7 @@ export default {
        });   
            
     },
-     //<-------------------- 매진임박 자판기 정보 전송 --------------------> 
+     //<--------------------  Send information for sold-out machines  --------------------> 
     vendingStock_soldOut: function (m,index){
     
     var vendingLat= m.position.lat;
@@ -390,7 +390,7 @@ export default {
 
         EventBus.$emit('VendingId',vendingId,vendingName,vendingSupplementer,venAddress); 
           
-         /*<------------------------ 클릭시 마커 색 변경 -------------------------->*/
+         /*<------------------------Change marker color when clicked-------------------------->*/
            
              for(key in response){
                
@@ -434,14 +434,14 @@ export default {
        } 
      },
      
-     /* <---------------------모달창 값 설정 --------------------> */
+     /* <---------------------Setting modal value--------------------> */
      instruction(){
          this.vending_name=vendingName, 
          this.vending_manager=vendingSupplementer, 
          this.vending_id=vendingId
 
     },
-     /* <---------------------모달창 내용 db전송 --------------------> */
+     /* <---------------------Send modal contents db --------------------> */
       submit(selectedItem,selectedItem_etc){
          console.log(selectedItem_etc);
        //  console.log(selectedItem);
@@ -470,15 +470,15 @@ export default {
        } 
         this.dialog = false
     },
-    /* <--------------------- 구글맵 상단바 버튼 --------------------> */
+    /* <--------------------- Google Maps Top Bar Button --------------------> */
     googleButton(num){
        this.axios.get('realtime/clickAButton/'+num)
         .then((response) =>{
           response = response.data;
 
-         /********** 전체 *********/
+         /********** All *********/
         if(num==0){ 
-            //일단 값 받아오면 그 값에 따라 아이콘 색 다르게 주기
+            //Once you receive the value, give the icon a different color depending on the value
                 this.markers.splice(0,);
                 this.selectTrue=false;
    
@@ -517,7 +517,7 @@ export default {
                   });
                 }  
              }
-         } /********** 매진임박 *********/
+         } /********** Sold out wage *********/
          else if(num==1){
                 this.selectTrue=true;
                 this.markers.splice(0,);
@@ -537,7 +537,7 @@ export default {
                             icon :"/images/realtime/vending_red.png",
                 });          
             }
-         } /********** 매진 *********/
+         } /********** Sold out  *********/
          else if(num==2){ 
                 this.markers.splice(0,);
                 //this.zoom = parseInt(7);
@@ -557,7 +557,7 @@ export default {
                             icon :"/images/realtime/vending_sold_out.png",
                  });
               }
-          } /********** 작업지시 *********/
+          } /********** Job order *********/
            else if(num==3){
                   this.selectTrue=false;
                   this.markers.splice(0,);
@@ -596,7 +596,7 @@ export default {
 };
 </script>
 <style>
-/* <----------------전체 레이아웃 ----------------> */
+/* <----------------Full Layout ----------------> */
 #mapImage{
   
 margin-top:-13px;
@@ -604,7 +604,7 @@ margin-right:160px;
 margin-bottom:0px; 
 
 }
-/* <------------- 상단바 버튼 css ------------> */
+/* <------------- Top Bar Button css ------------> */
 #buttonFont{
   background:#f7fbff;
   color:#03101f;
